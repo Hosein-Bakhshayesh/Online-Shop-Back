@@ -21,5 +21,9 @@
     <ProjectReference Include="..\Shared\UniversityShopProject.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Classes\" />
+  </ItemGroup>
+
 
 </Project>

@@ -1,0 +1,896 @@
+﻿@page "/CategoriesItem"
+
+<div id="mainBlock" class="">
+    <div class="row py-0 mx-3">
+        <div class="my-2 d-block d-xl-none">
+            <button type="button" class="btn btn-primary mt-2" data-toggle="modal" data-target="#exampleModal">
+                <i class="fa fa-filter"> </i> فیلتر
+            </button>
+        </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"> فیلترها </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="filterItems">
+                            <div class="card">
+                                <div class="card-header" id="brandHeading">
+                                    <h5 class="mb-0">
+                                        <button class="btn fw-bold w-100 text-left" data-toggle="collapse"
+                                                data-target="#brandFilterSM" aria-expanded="true"
+                                                aria-controls="brandFilterSM">
+                                            برند
+                                            <i class="fa fa-angle-down ml-2"></i>
+                                        </button>
+                                    </h5>
+                                </div>
+
+                                <div id="brandFilterSM" class="collapse show" aria-labelledby="brandHeading"
+                                     data-parent="#filterItems">
+                                    <div class="card-body">
+                                        <input type="checkbox" name="brand" id="brandSamsung"
+                                               class="form-check-label">
+                                        <label for="brandSamsung" class="form-check-label">سامسونگ</label>
+                                        <hr class="myhr">
+                                        <input type="checkbox" name="brand" id="brandXiaomi"
+                                               class="form-check-label">
+                                        <label for="brandXiaomi" class="form-check-label">شیائومی</label>
+                                        <hr class="myhr">
+                                        <input type="checkbox" name="brand" id="brandApple"
+                                               class="form-check-label">
+                                        <label for="brandApple" class="form-check-label">اپل</label>
+                                        <hr class="myhr">
+                                        <input type="checkbox" name="brand" id="brandNokia"
+                                               class="form-check-label">
+                                        <label for="brandNokia" class="form-check-label">نوکیا</label>
+                                        <hr class="myhr">
+                                        <input type="checkbox" name="brand" id="brandMotorolla"
+                                               class="form-check-label">
+                                        <label for="brandMotorolla" class="form-check-label">موتورولا</label>
+                                        <hr class="myhr">
+                                        <input type="checkbox" name="brand" id="brandHoawei"
+                                               class="form-check-label">
+                                        <label for="brandHoawei" class="form-check-label">هواوی</label>
+                                        <hr class="myhr">
+                                        <input type="checkbox" name="brand" id="brandGLX" class="form-check-label">
+                                        <label for="brandGLX" class="form-check-label">جی ال ایکس</label>
+                                        <hr class="myhr">
+                                        <input type="checkbox" name="brand" id="brandGPlus"
+                                               class="form-check-label">
+                                        <label for="brandGPlus" class="form-check-label">جی پلاس</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="colorHeading">
+                                    <h5 class="mb-0">
+                                        <button class="btn fw-bold w-100 text-left" data-toggle="collapse"
+                                                data-target="#colorFilterSM" aria-expanded="false"
+                                                aria-controls="colorFilterSM">
+                                            رنگ
+                                            <i class="fa fa-angle-down ml-2"></i>
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="colorFilterSM" class="collapse" aria-labelledby="colorHeading"
+                                     data-parent="#filterItems">
+                                    <div class="card-body">
+                                        <input type="checkbox" name="brand" id="colorBlack"
+                                               class="form-check-label">
+                                        <label for="colorBlack" class="form-check-label">مشکی</label>
+                                        <hr class="myhr">
+                                        <input type="checkbox" name="brand" id="colorWhite"
+                                               class="form-check-label">
+                                        <label for="colorWhite" class="form-check-label">سفید</label>
+                                        <hr class="myhr">
+                                        <input type="checkbox" name="brand" id="colorRed" class="form-check-label">
+                                        <label for="colorRed" class="form-check-label">قرمز</label>
+                                        <hr class="myhr">
+                                        <input type="checkbox" name="brand" id="colorBlue" class="form-check-label">
+                                        <label for="colorBlue" class="form-check-label">آبی</label>
+                                        <hr class="myhr">
+                                        <input type="checkbox" name="brand" id="colorYellow"
+                                               class="form-check-label">
+                                        <label for="colorYellow" class="form-check-label">زرد</label>
+                                        <hr class="myhr">
+                                        <input type="checkbox" name="brand" id="colorGrey" class="form-check-label">
+                                        <label for="colorGrey" class="form-check-label">طوسی</label>
+                                        <hr class="myhr">
+                                        <input type="checkbox" name="brand" id="colorPurple"
+                                               class="form-check-label">
+                                        <label for="colorPurple" class="form-check-label">بنفش</label>
+                                        <hr class="myhr">
+                                        <input type="checkbox" name="brand" id="colorGreen"
+                                               class="form-check-label">
+                                        <label for="colorGreen" class="form-check-label">سبز</label>
+                                        <hr class="myhr">
+                                        <input type="checkbox" name="brand" id="colorPink" class="form-check-label">
+                                        <label for="colorPink" class="form-check-label">صورتی</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="PriceHeading">
+                                    <h5 class="mb-0">
+                                        <button class="btn fw-bold w-100 text-left" data-toggle="collapse"
+                                                data-target="#priceFilterSM" aria-expanded="false"
+                                                aria-controls="priceFilterSM">
+                                            بازه قیمت
+                                            <i class="fa fa-angle-down ml-2"></i>
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="priceFilterSM" class="collapse" aria-labelledby="PriceHeading"
+                                     data-parent="#filterItems">
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="form-group">
+                                                <label for="formControlRange">
+                                                    از : <span id="FirstrangevalSM">0</span>
+                                                    تومان
+                                                </label>
+                                                <input type="range" class="form-control-range"
+                                                       id="firstControlRangeSM" name="priceRange" min="0" max="5000000"
+                                                       value="0" step="10000"
+                                                       onInput="$('#FirstrangevalSM').html($(this).val())"
+                                                       onchange="FirstRangeChangeSM();">
+                                                <hr class="myhr">
+                                                <label for="formControlRange">
+                                                    تا : <span id="LastrangevalSM">5,000,000</span>
+                                                    تومان
+                                                </label>
+                                                <input type="range" class="form-control-range" id="ControlRangeSM"
+                                                       name="priceRange" min="0" max="5000000" value="5000000"
+                                                       step="10000" onInput="$('#LastrangevalSM').html($(this).val())"
+                                                       onchange="LastRangeChangeSM();">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="OsHeading">
+                                    <h5 class="mb-0">
+                                        <button class="btn fw-bold w-100 text-left" data-toggle="collapse"
+                                                data-target="#OsFilterSM" aria-expanded="false"
+                                                aria-controls="OsFilterSM">
+                                            نوع سیستم عامل
+                                            <i class="fa fa-angle-down ml-2"></i>
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="OsFilterSM" class="collapse" aria-labelledby="OsHeading"
+                                     data-parent="#filterItems">
+                                    <div class="card-body">
+                                        <input type="checkbox" name="brand" id="AndroidOs" class="form-check-label">
+                                        <label for="AndroidOs" class="form-check-label">
+                                            <i class="fa fa-android">
+                                            </i> اندروید
+                                            (Android)
+                                        </label>
+                                        <hr class="myhr">
+                                        <input type="checkbox" name="brand" id="IOS" class="form-check-label">
+                                        <label for="IOS" class="form-check-label">
+                                            <i class="fa fa-apple"> </i> آی او
+                                            اس
+                                            (IOS)
+                                        </label>
+                                        <hr class="myhr">
+                                        <input type="checkbox" name="brand" id="WindowsPhone"
+                                               class="form-check-label">
+                                        <label for="WindowsPhone" class="form-check-label">
+                                            <i class="fa fa-windows">
+                                            </i> ویندوز
+                                            فون
+                                        </label>
+                                        <hr class="myhr">
+                                        <input type="checkbox" name="brand" id="moreOs" class="form-check-label">
+                                        <label for="moreOs" class="form-check-label">
+                                            <i class="fa fa-mobile"> </i>
+                                            سایر سیستم
+                                            عامل ها
+                                        </label>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">بستن</button>
+                        <form method="Post">
+                            <button type="submit" class="btn btn-primary mt-2 w-100" data-dismiss="modal">
+                                <i class="fa fa-filter"></i> اعمال
+                                فیلتر
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--------------------------------------------------------------------------------------------------->
+        <aside class="col-xl-3 d-none d-xl-block">
+            <div id="filterItems">
+                <div class="card">
+                    <div class="card-header" id="brandHeading">
+                        <h5 class="mb-0">
+                            <button class="btn fw-bold w-100 text-left" data-toggle="collapse"
+                                    data-target="#brandFilter" aria-expanded="true" aria-controls="brandFilter">
+                                برند
+                                <i class="fa fa-angle-down ml-2"></i>
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="brandFilter" class="collapse show" aria-labelledby="brandHeading"
+                         data-parent="#filterItems">
+                        <div class="card-body">
+                            <input type="checkbox" name="brand" id="brandSamsung" class="form-check-label">
+                            <label for="brandSamsung" class="form-check-label">سامسونگ</label>
+                            <hr class="myhr">
+                            <input type="checkbox" name="brand" id="brandXiaomi" class="form-check-label">
+                            <label for="brandXiaomi" class="form-check-label">شیائومی</label>
+                            <hr class="myhr">
+                            <input type="checkbox" name="brand" id="brandApple" class="form-check-label">
+                            <label for="brandApple" class="form-check-label">اپل</label>
+                            <hr class="myhr">
+                            <input type="checkbox" name="brand" id="brandNokia" class="form-check-label">
+                            <label for="brandNokia" class="form-check-label">نوکیا</label>
+                            <hr class="myhr">
+                            <input type="checkbox" name="brand" id="brandMotorolla" class="form-check-label">
+                            <label for="brandMotorolla" class="form-check-label">موتورولا</label>
+                            <hr class="myhr">
+                            <input type="checkbox" name="brand" id="brandHoawei" class="form-check-label">
+                            <label for="brandHoawei" class="form-check-label">هواوی</label>
+                            <hr class="myhr">
+                            <input type="checkbox" name="brand" id="brandGLX" class="form-check-label">
+                            <label for="brandGLX" class="form-check-label">جی ال ایکس</label>
+                            <hr class="myhr">
+                            <input type="checkbox" name="brand" id="brandGPlus" class="form-check-label">
+                            <label for="brandGPlus" class="form-check-label">جی پلاس</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="colorHeading">
+                        <h5 class="mb-0">
+                            <button class="btn fw-bold w-100 text-left" data-toggle="collapse"
+                                    data-target="#colorFilter" aria-expanded="false" aria-controls="colorFilter">
+                                رنگ
+                                <i class="fa fa-angle-down ml-2"></i>
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="colorFilter" class="collapse" aria-labelledby="colorHeading"
+                         data-parent="#filterItems">
+                        <div class="card-body">
+                            <input type="checkbox" name="brand" id="colorBlack" class="form-check-label">
+                            <label for="colorBlack" class="form-check-label">مشکی</label>
+                            <hr class="myhr">
+                            <input type="checkbox" name="brand" id="colorWhite" class="form-check-label">
+                            <label for="colorWhite" class="form-check-label">سفید</label>
+                            <hr class="myhr">
+                            <input type="checkbox" name="brand" id="colorRed" class="form-check-label">
+                            <label for="colorRed" class="form-check-label">قرمز</label>
+                            <hr class="myhr">
+                            <input type="checkbox" name="brand" id="colorBlue" class="form-check-label">
+                            <label for="colorBlue" class="form-check-label">آبی</label>
+                            <hr class="myhr">
+                            <input type="checkbox" name="brand" id="colorYellow" class="form-check-label">
+                            <label for="colorYellow" class="form-check-label">زرد</label>
+                            <hr class="myhr">
+                            <input type="checkbox" name="brand" id="colorGrey" class="form-check-label">
+                            <label for="colorGrey" class="form-check-label">طوسی</label>
+                            <hr class="myhr">
+                            <input type="checkbox" name="brand" id="colorPurple" class="form-check-label">
+                            <label for="colorPurple" class="form-check-label">بنفش</label>
+                            <hr class="myhr">
+                            <input type="checkbox" name="brand" id="colorGreen" class="form-check-label">
+                            <label for="colorGreen" class="form-check-label">سبز</label>
+                            <hr class="myhr">
+                            <input type="checkbox" name="brand" id="colorPink" class="form-check-label">
+                            <label for="colorPink" class="form-check-label">صورتی</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="PriceHeading">
+                        <h5 class="mb-0">
+                            <button class="btn fw-bold w-100 text-left" data-toggle="collapse"
+                                    data-target="#priceFilter" aria-expanded="false" aria-controls="priceFilter">
+                                بازه قیمت
+                                <i class="fa fa-angle-down ml-2"></i>
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="priceFilter" class="collapse" aria-labelledby="PriceHeading"
+                         data-parent="#filterItems">
+                        <div class="card-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="formControlRange">
+                                        از : <span id="Firstrangeval">0</span>
+                                        تومان
+                                    </label>
+                                    <input type="range" class="form-control-range" id="firstControlRange"
+                                           name="priceRange" min="0" max="5000000" value="0" step="10000"
+                                           onInput="$('#Firstrangeval').html($(this).val())"
+                                           onchange="FirstRangeChange();">
+                                    <hr class="myhr">
+                                    <label for="formControlRange">
+                                        تا : <span id="Lastrangeval">5,000,000</span>
+                                        تومان
+                                    </label>
+                                    <input type="range" class="form-control-range" id="ControlRange"
+                                           name="priceRange" min="0" max="5000000" value="5000000" step="10000"
+                                           onInput="$('#Lastrangeval').html($(this).val())"
+                                           onchange="LastRangeChange();">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="OsHeading">
+                        <h5 class="mb-0">
+                            <button class="btn fw-bold w-100 text-left" data-toggle="collapse"
+                                    data-target="#OsFilter" aria-expanded="false" aria-controls="OsFilter">
+                                نوع سیستم عامل
+                                <i class="fa fa-angle-down ml-2"></i>
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="OsFilter" class="collapse" aria-labelledby="OsHeading" data-parent="#filterItems">
+                        <div class="card-body">
+                            <input type="checkbox" name="brand" id="AndroidOs" class="form-check-label">
+                            <label for="AndroidOs" class="form-check-label">
+                                <i class="fa fa-android"> </i> اندروید
+                                (Android)
+                            </label>
+                            <hr class="myhr">
+                            <input type="checkbox" name="brand" id="IOS" class="form-check-label">
+                            <label for="IOS" class="form-check-label">
+                                <i class="fa fa-apple"> </i> آی او اس
+                                (IOS)
+                            </label>
+                            <hr class="myhr">
+                            <input type="checkbox" name="brand" id="WindowsPhone" class="form-check-label">
+                            <label for="WindowsPhone" class="form-check-label">
+                                <i class="fa fa-windows"> </i> ویندوز
+                                فون
+                            </label>
+                            <hr class="myhr">
+                            <input type="checkbox" name="brand" id="moreOs" class="form-check-label">
+                            <label for="moreOs" class="form-check-label">
+                                <i class="fa fa-mobile"> </i> سایر سیستم
+                                عامل ها
+                            </label>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <form method="Post">
+                    <button type="submit" class="btn btn-primary mt-2 w-100">
+                        <i class="fa fa-filter"></i> اعمال
+                        فیلتر
+                    </button>
+                </form>
+            </div>
+        </aside>
+        <!--------------------------------------------------------------------------------------------------->
+        <div class="col-12 col-xl">
+            <div class="row">
+                <div class="col-12 col-md-6 col-xl-3  mt-4">
+                    <div class="product-box card w-100">
+                        <a href="../pages/ProductDetail.html">
+                            <div class="product-img text-center">
+                                <img src="../Images/samsung galaxy a73 2022.webp" alt="samsung galaxy a73 2022"
+                                     class="p-imgs img-thumbnail">
+                            </div>
+                        </a>
+                        <div class="card-body overflow-y-hidden">
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="card-title font-size-product-title text-center">
+                                    گوشی سامسونگ مدل samsung
+                                    galaxy a73 2022
+                                </h4>
+                            </a>
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="font-size-price-title text-right mt-4">32,000,000 تومان</h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-xl-3  mt-4">
+                    <div class="product-box card w-100">
+                        <a href="../pages/ProductDetail.html">
+                            <div class="product-img text-center">
+                                <img src="../Images/samsung galaxy s22 2022.jpg" alt="samsung galaxy s22 2022"
+                                     class="p-imgs img-thumbnail">
+                            </div>
+                        </a>
+                        <div class="card-body overflow-y-hidden">
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="card-title font-size-product-title text-center">
+                                    گوشی سامسونگ مدل samsung
+                                    galaxy s22 2022
+                                </h4>
+                            </a>
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="font-size-price-title text-right mt-4">53,200,000 تومان</h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-xl-3  mt-4">
+                    <div class="product-box card w-100">
+                        <a href="../pages/ProductDetail.html">
+                            <div class="product-img text-center">
+                                <img src="../Images/xiaomi note 10 pro max.jpg" alt="xiaomi note 10 pro max"
+                                     class="p-imgs img-thumbnail">
+                            </div>
+                        </a>
+                        <div class="card-body overflow-y-hidden">
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="card-title font-size-product-title text-center">
+                                    گوشی شیائومی مدل xiaomi
+                                    note 10 pro max
+                                </h4>
+                            </a>
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="font-size-price-title text-right mt-4">7,500,000 تومان</h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-xl-3  mt-4">
+                    <div class="product-box card w-100">
+                        <a href="../pages/ProductDetail.html">
+                            <div class="product-img text-center">
+                                <img src="../Images/xiaomi mi 12.jpg" alt="xiaomi mi 12"
+                                     class="p-imgs img-thumbnail">
+                            </div>
+                        </a>
+                        <div class="card-body overflow-y-hidden">
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="card-title font-size-product-title text-center">
+                                    گوشی شیائومی مدل xiaomi
+                                    mi 12
+                                </h4>
+                            </a>
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="font-size-price-title text-right mt-4">18,300,000 تومان</h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--------------------------------------------------------------------------------------------------->
+            <div class="row">
+                <div class="col-12 col-md-6 col-xl-3  mt-4">
+                    <div class="product-box card w-100">
+                        <a href="../pages/ProductDetail.html">
+                            <div class="product-img text-center">
+                                <img src="../Images/iphone 13 pro max.jpg" alt="iphone 13 pro max"
+                                     class="p-imgs img-thumbnail">
+                            </div>
+                        </a>
+                        <div class="card-body overflow-y-hidden">
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="card-title font-size-product-title text-center">گوشی اپل مدل iphone 13 pro max</h4>
+                            </a>
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="font-size-price-title text-right mt-4">60,300,000 تومان</h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-xl-3  mt-4">
+                    <div class="product-box card w-100">
+                        <a href="../pages/ProductDetail.html">
+                            <div class="product-img text-center">
+                                <img src="../Images/samsung galaxy a53.jpg" alt="samsung galaxy a53"
+                                     class="p-imgs img-thumbnail">
+                            </div>
+                        </a>
+                        <div class="card-body overflow-y-hidden">
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="card-title font-size-product-title text-center">گوشی سامسونگ مدل samsung galaxy a53</h4>
+                            </a>
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="font-size-price-title text-right mt-4">21,000,000 تومان</h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-xl-3  mt-4">
+                    <div class="product-box card w-100">
+                        <a href="../pages/ProductDetail.html">
+                            <div class="product-img text-center">
+                                <img src="../Images/xiaomi mi 12.jpg" alt="xiaomi mi 12"
+                                     class="p-imgs img-thumbnail">
+                            </div>
+                        </a>
+                        <div class="card-body overflow-y-hidden">
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="card-title font-size-product-title text-center">گوشی شیائومی مدل xiaomi mi 12</h4>
+                            </a>
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="font-size-price-title text-right mt-4">27,100,000 تومان</h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-xl-3  mt-4">
+                    <div class="product-box card w-100">
+                        <a href="../pages/ProductDetail.html">
+                            <div class="product-img text-center">
+                                <img src="../Images/samsung s21 ultra.jpg" alt="samsung s21 ultra"
+                                     class="p-imgs img-thumbnail">
+                            </div>
+                        </a>
+                        <div class="card-body overflow-y-hidden">
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="card-title font-size-product-title text-center">گوشی سامسونگ مدل samsung s21 ultra</h4>
+                            </a>
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="font-size-price-title text-right mt-4">34,300,000 تومان</h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--------------------------------------------------------------------------------------------------->
+            <div class="row">
+                <div class="col-12 col-md-6 col-xl-3  mt-4">
+                    <div class="product-box card w-100">
+                        <a href="../pages/ProductDetail.html">
+                            <div class="product-img text-center">
+                                <img src="../Images/xiaomi mi 11 pro.jpg" alt="xiaomi mi 11 pro"
+                                     class="p-imgs img-thumbnail">
+                            </div>
+                        </a>
+                        <div class="card-body overflow-y-hidden">
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="card-title font-size-product-title text-center">گوشی سامسونگ مدل xiaomi mi 11 pro</h4>
+                            </a>
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="font-size-price-title text-right mt-4">26,800,000 تومان</h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-xl-3  mt-4">
+                    <div class="product-box card w-100">
+                        <a href="../pages/ProductDetail.html">
+                            <div class="product-img text-center">
+                                <img src="../Images/iphone se 2020.jpg" alt="iphone se 2020"
+                                     class="p-imgs img-thumbnail">
+                            </div>
+                        </a>
+                        <div class="card-body overflow-y-hidden">
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="card-title font-size-product-title text-center">گوشی اپل مدل iphone se 2020</h4>
+                            </a>
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="font-size-price-title text-right mt-4">36,000,000 تومان</h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-xl-3  mt-4">
+                    <div class="product-box card w-100">
+                        <a href="../pages/ProductDetail.html">
+                            <div class="product-img text-center">
+                                <img src="../Images/xiaomi poco x3 pro.png" alt="xiaomi poco x3 pro"
+                                     class="p-imgs img-thumbnail">
+                            </div>
+                        </a>
+                        <div class="card-body overflow-y-hidden">
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="card-title font-size-product-title text-center">گوشی شیائومی مدل xiaomi poco x3 pro</h4>
+                            </a>
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="font-size-price-title text-right mt-4">17,500,000 تومان</h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-xl-3  mt-4">
+                    <div class="product-box card w-100">
+                        <a href="../pages/ProductDetail.html">
+                            <div class="product-img text-center">
+                                <img src="../Images/iphone 13 pro max.jpg" alt="iphone 13 pro max"
+                                     class="p-imgs img-thumbnail">
+                            </div>
+                        </a>
+                        <div class="card-body overflow-y-hidden">
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="card-title font-size-product-title text-center">گوشی اپل مدل iphone 13 pro max</h4>
+                            </a>
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="font-size-price-title text-right mt-4">60,300,000 تومان</h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--------------------------------------------------------------------------------------------------->
+            <div class="row">
+                <div class="col-12 col-md-6 col-xl-3  mt-4">
+                    <div class="product-box card w-100">
+                        <a href="../pages/ProductDetail.html">
+                            <div class="product-img text-center">
+                                <img src="../Images/samsung galaxy a73 2022.webp" alt="samsung galaxy a73 2022"
+                                     class="p-imgs img-thumbnail">
+                            </div>
+                        </a>
+                        <div class="card-body overflow-y-hidden">
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="card-title font-size-product-title text-center">
+                                    گوشی سامسونگ مدل samsung
+                                    galaxy a73 2022
+                                </h4>
+                            </a>
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="font-size-price-title text-right mt-4">32,000,000 تومان</h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-xl-3  mt-4">
+                    <div class="product-box card w-100">
+                        <a href="../pages/ProductDetail.html">
+                            <div class="product-img text-center">
+                                <img src="../Images/samsung galaxy s22 2022.jpg" alt="samsung galaxy s22 2022"
+                                     class="p-imgs img-thumbnail">
+                            </div>
+                        </a>
+                        <div class="card-body overflow-y-hidden">
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="card-title font-size-product-title text-center">
+                                    گوشی سامسونگ مدل samsung
+                                    galaxy s22 2022
+                                </h4>
+                            </a>
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="font-size-price-title text-right mt-4">53,200,000 تومان</h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-xl-3  mt-4">
+                    <div class="product-box card w-100">
+                        <a href="../pages/ProductDetail.html">
+                            <div class="product-img text-center">
+                                <img src="../Images/xiaomi note 10 pro max.jpg" alt="xiaomi note 10 pro max"
+                                     class="p-imgs img-thumbnail">
+                            </div>
+                        </a>
+                        <div class="card-body overflow-y-hidden">
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="card-title font-size-product-title text-center">
+                                    گوشی شیائومی مدل xiaomi
+                                    note 10 pro max
+                                </h4>
+                            </a>
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="font-size-price-title text-right mt-4">7,500,000 تومان</h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-xl-3  mt-4">
+                    <div class="product-box card w-100">
+                        <a href="../pages/ProductDetail.html">
+                            <div class="product-img text-center">
+                                <img src="../Images/xiaomi mi 12.jpg" alt="xiaomi mi 12"
+                                     class="p-imgs img-thumbnail">
+                            </div>
+                        </a>
+                        <div class="card-body overflow-y-hidden">
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="card-title font-size-product-title text-center">
+                                    گوشی شیائومی مدل xiaomi
+                                    mi 12
+                                </h4>
+                            </a>
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="font-size-price-title text-right mt-4">18,300,000 تومان</h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--------------------------------------------------------------------------------------------------->
+            <div class="row">
+                <div class="col-12 col-md-6 col-xl-3  mt-4">
+                    <div class="product-box card w-100">
+                        <a href="../pages/ProductDetail.html">
+                            <div class="product-img text-center">
+                                <img src="../Images/iphone 13 pro max.jpg" alt="iphone 13 pro max"
+                                     class="p-imgs img-thumbnail">
+                            </div>
+                        </a>
+                        <div class="card-body overflow-y-hidden">
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="card-title font-size-product-title text-center">گوشی اپل مدل iphone 13 pro max</h4>
+                            </a>
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="font-size-price-title text-right mt-4">60,300,000 تومان</h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-xl-3  mt-4">
+                    <div class="product-box card w-100">
+                        <a href="../pages/ProductDetail.html">
+                            <div class="product-img text-center">
+                                <img src="../Images/samsung galaxy a53.jpg" alt="samsung galaxy a53"
+                                     class="p-imgs img-thumbnail">
+                            </div>
+                        </a>
+                        <div class="card-body overflow-y-hidden">
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="card-title font-size-product-title text-center">گوشی سامسونگ مدل samsung galaxy a53</h4>
+                            </a>
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="font-size-price-title text-right mt-4">21,000,000 تومان</h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-xl-3  mt-4">
+                    <div class="product-box card w-100">
+                        <a href="../pages/ProductDetail.html">
+                            <div class="product-img text-center">
+                                <img src="../Images/xiaomi mi 12.jpg" alt="xiaomi mi 12"
+                                     class="p-imgs img-thumbnail">
+                            </div>
+                        </a>
+                        <div class="card-body overflow-y-hidden">
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="card-title font-size-product-title text-center">گوشی شیائومی مدل xiaomi mi 12</h4>
+                            </a>
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="font-size-price-title text-right mt-4">27,100,000 تومان</h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-xl-3  mt-4">
+                    <div class="product-box card w-100">
+                        <a href="../pages/ProductDetail.html">
+                            <div class="product-img text-center">
+                                <img src="../Images/samsung s21 ultra.jpg" alt="samsung s21 ultra"
+                                     class="p-imgs img-thumbnail">
+                            </div>
+                        </a>
+                        <div class="card-body overflow-y-hidden">
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="card-title font-size-product-title text-center">گوشی سامسونگ مدل samsung s21 ultra</h4>
+                            </a>
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="font-size-price-title text-right mt-4">34,300,000 تومان</h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--------------------------------------------------------------------------------------------------->
+            <div class="row">
+                <div class="col-12 col-md-6 col-xl-3  mt-4">
+                    <div class="product-box card w-100">
+                        <a href="../pages/ProductDetail.html">
+                            <div class="product-img text-center">
+                                <img src="../Images/xiaomi mi 11 pro.jpg" alt="xiaomi mi 11 pro"
+                                     class="p-imgs img-thumbnail">
+                            </div>
+                        </a>
+                        <div class="card-body overflow-y-hidden">
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="card-title font-size-product-title text-center">گوشی سامسونگ مدل xiaomi mi 11 pro</h4>
+                            </a>
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="font-size-price-title text-right mt-4">26,800,000 تومان</h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-xl-3  mt-4">
+                    <div class="product-box card w-100">
+                        <a href="../pages/ProductDetail.html">
+                            <div class="product-img text-center">
+                                <img src="../Images/iphone se 2020.jpg" alt="iphone se 2020"
+                                     class="p-imgs img-thumbnail">
+                            </div>
+                        </a>
+                        <div class="card-body overflow-y-hidden">
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="card-title font-size-product-title text-center">گوشی اپل مدل iphone se 2020</h4>
+                            </a>
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="font-size-price-title text-right mt-4">36,000,000 تومان</h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-xl-3  mt-4">
+                    <div class="product-box card w-100">
+                        <a href="../pages/ProductDetail.html">
+                            <div class="product-img text-center">
+                                <img src="../Images/xiaomi poco x3 pro.png" alt="xiaomi poco x3 pro"
+                                     class="p-imgs img-thumbnail">
+                            </div>
+                        </a>
+                        <div class="card-body overflow-y-hidden">
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="card-title font-size-product-title text-center">گوشی شیائومی مدل xiaomi poco x3 pro</h4>
+                            </a>
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="font-size-price-title text-right mt-4">17,500,000 تومان</h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-xl-3  mt-4 ">
+                    <div class="product-box card w-100">
+                        <a href="../pages/ProductDetail.html">
+                            <div class="product-img text-center">
+                                <img src="../Images/iphone 13 pro max.jpg" alt="iphone 13 pro max"
+                                     class="p-imgs img-thumbnail">
+                            </div>
+                        </a>
+                        <div class="card-body overflow-y-hidden">
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="card-title font-size-product-title text-center">گوشی اپل مدل iphone 13 pro max</h4>
+                            </a>
+                            <a href="../pages/ProductDetail.html" class="text-black text-decoration-none">
+                                <h4 class="font-size-price-title text-right mt-4">60,300,000 تومان</h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--------------------------------------------------------------------------------------------------->
+            <div class="mt-5">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+                        <li class="page-item"><a class="page-link" href="#">10</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <Footer />
+</div>
+
+@code {
+}

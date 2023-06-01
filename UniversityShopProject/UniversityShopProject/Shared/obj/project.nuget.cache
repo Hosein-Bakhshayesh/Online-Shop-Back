@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "1sv2IJhCw7ZjfJ9ue6eEszSrtm6ilRtS6rxSsbe5l6L7KnqEpgD9j8Qmq5Esfv1zeXeBvEkXGAtq4UehzdQtNg==",
+  "dgSpecHash": "fVJJ8QSdzPfUT6xW7RChvD2dS3dqrDf4NrfiI75mbKfxV3m7c1iKTqgFPnk187HtlqGu8lZy+z2jDm7kxsP8Dg==",
   "success": true,
   "projectFilePath": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Shared\\UniversityShopProject.Shared.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\hosei\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\hosei\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
+    "C:\\Users\\hosei\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\hosei\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\hosei\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\hosei\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",

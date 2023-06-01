@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversityShopProject.Server", "UniversityShopProject\Server\UniversityShopProject.Server.csproj", "{AEC5861F-9C10-4F00-824B-AD82204BDA5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniversityShopProject.Server", "UniversityShopProject\Server\UniversityShopProject.Server.csproj", "{AEC5861F-9C10-4F00-824B-AD82204BDA5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversityShopProject.Client", "UniversityShopProject\Client\UniversityShopProject.Client.csproj", "{20F9B0E4-76C3-4CAB-87F9-F85D5E3E7FAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniversityShopProject.Client", "UniversityShopProject\Client\UniversityShopProject.Client.csproj", "{20F9B0E4-76C3-4CAB-87F9-F85D5E3E7FAD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversityShopProject.Shared", "UniversityShopProject\Shared\UniversityShopProject.Shared.csproj", "{CA928100-0306-455F-AA40-82E56C5339E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniversityShopProject.Shared", "UniversityShopProject\Shared\UniversityShopProject.Shared.csproj", "{CA928100-0306-455F-AA40-82E56C5339E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversityShopProjectModels", "UniversityShopProjectModels\UniversityShopProjectModels.csproj", "{AB3C47E1-BA67-4BA5-A24E-A1B4DA171515}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniversityShopProjectModels", "UniversityShopProjectModels\UniversityShopProjectModels.csproj", "{AB3C47E1-BA67-4BA5-A24E-A1B4DA171515}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversityShopProjectRepository", "UniversityShopProjectRepository\UniversityShopProjectRepository.csproj", "{74AE06AF-FF34-478D-992B-C6A5944402B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniversityShopProjectRepository", "UniversityShopProjectRepository\UniversityShopProjectRepository.csproj", "{74AE06AF-FF34-478D-992B-C6A5944402B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversityShopProjectServices", "UniversityShopProjectServices\UniversityShopProjectServices.csproj", "{9E2319E9-7F15-4435-9EC4-39725AC8B00E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniversityShopProjectServices", "UniversityShopProjectServices\UniversityShopProjectServices.csproj", "{9E2319E9-7F15-4435-9EC4-39725AC8B00E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

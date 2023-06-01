@@ -1,0 +1,101 @@
+.dropdown-menu {
+    right: -150px !important;
+}
+
+.dropdown-item {
+    width: 220px;
+    height: 55px;
+}
+
+.dropdown-item:active {
+    color: black;
+    background-color: #e9ecef;
+}
+
+.my-nav-style {
+    box-sizing: border-box !important;
+    box-shadow: 5px 7px 7px rgba(187, 187, 187, 0.651);
+    position: fixed;
+    z-index: 10;
+    height: 70px;
+    width: 100%;
+    top: 0 !important;
+}
+
+.logo-place {
+    font-weight: bold !important;
+}
+
+/* Dropdown Button */
+.dropbtn {
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    padding: 1rem;
+    padding-top: .5rem !important;
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 95vw;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.navbar-collapse {
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    min-width: 100%;
+    position: fixed;
+    top: 70px;
+    background-color: #f1f1f1;
+    z-index: 10;
+}
+
+.categories-title {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+
+.categories-subtitle {
+    font-size: .9rem;
+}
+
+.nav-sm {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.nav-sm:hover {
+    color: #17a2b8;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    color: #17a2b8;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}

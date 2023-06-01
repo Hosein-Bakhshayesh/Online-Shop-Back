@@ -46,6 +46,19 @@
           }
         }
       },
+      "BCrypt.Net-Next/4.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/BCrypt.Net-Next.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/BCrypt.Net-Next.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Humanizer.Core/2.14.1": {
         "type": "package",
         "compile": {
@@ -59,20 +72,20 @@
           }
         }
       },
-      "Microsoft.AspNetCore.Authorization/6.0.15": {
+      "Microsoft.AspNetCore.Authorization/7.0.5": {
         "type": "package",
         "dependencies": {
-          "Microsoft.AspNetCore.Metadata": "6.0.15",
-          "Microsoft.Extensions.Logging.Abstractions": "6.0.3",
-          "Microsoft.Extensions.Options": "6.0.0"
+          "Microsoft.AspNetCore.Metadata": "7.0.5",
+          "Microsoft.Extensions.Logging.Abstractions": "7.0.0",
+          "Microsoft.Extensions.Options": "7.0.1"
         },
         "compile": {
-          "lib/net6.0/Microsoft.AspNetCore.Authorization.dll": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.Authorization.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net6.0/Microsoft.AspNetCore.Authorization.dll": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.Authorization.dll": {
             "related": ".xml"
           }
         }
@@ -165,15 +178,15 @@
           "build/Microsoft.AspNetCore.Components.WebAssembly.DevServer.targets": {}
         }
       },
-      "Microsoft.AspNetCore.Metadata/6.0.15": {
+      "Microsoft.AspNetCore.Metadata/7.0.5": {
         "type": "package",
         "compile": {
-          "lib/net6.0/Microsoft.AspNetCore.Metadata.dll": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.Metadata.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net6.0/Microsoft.AspNetCore.Metadata.dll": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.Metadata.dll": {
             "related": ".xml"
           }
         }
@@ -657,7 +670,7 @@
           "buildTransitive/net6.0/Microsoft.Extensions.Logging.Abstractions.targets": {}
         }
       },
-      "Microsoft.Extensions.Options/7.0.0": {
+      "Microsoft.Extensions.Options/7.0.1": {
         "type": "package",
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "7.0.0",
@@ -1453,6 +1466,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
+          "BCrypt.Net-Next": "4.0.3",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.5"
         },
         "compile": {
@@ -1508,6 +1522,19 @@
           }
         }
       },
+      "BCrypt.Net-Next/4.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/BCrypt.Net-Next.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/BCrypt.Net-Next.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Humanizer.Core/2.14.1": {
         "type": "package",
         "compile": {
@@ -1521,20 +1548,20 @@
           }
         }
       },
-      "Microsoft.AspNetCore.Authorization/6.0.15": {
+      "Microsoft.AspNetCore.Authorization/7.0.5": {
         "type": "package",
         "dependencies": {
-          "Microsoft.AspNetCore.Metadata": "6.0.15",
-          "Microsoft.Extensions.Logging.Abstractions": "6.0.3",
-          "Microsoft.Extensions.Options": "6.0.0"
+          "Microsoft.AspNetCore.Metadata": "7.0.5",
+          "Microsoft.Extensions.Logging.Abstractions": "7.0.0",
+          "Microsoft.Extensions.Options": "7.0.1"
         },
         "compile": {
-          "lib/net6.0/Microsoft.AspNetCore.Authorization.dll": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.Authorization.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net6.0/Microsoft.AspNetCore.Authorization.dll": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.Authorization.dll": {
             "related": ".xml"
           }
         }
@@ -1627,15 +1654,15 @@
           "build/Microsoft.AspNetCore.Components.WebAssembly.DevServer.targets": {}
         }
       },
-      "Microsoft.AspNetCore.Metadata/6.0.15": {
+      "Microsoft.AspNetCore.Metadata/7.0.5": {
         "type": "package",
         "compile": {
-          "lib/net6.0/Microsoft.AspNetCore.Metadata.dll": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.Metadata.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net6.0/Microsoft.AspNetCore.Metadata.dll": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.Metadata.dll": {
             "related": ".xml"
           }
         }
@@ -2091,7 +2118,7 @@
           "buildTransitive/net6.0/Microsoft.Extensions.Logging.Abstractions.targets": {}
         }
       },
-      "Microsoft.Extensions.Options/7.0.0": {
+      "Microsoft.Extensions.Options/7.0.1": {
         "type": "package",
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "7.0.0",
@@ -2906,6 +2933,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
+          "BCrypt.Net-Next": "4.0.3",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.5"
         },
         "compile": {
@@ -2956,6 +2984,37 @@
         "lib/netstandard2.0/Azure.Identity.xml"
       ]
     },
+    "BCrypt.Net-Next/4.0.3": {
+      "sha512": "W+U9WvmZQgi5cX6FS5GDtDoPzUCV4LkBLkywq/kRZhuDwcbavOzcDAr3LXJFqHUi952Yj3LEYoWW0jbEUQChsA==",
+      "type": "package",
+      "path": "bcrypt.net-next/4.0.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "bcrypt.net-next.4.0.3.nupkg.sha512",
+        "bcrypt.net-next.nuspec",
+        "ico.png",
+        "lib/net20/BCrypt.Net-Next.dll",
+        "lib/net20/BCrypt.Net-Next.xml",
+        "lib/net35/BCrypt.Net-Next.dll",
+        "lib/net35/BCrypt.Net-Next.xml",
+        "lib/net462/BCrypt.Net-Next.dll",
+        "lib/net462/BCrypt.Net-Next.xml",
+        "lib/net472/BCrypt.Net-Next.dll",
+        "lib/net472/BCrypt.Net-Next.xml",
+        "lib/net48/BCrypt.Net-Next.dll",
+        "lib/net48/BCrypt.Net-Next.xml",
+        "lib/net5.0/BCrypt.Net-Next.dll",
+        "lib/net5.0/BCrypt.Net-Next.xml",
+        "lib/net6.0/BCrypt.Net-Next.dll",
+        "lib/net6.0/BCrypt.Net-Next.xml",
+        "lib/netstandard2.0/BCrypt.Net-Next.dll",
+        "lib/netstandard2.0/BCrypt.Net-Next.xml",
+        "lib/netstandard2.1/BCrypt.Net-Next.dll",
+        "lib/netstandard2.1/BCrypt.Net-Next.xml",
+        "readme.md"
+      ]
+    },
     "Humanizer.Core/2.14.1": {
       "sha512": "lQKvtaTDOXnoVJ20ibTuSIOf2i0uO0MPbDhd1jm238I+U/2ZnRENj0cktKZhtchBMtCUSRQ5v4xBCUbKNmyVMw==",
       "type": "package",
@@ -2974,22 +3033,22 @@
         "logo.png"
       ]
     },
-    "Microsoft.AspNetCore.Authorization/6.0.15": {
-      "sha512": "STjQZVKTwbvwKJXR5agYUOgDbi2ZOYtFgRVnVOWZFD+4VxEOgNrP6MWsur3v9jiM0gRCGxczRCB6M65byJ8L+w==",
+    "Microsoft.AspNetCore.Authorization/7.0.5": {
+      "sha512": "17BgaYa1QB8mOERZ/TSNwsWHrh65iU61VrsqivbZc+VUqnACtPCPbP0MFl/7CznXWCOXQZ59QRB6A5t0skyo2g==",
       "type": "package",
-      "path": "microsoft.aspnetcore.authorization/6.0.15",
+      "path": "microsoft.aspnetcore.authorization/7.0.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "THIRD-PARTY-NOTICES.TXT",
-        "lib/net461/Microsoft.AspNetCore.Authorization.dll",
-        "lib/net461/Microsoft.AspNetCore.Authorization.xml",
-        "lib/net6.0/Microsoft.AspNetCore.Authorization.dll",
-        "lib/net6.0/Microsoft.AspNetCore.Authorization.xml",
+        "lib/net462/Microsoft.AspNetCore.Authorization.dll",
+        "lib/net462/Microsoft.AspNetCore.Authorization.xml",
+        "lib/net7.0/Microsoft.AspNetCore.Authorization.dll",
+        "lib/net7.0/Microsoft.AspNetCore.Authorization.xml",
         "lib/netstandard2.0/Microsoft.AspNetCore.Authorization.dll",
         "lib/netstandard2.0/Microsoft.AspNetCore.Authorization.xml",
-        "microsoft.aspnetcore.authorization.6.0.15.nupkg.sha512",
+        "microsoft.aspnetcore.authorization.7.0.5.nupkg.sha512",
         "microsoft.aspnetcore.authorization.nuspec"
       ]
     },
@@ -3193,22 +3252,22 @@
         "tools/x86/aspnetcorev2_inprocess.dll"
       ]
     },
-    "Microsoft.AspNetCore.Metadata/6.0.15": {
-      "sha512": "J1+dXw+8nI/FZ5RO7eKWJcBDC2ywCns1sbhk9f+RT1QjLqH7GLGHDHUpYlEy59Lf0DBZT7PHQzTeq9ZKAPk8yQ==",
+    "Microsoft.AspNetCore.Metadata/7.0.5": {
+      "sha512": "S+EJS5RwVfrgBEyYKvNfMVQPH8CNIRhIH5UkGKalwIcppiYpi6k8pv7GDqjLiKLVa06LY+kNftXfUM5PwW7z/w==",
       "type": "package",
-      "path": "microsoft.aspnetcore.metadata/6.0.15",
+      "path": "microsoft.aspnetcore.metadata/7.0.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "THIRD-PARTY-NOTICES.TXT",
-        "lib/net461/Microsoft.AspNetCore.Metadata.dll",
-        "lib/net461/Microsoft.AspNetCore.Metadata.xml",
-        "lib/net6.0/Microsoft.AspNetCore.Metadata.dll",
-        "lib/net6.0/Microsoft.AspNetCore.Metadata.xml",
+        "lib/net462/Microsoft.AspNetCore.Metadata.dll",
+        "lib/net462/Microsoft.AspNetCore.Metadata.xml",
+        "lib/net7.0/Microsoft.AspNetCore.Metadata.dll",
+        "lib/net7.0/Microsoft.AspNetCore.Metadata.xml",
         "lib/netstandard2.0/Microsoft.AspNetCore.Metadata.dll",
         "lib/netstandard2.0/Microsoft.AspNetCore.Metadata.xml",
-        "microsoft.aspnetcore.metadata.6.0.15.nupkg.sha512",
+        "microsoft.aspnetcore.metadata.7.0.5.nupkg.sha512",
         "microsoft.aspnetcore.metadata.nuspec"
       ]
     },
@@ -3906,10 +3965,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.Extensions.Options/7.0.0": {
-      "sha512": "lP1yBnTTU42cKpMozuafbvNtQ7QcBjr/CcK3bYOGEMH55Fjt+iecXjT6chR7vbgCMqy3PG3aNQSZgo/EuY/9qQ==",
+    "Microsoft.Extensions.Options/7.0.1": {
+      "sha512": "pZRDYdN1FpepOIfHU62QoBQ6zdAoTvnjxFfqAzEd9Jhb2dfhA5i6jeTdgGgcgTWFRC7oT0+3XrbQu4LjvgX1Nw==",
       "type": "package",
-      "path": "microsoft.extensions.options/7.0.0",
+      "path": "microsoft.extensions.options/7.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3930,7 +3989,7 @@
         "lib/netstandard2.0/Microsoft.Extensions.Options.xml",
         "lib/netstandard2.1/Microsoft.Extensions.Options.dll",
         "lib/netstandard2.1/Microsoft.Extensions.Options.xml",
-        "microsoft.extensions.options.7.0.0.nupkg.sha512",
+        "microsoft.extensions.options.7.0.1.nupkg.sha512",
         "microsoft.extensions.options.nuspec",
         "useSharedDesignerContext.txt"
       ]
@@ -5937,6 +5996,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "Microsoft.AspNetCore.Authorization >= 7.0.5",
       "Microsoft.AspNetCore.Components.WebAssembly >= 6.0.15",
       "Microsoft.AspNetCore.Components.WebAssembly.DevServer >= 6.0.15",
       "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.5",
@@ -5987,6 +6047,10 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
+          "Microsoft.AspNetCore.Authorization": {
+            "target": "Package",
+            "version": "[7.0.5, )"
+          },
           "Microsoft.AspNetCore.Components.WebAssembly": {
             "target": "Package",
             "version": "[6.0.15, )"

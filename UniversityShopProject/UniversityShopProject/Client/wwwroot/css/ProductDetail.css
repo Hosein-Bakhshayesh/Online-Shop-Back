@@ -1,0 +1,128 @@
+@font-face {
+	font-family: 'TanhaWeb';
+	src: url("../fonts/Tanha/Tanha-FD.ttf") format('truerype');
+	src: url("../fonts/Tanha/Tanha-FD.woff") format('woff');
+	src: url("../fonts/Tanha/Tanha-FD.woff2") format('woff2');
+}
+
+@font-face {
+	font-family: 'yekanWeb';
+	src: url("../fonts/Yekan/Yekan.ttf") format('truerype');
+	src: url("../fonts/Yekan/Yekan.woff") format('woff');
+}
+
+body {
+	font-family: 'TanhaWeb';
+	font-size: medium;
+}
+
+* {
+	scroll-behavior: smooth;
+}
+
+.product-interface {
+	margin-top: 100px !important;
+
+}
+
+.product-img {
+	height: 450px;
+	margin: auto;
+}
+
+.product-another-imgs {
+	margin: auto;
+}
+
+.product-imgs {
+	height: 110px;
+}
+
+.product-imgs div {
+	cursor: pointer;
+}
+
+.font-size-small {
+	font-size: small;
+}
+
+.line {
+	height: 2px;
+}
+
+.detail-preview {
+	line-height: 1.6rem;
+	text-align: justify;
+}
+
+.add-cart {
+	height: 430px;
+}
+
+.add-cart-box {
+	width: 300px;
+	background: linear-gradient(0deg, hsla(240, 3%, 94%, .5), hsla(240, 3%, 94%, .5)), #fff;
+	border: 1px solid rgb(219, 219, 219);
+	border-radius: 20px;
+}
+
+.price {
+	text-align: end;
+}
+
+.product-detail-text {
+	line-height: 1.8rem;
+}
+
+.product-detail {
+	box-shadow: 1px 0px 5px rgba(187, 187, 187, 0.651);
+	border: 1px solid rgb(219, 219, 219);
+	border-radius: 20px;
+	padding: 30px;
+}
+
+.myhr {
+	margin-top: .8rem;
+	margin-bottom: .8rem;
+	border-top: 1px solid rgba(0, 0, 0, .3) !important;
+}
+
+.myCommenthr {
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+	border-top: 1px solid rgba(0, 0, 0) !important;
+}
+
+#show-more-technical {
+	transition-duration: .4s;
+}
+
+#show-more-technical-btn {
+	width: 150px;
+}
+
+#show-more-technical-btn:focus,
+#show-more-comments-btn:focus {
+	box-shadow: none !important;
+	border: none !important;
+}
+
+.comment-inputs:focus {
+	box-shadow: 0 0 1px 0.1rem #17a2b8;
+}
+
+.comment-box {
+	box-shadow: 0px 0px 2px rgba(187, 187, 187, 0.651);
+	border: 1px solid rgb(219, 219, 219);
+	padding: .7rem;
+}
+
+#show-more-comments-btn {
+	width: 170px;
+}
+
+.likeProductImgs {
+	margin: auto;
+	width: 100%;
+	height: 220px;
+}

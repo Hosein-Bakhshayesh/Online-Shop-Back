@@ -1,0 +1,139 @@
+#wishListPanel[b-tnwvwncss6] {
+    display: none;
+}
+
+#orderList[b-tnwvwncss6] {
+    display: none;
+}
+
+#locationLists[b-tnwvwncss6] {
+    display: none;
+}
+
+.mainBox[b-tnwvwncss6] {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+.panelBox[b-tnwvwncss6] {
+    position: relative;
+    margin: 100px auto;
+    width: 1000px;
+    height: 600px;
+    box-shadow: 0px 0px 10px rgba(187, 187, 187, 0.651);
+}
+
+.menu-title[b-tnwvwncss6] {
+    width: 100%;
+    height: 60px;
+}
+
+#button-active[b-tnwvwncss6] {
+    top: 0;
+    height: 60px;
+    transition-duration: .5s;
+    border-right: 4px solid;
+    background-color: rgb(212, 212, 212);
+}
+
+.menu-button[b-tnwvwncss6] {
+    background-color: transparent;
+    border: 1px solid rgba(187, 187, 187, 0.651);
+    outline: none;
+    direction: rtl;
+}
+
+    .menu-button i[b-tnwvwncss6] {
+        font-size: 1.5rem;
+    }
+
+.button-active[b-tnwvwncss6] {
+    width: 100%;
+    height: 60px;
+}
+
+.form-label[b-tnwvwncss6] {
+    font-size: 1rem;
+    color: rgb(100, 100, 100);
+}
+
+.input-field:focus[b-tnwvwncss6] {
+    outline: 0;
+    border: 1px solid #17a2b8;
+    box-shadow: 0 0 2px 0.1rem #17a2b8;
+}
+
+#wishListPanel[b-tnwvwncss6] {
+    height: 600px;
+}
+
+.whishList-items[b-tnwvwncss6] {
+    width: 100%;
+    height: 120px;
+    border-top: 1px solid rgba(187, 187, 187, 0.651);
+    border-bottom: 1px solid rgba(187, 187, 187, 0.651);
+}
+
+.p-Details[b-tnwvwncss6] {
+    margin-bottom: 15px !important;
+}
+
+#orderList[b-tnwvwncss6] {
+    height: 600px;
+}
+
+.orderItems[b-tnwvwncss6] {
+    height: 220px;
+    width: 100%;
+    border: 1px solid rgb(121, 121, 121);
+    border-radius: 10px;
+    margin-top: 5px !important;
+}
+
+.orderItems[b-tnwvwncss6] {
+    font-size: 1rem;
+}
+
+.product-details[b-tnwvwncss6] {
+    color: rgb(121, 121, 121);
+    font-size: .9rem !important;
+}
+
+.product-imgs[b-tnwvwncss6] {
+    height: 100px;
+    border: 1px solid rgb(121, 121, 121);
+    border-right: 0;
+    border-left: 0;
+    margin: .03rem;
+}
+
+.product-imgs-items[b-tnwvwncss6] {
+    width: 100px;
+    height: 80px;
+}
+
+#locationLists[b-tnwvwncss6] {
+    height: 600px;
+}
+
+.locationsList[b-tnwvwncss6] {
+    font-size: .9rem;
+    color: rgb(121, 121, 121);
+    border-bottom: 1px solid rgba(187, 187, 187, 0.651);
+}
+
+.location-buttons[b-tnwvwncss6] {
+    width: 100%;
+}
+
+.p-imgs[b-tnwvwncss6] {
+    position: absolute;
+    right: 0;
+    height: 100%;
+}
+
+.orders-img[b-tnwvwncss6] {
+    height: 100%;
+    width: 100%;
+}

@@ -1,9 +1,355 @@
 ﻿@page "/"
 
-<PageTitle>Index</PageTitle>
+<PageTitle>صفحه اصلی سایت</PageTitle>
 
-<h1>Hello, world!</h1>
+<Slider/>
+<CategoriesIcons/>
 
-Welcome to your new app.
+<div class="container">
+    <div class="mt-2 mb-5">
+        <div class="border border-2 border-dark rounded rounded-pill d-inline py-2 px-5">
+            <NavLink href="/CategoriesItem" class="text-black text-decoration-none">
+                <span class="fw-bold">جدیدترین محصولات</span>
+            </NavLink>
+        </div>
+    </div>
+    <div class="row m-auto p-0 justify-content-around">
+        <div class="col-12 col-sm-5 col-lg-2 product-box p-0 mx-2 my-2">
+            <NavLink href="ProductDetail" class="text-center h-50 bg-white d-block text-black text-decoration-none">
+                <img src="Images/Product-Image/samsung galaxy a73 2022.webp" alt="samsung galaxy a73 2022" class="product-img">
+            </NavLink>
+            <div class="w-100 text-center mt-2 h-25">
+                <NavLink href="ProductDetail"
+                   class="product-title mt-2 fw-lighter text-black text-decoration-none">
+                    گوشی موبایل سامسونگ مدل samsung
+                    galaxy a73 2022
+                </NavLink>
+            </div>
+            <div class=" justify-content-center align-items-end pb-4 h-25 d-flex text-danger">
+                22,500,000 تومان
+            </div>
+        </div>
+        <div class="col-12 col-sm-5 col-lg-2 product-box p-0 mx-2 my-2">
+            <NavLink href="/ProductDetail" class="text-center h-50 bg-white d-block text-black text-decoration-none">
+                <img src="Images/Product-Image/xiaomi note 10 pro max.jpg" alt="xiaomi note 10 pro max" class="product-img">
+            </NavLink>
+            <div class="w-100 text-center mt-2 h-25">
+                <NavLink href="/ProductDetail"
+                   class="product-title mt-2 fw-lighter text-black text-decoration-none">
+                    گوشی موبایل شیائومی مدل xiaomi note
+                    10 pro max
+                </NavLink>
+            </div>
+            <div class=" justify-content-center align-items-end pb-4 h-25 d-flex text-danger">
+                7,500,000 تومان
+            </div>
+        </div>
+        <div class="col-12 col-sm-5 col-lg-2 product-box p-0 mx-2 my-2">
+            <NavLink href="/ProductDetail" class="text-center h-50 bg-white d-block text-black text-decoration-none">
+                <img src="Images/Product-Image/samsung galaxy s22 2022.jpg" alt="samsung galaxy s22 2022" class="product-img">
+            </NavLink>
+            <div class="w-100 text-center mt-2 h-25">
+                <NavLink href="/ProductDetail"
+                   class="product-title mt-2 fw-lighter text-black text-decoration-none">
+                    گوشی موبایل سامسونگ مدل samsung
+                    galaxy s22 2022
+                </NavLink>
+            </div>
+            <div class=" justify-content-center align-items-end pb-4 h-25 d-flex text-danger">
+                52,000,000 تومان
+            </div>
+        </div>
+        <div class="col-12 col-sm-5 col-lg-2 product-box p-0 mx-2 my-2">
+            <NavLink href="/ProductDetail" class="text-center h-50 bg-white d-block text-black text-decoration-none">
+                <img src="Images/Product-Image/xiaomi mi 12.jpg" alt="xiaomi mi 12" class="product-img">
+            </NavLink>
+            <div class="w-100 text-center mt-2 h-25">
+                <NavLink href="/ProductDetail"
+                   class="product-title mt-2 fw-lighter text-black text-decoration-none">
+                    گوشی موبایل شیائومی مدل xiaomi mi
+                    12
+                </NavLink>
+            </div>
+            <div class=" justify-content-center align-items-end pb-4 h-25 d-flex text-danger">
+                12,500,000 تومان
+            </div>
+        </div>
+        <div class="col-12 col-sm-5 col-lg-2 product-box p-0 mx-2 my-2">
+            <NavLink href="/ProductDetail" class="text-center h-50 bg-white d-block text-black text-decoration-none">
+                <img src="Images/Product-Image/iphone 13 pro max.jpg" alt="iphone 13 pro max" class="product-img">
+            </NavLink>
+            <div class="w-100 text-center mt-2 h-25">
+                <NavLink href="/ProductDetail"
+                   class="product-title mt-2 fw-lighter text-black text-decoration-none">
+                    گوشی موبایل اپل مدل iphone 13 pro
+                    max
+                </NavLink>
+            </div>
+            <div class=" justify-content-center align-items-end pb-4 h-25 d-flex text-danger">
+                60,100,000 تومان
+            </div>
+        </div>
+        <div class="col-12 col-sm-5 col-lg-2 product-box p-0 mx-2 my-2">
+            <NavLink href="/ProductDetail" class="text-center h-50 bg-white d-block text-black text-decoration-none">
+                <img src="Images/Product-Image/samsung galaxy a53.jpg" alt="samsung galaxy a53" class="product-img">
+            </NavLink>
+            <div class="w-100 text-center mt-2 h-25">
+                <NavLink href="/ProductDetail"
+                   class="product-title mt-2 fw-lighter text-black text-decoration-none">
+                    گوشی موبایل سامسونگ مدل samsung
+                    galaxy a53
+                </NavLink>
+            </div>
+            <div class=" justify-content-center align-items-end pb-4 h-25 d-flex text-danger">
+                18,400,000 تومان
+            </div>
+        </div>
+        <div class="col-12 col-sm-5 col-lg-2 product-box p-0 mx-2 my-2">
+            <NavLink href="/ProductDetail" class="text-center h-50 bg-white d-block text-black text-decoration-none">
+                <img src="Images/Product-Image/iphone se 2020.jpg" alt="iphone se 2020" class="product-img">
+            </NavLink>
+            <div class="w-100 text-center mt-2 h-25">
+                <NavLink href="/ProductDetail"
+                   class="product-title mt-2 fw-lighter text-black text-decoration-none">
+                    گوشی موبایل اپل مدل iphone se
+                    2020
+                </NavLink>
+            </div>
+            <div class=" justify-content-center align-items-end pb-4 h-25 d-flex text-danger">
+                22,500,000 تومان
+            </div>
+        </div>
+        <div class="col-12 col-sm-5 col-lg-2 product-box p-0 mx-2 my-2">
+            <NavLink href="/ProductDetail" class="text-center h-50 bg-white d-block text-black text-decoration-none">
+                <img src="Images/Product-Image/xiaomi mi 11 pro.jpg" alt="xiaomi mi 11 pro" class="product-img">
+            </NavLink>
+            <div class="w-100 text-center mt-2 h-25">
+                <NavLink href="/ProductDetail"
+                   class="product-title mt-2 fw-lighter text-black text-decoration-none">
+                    گوشی موبایل شیائومی مدل xiaomi mi 11
+                    pro
+                </NavLink>
+            </div>
+            <div class=" justify-content-center align-items-end pb-4 h-25 d-flex text-danger">
+                20,700,000 تومان
+            </div>
+        </div>
+        <div class="col-12 col-sm-5 col-lg-2 product-box p-0 mx-2 my-2">
+            <NavLink href="/ProductDetail" class="text-center h-50 bg-white d-block text-black text-decoration-none">
+                <img src="Images/Product-Image/samsung s21 ultra.jpg" alt="samsung s21 ultra" class="product-img">
+            </NavLink>
+            <div class="w-100 text-center mt-2 h-25">
+                <NavLink href="/ProductDetail"
+                   class="product-title mt-2 fw-lighter text-black text-decoration-none">
+                    گوشی موبایل سامسونگ مدل samsung s21
+                    ultra
+                </NavLink>
+            </div>
+            <div class=" justify-content-center align-items-end pb-4 h-25 d-flex text-danger">
+                32,000,000 تومان
+            </div>
+        </div>
+        <div class="col-12 col-sm-5 col-lg-2 product-box p-0 mx-2 my-2">
+            <NavLink href="/ProductDetail" class="text-center h-50 bg-white d-block text-black text-decoration-none">
+                <img src="Images/Product-Image/xiaomi poco x3 pro.png" alt="xiaomi poco x3 pro" class="product-img">
+            </NavLink>
+            <div class="w-100 text-center mt-2 h-25">
+                <NavLink href="/ProductDetail"
+                   class="product-title mt-2 fw-lighter text-black text-decoration-none">
+                    گوشی موبایل شیائومی مدل xiaomi poco
+                    x3 pro
+                </NavLink>
+            </div>
+            <div class=" justify-content-center align-items-end pb-4 h-25 d-flex text-danger">
+                14,000,000 تومان
+            </div>
+        </div>
+    </div>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+    <!--------------------------------------------------------------------------------------------------->
+    <!--------------------------------------------------------------------------------------------------->
+    <!--------------------------------------------------------------------------------------------------->
+
+    <div class="off-section">
+        <div class="row my-3">
+            <NavLink href="#" class="col-12 col-lg-6 text-center text-black text-decoration-none p-0">
+                <div class="off-items border border-4 m-3 bg-white">
+                    <img src="Images/Static-Image/PictureOff-1.jpg" alt="تخفیف ویژه" class="off-img" title="تخفیف ویژه">
+                </div>
+            </NavLink>
+            <NavLink href="#" class="col-12 col-lg-6 text-center text-black text-decoration-none p-0">
+                <div class="off-items border border-4 m-3 bg-white">
+                    <img src="Images/Static-Image/PictureOff-2.jpg" alt="تخفیف خرید کتاب" class="off-img" title="تخفیف حرید کتاب">
+                </div>
+            </NavLink>
+        </div>
+    </div>
+
+    <!--------------------------------------------------------------------------------------------------->
+    <!--------------------------------------------------------------------------------------------------->
+    <!--------------------------------------------------------------------------------------------------->
+
+    <div class="mt-5 mb-5">
+        <div class="border border-2 border-dark rounded rounded-pill d-inline py-2 px-5">
+            <NavLink href="/CategoriesItem" class="text-black text-decoration-none">
+                <span class="fw-bold">محصولات پرفروش</span>
+            </NavLink>
+        </div>
+    </div>
+    <div class="row m-auto p-0 justify-content-around">
+        <div class="col-12 col-sm-5 col-lg-2 product-box p-0 mx-2 my-2">
+            <NavLink href="/ProductDetail" class="text-center h-50 bg-white d-block text-black text-decoration-none">
+                <img src="Images/Product-Image/samsung galaxy a73 2022.webp" alt="samsung galaxy a73 2022" class="product-img">
+            </NavLink>
+            <div class="w-100 text-center mt-2 h-25">
+                <NavLink href="/ProductDetail"
+                   class="product-title mt-2 fw-lighter text-black text-decoration-none">
+                    گوشی موبایل سامسونگ مدل samsung
+                    galaxy a73 2022
+                </NavLink>
+            </div>
+            <div class=" justify-content-center align-items-end pb-4 h-25 d-flex text-danger">
+                22,500,000 تومان
+            </div>
+        </div>
+        <div class="col-12 col-sm-5 col-lg-2 product-box p-0 mx-2 my-2">
+            <NavLink href="/ProductDetail" class="text-center h-50 bg-white d-block text-black text-decoration-none">
+                <img src="Images/Product-Image/xiaomi note 10 pro max.jpg" alt="xiaomi note 10 pro max" class="product-img">
+            </NavLink>
+            <div class="w-100 text-center mt-2 h-25">
+                <NavLink href="/ProductDetail"
+                   class="product-title mt-2 fw-lighter text-black text-decoration-none">
+                    گوشی موبایل شیائومی مدل xiaomi note
+                    10 pro max
+                </NavLink>
+            </div>
+            <div class=" justify-content-center align-items-end pb-4 h-25 d-flex text-danger">
+                7,500,000 تومان
+            </div>
+        </div>
+        <div class="col-12 col-sm-5 col-lg-2 product-box p-0 mx-2 my-2">
+            <NavLink href="/ProductDetail" class="text-center h-50 bg-white d-block text-black text-decoration-none">
+                <img src="Images/Product-Image/samsung galaxy s22 2022.jpg" alt="samsung galaxy s22 2022" class="product-img">
+            </NavLink>
+            <div class="w-100 text-center mt-2 h-25">
+                <NavLink href="/ProductDetail"
+                   class="product-title mt-2 fw-lighter text-black text-decoration-none">
+                    گوشی موبایل سامسونگ مدل samsung
+                    galaxy s22 2022
+                </NavLink>
+            </div>
+            <div class=" justify-content-center align-items-end pb-4 h-25 d-flex text-danger">
+                52,000,000 تومان
+            </div>
+        </div>
+        <div class="col-12 col-sm-5 col-lg-2 product-box p-0 mx-2 my-2">
+            <NavLink href="/ProductDetail" class="text-center h-50 bg-white d-block text-black text-decoration-none">
+                <img src="Images/Product-Image/xiaomi mi 12.jpg" alt="xiaomi mi 12" class="product-img">
+            </NavLink>
+            <div class="w-100 text-center mt-2 h-25">
+                <NavLink href="/ProductDetail"
+                   class="product-title mt-2 fw-lighter text-black text-decoration-none">
+                    گوشی موبایل شیائومی مدل xiaomi mi
+                    12
+                </NavLink>
+            </div>
+            <div class=" justify-content-center align-items-end pb-4 h-25 d-flex text-danger">
+                12,500,000 تومان
+            </div>
+        </div>
+        <div class="col-12 col-sm-5 col-lg-2 product-box p-0 mx-2 my-2">
+            <NavLink href="/ProductDetail" class="text-center h-50 bg-white d-block text-black text-decoration-none">
+                <img src="Images/Product-Image/iphone 13 pro max.jpg" alt="iphone 13 pro max" class="product-img">
+            </NavLink>
+            <div class="w-100 text-center mt-2 h-25">
+                <NavLink href="/ProductDetail"
+                   class="product-title mt-2 fw-lighter text-black text-decoration-none">
+                    گوشی موبایل اپل مدل iphone 13 pro
+                    max
+                </NavLink>
+            </div>
+            <div class=" justify-content-center align-items-end pb-4 h-25 d-flex text-danger">
+                60,100,000 تومان
+            </div>
+        </div>
+        <div class="col-12 col-sm-5 col-lg-2 product-box p-0 mx-2 my-2">
+            <NavLink href="/ProductDetail" class="text-center h-50 bg-white d-block text-black text-decoration-none">
+                <img src="Images/Product-Image/samsung galaxy a53.jpg" alt="samsung galaxy a53" class="product-img">
+            </NavLink>
+            <div class="w-100 text-center mt-2 h-25">
+                <NavLink href="/ProductDetail"
+                   class="product-title mt-2 fw-lighter text-black text-decoration-none">
+                    گوشی موبایل سامسونگ مدل samsung
+                    galaxy a53
+                </NavLink>
+            </div>
+            <div class=" justify-content-center align-items-end pb-4 h-25 d-flex text-danger">
+                18,400,000 تومان
+            </div>
+        </div>
+        <div class="col-12 col-sm-5 col-lg-2 product-box p-0 mx-2 my-2">
+            <NavLink href="/ProductDetail" class="text-center h-50 bg-white d-block text-black text-decoration-none">
+                <img src="Images/Product-Image/iphone se 2020.jpg" alt="iphone se 2020" class="product-img">
+            </NavLink>
+            <div class="w-100 text-center mt-2 h-25">
+                <NavLink href="/ProductDetail"
+                   class="product-title mt-2 fw-lighter text-black text-decoration-none">
+                    گوشی موبایل اپل مدل iphone se
+                    2020
+                </NavLink>
+            </div>
+            <div class=" justify-content-center align-items-end pb-4 h-25 d-flex text-danger">
+                22,500,000 تومان
+            </div>
+        </div>
+        <div class="col-12 col-sm-5 col-lg-2 product-box p-0 mx-2 my-2">
+            <NavLink href="/ProductDetail" class="text-center h-50 bg-white d-block text-black text-decoration-none">
+                <img src="Images/Product-Image/xiaomi mi 11 pro.jpg" alt="xiaomi mi 11 pro" class="product-img">
+            </NavLink>
+            <div class="w-100 text-center mt-2 h-25">
+                <NavLink href="/ProductDetail"
+                   class="product-title mt-2 fw-lighter text-black text-decoration-none">
+                    گوشی موبایل شیائومی مدل xiaomi mi 11
+                    pro
+                </NavLink>
+            </div>
+            <div class=" justify-content-center align-items-end pb-4 h-25 d-flex text-danger">
+                20,700,000 تومان
+            </div>
+        </div>
+        <div class="col-12 col-sm-5 col-lg-2 product-box p-0 mx-2 my-2">
+            <NavLink href="/ProductDetail" class="text-center h-50 bg-white d-block text-black text-decoration-none">
+                <img src="Images/Product-Image/samsung s21 ultra.jpg" alt="samsung s21 ultra" class="product-img">
+            </NavLink>
+            <div class="w-100 text-center mt-2 h-25">
+                <NavLink href="/ProductDetail"
+                   class="product-title mt-2 fw-lighter text-black text-decoration-none">
+                    گوشی موبایل سامسونگ مدل samsung s21
+                    ultra
+                </NavLink>
+            </div>
+            <div class=" justify-content-center align-items-end pb-4 h-25 d-flex text-danger">
+                32,000,000 تومان
+            </div>
+        </div>
+        <div class="col-12 col-sm-5 col-lg-2 product-box p-0 mx-2 my-2">
+            <NavLink href="/ProductDetail" class="text-center h-50 bg-white d-block text-black text-decoration-none">
+                <img src="Images/Product-Image/xiaomi poco x3 pro.png" alt="xiaomi poco x3 pro" class="product-img">
+            </NavLink>
+            <div class="w-100 text-center mt-2 h-25">
+                <NavLink href="/ProductDetail"
+                   class="product-title mt-2 fw-lighter text-black text-decoration-none">
+                    گوشی موبایل شیائومی مدل xiaomi poco
+                    x3 pro
+                </NavLink>
+            </div>
+            <div class=" justify-content-center align-items-end pb-4 h-25 d-flex text-danger">
+                14,000,000 تومان
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <Footer />
+</div>
