@@ -1,0 +1,86 @@
+@font-face {
+    font-family: 'TanhaWeb';
+    src: url("../fonts/Tanha/Tanha-FD.ttf") format('truerype');
+    src: url("../fonts/Tanha/Tanha-FD.woff") format('woff');
+    src: url("../fonts/Tanha/Tanha-FD.woff2") format('woff2');
+}
+
+@font-face {
+    font-family: 'yekanWeb';
+    src: url("../fonts/Yekan/Yekan.ttf") format('truerype');
+    src: url("../fonts/Yekan/Yekan.woff") format('woff');
+}
+
+body[b-p7bp40ch2a] {
+    font-family: 'TanhaWeb';
+    font-size: medium;
+}
+
+.dropdown-menu[b-p7bp40ch2a] {
+    right: -150px !important;
+}
+
+.dropdown-item[b-p7bp40ch2a] {
+    width: 220px;
+    height: 55px;
+}
+
+    .dropdown-item:active[b-p7bp40ch2a] {
+        color: black;
+        background-color: #e9ecef;
+    }
+
+.my-nav-style[b-p7bp40ch2a] {
+    box-sizing: border-box !important;
+    box-shadow: 5px 7px 7px rgba(187, 187, 187, 0.651);
+    position: fixed;
+    z-index: 10;
+    height: 70px;
+    width: 100%;
+    top: 0 !important;
+}
+
+#mainBlock[b-p7bp40ch2a] {
+    margin-top: 90px;
+}
+
+.btn:focus[b-p7bp40ch2a],
+.btn:active[b-p7bp40ch2a] {
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.myhr[b-p7bp40ch2a] {
+    margin-top: .8rem;
+    margin-bottom: .8rem;
+    border-top: 1px solid rgba(0, 0, 0, .3) !important;
+}
+
+.card-body[b-p7bp40ch2a] {
+    height: 300px;
+    overflow-y: scroll;
+}
+
+.product-img[b-p7bp40ch2a] {
+    width: 100%;
+    height: 240px;
+}
+
+.product-box[b-p7bp40ch2a] {
+    height: 380px !important;
+}
+
+.font-size-product-title[b-p7bp40ch2a] {
+    font-size: medium;
+    line-height: 1.6rem;
+}
+
+.font-size-price-title[b-p7bp40ch2a] {
+    font-size: large;
+    font-weight: bold;
+}
+
+.p-imgs[b-p7bp40ch2a] {
+    position: relative;
+    height: 100%;
+}

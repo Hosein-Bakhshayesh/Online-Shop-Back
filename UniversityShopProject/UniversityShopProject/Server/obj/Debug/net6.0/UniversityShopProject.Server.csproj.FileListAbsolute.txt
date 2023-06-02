@@ -106,3 +106,9 @@ C:\Users\hosei\OneDrive\Desktop\University Online Shop Project\Back-end\Universi
 C:\Users\hosei\OneDrive\Desktop\University Online Shop Project\Back-end\UniversityShopProject\UniversityShopProject\Server\obj\Debug\net6.0\UniversityShopProject.Server.pdb
 C:\Users\hosei\OneDrive\Desktop\University Online Shop Project\Back-end\UniversityShopProject\UniversityShopProject\Server\obj\Debug\net6.0\UniversityShopProject.Server.genruntimeconfig.cache
 C:\Users\hosei\OneDrive\Desktop\University Online Shop Project\Back-end\UniversityShopProject\UniversityShopProject\Server\obj\Debug\net6.0\ref\UniversityShopProject.Server.dll
+C:\Users\hosei\OneDrive\Desktop\University Online Shop Project\Back-end\UniversityShopProject\UniversityShopProject\Server\bin\Debug\net6.0\BCrypt.Net-Next.dll
+C:\Users\hosei\OneDrive\Desktop\University Online Shop Project\Back-end\UniversityShopProject\UniversityShopProject\Server\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\hosei\OneDrive\Desktop\University Online Shop Project\Back-end\UniversityShopProject\UniversityShopProject\Server\bin\Debug\net6.0\UniversityShopProjectRepository.dll
+C:\Users\hosei\OneDrive\Desktop\University Online Shop Project\Back-end\UniversityShopProject\UniversityShopProject\Server\bin\Debug\net6.0\UniversityShopProjectServices.dll
+C:\Users\hosei\OneDrive\Desktop\University Online Shop Project\Back-end\UniversityShopProject\UniversityShopProject\Server\bin\Debug\net6.0\UniversityShopProjectServices.pdb
+C:\Users\hosei\OneDrive\Desktop\University Online Shop Project\Back-end\UniversityShopProject\UniversityShopProject\Server\bin\Debug\net6.0\UniversityShopProjectRepository.pdb

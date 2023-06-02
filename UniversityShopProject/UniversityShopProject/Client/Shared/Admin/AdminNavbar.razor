@@ -1,0 +1,26 @@
+﻿<div id="openIcon" class="mx-1 my-3">
+    <i onclick="OpenNav()" title="باز کردن منو" class="fa fa-arrow-circle-o-left px-2"></i>
+</div>
+<nav id="navbar">
+    <div class="pt-3 d-flex justify-content-between px-3">
+        <div>
+            <NavLink href="#" title="خروج"><i class="fa fa-sign-out text-white icon"></i></NavLink>
+        </div>
+        <div>
+            <NavLink href="#" onclick="CloseNav()" title="بستن منو"><i class="fa fa-arrow-circle-o-right text-white icon"></i></NavLink>
+        </div>
+    </div>
+    <div class="pt-4">
+        <p class="my-1"><NavLink Class="B-Nav btn" href="/Admin">داشبورد</NavLink></p>
+        <p class="my-1"><NavLink Class="B-Nav btn"  href="#">دسته بندی محصولات</NavLink></p>
+        <p class="my-1"><NavLink Class="B-Nav btn" href="#">محصولات</NavLink></p>
+        <p class="my-1"><NavLink class="B-Nav btn" href="/Admin/AdminList">لیست مدیران سایت</NavLink></p>
+        <p class="my-1"><NavLink Class="B-Nav btn" href="#">کامنت‌ها</NavLink></p>
+        <p class="my-1"><NavLink Class="B-Nav btn" href="/Admin/UserList">لیست کاربران سایت</NavLink></p>
+        <p class="my-1"><NavLink Class="B-Nav btn" href="/" target="_blank">مشاهده سایت</NavLink></p>
+    </div>
+</nav>
+
+@code {
+
+}

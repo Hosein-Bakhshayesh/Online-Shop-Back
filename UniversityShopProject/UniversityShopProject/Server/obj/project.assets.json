@@ -1501,7 +1501,8 @@
           "Microsoft.AspNetCore.Authorization": "7.0.5",
           "Microsoft.AspNetCore.Components.WebAssembly": "6.0.15",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.5",
-          "UniversityShopProject.Shared": "1.0.0"
+          "UniversityShopProject.Shared": "1.0.0",
+          "UniversityShopProjectModels": "1.0.0"
         },
         "compile": {
           "bin/placeholder/UniversityShopProject.Client.dll": {}
@@ -1535,6 +1536,33 @@
         },
         "runtime": {
           "bin/placeholder/UniversityShopProjectModels.dll": {}
+        }
+      },
+      "UniversityShopProjectRepository/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "UniversityShopProjectModels": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/UniversityShopProjectRepository.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/UniversityShopProjectRepository.dll": {}
+        }
+      },
+      "UniversityShopProjectServices/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "UniversityShopProjectModels": "1.0.0",
+          "UniversityShopProjectRepository": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/UniversityShopProjectServices.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/UniversityShopProjectServices.dll": {}
         }
       }
     }
@@ -4283,6 +4311,16 @@
       "type": "project",
       "path": "../../UniversityShopProjectModels/UniversityShopProjectModels.csproj",
       "msbuildProject": "../../UniversityShopProjectModels/UniversityShopProjectModels.csproj"
+    },
+    "UniversityShopProjectRepository/1.0.0": {
+      "type": "project",
+      "path": "../../UniversityShopProjectRepository/UniversityShopProjectRepository.csproj",
+      "msbuildProject": "../../UniversityShopProjectRepository/UniversityShopProjectRepository.csproj"
+    },
+    "UniversityShopProjectServices/1.0.0": {
+      "type": "project",
+      "path": "../../UniversityShopProjectServices/UniversityShopProjectServices.csproj",
+      "msbuildProject": "../../UniversityShopProjectServices/UniversityShopProjectServices.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -4294,7 +4332,8 @@
       "Microsoft.EntityFrameworkCore.Tools >= 7.0.5",
       "UniversityShopProject.Client >= 1.0.0",
       "UniversityShopProject.Shared >= 1.0.0",
-      "UniversityShopProjectModels >= 1.0.0"
+      "UniversityShopProjectModels >= 1.0.0",
+      "UniversityShopProjectServices >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -4327,6 +4366,9 @@
           "projectReferences": {
             "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProjectModels\\UniversityShopProjectModels.csproj": {
               "projectPath": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProjectModels\\UniversityShopProjectModels.csproj"
+            },
+            "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProjectServices\\UniversityShopProjectServices.csproj": {
+              "projectPath": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProjectServices\\UniversityShopProjectServices.csproj"
             },
             "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\UniversityShopProject.Client.csproj": {
               "projectPath": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\UniversityShopProject.Client.csproj"

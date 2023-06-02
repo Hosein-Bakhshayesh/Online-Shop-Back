@@ -4,9 +4,12 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>99b77db7-8caa-4c9b-8c7e-596c988bf6f6</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.16" />
+    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="7.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.5">
@@ -17,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\UniversityShopProjectModels\UniversityShopProjectModels.csproj" />
+    <ProjectReference Include="..\..\UniversityShopProjectServices\UniversityShopProjectServices.csproj" />
     <ProjectReference Include="..\Client\UniversityShopProject.Client.csproj" />
     <ProjectReference Include="..\Shared\UniversityShopProject.Shared.csproj" />
   </ItemGroup>

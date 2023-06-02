@@ -1,0 +1,34 @@
+#instagram:hover[b-wyd0rhvhtp] {
+    color: red;
+}
+
+#telegram:hover[b-wyd0rhvhtp] {
+    color: rgb(0, 89, 255);
+}
+
+#facebook:hover[b-wyd0rhvhtp] {
+    color: blue
+}
+
+#linkedin:hover[b-wyd0rhvhtp] {
+    color: rgb(0, 180, 180);
+}
+
+.footer[b-wyd0rhvhtp] {
+    min-height: 300px;
+    background-color: #eee;
+}
+
+.footer-item[b-wyd0rhvhtp] {
+    transition-duration: .3s;
+    color: gray !important;
+}
+
+    .footer-item:hover[b-wyd0rhvhtp] {
+        color: black !important;
+    }
+
+#off-email:focus[b-wyd0rhvhtp] {
+    border-color: #e9ecef !important;
+    box-shadow: 0 0 2px 0.1rem #17a2b8 !important;
+}

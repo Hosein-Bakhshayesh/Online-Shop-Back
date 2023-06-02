@@ -1,4 +1,4 @@
-@font-face {
+﻿@font-face {
     font-family: 'TanhaWeb';
     src: url("../fonts/Tanha/Tanha-FD.ttf") format('truerype');
     src: url("../fonts/Tanha/Tanha-FD.woff") format('woff');
@@ -25,10 +25,10 @@ body {
     height: 55px;
 }
 
-.dropdown-item:active {
-    color: black;
-    background-color: #e9ecef;
-}
+    .dropdown-item:active {
+        color: black;
+        background-color: #e9ecef;
+    }
 
 .my-nav-style {
     box-sizing: border-box !important;

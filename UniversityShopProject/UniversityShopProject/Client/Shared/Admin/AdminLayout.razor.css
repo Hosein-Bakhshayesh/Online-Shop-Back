@@ -1,0 +1,21 @@
+﻿@font-face {
+    font-family: 'TanhaWeb';
+    src: url("fonts/Tanha/Tanha-FD.ttf") format('truerype');
+    src: url("fonts/Tanha/Tanha-FD.woff") format('woff');
+    src: url("fonts/Tanha/Tanha-FD.woff2") format('woff2');
+}
+
+@font-face {
+    font-family: 'yekanWeb';
+    src: url("fonts/Yekan/Yekan.ttf") format('truerype');
+    src: url("fonts/Yekan/Yekan.woff") format('woff');
+}
+
+body {
+    font-family: 'TanhaWeb';
+    font-size: medium;
+}
+#main {
+    margin-right: 20%;
+    transition: .3s;
+}

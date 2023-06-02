@@ -1,0 +1,50 @@
+﻿#navbar {
+    height: 100%;
+    width: 18%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    overflow-x: hidden;
+    background-color: rgb(49, 49, 49);
+    transition: .3s;
+    text-align: center;
+}
+
+.B-Nav {
+    color: white !important;
+    text-decoration: none;
+    outline: none;
+}
+
+.B-Nav:hover {
+    color: rgb(49, 49, 49);
+    background-color: white;
+    text-decoration: none;
+}
+
+.btn:focus {
+    box-shadow: none !important;
+}
+
+#img-profile {
+    height: 160px;
+    width: 160px;
+}
+
+.icon {
+    font-size: x-large;
+}
+
+
+#openIcon {
+    font-size: x-large;
+    display: inline;
+    visibility: hidden;
+    transition: .3s;
+    position: fixed;
+}
+
+    #openIcon:hover {
+        cursor: pointer;
+    }

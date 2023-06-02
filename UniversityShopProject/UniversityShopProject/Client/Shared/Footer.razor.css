@@ -1,0 +1,34 @@
+﻿#instagram:hover {
+    color: red;
+}
+
+#telegram:hover {
+    color: rgb(0, 89, 255);
+}
+
+#facebook:hover {
+    color: blue
+}
+
+#linkedin:hover {
+    color: rgb(0, 180, 180);
+}
+
+.footer {
+    min-height: 300px;
+    background-color: #eee;
+}
+
+.footer-item {
+    transition-duration: .3s;
+    color: gray !important;
+}
+
+    .footer-item:hover {
+        color: black !important;
+    }
+
+#off-email:focus {
+    border-color: #e9ecef !important;
+    box-shadow: 0 0 2px 0.1rem #17a2b8 !important;
+}

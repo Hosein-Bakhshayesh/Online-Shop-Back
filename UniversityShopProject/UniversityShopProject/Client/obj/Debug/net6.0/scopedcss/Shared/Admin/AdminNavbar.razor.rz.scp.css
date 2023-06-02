@@ -1,0 +1,50 @@
+#navbar[b-klri5ah9ag] {
+    height: 100%;
+    width: 18%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    overflow-x: hidden;
+    background-color: rgb(49, 49, 49);
+    transition: .3s;
+    text-align: center;
+}
+
+.B-Nav[b-klri5ah9ag] {
+    color: white !important;
+    text-decoration: none;
+    outline: none;
+}
+
+.B-Nav:hover[b-klri5ah9ag] {
+    color: rgb(49, 49, 49);
+    background-color: white;
+    text-decoration: none;
+}
+
+.btn:focus[b-klri5ah9ag] {
+    box-shadow: none !important;
+}
+
+#img-profile[b-klri5ah9ag] {
+    height: 160px;
+    width: 160px;
+}
+
+.icon[b-klri5ah9ag] {
+    font-size: x-large;
+}
+
+
+#openIcon[b-klri5ah9ag] {
+    font-size: x-large;
+    display: inline;
+    visibility: hidden;
+    transition: .3s;
+    position: fixed;
+}
+
+    #openIcon:hover[b-klri5ah9ag] {
+        cursor: pointer;
+    }

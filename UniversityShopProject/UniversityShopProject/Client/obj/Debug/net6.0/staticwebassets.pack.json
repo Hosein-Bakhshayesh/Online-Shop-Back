@@ -133,26 +133,6 @@
       "PackagePath": "staticwebassets\\Js\\jquery-3.2.1.slim.min.js"
     },
     {
-      "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\css\\AccountingPage.css",
-      "PackagePath": "staticwebassets\\css\\AccountingPage.css"
-    },
-    {
-      "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\css\\CategoriesItem.css",
-      "PackagePath": "staticwebassets\\css\\CategoriesItem.css"
-    },
-    {
-      "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\css\\FooterStyle.css",
-      "PackagePath": "staticwebassets\\css\\FooterStyle.css"
-    },
-    {
-      "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\css\\ProductDetail.css",
-      "PackagePath": "staticwebassets\\css\\ProductDetail.css"
-    },
-    {
-      "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\css\\UserPanelPage.css",
-      "PackagePath": "staticwebassets\\css\\UserPanelPage.css"
-    },
-    {
       "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\css\\admin-style.css",
       "PackagePath": "staticwebassets\\css\\admin-style.css"
     },

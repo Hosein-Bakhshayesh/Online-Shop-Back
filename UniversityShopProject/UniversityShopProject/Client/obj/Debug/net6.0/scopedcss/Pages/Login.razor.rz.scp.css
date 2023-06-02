@@ -1,36 +1,36 @@
 @font-face {
-	font-family: 'TanhaWeb';
-	src: url("../fonts/Tanha/Tanha-FD.ttf") format('truerype');
-	src: url("../fonts/Tanha/Tanha-FD.woff") format('woff');
-	src: url("../fonts/Tanha/Tanha-FD.woff2") format('woff2');
+    font-family: 'TanhaWeb';
+    src: url("../fonts/Tanha/Tanha-FD.ttf") format('truerype');
+    src: url("../fonts/Tanha/Tanha-FD.woff") format('woff');
+    src: url("../fonts/Tanha/Tanha-FD.woff2") format('woff2');
 }
 
 @font-face {
-	font-family: 'yekanWeb';
-	src: url("../fonts/Yekan/Yekan.ttf") format('truerype');
-	src: url("../fonts/Yekan/Yekan.woff") format('woff');
+    font-family: 'yekanWeb';
+    src: url("../fonts/Yekan/Yekan.ttf") format('truerype');
+    src: url("../fonts/Yekan/Yekan.woff") format('woff');
 }
 
-body {
+body[b-cuq7xw58nc] {
     font-family: 'TanhaWeb';
     font-size: medium;
 }
 
-* {
+*[b-cuq7xw58nc] {
     margin: 0;
     padding: 0;
 }
 
-.main-box {
+.main-box[b-cuq7xw58nc] {
     position: absolute;
     height: 100%;
     width: 100%;
-    background-image: url(../Images/accountingBackground.jpg);
+    background-image: url(Images/Static-Image/accountingBackground.jpg);
     background-position: center;
     background-size: cover;
 }
 
-.form-box {
+.form-box[b-cuq7xw58nc] {
     width: 380px;
     height: 550px;
     position: relative;
@@ -40,7 +40,7 @@ body {
     padding: 0.3rem;
 }
 
-.btn-box {
+.btn-box[b-cuq7xw58nc] {
     width: 220px;
     margin: 2.2rem auto;
     position: relative;
@@ -49,7 +49,7 @@ body {
     box-shadow: 5px 7px 7px rgba(187, 187, 187, 0.651);
 }
 
-.toggle-btn {
+.toggle-btn[b-cuq7xw58nc] {
     position: relative;
     background: transparent;
     border: 0;
@@ -57,50 +57,50 @@ body {
     cursor: pointer;
 }
 
-#btn-active {
+#btn-active[b-cuq7xw58nc] {
     left: 0;
     width: 110px;
     border-radius: 1.8rem;
     transition: .6s;
 }
 
-.social-icons {
+.social-icons[b-cuq7xw58nc] {
     width: 150px;
 }
 
-#instagram:hover {
+#instagram:hover[b-cuq7xw58nc] {
     color: red;
 }
 
-#telegram:hover {
+#telegram:hover[b-cuq7xw58nc] {
     color: rgb(0, 89, 255);
 }
 
-#facebook:hover {
+#facebook:hover[b-cuq7xw58nc] {
     color: blue
 }
 
-#linkedin:hover {
+#linkedin:hover[b-cuq7xw58nc] {
     color: rgb(0, 180, 180);
 }
 
-.input-group {
+.input-group[b-cuq7xw58nc] {
     width: 250px;
 }
 
-.input-field {
+.input-field[b-cuq7xw58nc] {
     border-bottom: 2px solid black !important;
 }
 
-.input-field:focus {
-    outline: 0 !important;
-    box-shadow: none !important;
-}
+    .input-field:focus[b-cuq7xw58nc] {
+        outline: 0 !important;
+        box-shadow: none !important;
+    }
 
-#login {
+#login[b-cuq7xw58nc] {
     display: block;
 }
 
-#register {
+#register[b-cuq7xw58nc] {
     display: none;
 }

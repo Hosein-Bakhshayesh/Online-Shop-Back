@@ -1,0 +1,80 @@
+﻿@page "/Login"
+@layout AccountintLayout
+
+<div class="main-box">
+    <div class="form-box">
+        <div class="btn-box d-flex justify-content-around">
+            <div id="btn-active" class="h-100 top-0 position-absolute bg-info m-0 p-0"></div>
+            <button type="button" class="toggle-btn text-center py-2 fw-bolder" onclick="Register();">
+                ثبت
+                نام
+            </button>
+            <button type="button" class="toggle-btn text-center py-2 fw-bolder" onclick="Login();">ورود</button>
+        </div>
+        <div class="social-icons d-flex justify-content-between m-auto">
+            <NavLink href="#" class="text-dark text-decoration-none mb-4">
+                <i id="instagram" class="fa fa-2x fa-instagram"></i>
+            </NavLink>
+            <NavLink href="#" class="text-dark text-decoration-none mb-4">
+                <i id="telegram" class="fa fa-2x fa-telegram"></i>
+            </NavLink>
+            <NavLink href="#" class="text-dark text-decoration-none mb-4">
+                <i id="facebook" class="fa fa-2x fa-facebook"></i>
+            </NavLink>
+            <NavLink href="#" class="text-dark text-decoration-none mb-4">
+                <i id="linkedin" class="fa fa-2x fa-linkedin"></i>
+            </NavLink>
+        </div>
+        <form action="" id="login" class="input-group m-auto" method="post">
+            <input type="text" name="userName" id="userName" class="input-field form-control w-100 my-2 border-0"
+                   placeholder="نام کاربری">
+            <input type="password" name="password" id="password"
+                   class="input-field form-control w-100 my-2 border-0" placeholder="رمز عبور">
+            <input type="checkbox" name="remember" id="remember" class="checkbox-R mt-3"><span class="mt-3 ml-2">
+                مرا
+                به خاطر بسپار
+            </span>
+            <button type="submit" class="btn btn-success w-100 mt-4">ورود</button>
+        </form>
+        <form action="" id="register" class="input-group m-auto" method="post">
+            <input type="text" name="emailRegister" id="emailRegister"
+                   class="input-field form-control w-100 my-2 border-0" placeholder="ایمیل">
+            <input type="text" name="userNameRegister" id="userNameRegister"
+                   class="input-field form-control w-100 my-2 border-0" placeholder="نام کاربری">
+            <input type="password" name="passwordRegister" id="passwordRegister"
+                   class="input-field form-control w-100 my-2 border-0" placeholder="رمز عبور">
+            <input type="password" name="rePassword" id="rePassword"
+                   class="input-field form-control w-100 my-2 border-0" placeholder="تکرار رمز عبور">
+            <input type="checkbox" name="AcceptRules" id="AcceptRules" class="checkbox-R mt-3">
+            <span class="mt-3 ml-2">
+                <a href="#" data-toggle="modal" data-target="#exampleModal">قوانین مقررات</a> را
+                میپذیرم.
+            </span>
+            <button type="submit" class="btn btn-success w-100 mt-4">ثبت نام</button>
+        </form>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">قوانین و مقررات سایت</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        این قوانین و مقررات سایت است
+                        لطفا بخوانید و بعد تیک تایید را بزنید و سپس ثبت نام کنید
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">بستن</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+
+}

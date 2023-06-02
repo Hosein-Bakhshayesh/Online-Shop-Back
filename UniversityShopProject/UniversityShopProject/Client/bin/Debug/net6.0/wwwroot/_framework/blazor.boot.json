@@ -9,13 +9,14 @@
     "assembly": {
       "Azure.Core.dll": "sha256-mV+r6h4Q5bYNZWmGqnlVh8j+RvQCuCLcaJBse6KNzZQ=",
       "Azure.Identity.dll": "sha256-3I+KiqSx+vChzrz8oSO5j2hbj7gSL1YGcIsSOkurkYI=",
+      "BCrypt.Net-Next.dll": "sha256-EVufr\/i5CaGgi2WzFQWOsYLAxMOnfBn81fTanaSdSmM=",
       "Humanizer.dll": "sha256-1oUwdVR9fjA+\/WA1TZEaL\/GO26WCzaL6WdkaLl3Pnpg=",
-      "Microsoft.AspNetCore.Authorization.dll": "sha256-iHLDF8B7pfRTW\/hNQ3ctXZN6PEfTsWrDiTyw1fLNMsI=",
+      "Microsoft.AspNetCore.Authorization.dll": "sha256-MF5wn0pG0I5XrsisItfqiud0jURlFsxt9szb1MyJafo=",
       "Microsoft.AspNetCore.Components.dll": "sha256-yMUQKGGiZLCGNw3RJPaqhOJrCJIPYbgmJ81JNAcRoAE=",
       "Microsoft.AspNetCore.Components.Forms.dll": "sha256-KLb9bb+VZeGmF5nHy9Qh4vpB2VYsD7whNFrRt1EMyAU=",
       "Microsoft.AspNetCore.Components.Web.dll": "sha256-2MxwOoph3MgGrwXQs6dk1MYKWI7aY76FCRLW3A\/hXIA=",
       "Microsoft.AspNetCore.Components.WebAssembly.dll": "sha256-Zw+8hKvSWqNVTfS96m6AmCqaN9+2k0BcxRJy1Oa\/MCE=",
-      "Microsoft.AspNetCore.Metadata.dll": "sha256-Ib5jHqIOssTs4SdYuKEFwU61O1mvlsJgzx65Rz+D50E=",
+      "Microsoft.AspNetCore.Metadata.dll": "sha256-v2DXi4PgcdheiNTvcH3B08UIArILu7ePrH9JJsIAYvc=",
       "Microsoft.Bcl.AsyncInterfaces.dll": "sha256-EcDo\/GQZkQrOT1Xd0jMPE3NwT5lsMq5DNsPxHVidLDQ=",
       "Microsoft.Data.SqlClient.dll": "sha256-PGg6gVwXx1Y63UlgP63wJyiehXdRScm2RIyuoMMkUYE=",
       "Microsoft.EntityFrameworkCore.dll": "sha256-lsb0jHoEcZ7+PKRj6aRDmF3vFqDeKVhLcLRaCDRyj7Q=",
@@ -38,7 +39,7 @@
       "Microsoft.Extensions.FileSystemGlobbing.dll": "sha256-viiXOG0fwhWobT0TQ1ZOJiZBdRvYRlWbDtjz+6d8sQI=",
       "Microsoft.Extensions.Logging.dll": "sha256-aDOpB2uaS7QZXIfNrHzPS5m4bR\/ISKCOB01mjR4DUw4=",
       "Microsoft.Extensions.Logging.Abstractions.dll": "sha256-tL9wx+KqXqAJDhOBe4lTOSWcxDXdFti9Ms5OvYXeSjw=",
-      "Microsoft.Extensions.Options.dll": "sha256-eSdlox4SJgv3qnYw0Q5A3Z8uFA\/7VngjeiBVJmtHgRI=",
+      "Microsoft.Extensions.Options.dll": "sha256-PRhosgCV00zsP3YmGbNmM3ZWJGblBn+bgCXKIKSSz3Y=",
       "Microsoft.Extensions.Primitives.dll": "sha256-hXhFRImkOdXevYqMqYRLOzgHZWPq8ZXMXtS9J6jFTqM=",
       "Microsoft.Identity.Client.dll": "sha256-egOWTm7rhv0RJR5Yn9iEFxss7A3TKxdtcBaAuuRIcbk=",
       "Microsoft.Identity.Client.Extensions.Msal.dll": "sha256-mLxjTi1w\/CSUlj2ix1MmsNQQULcIezI\/xAKrLCfG5mw=",
@@ -229,15 +230,17 @@
       "mscorlib.dll": "sha256-C3gpWQMELcHYfrHU\/1agQUvWTtSNs9Ul2suMxcKFnIc=",
       "netstandard.dll": "sha256-CgGkoZQx73t3qchcsu85kgBcgrjNEOiudArOwKNb18k=",
       "System.Private.CoreLib.dll": "sha256-6nUSjiT7okMlkN897OnDypwppYuK7JxTahOClXkAuwE=",
-      "UniversityShopProject.Shared.dll": "sha256-GaiHZ6GcK25C5ywf6T3EYMIQYy2Xstq59KRTUhGlCw8=",
-      "UniversityShopProject.Client.dll": "sha256-SNt6B2Ye+Z\/L7I4uj5cEotVmIAC0roKoQVBlhIbCkIM="
+      "UniversityShopProject.Shared.dll": "sha256-zmJ1X\/941\/5tjlYkuddXJxj6CUiet0kxJFX8b2dVPQY=",
+      "UniversityShopProjectModels.dll": "sha256-ylnUuwvt0Vk3xxJ23rwp\/7eCzrjVzA9ACHiMaOdepu4=",
+      "UniversityShopProject.Client.dll": "sha256-\/QzTrILYPg0WnSknYjbP3070HjFkp0FPsbcyaAZ0JUE="
     },
     "extensions": null,
     "lazyAssembly": null,
     "libraryInitializers": null,
     "pdb": {
-      "UniversityShopProject.Shared.pdb": "sha256-gZrutry3vzxzFbqgJRL+el8Ewlcih41gJQWjxmyL51g=",
-      "UniversityShopProject.Client.pdb": "sha256-aFLbvrQSzfoHgKR0rxQJ0GLVWf8m2M0BYVVrZuzoJvw="
+      "UniversityShopProjectModels.pdb": "sha256-xKos1GuBeBPQKd0FhKRLVewB0vq7nuOp5Ew0FZPAK98=",
+      "UniversityShopProject.Shared.pdb": "sha256-dYon8Z9l1THFOnXCM7\/Xq7055fumxJDqpfyI6gXSJKA=",
+      "UniversityShopProject.Client.pdb": "sha256-i873kkV0XMtIWj9c6Gn61w+YGZZMP\/Zz74oIENYjCTI="
     },
     "runtime": {
       "dotnet.6.0.16.5l3cj9sv96.js": "sha256-GT2gK+GjOisRXJY+9yh6H8s6K\/KDIsaFMFIgWvAnttY=",

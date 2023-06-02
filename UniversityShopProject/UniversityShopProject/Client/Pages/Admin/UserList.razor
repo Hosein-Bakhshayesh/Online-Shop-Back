@@ -1,0 +1,23 @@
+﻿@page "/Admin/UserList"
+@using UniversityShopProjectModels.Models;
+@inject HttpClient httpClient
+
+@layout AdminLayout
+
+<h3>UserList</h3>
+
+<ul>
+    @foreach (var user in users)
+    {
+        <li>@user.FirstName</li>
+    }
+</ul>
+
+@code {
+    private List<User> users = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        users = await httpClient.GetFromJsonAsync<List<User>>("User/List");
+    }
+}
