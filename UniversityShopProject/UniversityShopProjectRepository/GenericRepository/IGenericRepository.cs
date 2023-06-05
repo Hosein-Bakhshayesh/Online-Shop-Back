@@ -8,7 +8,7 @@ namespace UniversityShopProjectRepository.GenericRepository
 {
     public interface IGenericRepository<T>:IDisposable
     {
-        IEnumerable<T> GetAll();
+        List<T> GetAll();
         T GetEntity(int id);
         bool Add(T entity);
         bool Update(T entity);

@@ -965,14 +965,6 @@ C:\Users\hosei\OneDrive\Desktop\University Online Shop Project\Back-end\Universi
 C:\Users\hosei\OneDrive\Desktop\University Online Shop Project\Back-end\UniversityShopProject\UniversityShopProject\Client\obj\Debug\net6.0\scopedcss\Pages\CategoriesItem.razor.rz.scp.css
 C:\Users\hosei\OneDrive\Desktop\University Online Shop Project\Back-end\UniversityShopProject\UniversityShopProject\Client\obj\Debug\net6.0\scopedcss\Shared\Footer.razor.rz.scp.css
 C:\Users\hosei\OneDrive\Desktop\University Online Shop Project\Back-end\UniversityShopProject\UniversityShopProject\Client\obj\Debug\net6.0\scopedcss\Pages\Login.razor.rz.scp.css
-C:\Users\hosei\OneDrive\Desktop\University Online Shop Project\Back-end\UniversityShopProject\UniversityShopProject\Client\obj\Debug\net6.0\scopedcss\Pages\Admin\Admin.razor.rz.scp.css
 C:\Users\hosei\OneDrive\Desktop\University Online Shop Project\Back-end\UniversityShopProject\UniversityShopProject\Client\obj\Debug\net6.0\scopedcss\Shared\Admin\AdminNavbar.razor.rz.scp.css
 C:\Users\hosei\OneDrive\Desktop\University Online Shop Project\Back-end\UniversityShopProject\UniversityShopProject\Client\obj\Debug\net6.0\scopedcss\Shared\Admin\AdminLayout.razor.rz.scp.css
-C:\Users\hosei\OneDrive\Desktop\University Online Shop Project\Back-end\UniversityShopProject\UniversityShopProject\Client\bin\Debug\net6.0\wwwroot\_framework\UniversityShopProjectModels.dll
-C:\Users\hosei\OneDrive\Desktop\University Online Shop Project\Back-end\UniversityShopProject\UniversityShopProject\Client\bin\Debug\net6.0\wwwroot\_framework\UniversityShopProjectModels.pdb
-C:\Users\hosei\OneDrive\Desktop\University Online Shop Project\Back-end\UniversityShopProject\UniversityShopProject\Client\bin\Debug\net6.0\wwwroot\_framework\UniversityShopProjectModels.dll.gz
-C:\Users\hosei\OneDrive\Desktop\University Online Shop Project\Back-end\UniversityShopProject\UniversityShopProject\Client\bin\Debug\net6.0\wwwroot\_framework\UniversityShopProjectModels.pdb.gz
-C:\Users\hosei\OneDrive\Desktop\University Online Shop Project\Back-end\UniversityShopProject\UniversityShopProject\Client\bin\Debug\net6.0\UniversityShopProjectModels.dll
-C:\Users\hosei\OneDrive\Desktop\University Online Shop Project\Back-end\UniversityShopProject\UniversityShopProject\Client\bin\Debug\net6.0\UniversityShopProjectModels.pdb
-C:\Users\hosei\OneDrive\Desktop\University Online Shop Project\Back-end\UniversityShopProject\UniversityShopProject\Client\obj\Debug\net6.0\build-gz\BySmlBkk.gz
-C:\Users\hosei\OneDrive\Desktop\University Online Shop Project\Back-end\UniversityShopProject\UniversityShopProject\Client\obj\Debug\net6.0\build-gz\FBfBGWcF.gz
+C:\Users\hosei\OneDrive\Desktop\University Online Shop Project\Back-end\UniversityShopProject\UniversityShopProject\Client\obj\Debug\net6.0\scopedcss\Pages\Admin\UserEdit.razor.rz.scp.css

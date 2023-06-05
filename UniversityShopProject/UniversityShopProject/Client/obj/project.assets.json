@@ -1475,19 +1475,6 @@
         "runtime": {
           "bin/placeholder/UniversityShopProject.Shared.dll": {}
         }
-      },
-      "UniversityShopProjectModels/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "dependencies": {
-          "Microsoft.EntityFrameworkCore.SqlServer": "7.0.5"
-        },
-        "compile": {
-          "bin/placeholder/UniversityShopProjectModels.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/UniversityShopProjectModels.dll": {}
-        }
       }
     },
     "net6.0/browser-wasm": {
@@ -2954,19 +2941,6 @@
         },
         "runtime": {
           "bin/placeholder/UniversityShopProject.Shared.dll": {}
-        }
-      },
-      "UniversityShopProjectModels/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "dependencies": {
-          "Microsoft.EntityFrameworkCore.SqlServer": "7.0.5"
-        },
-        "compile": {
-          "bin/placeholder/UniversityShopProjectModels.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/UniversityShopProjectModels.dll": {}
         }
       }
     }
@@ -6018,11 +5992,6 @@
       "type": "project",
       "path": "../Shared/UniversityShopProject.Shared.csproj",
       "msbuildProject": "../Shared/UniversityShopProject.Shared.csproj"
-    },
-    "UniversityShopProjectModels/1.0.0": {
-      "type": "project",
-      "path": "../../UniversityShopProjectModels/UniversityShopProjectModels.csproj",
-      "msbuildProject": "../../UniversityShopProjectModels/UniversityShopProjectModels.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -6032,8 +6001,7 @@
       "Microsoft.AspNetCore.Components.WebAssembly.DevServer >= 6.0.15",
       "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.5",
       "Microsoft.EntityFrameworkCore.Tools >= 7.0.5",
-      "UniversityShopProject.Shared >= 1.0.0",
-      "UniversityShopProjectModels >= 1.0.0"
+      "UniversityShopProject.Shared >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -6063,9 +6031,6 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProjectModels\\UniversityShopProjectModels.csproj": {
-              "projectPath": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProjectModels\\UniversityShopProjectModels.csproj"
-            },
             "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Shared\\UniversityShopProject.Shared.csproj": {
               "projectPath": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Shared\\UniversityShopProject.Shared.csproj"
             }

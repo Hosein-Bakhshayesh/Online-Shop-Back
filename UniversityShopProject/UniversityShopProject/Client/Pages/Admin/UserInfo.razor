@@ -1,0 +1,91 @@
+﻿@page "/Admin-UserInfo/{userId}"
+@inject HttpClient httpClient
+@layout AdminLayout
+
+<h3>مشخصات @userInfoView.FirstName @userInfoView.LastName</h3>
+
+@if (userInfoView != null)
+{
+    <table class="table table-bordered mt-3">
+        <thead>
+            <tr>
+                <th scope="col">آیدی</th>
+                <th scope="col">نام</th>
+                <th scope="col">نام خانوادگی</th>
+                <th scope="col">نام کاربری</th>
+                <th scope="col">پسورد</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@userInfoView.UserId</td>
+                <td>@userInfoView.FirstName</td>
+                <td>@userInfoView.LastName</td>
+                <td>@userInfoView.UserName</td>
+                <td>@userInfoView.Password</td>
+            </tr>
+        </tbody>
+        <thead>
+            <tr>
+                <th scope="col">شماره موبایل</th>
+                <th scope="col">ایمیل</th>
+                <th scope="col">کد ملی</th>
+                <th scope="col">جنسیت</th>
+                <th scope="col">وضعیت فعال/غیرفعال</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@userInfoView.MobileNumber</td>
+                <td>@userInfoView.Email</td>
+                <td>@userInfoView.NationalCode</td>
+                <td>@userInfoView.Gender</td>
+                <td>@userInfoView.IsActive</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <NavLink href="@userInfoView.EditUrl">
+        <button class="btn btn-warning my-2">ویرایش</button>
+    </NavLink>
+    <button type="button" class="btn btn-danger" @onclick="DeleteUser">حذف</button>
+    <div class="@hiddenStr">
+        <DeleteText userId="@userId" />
+    </div>
+}
+else
+{
+    <h4 class="text-danger">
+        User Not Found
+    </h4>
+}
+
+
+@code {
+    @inject NavigationManager navigationManager
+    [Parameter]
+    public string userId { get; set; }
+
+    public UserInfoViewModel? userInfoView { get; set; }
+    public string hiddenStr = "mt-2 d-none";
+
+    protected override async Task OnInitializedAsync()
+    {
+        userInfoView = new UserInfoViewModel();
+        int id = int.Parse(userId);
+        userInfoView = await httpClient.GetFromJsonAsync<UserInfoViewModel>($"User/Info/{id}");
+        userInfoView.EditUrl = ("/Admin-UserInfo/" + userInfoView.UserId + "/Edit");
+    } 
+    public void DeleteUser()
+    {
+        if (this.hiddenStr == "mt-2 d-none")
+        {
+            this.hiddenStr = "mt-2";
+        }
+        else
+        {
+            this.hiddenStr = "mt-2 d-none";
+        }
+    }
+
+}

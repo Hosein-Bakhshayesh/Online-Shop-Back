@@ -21,7 +21,7 @@ namespace UniversityShopProjectRepository.GenericRepository
 
         }
 
-        public IEnumerable<T> GetAll()
+        public List<T> GetAll()
         {
             return dbSet.ToList();
         }

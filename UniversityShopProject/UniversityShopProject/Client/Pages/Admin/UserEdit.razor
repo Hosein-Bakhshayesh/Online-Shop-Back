@@ -1,0 +1,157 @@
+﻿@page "/Admin-UserInfo/{userId}/Edit"
+@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+@layout AdminLayout
+
+<h3>مشخصات @userInfoView.FirstName @userInfoView.LastName</h3>
+
+@if (userInfoView != null)
+{
+    <EditForm Model="@userInfoView" OnValidSubmit="@HandleValidSubmit">
+        <hr />
+        <span class="text-danger">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+        </span>
+
+
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th scope="col">آیدی</th>
+                    <th scope="col">
+                        نام<span class="text-danger">*</span>
+                    </th>
+                    <th scope="col">
+                        نام خانوادگی<span class="text-danger">*</span>
+                    </th>
+                    <th scope="col">
+                        نام کاربری<span class="text-danger">*</span>
+                    </th>
+                    <th scope="col">
+                        پسورد<span class="text-danger">*</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@userInfoView.UserId</td>
+                    <td>
+                        <InputText @bind-Value="userInfoView.FirstName" class="input-field form-control" />
+                    </td>
+                    <td>
+                        <InputText @bind-Value="userInfoView.LastName" class="form-control" />
+                    </td>
+                    <td>
+                        <InputText @bind-Value="userInfoView.UserName" class="form-control" />
+                    </td>
+                    <td class="d-flex">
+                        <InputText @bind-Value="userInfoView.Password" class="form-control" type="@inType" />
+                        <span class="fa fa-eye m-auto ml-1" @onclick="ShowPassword"></span>
+                    </td>
+                </tr>
+            </tbody>
+            <thead>
+                <tr>
+                    <th scope="col">
+                        شماره موبایل<span class="text-danger">*</span>
+                    </th>
+                    <th scope="col">ایمیل</th>
+                    <th scope="col">کد ملی</th>
+                    <th scope="col">جنسیت</th>
+                    <th scope="col">وضعیت فعال/غیرفعال<span class="text-danger">*</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <InputText @bind-Value="userInfoView.MobileNumber" class="form-control" />
+                    </td>
+                    <td>
+                        <InputText @bind-Value="userInfoView.Email" class="form-control" />
+                    </td>
+                    <td>
+                        <InputText @bind-Value="userInfoView.NationalCode" class="form-control" />
+                    </td>
+                    <td>
+                        <InputSelect @bind-Value="userInfoView.Gender" class="form-control">
+                            <option value="true">مرد</option>
+                            <option value="false">زن</option>
+                            <option value="">بدون انتخاب</option>
+                        </InputSelect>
+                    </td>
+                    <td>
+                        <InputSelect @bind-Value="userInfoView.IsActive" class="form-control">
+                            <option value="true">فعال</option>
+                            <option value="false">غیرفعال</option>
+                        </InputSelect>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-warning my-2">تایید و ویرایش</button>
+        <button type="button" class="btn btn-danger" @onclick="DeleteUser">حذف</button>
+        <div class="@hiddenStr">
+            <DeleteText userId="@userId" />
+        </div>
+    </EditForm>
+
+
+}
+else
+{
+    <h4 class="text-danger">
+        User Not Found
+    </h4>
+}
+
+
+@code {
+    [Parameter]
+    public string? userId { get; set; }
+
+    public UserInfoViewModel? userInfoView { get; set; }
+    private string inType = "password";
+    public string hiddenStr = "mt-2 d-none";
+    protected override async Task OnInitializedAsync()
+    {
+        userInfoView = new UserInfoViewModel();
+        int id = int.Parse(userId);
+        userInfoView = await httpClient.GetFromJsonAsync<UserInfoViewModel>($"User/Info/{id}");
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        if (userInfoView != null)
+        {
+            var res = await httpClient.PutAsJsonAsync("User/Edit", userInfoView);
+            if (res != null)
+            {
+                navigationManager.NavigateTo("/Admin-Userlist");
+            }
+        }
+    }
+
+    private void ShowPassword()
+    {
+        if (this.inType == "password")
+        {
+            this.inType = "text";
+        }
+        else
+        {
+            this.inType = "password";
+        }
+    }
+    public void DeleteUser()
+    {
+        if (this.hiddenStr == "mt-2 d-none")
+        {
+            this.hiddenStr = "mt-2";
+        }
+        else
+        {
+            this.hiddenStr = "mt-2 d-none";
+        }
+    }
+}

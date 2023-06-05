@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Z/XDjaX05i1tbmNIpkWdyMI12KvbCdqPIesedb6bKBc=",
+  "Hash": "Ne3PMLej1ilvn+y/8kgm7YkuF2sVG3lxZ16bIrFT+GQ=",
   "Source": "UniversityShopProject.Client",
   "BasePath": "/",
   "Mode": "Root",
@@ -4012,40 +4012,6 @@
       "OriginalItemSpec": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Shared\\bin\\Debug\\net6.0\\UniversityShopProject.Shared.pdb"
     },
     {
-      "Identity": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\bin\\Debug\\net6.0\\wwwroot\\_framework\\UniversityShopProjectModels.dll",
-      "SourceId": "UniversityShopProject.Client",
-      "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\bin\\Debug\\net6.0\\wwwroot\\",
-      "BasePath": "/",
-      "RelativePath": "_framework/UniversityShopProjectModels.dll",
-      "AssetKind": "Build",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "BlazorWebAssemblyResource",
-      "AssetTraitValue": "runtime",
-      "CopyToOutputDirectory": "PreserveNewest",
-      "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProjectModels\\bin\\Debug\\net6.0\\UniversityShopProjectModels.dll"
-    },
-    {
-      "Identity": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\bin\\Debug\\net6.0\\wwwroot\\_framework\\UniversityShopProjectModels.pdb",
-      "SourceId": "UniversityShopProject.Client",
-      "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\bin\\Debug\\net6.0\\wwwroot\\",
-      "BasePath": "/",
-      "RelativePath": "_framework/UniversityShopProjectModels.pdb",
-      "AssetKind": "Build",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "BlazorWebAssemblyResource",
-      "AssetTraitValue": "symbol",
-      "CopyToOutputDirectory": "PreserveNewest",
-      "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProjectModels\\bin\\Debug\\net6.0\\UniversityShopProjectModels.pdb"
-    },
-    {
       "Identity": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\bin\\Debug\\net6.0\\wwwroot\\_framework\\WindowsBase.dll",
       "SourceId": "UniversityShopProject.Client",
       "SourceType": "Computed",
@@ -5117,23 +5083,6 @@
       "OriginalItemSpec": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Microsoft.JSInterop.dll"
     },
     {
-      "Identity": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\obj\\Debug\\net6.0\\build-gz\\BySmlBkk.gz",
-      "SourceId": "UniversityShopProject.Client",
-      "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\bin\\Debug\\net6.0\\wwwroot\\",
-      "BasePath": "/",
-      "RelativePath": "_framework/UniversityShopProjectModels.dll.gz",
-      "AssetKind": "Build",
-      "AssetMode": "All",
-      "AssetRole": "Alternative",
-      "RelatedAsset": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\bin\\Debug\\net6.0\\wwwroot\\_framework\\UniversityShopProjectModels.dll",
-      "AssetTraitName": "Content-Encoding",
-      "AssetTraitValue": "gzip",
-      "CopyToOutputDirectory": "PreserveNewest",
-      "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\bin\\Debug\\net6.0\\wwwroot\\_framework\\UniversityShopProjectModels.dll"
-    },
-    {
       "Identity": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\obj\\Debug\\net6.0\\build-gz\\C7M8qPHc.gz",
       "SourceId": "UniversityShopProject.Client",
       "SourceType": "Computed",
@@ -5336,23 +5285,6 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll"
-    },
-    {
-      "Identity": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\obj\\Debug\\net6.0\\build-gz\\FBfBGWcF.gz",
-      "SourceId": "UniversityShopProject.Client",
-      "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\bin\\Debug\\net6.0\\wwwroot\\",
-      "BasePath": "/",
-      "RelativePath": "_framework/UniversityShopProjectModels.pdb.gz",
-      "AssetKind": "Build",
-      "AssetMode": "All",
-      "AssetRole": "Alternative",
-      "RelatedAsset": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\bin\\Debug\\net6.0\\wwwroot\\_framework\\UniversityShopProjectModels.pdb",
-      "AssetTraitName": "Content-Encoding",
-      "AssetTraitValue": "gzip",
-      "CopyToOutputDirectory": "PreserveNewest",
-      "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\bin\\Debug\\net6.0\\wwwroot\\_framework\\UniversityShopProjectModels.pdb"
     },
     {
       "Identity": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\obj\\Debug\\net6.0\\build-gz\\fcg6k0Y3.gz",

@@ -1,23 +1,69 @@
-﻿@page "/Admin/UserList"
-@using UniversityShopProjectModels.Models;
+﻿@page "/Admin-UserList"
 @inject HttpClient httpClient
 
 @layout AdminLayout
 
-<h3>UserList</h3>
+<h3>لیست کاربران سایت</h3>
 
-<ul>
-    @foreach (var user in users)
-    {
-        <li>@user.FirstName</li>
-    }
-</ul>
+<UserAddModal/>
+<table class="table table-bordered mt-3">
+    <thead>
+        <tr>
+            <th scope="col" >نام</th>
+            <th scope="col" >نام خانوادگی</th>
+            <th scope="col" >نام کاربری</th>
+            <th scope="col" >وضعیت فعال/غیرفعال</th>
+            <th scope="col" >گزینه‌ها</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in users)
+        {
+            <tr>
+                <td>
+                    @user.FirstName
+                </td>
+                <td>
+                    @user.LastName
+                </td>
+                <td>
+                    @user.UserName
+                </td>
+                <td>
+                    @if(user.IsActive)
+                    {
+                        <span class="text-success">
+                            کاربر فعال می‌باشد
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="text-danger">
+                            کاربر غیرفعال است
+                        </span>
+                    }
+                </td>
+                <td>
+                    <NavLink href="@user.InfoUrl">
+                        <button class="btn btn-info">جزئیات</button>
+                    </NavLink>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
 
 @code {
-    private List<User> users = new();
+    private List<UserListViewModel>? users = new();
 
     protected override async Task OnInitializedAsync()
     {
-        users = await httpClient.GetFromJsonAsync<List<User>>("User/List");
+        users = await httpClient.GetFromJsonAsync<List<UserListViewModel>>("User/List");
+        foreach (var item in users)
+        {
+            item.InfoUrl = "/Admin-UserInfo/" + item.UserId;
+        }
     }
+
 }

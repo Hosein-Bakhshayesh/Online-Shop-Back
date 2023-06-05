@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.ResponseCompression;
+using System.Reflection;
+using UniversityShopProject.Server.Classes.MappingProfile;
 
 namespace UniversityShopProject
 {
@@ -13,6 +15,8 @@ namespace UniversityShopProject
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
 
+            //AutoMapper
+            builder.Services.AddAutoMapper(typeof(UserMapProfile));
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
