@@ -12,6 +12,31 @@ namespace UniversityShopProjectServices.Service
     {
         public UserService(UniversityShopProjectContext context) : base(context)
         {
+
+        }
+
+        public bool CheckMobileNumber(string mobileNumber)
+        {
+            var users = GetAll();
+            var userNames = users.Select(u => u.MobileNumber);
+            if (userNames.Any(u => u == mobileNumber))
+            {
+                return false;
+            }
+            else
+                return true;
+        }
+
+        public bool CheckUserName(string userName)
+        {
+            var users = GetAll();
+            var userNames = users.Select(u => u.UserName);
+            if(userNames.Any(u=> u == userName))
+            {
+                return false;
+            }
+            else
+                return true;
         }
     }
 }

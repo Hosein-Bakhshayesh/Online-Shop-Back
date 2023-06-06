@@ -12,6 +12,8 @@ namespace UniversityShopProject.Server.Classes.MappingProfile
             CreateMap<UserListViewModel, User>().IgnoreAllPropertiesWithAnInaccessibleSetter();
             CreateMap<User, UserInfoViewModel>().IgnoreAllPropertiesWithAnInaccessibleSetter();
             CreateMap<UserInfoViewModel, User>().IgnoreAllPropertiesWithAnInaccessibleSetter();
+            CreateMap<User, UserCreateViewModel>().IgnoreAllPropertiesWithAnInaccessibleSetter();
+            CreateMap<UserCreateViewModel, User>().IgnoreAllPropertiesWithAnInaccessibleSetter();
         }
     }
 }

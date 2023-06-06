@@ -1,4 +1,4 @@
-﻿
+﻿@inject HttpClient httpClient
 <!-- Button trigger modal -->
 <button type="button" @onclick='ShowAddModal' class="btn btn-success my-2" data-toggle="modal" data-target="#AddUserModal">
     درج کاربر جدید
@@ -61,8 +61,8 @@
                             </label>
                             <InputText @bind-Value="userCreateViewModel.RePassword" class="form-control input-field" type="@inType" />
                         </div>
-                        <div class="col-2 w-100">
-                            <span class="fa fa-eye m-auto ml-1" @onclick="ShowPassword"></span>
+                        <div class="col-2 w-100 p-0">
+                            <span class="fa fa-eye mt-5" @onclick="ShowPassword"></span>
                         </div>
                         <hr />
                         <div class="col-5 w-100">
@@ -84,7 +84,7 @@
                         <div class="col-4 w-100">
                             <label>
                                 وضعیت :<span class="text-danger">*</span>
-                                
+
                             </label>
                             <InputSelect @bind-Value="userCreateViewModel.IsActive" class="form-control input-field">
                                 <option value="true">فعال</option>
@@ -99,21 +99,27 @@
                             <InputText @bind-Value="userCreateViewModel.Email" class="form-control input-field w-100" placeholder="ایمیل" />
                         </div>
                     </div>
+                    <hr />
+                    <div>
+                        <button @onclick="CloseModal" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Save changes</button>
+                    </div>
                 </EditForm>
             </div>
-            <div class="modal-footer">
-                <button @onclick="CloseModal" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success">Save changes</button>
-            </div>
+
         </div>
     </div>
 </div>
 
 @code {
-    UserCreateViewModel userCreateViewModel = new UserCreateViewModel();
+    UserCreateViewModel? userCreateViewModel;
     private string styleModal = "d-none";
     private string inType = "password";
 
+    protected override void OnInitialized()
+    {
+        userCreateViewModel = new UserCreateViewModel();
+    }
     protected void ShowAddModal()
     {
         if (styleModal == "d-none")
@@ -125,9 +131,12 @@
     {
         styleModal = "d-none";
     }
-    private void HandleValidSubmit()
+    private async Task HandleValidSubmit()
     {
-
+        if (userCreateViewModel != null)
+        {
+            var res = await httpClient.PostAsJsonAsync<UserCreateViewModel>("User/Create", userCreateViewModel);
+        }
     }
     private void ShowPassword()
     {

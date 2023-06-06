@@ -90,5 +90,35 @@ namespace UniversityShopProject.Server.Controller
                 return StatusCode(StatusCodes.Status500InternalServerError, "عملیات حذف انجام نشد");
             }
         }
+        [HttpPost("Create")]
+        public ActionResult CreateUser(UserCreateViewModel userCreate)
+        {
+            User user = _mapper.Map<UserCreateViewModel, User>(userCreate);
+            try
+            {
+                if(user==null)
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, "با مشکل مواجه شد");
+                }
+                else
+                {
+                    if(_userService.CheckUserName(user.UserName)== false)
+                    {
+                        return NotFound("کاربری با این نام کاربری قبلا ثبت شده است");
+                    }
+                    if (_userService.CheckMobileNumber(user.MobileNumber) == false)
+                    {
+                        return NotFound("کاربری با این شماره موبایل قبلا ثبت شده است");
+                    }
+                    _userService.Add(user);
+                    _userService.Save();
+                    return Ok();
+                }
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "عملیات درج کاربر انجام نشد");
+            }
+        }
     }
 }

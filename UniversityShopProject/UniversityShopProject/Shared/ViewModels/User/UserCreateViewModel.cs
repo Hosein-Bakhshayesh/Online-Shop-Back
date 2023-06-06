@@ -11,20 +11,18 @@ namespace UniversityShopProject.Shared.ViewModels.User
 {
     public class UserCreateViewModel
     {
-        [Key]
-        [Display(Name = "آیدی")]
-        public int UserId { get; set; }
         [Display(Name = "نام کاربری")]
         [Required(ErrorMessage = "پر کردن فیلد {0} الزامی است.")]
         public string UserName { get; set; } = null!;
         [Display(Name = "پسورد")]
         [Required(ErrorMessage = "پر کردن فیلد {0} الزامی است.")]
         [DataType(DataType.Password)]
+        [MinLength(8,ErrorMessage ="{0} باید حداقل 8 کاراکتر باشد")]
         public string Password { get; set; } = null!;
         [Display(Name = "تکرار پسورد")]
         [Required(ErrorMessage = "پر کردن فیلد {0} الزامی است.")]
         [DataType(DataType.Password)]
-        [Compare("UserViewModel.Password", ErrorMessage = "پسورد و تکرار آن یکسان نیست.")]
+        [Compare("Password", ErrorMessage = "پسورد و تکرار آن یکسان نیست.")]
         public string RePassword { get; set; } = null!;
         [Display(Name = "نام")]
         [Required(ErrorMessage = "پر کردن فیلد {0} الزامی است.")]
@@ -46,5 +44,6 @@ namespace UniversityShopProject.Shared.ViewModels.User
         public bool? Gender { get; set; }
         [Display(Name = "فعال/غیرفعال")]
         public bool IsActive { get; set; }
+
     }
 }

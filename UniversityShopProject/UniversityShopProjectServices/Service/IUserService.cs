@@ -9,5 +9,7 @@ namespace UniversityShopProjectServices.Service
 {
     public interface IUserService:IGenericService<User>
     {
+        public bool CheckUserName(string userName);
+        public bool CheckMobileNumber(string mobileNumber);
     }
 }
