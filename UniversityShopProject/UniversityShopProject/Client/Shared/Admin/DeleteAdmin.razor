@@ -1,0 +1,31 @@
+﻿@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+
+<div class="row mt-3">
+
+    <h4 class="text-danger col">آیا برای حذف اطمینان دارید ؟</h4>
+
+    <button class="btn btn-danger col-1 mx-2" @onclick="Delete">مطمئنم و حذف !</button>
+</div>
+
+@code {
+    [Parameter]
+    public string? adminId { get; set; }
+    public AdminInfoViewModel? adminInfoView { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        adminInfoView = new AdminInfoViewModel();
+        int id = int.Parse(adminId);
+        adminInfoView = await httpClient.GetFromJsonAsync<AdminInfoViewModel>($"Admins/Info/{id}");
+    }
+
+    private async Task Delete()
+    {
+        var res = await httpClient.PutAsJsonAsync("Admins/Delete", adminInfoView);
+        if (res != null)
+        {
+            navigationManager.NavigateTo("/Admin-AdminList");
+        }
+    }
+}

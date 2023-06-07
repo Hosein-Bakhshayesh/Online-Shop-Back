@@ -12,6 +12,30 @@ namespace UniversityShopProjectServices.Service
     {
         public AdminService(UniversityShopProjectContext context) : base(context)
         {
+
+        }
+        public bool CheckMobileNumber(string mobileNumber)
+        {
+            var admins = GetAll();
+            var userNames = admins.Select(u => u.MobileNumber);
+            if (userNames.Any(u => u == mobileNumber))
+            {
+                return false;
+            }
+            else
+                return true;
+        }
+
+        public bool CheckUserName(string userName)
+        {
+            var admins = GetAll();
+            var userNames = admins.Select(u => u.UserName);
+            if (userNames.Any(u => u == userName))
+            {
+                return false;
+            }
+            else
+                return true;
         }
     }
 }

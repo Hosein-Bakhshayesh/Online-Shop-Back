@@ -17,6 +17,7 @@ namespace UniversityShopProject
 
             //AutoMapper
             builder.Services.AddAutoMapper(typeof(UserMapProfile));
+            builder.Services.AddAutoMapper(typeof(AdminMapProfile));
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

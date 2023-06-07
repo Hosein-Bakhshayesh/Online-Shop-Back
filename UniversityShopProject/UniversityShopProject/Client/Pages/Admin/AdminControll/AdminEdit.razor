@@ -1,0 +1,146 @@
+﻿@page "/Admin-AdminInfo/{adminId}/Edit"
+@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+@layout AdminLayout
+
+<h3>مشخصات @adminInfoView.FirstName @adminInfoView.LastName</h3>
+
+@if (adminInfoView != null)
+{
+    <EditForm Model="@adminInfoView" OnValidSubmit="@HandleValidSubmit">
+        <hr />
+        <span class="text-danger">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+        </span>
+
+
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th scope="col">آیدی</th>
+                    <th scope="col">
+                        نام<span class="text-danger">*</span>
+                    </th>
+                    <th scope="col">
+                        نام خانوادگی<span class="text-danger">*</span>
+                    </th>
+                    <th scope="col">
+                        نام کاربری<span class="text-danger">*</span>
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@adminInfoView.AdminId</td>
+                    <td>
+                        <InputText @bind-Value="adminInfoView.FirstName" class="input-field form-control" />
+                    </td>
+                    <td>
+                        <InputText @bind-Value="adminInfoView.LastName" class="form-control" />
+                    </td>
+                    <td>
+                        <InputText @bind-Value="adminInfoView.UserName" class="form-control" />
+                    </td>
+                </tr>
+            </tbody>
+            <thead>
+                <tr>
+                    <th scope="col">
+                        پسورد<span class="text-danger">*</span>
+                    </th>
+                    <th scope="col">
+                        شماره موبایل<span class="text-danger">*</span>
+                    </th>
+                    <th scope="col">ایمیل</th>
+                    <th scope="col">وضعیت فعال/غیرفعال<span class="text-danger">*</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="d-flex">
+                        <InputText @bind-Value="adminInfoView.Password" class="form-control" type="@inType" />
+                        <span class="fa fa-eye m-auto ml-1" @onclick="ShowPassword"></span>
+                    </td>
+                    <td>
+                        <InputText @bind-Value="adminInfoView.MobileNumber" class="form-control" />
+                    </td>
+                    <td>
+                        <InputText @bind-Value="adminInfoView.Email" class="form-control" />
+                    </td>
+                    <td>
+                        <InputSelect @bind-Value="adminInfoView.IsActive" class="form-control">
+                            <option value="true">فعال</option>
+                            <option value="false">غیرفعال</option>
+                        </InputSelect>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-warning my-2">تایید و ویرایش</button>
+        <button type="button" class="btn btn-danger" @onclick="DeleteUser">حذف</button>
+        <div class="@hiddenStr">
+            <DeleteAdmin adminId="@adminId" />
+        </div>
+    </EditForm>
+
+
+}
+else
+{
+    <h4 class="text-danger">
+        User Not Found
+    </h4>
+}
+
+
+@code {
+    [Parameter]
+    public string? adminId { get; set; }
+
+    public AdminInfoViewModel? adminInfoView { get; set; }
+    private string inType = "password";
+    public string hiddenStr = "mt-2 d-none";
+    protected override async Task OnInitializedAsync()
+    {
+        adminInfoView = new AdminInfoViewModel();
+        int id = int.Parse(adminId);
+        adminInfoView = await httpClient.GetFromJsonAsync<AdminInfoViewModel>($"Admins/Info/{id}");
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        if (adminInfoView != null)
+        {
+            var res = await httpClient.PutAsJsonAsync("Admins/Edit", adminInfoView);
+            if (res != null)
+            {
+                navigationManager.NavigateTo("/Admin-Adminlist");
+            }
+        }
+    }
+
+    private void ShowPassword()
+    {
+        if (this.inType == "password")
+        {
+            this.inType = "text";
+        }
+        else
+        {
+            this.inType = "password";
+        }
+    }
+    public void DeleteUser()
+    {
+        if (this.hiddenStr == "mt-2 d-none")
+        {
+            this.hiddenStr = "mt-2";
+        }
+        else
+        {
+            this.hiddenStr = "mt-2 d-none";
+        }
+    }
+}
