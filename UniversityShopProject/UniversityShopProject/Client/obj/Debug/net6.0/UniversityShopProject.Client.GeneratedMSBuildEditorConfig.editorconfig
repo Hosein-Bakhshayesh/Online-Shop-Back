@@ -44,6 +44,22 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQWxlcnRNZXNzYWdlLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/hosei/OneDrive/Desktop/University Online Shop Project/Back-end/UniversityShopProject/UniversityShopProject/Client/Pages/Admin/CategoryControll/CategoryAddModal.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQ2F0ZWdvcnlDb250cm9sbFxDYXRlZ29yeUFkZE1vZGFsLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hosei/OneDrive/Desktop/University Online Shop Project/Back-end/UniversityShopProject/UniversityShopProject/Client/Pages/Admin/CategoryControll/CategoryDelete.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQ2F0ZWdvcnlDb250cm9sbFxDYXRlZ29yeURlbGV0ZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hosei/OneDrive/Desktop/University Online Shop Project/Back-end/UniversityShopProject/UniversityShopProject/Client/Pages/Admin/CategoryControll/CategoryEdit.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQ2F0ZWdvcnlDb250cm9sbFxDYXRlZ29yeUVkaXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hosei/OneDrive/Desktop/University Online Shop Project/Back-end/UniversityShopProject/UniversityShopProject/Client/Pages/Admin/CategoryControll/CategoryList.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQ2F0ZWdvcnlDb250cm9sbFxDYXRlZ29yeUxpc3QucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/hosei/OneDrive/Desktop/University Online Shop Project/Back-end/UniversityShopProject/UniversityShopProject/Client/Pages/Admin/UsersControll/UserAddModal.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cVXNlcnNDb250cm9sbFxVc2VyQWRkTW9kYWwucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 

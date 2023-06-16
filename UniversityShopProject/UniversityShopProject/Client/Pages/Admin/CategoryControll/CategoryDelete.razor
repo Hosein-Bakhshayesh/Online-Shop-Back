@@ -1,0 +1,70 @@
+﻿@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+<!-- Button trigger modal -->
+<button type="button" @onclick='ShowAddModal' class="btn btn-danger my-2" data-toggle="modal" data-target="#CategoryDelete">
+    حذف دسته‌بندی
+</button>
+
+<!-- Modal -->
+<div class="modal fade show @styleModal overflow-y-scroll" id="CategoryDelete" tabindex="-1" role="dialog" aria-labelledby="CategoryDeleteTitle" aria-hidden="true" style="background:#00000080">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="CategoryDeleteTitle">حذف دسته‌بندی</h5>
+                <button @onclick="CloseModal" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    آیا برای حذف اطمینان دارید ؟
+                </p>
+                <button @onclick="CloseModal" type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
+                <button @onclick="DeleteCategory" type="button" class="btn btn-danger">حذف</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public int CategoryId{ get; set; }
+    CategoryViewModel? categoryView { get; set; }
+    List<CategoryViewModel>? CategoryChild = new List<CategoryViewModel>();
+    private string styleModal = "d-none";
+
+    protected void ShowAddModal()
+    {
+        if (styleModal == "d-none")
+        {
+            styleModal = "d-block";
+        }
+    }
+    protected void CloseModal()
+    {
+        styleModal = "d-none";
+    }
+    private async Task DeleteCategory()
+    {
+        categoryView = new CategoryViewModel();
+        int id = CategoryId;
+        categoryView = await httpClient.GetFromJsonAsync<CategoryViewModel>($"Category/Info/{id}");
+        CategoryChild = await httpClient.GetFromJsonAsync<List<CategoryViewModel>>($"Category/ChildInfo/{id}");
+        if (categoryView != null)
+        {
+            if (CategoryChild.Count > 0)
+            {
+                foreach (var item in CategoryChild)
+                {
+                    var res = await httpClient.PostAsJsonAsync<CategoryViewModel>("Category/Delete", item);
+                }
+            }
+            var res_2 = await httpClient.PostAsJsonAsync<CategoryViewModel>("Category/Delete", categoryView);
+            if (res_2 != null)
+            {
+                navigationManager.NavigateTo("/Admin-CategoryList", true);
+            }
+        }
+    }
+}

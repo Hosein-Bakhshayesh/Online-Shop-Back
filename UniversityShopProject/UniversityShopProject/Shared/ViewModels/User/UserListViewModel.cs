@@ -23,6 +23,6 @@ namespace UniversityShopProject.Shared.ViewModels.User
         public string LastName { get; set; } = null!;
         [Display(Name = "فعال/غیرفعال")]
         public bool IsActive { get; set; }
-        public string InfoUrl { get; set; }
+        public string? InfoUrl { get; set; }
     }
 }

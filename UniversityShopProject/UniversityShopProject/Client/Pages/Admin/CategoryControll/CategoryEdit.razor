@@ -1,0 +1,210 @@
+﻿@page "/Admin-CategoryInfo/{categoryId}"
+@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+
+@layout AdminLayout
+
+<h3>مشخصات @categoryView.CategoryName</h3>
+
+@if (categoryView != null)
+{
+    <EditForm Model="@categoryView" OnValidSubmit="@HandleValidSubmit">
+        <hr />
+        <span class="text-danger">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+        </span>
+
+
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th scope="col">آیدی</th>
+                    <th scope="col">
+                        نام<span class="text-danger">*</span>
+                    </th>
+                    <th scope="col">
+                        وضعیت فعال/غیرفعال<span class="text-danger">*</span>
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@categoryView.CategoryId</td>
+                    <td>
+                        @if (isEdit == false)
+                        {
+                            <span>
+                                @categoryView.CategoryName
+                            </span>
+                        }
+                        else
+                        {
+                            <InputText @bind-Value="categoryView.CategoryName" class="input-field form-control" />
+
+                        }
+                    </td>
+                    <td>
+                        @if (isEdit == false)
+                        {
+                            @if (categoryView.IsActive == true)
+                            {
+                                <span class="text-success">این دسته بندی فعال است.</span>
+                            }
+                            else
+                            {
+                                <span class="text-danger">این دسته بندی غیرفعال است.</span>
+
+                            }
+                        }
+                        else
+                        {
+                            <InputSelect @bind-Value="categoryView.IsActive" class="form-control">
+                                <option value="true">فعال</option>
+                                <option value="false">غیرفعال</option>
+                            </InputSelect>
+                        }
+                    </td>
+                </tr>
+            </tbody>
+            <thead>
+                <tr>
+                    <th>
+                        لیست زیردسته ها
+                    </th>
+                </tr>
+                <tr>
+                    <th>نام دسته</th>
+                    <th>وضعیت</th>
+                    <th>دسته اصلی</th>
+                    <th>امکانات</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in CategoryChild)
+                {
+                    <tr>
+
+                        @if (isEdit == false)
+                        {
+                            <td>@item.CategoryName</td>
+                            <td>
+                                @if (item.IsActive == true)
+                                {
+                                    <span class="text-success">این دسته بندی فعال است.</span>
+                                }
+                                else
+                                {
+                                    <span class="text-danger">این دسته بندی غیرفعال است.</span>
+
+                                }
+                            </td>
+                            <td>
+                                @Categories.FirstOrDefault(t=>t.CategoryId == item.ParentId).CategoryName
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                <InputText @bind-Value="item.CategoryName" class="input-field form-control" />
+                            </td>
+                            <td>
+                                <InputSelect @bind-Value="item.IsActive" class="form-control">
+                                    <option value="true">فعال</option>
+                                    <option value="false">غیرفعال</option>
+                                </InputSelect>
+                            </td>
+                            <td>
+                                <InputSelect @bind-Value="item.ParentId" class="form-control">
+                                    @foreach (var C in Categories)
+                                    {
+
+                                        @if (C.ParentId == null)
+                                        {
+                                            <option value="@C.CategoryId">
+                                                @C.CategoryName
+                                            </option>
+                                        }
+
+                                    }
+                                </InputSelect>
+                            </td>
+                        }
+                        <td>
+                            <CategoryDelete CategoryId="@item.CategoryId"/>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @if(isEdit == false)
+        {
+            <button type="button" class="btn btn-warning my-2" @onclick="EditCategory">ویرایش</button>
+        }else
+        {
+            <button type="submit" class="btn btn-warning my-2">تایید و ویرایش</button>
+        }
+    </EditForm>
+    <CategoryDelete CategoryId="@int.Parse(categoryId)" />
+
+
+}
+else
+{
+    <h4 class="text-danger">
+        User Not Found
+    </h4>
+}
+
+@code {
+    [Parameter]
+    public string? categoryId { get; set; }
+    public CategoryViewModel? categoryView { get; set; }
+    public List<CategoryViewModel>? CategoryChild { get; set; }
+    public List<CategoryViewModel>? Categories { get; set; }
+
+    public bool isEdit { get; set; } = false;
+    public string hiddenStr = "mt-2 d-none";
+    protected override async Task OnInitializedAsync()
+    {
+        categoryView = new CategoryViewModel();
+        int id = int.Parse(categoryId);
+        categoryView = await httpClient.GetFromJsonAsync<CategoryViewModel>($"Category/Info/{id}");
+        Categories = await httpClient.GetFromJsonAsync<List<CategoryViewModel>>("Category/List");
+        CategoryChild = await httpClient.GetFromJsonAsync<List<CategoryViewModel>>($"Category/ChildInfo/{id}");
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        if (categoryView != null)
+        {
+            var res = await httpClient.PutAsJsonAsync("Category/Edit", categoryView);
+            var res_2 = await httpClient.PutAsJsonAsync("Category/EditChild", CategoryChild);
+            if (res != null || res_2!=null)
+            {
+                navigationManager.NavigateTo("/Admin-CategoryList");
+            }
+        }
+    }
+
+    public void DeleteUser()
+    {
+        if (this.hiddenStr == "mt-2 d-none")
+        {
+            this.hiddenStr = "mt-2";
+        }
+        else
+        {
+            this.hiddenStr = "mt-2 d-none";
+        }
+    }
+
+    public void EditCategory()
+    {
+        if (isEdit == false)
+        {
+            isEdit = true;
+        }
+    }
+}
