@@ -11,6 +11,8 @@ namespace UniversityShopProject.Server.Classes.MappingProfile
         {
             CreateMap<Category, CategoryViewModel>().IgnoreAllPropertiesWithAnInaccessibleSetter();
             CreateMap<CategoryViewModel, Category>().IgnoreAllPropertiesWithAnInaccessibleSetter();
+            CreateMap<CategoryAttributeViewModel, CategoryAttribute>().IgnoreAllPropertiesWithAnInaccessibleSetter();
+            CreateMap<CategoryAttribute, CategoryAttributeViewModel>().IgnoreAllPropertiesWithAnInaccessibleSetter();
         }
     }
 }

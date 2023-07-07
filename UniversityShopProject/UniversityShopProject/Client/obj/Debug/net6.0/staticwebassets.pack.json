@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\UniversityShopProject.Client.styles.css"
     },
     {
+      "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\Images\\CategoryAdminImages\\mobile.jpg",
+      "PackagePath": "staticwebassets\\Images\\CategoryAdminImages\\mobile.jpg"
+    },
+    {
       "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\Images\\Product-Image\\acer nitro 5 an515-55.jpg",
       "PackagePath": "staticwebassets\\Images\\Product-Image\\acer nitro 5 an515-55.jpg"
     },

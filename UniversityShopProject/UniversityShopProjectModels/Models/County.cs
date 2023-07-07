@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace UniversityShopProjectModels.Models;
 
-public partial class County:BaseEntity
+public partial class County : BaseEntity
 {
     public int Id { get; set; }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace UniversityShopProjectModels.Models;
 
-public partial class User:BaseEntity
+public partial class User : BaseEntity
 {
     public int UserId { get; set; }
 

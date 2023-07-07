@@ -3,13 +3,15 @@ using System.Collections.Generic;
 
 namespace UniversityShopProjectModels.Models;
 
-public partial class ProductAttribute:BaseEntity
+public partial class ProductAttribute : BaseEntity
 {
     public int Paid { get; set; }
 
     public int ProductId { get; set; }
 
     public int AttributeId { get; set; }
+
+    public string? Discription { get; set; }
 
     public virtual CategoryAttribute Attribute { get; set; } = null!;
 

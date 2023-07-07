@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace UniversityShopProjectModels.Models;
 
-public partial class Cart:BaseEntity
+public partial class Cart : BaseEntity
 {
     public int CartId { get; set; }
 

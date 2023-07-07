@@ -1,0 +1,288 @@
+﻿@page "/Admin-CategoryInfo/Attributes/{categoryId}"
+@inject HttpClient httpClient
+
+@layout AdminLayout
+
+<h3>ویژگی‌های دسته @CategoryName‌</h3>
+
+
+<button type="button" @onclick='ShowAddModal' class="btn btn-success my-2" data-toggle="modal" data-target="#AddCategoryModal">
+    درج ویژگی جدید
+</button>
+
+<!-- Modal -->
+<div class="modal fade show @styleModal overflow-y-scroll" id="AddCategoryModal" tabindex="-1" role="dialog" aria-labelledby="AddCategoryModalTitle" aria-hidden="true" style="background:#00000080">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="AddCategoryModalTitle">درج دسته‌بندی جدید</h5>
+                <button @onclick="CloseModal" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <EditForm Model="@categoryAttView" OnValidSubmit="@HandleValidSubmitAdd">
+                    <hr />
+                    <span class="text-danger">
+                        <DataAnnotationsValidator />
+                        <ValidationSummary />
+                    </span>
+
+                    <div class="row w-100">
+                        <div class="col-6 w-100">
+                            <label>
+                                نام ویژگی :<span class="text-danger">*</span>
+                            </label>
+                            <InputText @bind-Value="categoryAttView.Title" class="form-control input-field" placeholder="نام دسته" />
+                        </div>
+                        <div class="col-6 w-100">
+                            <label>
+                                توضیحات :
+                            </label>
+                            <InputText @bind-Value="categoryAttView.Discription" class="form-control input-field" placeholder="نام دسته" />
+                        </div>
+                    </div>
+                    <hr />
+                    <div>
+                        <button @onclick="CloseModal" type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
+                        <button type="submit" class="btn btn-success">درج دسته‌بندی</button>
+                    </div>
+                </EditForm>
+            </div>
+        </div>
+
+    </div>
+</div>
+<button class="btn btn-warning my-2" @onclick="editAtt">
+    @if (IsEdit == false)
+    {
+        <span>
+            فعال کردن قابلیت ویرایش
+        </span>
+    }
+    else
+    {
+        <span>
+            غیرفعال کردن قابلیت ویرایش
+        </span>
+    }
+
+</button>
+
+@if (attributes.Count > 0 || categoryId != null)
+{
+    <EditForm Model="@attributes" OnValidSubmit="@HandleValidSubmit">
+        <hr />
+        <span class="text-danger">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+        </span>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>عنوان ویژگی</th>
+                    <th>توضیحات</th>
+                    <th>حذف</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in attributes)
+                {
+                    <tr>
+                        <td>
+                            @if (IsEdit == false)
+                            {
+                                <InputText @bind-Value="item.Title" class="form-control input-field" readonly />
+                            }
+                            else
+                            {
+                                <InputText @bind-Value="item.Title" class="form-control input-field" />
+                            }
+                        </td>
+                        <td>
+                            @if (IsEdit == false)
+                            {
+                                <InputText @bind-Value="item.Discription" class="form-control input-field" readonly />
+                            }
+                            else
+                            {
+                                <InputText @bind-Value="item.Discription" class="form-control input-field" />
+                            }
+
+                        </td>
+                        <td>
+                            <button type="button" @onclick='ShowDeleteModal' class="btn btn-outline-danger my-2" data-toggle="modal" data-target="#DeleteCategoryModal">
+                                حذف ویژگی
+                            </button>
+                        </td>
+                    </tr>
+                    <div class="modal fade show @styleDeleteModal overflow-y-scroll" id="DeleteCategoryModal" tabindex="1" role="dialog" aria-labelledby="DeleteCategoryModalTitle" aria-hidden="true" style="background:#00000008">
+                        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="DeleteCategoryModalTitle">حذف ویژگی</h5>
+                                    <button @onclick="CloseDeleteModal" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>
+                                        آیا برای حذف ویژگی <span class="text-danger fw-bold">@item.Title</span> مطمئن هستید ؟
+                                    </p>
+                                    <button @onclick="CloseDeleteModal" type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
+                                    <button type="button" class="btn btn-outline-danger" @onclick="@(e => DeleteAtt(item.AttributeId))">حذف ویژگی</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                }
+
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-warning mt-2 @editBTN">
+            ثبت ویرایش
+        </button>
+    </EditForm>
+
+    <div class="modal show @styleEditModal overflow-y-scroll" id="EditCategoryModal" tabindex="-1" role="dialog" aria-labelledby="EditCategoryModalTitle" aria-hidden="true" style="background:#00000008">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="EditCategoryModalTitle">حذف ویژگی</h5>
+                    <button @onclick="CloseEditModal" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        ویرایش با موفقیت انجام شد.
+                    </p>
+                    <button @onclick="CloseEditModal" type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+}
+else
+{
+    <h4 class="text-danger">
+        موردی یافت نشد
+    </h4>
+}
+
+@code {
+    [Parameter]
+    public string? categoryId { get; set; }
+    public string CategoryName { get; set; }
+    public List<CategoryAttributeViewModel>? attributes { get; set; } = new();
+    public bool IsEdit { get; set; } = false;
+    CategoryAttributeViewModel? categoryAttView;
+    private string styleModal = "d-none";
+    private string styleDeleteModal = "d-none";
+    public string editBTN { get; set; } = "d-none";
+    public string styleEditModal { get; set; } = "d-none";
+
+
+    protected void ShowAddModal()
+    {
+        categoryAttView = new CategoryAttributeViewModel();
+        categoryAttView.CategoryId = int.Parse(categoryId);
+        if (styleModal == "d-none")
+        {
+            styleModal = "d-block";
+        }
+    }
+    protected void ShowDeleteModal()
+    {
+        if (styleDeleteModal == "d-none")
+        {
+            styleDeleteModal = "d-block";
+        }
+    }
+    public async void CloseModal()
+    {
+        styleModal = "d-none";
+        ReLoadList();
+    }
+    public async void ShowEditModal()
+    {
+        styleEditModal = "d-block";
+        editBTN = "d-none";
+        IsEdit = false;
+    }
+    public async void CloseEditModal()
+    {
+        styleEditModal = "d-none";
+        ReLoadList();
+    }
+    public async void CloseDeleteModal()
+    {
+        styleDeleteModal = "d-none";
+        ReLoadList();
+    }
+    private async Task HandleValidSubmitAdd()
+    {
+        if (categoryAttView != null)
+        {
+            var res = await httpClient.PostAsJsonAsync<CategoryAttributeViewModel>("CategoryAttribute/Create", categoryAttView);
+            if (res != null)
+            {
+                int id = int.Parse(categoryId);
+                attributes = await httpClient.GetFromJsonAsync<List<CategoryAttributeViewModel>>($"CategoryAttribute/List/{id}");
+                CloseModal();
+            }
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        int id = int.Parse(categoryId);
+        CategoryViewModel temp = await httpClient.GetFromJsonAsync<CategoryViewModel>($"Category/Info/{id}");
+        CategoryName = temp.CategoryName;
+        attributes = await httpClient.GetFromJsonAsync<List<CategoryAttributeViewModel>>($"CategoryAttribute/List/{id}");
+    }
+
+    public async void HandleValidSubmit()
+    {
+        ShowEditModal();
+        var res = await httpClient.PutAsJsonAsync("CategoryAttribute/Edit", attributes);
+        if (res != null)
+        {
+            int id = int.Parse(categoryId);
+            attributes = await httpClient.GetFromJsonAsync<List<CategoryAttributeViewModel>>($"CategoryAttribute/List/{id}");
+        }
+    }
+    public void editAtt()
+    {
+        if (IsEdit == false)
+        {
+            editBTN = "d-block";
+            IsEdit = true;
+        }
+        else
+        {
+            editBTN = "d-none";
+            IsEdit = false;
+        }
+    }
+    public async void ReLoadList()
+    {
+        OnInitializedAsync();
+    }
+    private async void DeleteAtt(int id)
+    {
+        var res = await httpClient.DeleteAsync($"CategoryAttribute/Delete/{id}");
+        if (res != null)
+        {
+            int temp = int.Parse(categoryId);
+            attributes = await httpClient.GetFromJsonAsync<List<CategoryAttributeViewModel>>($"CategoryAttribute/List/{temp}");
+            styleDeleteModal = "d-none";
+            CloseDeleteModal();
+        }
+    }
+
+}

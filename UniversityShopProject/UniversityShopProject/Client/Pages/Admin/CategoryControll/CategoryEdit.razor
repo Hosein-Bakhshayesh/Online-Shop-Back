@@ -133,6 +133,9 @@
                         }
                         <td>
                             <CategoryDelete CategoryId="@item.CategoryId"/>
+                            <NavLink href="@item.CAttributeUrl">
+                                <button type="button" class="btn-outline-primary btn">ویژگی‌ها</button>
+                            </NavLink>
                         </td>
                     </tr>
                 }
@@ -173,6 +176,10 @@ else
         categoryView = await httpClient.GetFromJsonAsync<CategoryViewModel>($"Category/Info/{id}");
         Categories = await httpClient.GetFromJsonAsync<List<CategoryViewModel>>("Category/List");
         CategoryChild = await httpClient.GetFromJsonAsync<List<CategoryViewModel>>($"Category/ChildInfo/{id}");
+        @foreach (var item in CategoryChild)
+        {
+            item.CAttributeUrl = "/Admin-CategoryInfo/Attributes/" + item.CategoryId;
+        }
     }
 
     private async Task HandleValidSubmit()

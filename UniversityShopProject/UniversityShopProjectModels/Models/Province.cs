@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace UniversityShopProjectModels.Models;
 
-public partial class Province:BaseEntity
+public partial class Province : BaseEntity
 {
     public int Id { get; set; }
 

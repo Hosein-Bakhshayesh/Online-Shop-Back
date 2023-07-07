@@ -22,6 +22,6 @@ namespace UniversityShopProject.Shared.ViewModels
         [Required(ErrorMessage = "فیلد {0} نباید خالی باشد.")]
         public bool IsActive { get; set; }
         public string? CInfoUrl { get; set; }
-        public string? CEditUrl { get; set; }
+        public string? CAttributeUrl { get; set; }
     }
 }

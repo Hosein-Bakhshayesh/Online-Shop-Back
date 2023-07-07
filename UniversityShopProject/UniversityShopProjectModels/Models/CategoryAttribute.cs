@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace UniversityShopProjectModels.Models;
 
-public partial class CategoryAttribute:BaseEntity
+public partial class CategoryAttribute : BaseEntity
 {
     public int AttributeId { get; set; }
 
@@ -11,7 +11,7 @@ public partial class CategoryAttribute:BaseEntity
 
     public string Title { get; set; } = null!;
 
-    public string Discription { get; set; } = null!;
+    public string? Discription { get; set; }
 
     public virtual Category Category { get; set; } = null!;
 

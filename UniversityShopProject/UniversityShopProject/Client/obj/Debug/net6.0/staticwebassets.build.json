@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Ne3PMLej1ilvn+y/8kgm7YkuF2sVG3lxZ16bIrFT+GQ=",
+  "Hash": "CaNzKC7kYIYylTExTIArfQAxvJQudjsPyduPiec29yo=",
   "Source": "UniversityShopProject.Client",
   "BasePath": "/",
   "Mode": "Root",
@@ -8753,6 +8753,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\icon-192.png"
+    },
+    {
+      "Identity": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\Images\\CategoryAdminImages\\mobile.jpg",
+      "SourceId": "UniversityShopProject.Client",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "Images/CategoryAdminImages/mobile.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\CategoryAdminImages\\mobile.jpg"
     },
     {
       "Identity": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\Images\\Product-Image\\acer nitro 5 an515-55.jpg",

@@ -51,7 +51,8 @@ public partial class UniversityShopProjectContext : DbContext
     public virtual DbSet<WishList> WishLists { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=.;Initial Catalog=UniversityShopProject;Integrated Security=True;TrustServerCertificate=True;");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=UniversityShopProject;Integrated Security=True;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -207,9 +208,6 @@ public partial class UniversityShopProjectContext : DbContext
 
             entity.ToTable("CategoryAttribute");
 
-            entity.Property(e => e.Discription)
-                .HasMaxLength(500)
-                .UseCollation("SQL_Latin1_General_CP1_CI_AS");
             entity.Property(e => e.Title)
                 .HasMaxLength(150)
                 .UseCollation("SQL_Latin1_General_CP1_CI_AS");
@@ -422,25 +420,17 @@ public partial class UniversityShopProjectContext : DbContext
         {
             entity.ToTable("User");
 
-            entity.Property(e => e.Email)
-                .HasMaxLength(100)
-                .UseCollation("SQL_Latin1_General_CP1_CI_AS");
-            entity.Property(e => e.FirstName)
-                .HasMaxLength(150)
-                .UseCollation("SQL_Latin1_General_CP1_CI_AS");
+            entity.Property(e => e.Email).UseCollation("SQL_Latin1_General_CP1_CI_AS");
+            entity.Property(e => e.FirstName).UseCollation("SQL_Latin1_General_CP1_CI_AS");
             entity.Property(e => e.IsActive).HasColumnName("isActive");
-            entity.Property(e => e.LastName)
-                .HasMaxLength(150)
-                .UseCollation("SQL_Latin1_General_CP1_CI_AS");
+            entity.Property(e => e.LastName).UseCollation("SQL_Latin1_General_CP1_CI_AS");
             entity.Property(e => e.MobileNumber)
                 .HasMaxLength(50)
                 .UseCollation("SQL_Latin1_General_CP1_CI_AS");
             entity.Property(e => e.NationalCode)
                 .HasMaxLength(50)
                 .UseCollation("SQL_Latin1_General_CP1_CI_AS");
-            entity.Property(e => e.Password)
-                .HasMaxLength(300)
-                .UseCollation("SQL_Latin1_General_CP1_CI_AS");
+            entity.Property(e => e.Password).UseCollation("SQL_Latin1_General_CP1_CI_AS");
             entity.Property(e => e.UserName)
                 .HasMaxLength(150)
                 .UseCollation("SQL_Latin1_General_CP1_CI_AS");
