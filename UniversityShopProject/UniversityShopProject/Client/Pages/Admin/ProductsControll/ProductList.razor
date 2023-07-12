@@ -1,23 +1,154 @@
-﻿@page "/Admin-ProductList"
-@inject HttpClient httpClient
+﻿@page "/Admin-ProductList/{id}"
 @layout AdminLayout
+@inject HttpClient httpClient
 
-<h3 class="mb-4">دسته بندی محصولات</h3>
+<h3>لیست محصولات</h3>
 
-<div class="card my-3" style="width: 18rem;">
-    <img class="card-img-top" src="~/Images/CategoryAdminImages/mobile.jpg" alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
+<ProductAdd id="@id"/>
+
+<table class="table table-bordered mt-3">
+    <thead>
+        <tr>
+            <th scope="col" class="text-center">شماره</th>
+            <th scope="col" class="text-center">نام محصول</th>
+            <th scope="col" class="text-center">تصویر محصول</th>
+            <th scope="col" class="text-center">قیمت</th>
+            <th scope="col" class="text-center">فعال</th>
+            <th scope="col" class="text-center">مشاهده جزئیات</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (products != null)
+        {
+            int i = 1;
+            foreach (var item in products)
+            {
+                <tr>
+                    <td class="pt-3 text-center">
+                        @(i)
+                    </td>
+                    <td class="pt-3 text-center fw-bold">
+                        @item.ProductName
+                    </td>
+                    <td class="w-25 text-center p-2">
+                        <img src="/Images/Product-Image/@item.ProductImagePath" style="max-height:120px;" />
+                    </td>
+                    <td class="pt-3 text-center">
+                        @item.Price
+                    </td>
+                    <td class="pt-3 text-center">
+                        @if (item.IsActive)
+                        {
+                            <span class="text-success">
+                                <i class="fa fa-check"></i>
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="text-danger">
+                                <i class="fa fa-xmark"></i>
+                            </span>
+                        }
+                    </td>
+                    <td class="text-center">
+                        <NavLink>
+                            <a href="#" class="btn btn-outline-primary text-decoration-none">جزئیات</a>
+                        </NavLink>
+                        <button @onclick="(e => DeleteProduct(item.ProductId))" class="btn btn-outline-danger">حذف</button>
+                    </td>
+                </tr>
+                i = (i + 1);
+            }
+        }
+        else
+        {
+        <td>
+            <p class="text-danger">
+                محصولی یافت نشد...
+            </p>
+        </td>
+        }
+    </tbody>
+</table>
+@*--------------------------------------------------------------------------------------------------------*@
+<div class="modal fade show @styleDeleteSuccessModal overflow-y-scroll" id="DeleteSuccessModal" tabindex="-1" role="dialog" aria-labelledby="DeleteSuccessModalTitle" aria-hidden="true" style="background:#00000080">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="DeleteSuccessModalTitle">حذف محصول</h5>
+            </div>
+            <div class="modal-header">
+                <p class="my-2">
+                    حذف با موفقیت انجام شد.
+                </p>
+                <br />
+                <button @onclick="CloseDeleteSuccessModal" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            </div>
+        </div>
+
+    </div>
 </div>
+@*--------------------------------------------------------------------------------------------------------*@
+
 
 @code {
-    public List<CategoryViewModel>? categories { get; set; }
+    [Parameter]
+    public string id { get; set; }
+    public List<ProductViewModel>? products { get; set; }
+    public string styleDeleteSuccessModal { get; set; } = "d-none";
+    public ImageFile imageFile;
 
     protected override async Task OnInitializedAsync()
     {
-        categories = await httpClient.GetFromJsonAsync<List<CategoryViewModel>>("Category/List");
+        int temp = int.Parse(id);
+        products = await httpClient.GetFromJsonAsync<List<ProductViewModel>>($"Product/List/{temp}");
+    }
+    public void ShowDeleteSuccessModal()
+    {
+        if (styleDeleteSuccessModal == "d-none")
+        {
+            styleDeleteSuccessModal = "d-block";
+        }
+    }
+    public async Task CloseDeleteSuccessModal()
+    {
+        if (styleDeleteSuccessModal == "d-block")
+        {
+            styleDeleteSuccessModal = "d-none";
+        }
+        await ReLoad();
+    }
+
+    public async Task DeleteProduct(int Pid)
+    {
+        var res = await httpClient.DeleteAsync($"Product/Delete/{Pid}");
+        if (res != null)
+        {
+            ShowDeleteSuccessModal();
+            int temp = int.Parse(id);
+            products = await httpClient.GetFromJsonAsync<List<ProductViewModel>>($"Product/List/{temp}");
+
+        }
+    }
+
+
+
+    //private async Task OnInputFileChanged(InputFileChangeEventArgs f)
+    //{
+    //    imageFile.Files.FileName = Guid.NewGuid().ToString().Replace("-", "");
+    //    imageFile.Files.Data = new Byte[f.File.Size];
+    //    await f.File.OpenReadStream().ReadAsync(imageFile.Files.Data);
+    //    imageFile.Files.FileType = f.File.ContentType;
+    //    imageFile.Files.Size = f.File.Size;
+    //    ProductAdd.ProductImagePath = imageFile.Files.FileName + ".jpg";
+    //}
+
+    public async Task ReLoad()
+    {
+        await OnInitializedAsync();
     }
 }

@@ -1,0 +1,47 @@
+﻿@page "/Admin-PCategoryList"
+@inject HttpClient httpClient
+@layout AdminLayout
+
+<h3 class="mb-4">دسته بندی محصولات</h3>
+
+@foreach (var item in categories)
+{
+    if (item.ParentId == null)
+    {
+        <h3 class="w-100 my-3 mx-auto text-center text-info">-----------------------@item.CategoryName-----------------------</h3>
+
+        <div class="row">
+            @foreach (var temp in categories)
+            {
+                if (temp.ParentId == item.CategoryId)
+                {
+                    <div class="card my-3 col-2 mx-2" style="height: 23rem;">
+                        <div class="h-50">
+                            <img class="card-img-top p-2 h-100" src="@temp.CImage" alt="Card image cap">
+                        </div>
+                        <div class="card-body p-1 text-center mt-3">
+                            <h5 class="card-title mb-3">@temp.CategoryName</h5>
+                            <a href="@temp.PUrl" class="btn-sm btn-outline-primary w-100">مشاهده محصولات</a>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+
+    }
+}
+
+@code {
+    public List<CategoryViewModel>? categories { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        categories = await httpClient.GetFromJsonAsync<List<CategoryViewModel>>("Category/List");
+        foreach (var item in categories)
+        {
+            item.CImage = "Images/CategoryAdminImages/" + item.CategoryName + ".jpg";
+            item.PUrl = "/Admin-ProductList/" + item.CategoryId;
+        }
+    }
+}
+

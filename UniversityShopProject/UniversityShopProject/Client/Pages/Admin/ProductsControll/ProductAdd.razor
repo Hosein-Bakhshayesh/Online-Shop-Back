@@ -1,0 +1,134 @@
+﻿<button type="button" @onclick='ShowAddProductModal' class="btn btn-success my-2" data-toggle="modal" data-target="#AddProductModal">
+    افزودن کالا جدید
+</button>
+
+@*--------------------------------------------------------------------------------------------*@
+<div class="modal fade show @styleAddProductModal overflow-y-scroll" id="AddProductModalModal" tabindex="-1" role="dialog" aria-labelledby="AddProductModalTitle" aria-hidden="true" style="background:#00000080">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="AddProductModalTitle">افزودن کالا</h5>
+                <button @onclick="CloseAddModal" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <EditForm Model="productAdd" OnValidSubmit="@AddHandleValidSubmit">
+                    <hr />
+                    <span class="text-danger">
+                        <DataAnnotationsValidator />
+                        <ValidationSummary />
+                    </span>
+                    <div class="row w-100">
+                        <div class="col-6 w-100">
+                            <label>
+                                نام کالا :<span class="text-danger">*</span>
+                            </label>
+                            <InputText @bind-Value="productAdd.ProductName" class="form-control input-field" placeholder="نام کالا" />
+                        </div>
+                        <div class="col-6 w-100">
+                            <label>
+                                گروه کالا :<span class="text-danger">*</span>
+                            </label>
+                            <InputSelect @bind-Value="productAdd.CategoryId" class="form-control input-field" readonly>
+                                @foreach (var item in Categories)
+                                {
+                                    if (item.CategoryId == int.Parse(id))
+                                    {
+                                        <option value="@item.CategoryId" selected>@item.CategoryName</option>
+                                    }
+                                }
+                            </InputSelect>
+                        </div>
+                        <hr />
+                        <div class="col-12 w-100">
+                            <label>
+                                توضیحات :<span class="text-danger">*</span>
+                            </label>
+                            <InputTextArea @bind-Value="productAdd.ProductDiscription" class="form-control input-field" />
+                        </div>
+                        <hr />
+                        <div class="col-6 w-100">
+                            <label>
+                                قیمت :<span class="text-danger">*</span>
+                            </label>
+                            <InputText @bind-Value="productAdd.Price" class="form-control input-field" />
+                        </div>
+                        <div class="col-6 w-100">
+                            <label>
+                                تعداد :<span class="text-danger">*</span>
+                            </label>
+                            <InputNumber @bind-Value="productAdd.Number" class="form-control input-field" />
+                        </div>
+                        <hr />
+                        <div class="col-6 w-100">
+                            <label>
+                                وضعیت :<span class="text-danger">*</span>
+                            </label>
+                            <InputSelect @bind-Value="productAdd.IsActive" class="form-control input-field">
+                                <option value="true" selected>فعال</option>
+                                <option value="false">غیرفعال</option>
+                            </InputSelect>
+                        </div>
+                        <hr />
+                        @*                        <div class="col-12 w-100">
+                        <label>
+                        تصویر کالا :<span class="text-danger">*</span>
+                        </label>
+                        <InputFile OnChange="@OnInputFileChanged" required />
+                        </div>*@
+                    </div>
+                    <hr />
+                    <div>
+                        <button @onclick="CloseAddModal" type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
+                        <button type="submit" class="btn btn-success">درج کالا</button>
+                    </div>
+                </EditForm>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+@code {
+    [Parameter]
+    public string id { get; set; }
+    public ProductViewModel productAdd { get; set; }
+    public List<CategoryViewModel>? Categories { get; set; }
+    HttpClient httpClient = new HttpClient();
+    public string styleAddProductModal { get; set; } = "d-none";
+
+    protected override async Task OnInitializedAsync()
+    {
+        productAdd = new ProductViewModel();
+        Categories = await httpClient.GetFromJsonAsync<List<CategoryViewModel>>("Category/List");
+
+    }
+
+    public void AddHandleValidSubmit()
+    {
+        var res = httpClient.PostAsJsonAsync("Product/Add", productAdd);
+        productAdd.ProductImagePath = Guid.NewGuid().ToString().Replace("-", "");
+        //if (imageFile != null)
+        //{
+        //    var payload = new ImageFile { Files = imageFile.Files };
+        //    var res2 = await httpClient.PostAsJsonAsync("Product/SaveImage", payload);
+        //}
+    }
+    public void ShowAddProductModal()
+    {
+        if (styleAddProductModal == "d-none")
+        {
+            styleAddProductModal = "d-block";
+        }
+    }
+    public async Task CloseAddModal()
+    {
+        if (styleAddProductModal == "d-block")
+        {
+            styleAddProductModal = "d-none";
+        }
+
+    }
+}
