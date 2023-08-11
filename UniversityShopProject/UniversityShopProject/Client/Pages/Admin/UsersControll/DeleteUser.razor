@@ -1,0 +1,44 @@
+﻿@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+
+@if (userInfoView != null)
+{
+    <div class="row mt-3">
+
+        <h4 class="text-danger col">آیا برای حذف <span>@userInfoView.UserName</span> اطمینان دارید ؟</h4>
+
+        <button class="btn btn-danger col-1 mx-2" @onclick="Delete">مطمئنم و حذف !</button>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public string? userId { get; set; }
+    public UserInfoViewModel? userInfoView = new UserInfoViewModel();
+
+    protected override async Task OnInitializedAsync()
+    {
+        if(userId != null)
+        {
+            int id = int.Parse(userId);
+            userInfoView = await httpClient.GetFromJsonAsync<UserInfoViewModel>($"User/Info/{id}");
+        }
+    }
+    protected override async Task OnParametersSetAsync()
+    {
+        if (userId != null)
+        {
+            int id = int.Parse(userId);
+            userInfoView = await httpClient.GetFromJsonAsync<UserInfoViewModel>($"User/Info/{id}");
+        }
+    }
+
+    private async Task Delete()
+    {
+        var res = await httpClient.PutAsJsonAsync("User/Delete", userInfoView);
+        if(res!=null)
+        {
+            navigationManager.NavigateTo("/Admin-UserList");
+        }
+    }
+}

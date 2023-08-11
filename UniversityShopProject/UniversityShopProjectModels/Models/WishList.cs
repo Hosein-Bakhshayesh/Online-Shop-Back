@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace UniversityShopProjectModels.Models;
 
-public partial class WishList : BaseEntity
+public partial class WishList:BaseEntity
 {
     public int WishId { get; set; }
 

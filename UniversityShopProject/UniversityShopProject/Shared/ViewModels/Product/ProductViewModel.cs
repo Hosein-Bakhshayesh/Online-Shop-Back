@@ -25,5 +25,8 @@ namespace UniversityShopProject.Shared.ViewModels.Product
         [Required(ErrorMessage = "فیلد {0} الزامی میباشد")]
         public bool IsActive { get; set; }
 
+        public string infoUrl { get; set; }
+        public string? ProductDetailLink { get; set; }
+
     }
 }

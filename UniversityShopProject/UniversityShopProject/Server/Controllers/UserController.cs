@@ -90,6 +90,27 @@ namespace UniversityShopProject.Server.Controller
                 return StatusCode(StatusCodes.Status500InternalServerError, "عملیات حذف انجام نشد");
             }
         }
+
+        [HttpPut("Delete")]
+        public ActionResult DeleteUser(UserListViewModel userInfo)
+        {
+            User user = _mapper.Map<UserListViewModel, User>(userInfo);
+            try
+            {
+                if (user == null)
+                {
+                    return NotFound("User Not Found !");
+                }
+                _userService.Delete(user);
+                _userService.Save();
+                return Ok();
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "عملیات حذف انجام نشد");
+            }
+        }
+
         [HttpPost("Create")]
         public ActionResult CreateUser(UserCreateViewModel userCreate)
         {

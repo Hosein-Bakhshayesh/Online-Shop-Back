@@ -356,9 +356,7 @@ public partial class UniversityShopProjectContext : DbContext
             entity.Property(e => e.Price)
                 .HasMaxLength(50)
                 .UseCollation("SQL_Latin1_General_CP1_CI_AS");
-            entity.Property(e => e.ProductDiscription)
-                .HasMaxLength(500)
-                .UseCollation("SQL_Latin1_General_CP1_CI_AS");
+            entity.Property(e => e.ProductDiscription).UseCollation("SQL_Latin1_General_CP1_CI_AS");
             entity.Property(e => e.ProductImagePath).HasMaxLength(500);
             entity.Property(e => e.ProductName)
                 .HasMaxLength(150)

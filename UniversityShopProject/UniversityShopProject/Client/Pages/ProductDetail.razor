@@ -1,641 +1,421 @@
-﻿@page "/ProductDetail"
+﻿@page "/ProductDetail/{Id}"
+@inject HttpClient httpClient
 
-<div class="row product-interface p-0 m-0">
-    <div class="product-img-box col-12 col-xl-4 px-0 py-4">
-        <div id="active-img" class="product-img w-100 m-0 text-center">
-            <img src="../Images/samsung galaxy s22 2022.jpg" alt="samsung galaxy s22 2022" class="h-100">
-        </div>
-        <div class="product-another-imgs row my-2">
-            <div class="product-imgs col-3 p-2 w-100 m-0 text-center">
-                <a href="#">
-                    <img src="../Images/iphone se 2020.jpg" alt="iphone se 2020" class="h-100">
-                </a>
+@if (product != null)
+{
+    <div class="row product-interface p-0 m-0">
+        <div class="product-img-box col-12 col-xl-4 px-0 py-4">
+            <div id="active-img" class="product-img w-100 m-0 text-center">
+                <img src="/Images/Product-Image/@product.ProductImagePath" alt="@product.ProductName" class="h-100">
             </div>
-            <div class="product-imgs col-3 p-2 w-100 m-0 text-center">
-                <a href="#">
-                    <img src="../Images/samsung s21 ultra.jpg" alt="samsung s21 ultra" class="h-100">
-                </a>
-            </div>
-            <div class="product-imgs col-3 p-2 w-100 m-0 text-center">
-                <a href="#">
-                    <img src="../Images/iphone 13 pro max.jpg" alt="iphone 13 pro max" class="h-100">
-                </a>
-            </div>
-            <div class="product-imgs col-3 p-2 w-100 m-0 text-center">
-                <a href="#">
-                    <img src="../Images/xiaomi mi 12.jpg" alt="xiaomi mi 12" class="h-100">
-                </a>
-            </div>
+            @if (productImagesViewModels != null)
+            {
+                <div class="product-another-imgs row my-2">
+                    @foreach (var item in productImagesViewModels)
+                    {
+                        <div class="product-imgs col-3 p-2 w-100 m-0 text-center">
+                            <a href="#">
+                                <img src="~/Images/Product-Image/@item.ImagePath" alt="@product.ProductName" class="h-100">
+                            </a>
+                        </div>
+                    }
+
+                </div>
+            }
         </div>
-    </div>
-    <div class="product-detail-interface col-12 col-xl-5 px-0 py-5">
-        <div class="font-size-small">
-            <span class="fw-light text-info">دسته کالا :</span>
-            <a href="#" class="text-decoration-none fw-light text-info">گوشی موبایل</a>
-        </div>
-        <div class="p-title fw-bold my-2">
-            گوشی سامسونگ مدل samsung galexy a22 2020
-        </div>
-        <div class="line bg-dark-subtle w-100 my-1"></div>
-        <div class="font-size-small my-3">
-            <a href="#product-comments" class="text-decoration-none fw-light text-info">6 دیدگاه برای این کالا</a>
-        </div>
-        <div class="font-size-small my-3 detail-preview">
-            گوشی‌های هوشمند میان‌رده سری A و M سامسونگ توانسته‌اند به نسبت رقبا عملکرد بهتری را به نمایش بگذارند.
-            این
-            گوشی‌های هوشمند با بهره بردن از مشخصات فنی مناسب در کنار قیمت مقرون به‌صرفه توانستند کاربران بسیاری را
-            به
-            سمت خود جلب کنند و فروش چشم‌گیری در بازار جهانی داشته‌اند. سامسونگ گلکسی A22 5G هم یکی از محصولات
-            با‌کیفیت
-            این شرکت است که از مشخصات فنی بسیار خوبی در جایگاه یک گوشی میان‌رده بهره برده است. در نمای رو‌به‌رویی
-            این
-            گوشی به صفحه‌نمایش 6.6 اینچ با رزولوشن 1080×2400 پیکسل از نوع TFT مجهز شده است. توانایی ارائه نرخ
-            بروزرسانی
-            <a href="#product-detail" class="text-decoration-none fw-bold text-info">بیشتر.....</a>
-        </div>
-        <div class="my-3">
-            <a href="#Product-Technical" class="fw-bold text-decoration-none text-info">مشاهده مشخصات فنی کالا</a>
-        </div>
-    </div>
-    <div class="add-cart col-12 col-xl-3 mt-xl-5">
-        <div class="add-cart-box w-100 text-left h-100 px-3 py-4">
-            <div class="mt-3">
-                <i class="fa-regular fa-user-circle"> </i> فروشنده :
-                <a href="#" class="text-decoration-none fw-light text-info">فروشنده شماره یک</a>
-            </div>
-            <div class="line bg-dark-subtle w-100 my-4"></div>
+        <div class="product-detail-interface col-12 col-xl-5 px-0 py-5">
             <div class="font-size-small">
-                <i class="fa fa-check"> </i> گارانتی اصالت کالا و برگشت 20 روزه کالا
-            </div>
-            <div class="line bg-dark-subtle w-100 my-4"></div>
-            <span class="font-size-small"><i class="fa fa-shop"> </i></span> موجود در انبار و اماده ارسال
-            <div class="line bg-dark-subtle w-100 my-4"></div>
-            <form method="post" class="add-cart-form">
-                <input class="mx-1" type="radio" value="blue" name="colorSelected" id="colorSelected0" checked><span class="text-primary">آبی</span>
-                <input class="mx-1" type="radio" value="black" name="colorSelected" id="colorSelected1"><span class="text-black">مشکی</span>
-                <input class="mx-1" type="radio" value="pink" name="colorSelected" id="colorSelected3"><span class="text-danger">قرمز</span>
-                <div class="price my-3">
-                    <span class="fw-bold">12,500,000 تومان</span>
-                </div>
-                <button type="submit" class="btn btn-success w-100">اضافه به سبد خرید</button>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!--------------------------------------------------------------------------------------------------->
-<!--------------------------------------------------------------------------------------------------->
-<!--------------------------------------------------------------------------------------------------->
-
-
-<div class="p-0 mx-0 mt-4">
-    <div class="container product-detail">
-        <div class="border border-2 border-dark rounded rounded-pill d-inline py-2 px-5">
-            <span class="fw-bold" id="product-detail"><i class="fa fa-info-circle"> </i> توضیحات کالا</span>
-        </div>
-        <div class="text-justify product-detail-text mt-5">
-            گوشی‌های هوشمند میان‌رده سری A و M سامسونگ توانسته‌اند به نسبت رقبا عملکرد بهتری را به نمایش بگذارند.
-            این
-            گوشی‌های هوشمند با بهره بردن از مشخصات فنی مناسب در کنار قیمت مقرون به‌صرفه توانستند کاربران بسیاری را
-            به
-            سمت خود جلب کنند و فروش چشم‌گیری در بازار جهانی داشته‌اند. سامسونگ گلکسی A22 5G هم یکی از محصولات
-            با‌کیفیت
-            این شرکت است که از مشخصات فنی بسیار خوبی در جایگاه یک گوشی میان‌رده بهره برده است. در نمای رو‌به‌رویی
-            این
-            گوشی به صفحه‌نمایش 6.6 اینچ با رزولوشن 1080×2400 پیکسل از نوع TFT مجهز شده است. توانایی ارائه نرخ
-            بروزرسانی
-            90 هرتز، رزولوشن بسیار خوب و تراکم پیکسلی 399 پیکسل در هر اینچ، سبب شده تا این صفحه‌نمایش کیفیت بسیار
-            خوب و
-            قابل قبولی را ارائه کند. در قسمت پشتی هم یک سنسور دوربین اصلی با رزولوشن 48 مگاپیکسل و گشودگی دریچه
-            دیافراگم
-            f/1.8 از نوع عریض در کنار سنسور 5 مگاپیکسلی از نوع فوق عریض (ultra wide) با زاویه دید 115 درجه و سنسور 2
-            مگاپیکسل سنجش عمق، سنسور‌های دوربین سه‌گانه سامسونگ گلکسی A22 5G را تشکیل می‌دهند. برای دوربین سلفی هم
-            سنسور
-            8 مگاپیکسلی از نوع عریض در نظر گرفته شده است. در بخش مشخصات سخت‌افزاری هم به پردازنده میان‌رده دیمنسیتی
-            700
-            5G شرکت مدیاتک مجهز شده است. پردازنده‌ای با معماری 7 نانومتری که در کنار عملکرد خوب در اجرای بازی‌های
-            حتی
-            سنگین (بهتر است که تنظیمات گرافیکی بازی‌های سنگین مثل آسفالت 9 را روی حالت low تنظیم کنید تا عملکرد
-            بهتری را
-            شاهد باشید) توانایی پشتیبانی از شبکه‌های اینترنتی پرسرعت نسل پنجم یا همان 5G را هم دارد. باتری قدرتمند
-            با
-            میزان ظرفیت 5000 میلی‌آمپر‌ساعت در نظر گرفته شده هم می‌تواند به ازای هر بار شارژ 100 درصدی، طول عمر مفید
-            (زمان آماده به‌کار) بسیار قابل قبولی را ارائه کند.
-        </div>
-    </div>
-</div>
-
-<!--------------------------------------------------------------------------------------------------->
-<!--------------------------------------------------------------------------------------------------->
-<!--------------------------------------------------------------------------------------------------->
-
-
-<div class="p-0 mx-0 mt-4">
-    <div class="container product-detail">
-        <div class="border border-2 border-dark rounded rounded-pill d-inline py-2 px-5">
-            <span id="Product-Technical" class="fw-bold"><i class="fa fa-gears"> </i> مشخصات فنی</span>
-        </div>
-        <div class="text-justify product-Technical-text mt-5">
-            <div id="show-less-technical">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">وزن</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">186 گرم</div>
-                </div>
-                <hr class="myhr">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">ابعاد</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">159.3x73.6x8.4</div>
-                </div>
-                <hr class="myhr">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">فناوری صفحه‌نمایش</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">Super AMOLED</div>
-                </div>
-                <hr class="myhr">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">بازه‌ی اندازه صفحه نمایش</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">6.0 اینچ و بزرگتر</div>
-                </div>
-                <hr class="myhr">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">توضیحات سیم کارت</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">سایز نانو (8.8 x 12.3 میلی‌متر)</div>
-                </div>
-                <hr class="myhr">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">اندازه</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">6.4 اینچ</div>
-                </div>
-            </div>
-            <!--------------------------------------------------------------------------------------------------->
-            <div id="show-more-technical" class="d-none">
-                <hr class="myhr">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">ویژگی‌های خاص</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">
-                        مجهز به اثر انگشت<br>
-                        مناسب عکاسی
-                    </div>
-                </div>
-                <hr class="myhr">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">رزولوشن</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">720x1600 پیکسل بر اینچ</div>
-                </div>
-                <hr class="myhr">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">تراکم پیکسلی</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">274 پیکسل بر اینچ</div>
-                </div>
-                <hr class="myhr">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">تعداد سیم کارت</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">دو عدد</div>
-                </div>
-                <hr class="myhr">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">نسبت صفحه‌نمایش به بدنه</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">84.3</div>
-                </div>
-                <hr class="myhr">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">زمان معرفی</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">03 ژوئن 2021</div>
-                </div>
-                <hr class="myhr">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">نسبت تصویر</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">20:9</div>
-                </div>
-                <hr class="myhr">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">تراشه</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">Mediatek Helio G80 (12 nm) Chipset</div>
-                </div>
-                <hr class="myhr">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">پردازنده‌ی مرکزی</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">Dual-Core Cortex-A75 &amp; Hexa-Core Cortex-A55 CPU</div>
-                </div>
-                <hr class="myhr">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">نوع پردازنده</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">64 بیتی</div>
-                </div>
-                <hr class="myhr">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">فرکانس پردازنده‌ی مرکزی</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">1.8 و 2.0 گیگاهرتز</div>
-                </div>
-                <hr class="myhr">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">شبکه های ارتباطی</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">
-                        2G <br>
-                        3G <br>
-                        4G
-                    </div>
-                </div>
-                <hr class="myhr">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">پردازنده‌ی گرافیکی</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">Mali-G52 MC۲ GPU</div>
-                </div>
-                <hr class="myhr">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">حافظه داخلی</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">64 گیگابایت</div>
-                </div>
-                <hr class="myhr">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">مقدار RAM</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">چهار گیگابایت</div>
-                </div>
-                <hr class="myhr">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">پشتیبانی از کارت حافظه</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">microSD</div>
-                </div>
-                <hr class="myhr">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">فناوری‌های ارتباطی</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">
-                        Wi-Fi <br>
-                        بلوتوث
-                    </div>
-                </div>
-                <hr class="myhr">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">استاندارد کارت حافظه</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">eMMC 5.1</div>
-                </div>
-                <hr class="myhr">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">Wi-Fi</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">Wi-Fi 802.11 a/b/g/n/ac Dual-band Wi-Fi Direct Hotspot</div>
-                </div>
-                <hr class="myhr">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">بلوتوث</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">5.0, A2DP, LE</div>
-                </div>
-                <hr class="myhr">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">فن‌آوری موبایل</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">
-                        A-GPS <br>
-                        BDS <br>
-                        GALILEO <br>
-                        GLONASS
-                    </div>
-                </div>
-                <hr class="myhr">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">درگاه‌های ارتباطی</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">USB Type-C 2.0</div>
-                </div>
-                <hr class="myhr">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">نسخه بلوتوث</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">5.0</div>
-                </div>
-                <hr class="myhr">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">دوربین‌های پشت گوشی</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">4 ماژول دوربین</div>
-                </div>
-                <hr class="myhr">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">رزولوشن عکس</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">48 مگاپیکسل</div>
-                </div>
-                <hr class="myhr">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">فناوری فوکوس</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">AutoFocus</div>
-                </div>
-                <hr class="myhr">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">قابلیت‌های دوربین</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">
-                        دارای 4 ماژول دوربین در قاب پشت | دوربین هایی با رزولوشن 48 ، 8 ، 2 و 2 مگاپیکسل - دوربین
-                        اول از
-                        نوع عریض (wide) با رزولوشن 48 مگاپیکسل، دریچه دیافراگم f/1.8 و محهز به فناوری فوکوس اتوماتیک
-                        از
-                        نوع PDAF و OIS - دوربین دوم از نوع فوق عریض (ultraWide) با رزولوشن 8 مگاپیکسل، دریچه
-                        دیافراگم
-                        f/2.2، زاویه دید 123 درجه، سایز سنسور 1/4.0 اینچ و ثبت تصاویر با پیکسلهایی به سایز 1.12
-                        میکرومتر
-                        - دوربین سوم برای ایجاد عمق عکس (Depth) با رزولوشن 2 مگاپیکسل و دریچه دیافراگم f/2.4 -
-                        دوربین
-                        چهارم برای ایجاد ماکرو (macro) با رزولوشن 2 مگاپیکسل و دریچه دیافراگم f/2.4 قابلیت عکاسی
-                        پانوراما و قابلیت عکاسی HDR
-                    </div>
-                </div>
-                <hr class="myhr">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">فیلمبرداری</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">فیلمبرداری با رزولوشن 1920 x 1080 و سرعت 30 فریم بر ثانیه</div>
-                </div>
-                <hr class="myhr">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">دوربین سلفی</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">
-                        دارای لنز از نوع عریض با رزولوشن 13 مگاپیکسل، دریچه دیافراگم f/2.2، سایز سنسور 1/31 اینچ و
-                        ثبت تصاویر با پیکسلهایی به سایز 1.12 میکرومتر <br>
-                        فیلمبرداری با رزولوشن 1920 x 1080 و سرعت 30 فریم بر ثانیه
-                    </div>
-                </div>
-                <hr class="myhr">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">سیستم عامل</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">Android 11</div>
-                </div>
-                <hr class="myhr">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">حس‌گرها</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">
-                        اثر انگشت روی لبه (FingerPrint) <br>
-                        ژیروسکوپ (Gyro) <br>
-                        شتاب سنج (Accelerometer) <br>
-                        قطب نما (Compass) <br>
-                        مجاورت (Proximity)
-                    </div>
-                </div>
-                <hr class="myhr">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">مشخصات باتری</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">
-                        لیتیوم-پلیمری با ظرفیت 5000 میلی آمپر ساعت امکان شارژ سریع باتری با توان 15 وات
-                    </div>
-                </div>
-                <hr class="myhr">
-                <div class="row p-0 mx-0">
-                    <div class="col-3">امکانات موبایل</div>
-                    <span class="col-1 text-black-50">|</span>
-                    <div class="col">شیار مجزا برای کارت حافظه</div>
-                </div>
-            </div>
-            <hr class="myhr">
-            <button id="show-more-technical-btn" class="btn btn-info btn-sm my-3 p-2" onclick="showMoreFunction();">
-                مشاهده
-                بیشتر ...
-            </button>
-        </div>
-    </div>
-</div>
-<!--------------------------------------------------------------------------------------------------->
-<!--------------------------------------------------------------------------------------------------->
-<!--------------------------------------------------------------------------------------------------->
-
-<div class="p-0 mx-0 mt-4">
-    <div class="container product-detail">
-        <div class="border border-2 border-dark rounded rounded-pill d-inline py-2 px-5">
-            <span class="fw-bold" id="product-comments"><i class="fa fa-comment"> </i> نظرات</span>
-        </div>
-        <div class="product-comments mt-3 text-justify text-center">
-            <div class="add-Comment d-block d-lg-none w-100 m-auto font-size-small">
-                <form action="#" method="post" class="form-box">
-                    <input type="text" id="commentUserNameSM" name="commentUserName" placeholder="نام ..."
-                           class="comment-inputs form-control my-2 font-size-small">
-                    <textarea name="commentText" id="commentTextSM" cols="30" rows="10" placeholder="متن نظر ..."
-                              class="comment-inputs form-control my-2 font-size-small"></textarea>
-                    <button type="submit" class="w-100 btn btn-success">ارسال نظر</button>
-                </form>
-            </div>
-            <div class="add-Comment d-none d-lg-block w-50 m-auto font-size-small">
-                <form action="#" method="post" class="form-box">
-                    <input type="text" id="commentUserName" name="commentUserName" placeholder="نام ..."
-                           class="comment-inputs form-control my-2 font-size-small">
-                    <textarea name="commentText" id="commentText" cols="30" rows="10" placeholder="متن نظر ..."
-                              class="comment-inputs form-control my-2 font-size-small"></textarea>
-                    <button type="submit" class="w-100 btn btn-success">ارسال نظر</button>
-                </form>
-            </div>
-            <div id="show-less-comments">
-                <div class="comment-box text-left rounded rounded-5 my-3">
-                    <div class="font-size-small">
-                        حسین بخشایش مقرب | <span class="text-black-50">9 فروردین 1402</span> | <span class="text-success">
-                            5 <a href="#" class="text-success text-decoration-none"><i class="fa-regular fa-thumbs-up"></i></a>
-                        </span>
-                    </div>
-                    <hr class="myhr">
-                    <div class="px-3">
-                        <p class="comment-text">
-                            من این گوشی رو خریدم<br>
-                            خیلی عالی هستش و من ازش خیلی راضیم<br>
-                            مرسی از سایت خوبتون
-                        </p>
-                    </div>
-                </div>
-                <div class="comment-box text-left rounded rounded-5 my-3">
-                    <div class="font-size-small">
-                        کاربر 2 | <span class="text-black-50">2 اسفند 1401</span> | <span class="text-success">
-                            2 <a href="#"
-                                 class="text-success text-decoration-none"><i class="fa-regular fa-thumbs-up"></i></a>
-                        </span>
-                    </div>
-                    <hr class="myhr">
-                    <div class="px-3">
-                        <p class="comment-text">
-                            خیلی سایت خوبی دارین، من همیشه از سایت شما خرید میکنم و همیشه برام در کمترین زمان میرسه،
-                            واقعا خدمات پس از فروش و گارانتی هم عالیه، پیشنهاد میکنم حتما ازشون خرید کنین
-                        </p>
-                    </div>
-                </div>
-                <div class="comment-box text-left rounded rounded-5 my-3">
-                    <div class="font-size-small">
-                        کاربر 3 | <span class="text-black-50">10 بهمن 1401</span> | <span class="text-success">
-                            2 <a href="#"
-                                 class="text-success text-decoration-none"><i class="fa-regular fa-thumbs-up"></i></a>
-                        </span>
-                    </div>
-                    <hr class="myhr">
-                    <div class="px-3">
-                        <p class="comment-text">
-                            اصلا گوشی خوبی نیست. من راضی نبودم
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div id="show-more-comments" class="d-none">
-                <div class="comment-box text-left rounded rounded-5 my-3">
-                    <div class="font-size-small">
-                        کاربر 4 | <span class="text-black-50">2 بهمن 1401</span> | <span class="text-success">
-                            1 <a href="#"
-                                 class="text-success text-decoration-none"><i class="fa-regular fa-thumbs-up"></i></a>
-                        </span>
-                    </div>
-                    <hr class="myhr">
-                    <div class="px-3">
-                        <p class="comment-text">
-                            سامسونگ همیشه گوشی های خیلی خوبی داره
-                        </p>
-                    </div>
-                </div>
-                <div class="comment-box text-left rounded rounded-5 my-3">
-                    <div class="font-size-small">
-                        کاربر 5 | <span class="text-black-50">2 بهمن 1401</span> | <span class="text-success">
-                            0 <a href="#"
-                                 class="text-success text-decoration-none"><i class="fa-regular fa-thumbs-up"></i></a>
-                        </span>
-                    </div>
-                    <hr class="myhr">
-                    <div class="px-3">
-                        <p class="comment-text">
-                            خیلی مزخرفه.....
-                        </p>
-                    </div>
-                </div>
-                <div class="comment-box text-left rounded rounded-5 my-3">
-                    <div class="font-size-small">
-                        کاربر 6 | <span class="text-black-50">20 دی 1401</span> | <span class="text-success">
-                            0 <a href="#"
-                                 class="text-success text-decoration-none"><i class="fa-regular fa-thumbs-up"></i></a>
-                        </span>
-                    </div>
-                    <hr class="myhr">
-                    <div class="px-3">
-                        <p class="comment-text">
-                            بهترین سایت رو دارین. ممنون از شما و سایت خوبتون
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <button id="show-more-comments-btn" class="btn btn-info btn-sm p-2" onclick="showMoreCommentsFunction();">
-                مشاهده
-                نظرات بیشتر...
-            </button>
-        </div>
-    </div>
-</div>
-
-
-<!--------------------------------------------------------------------------------------------------->
-<!--------------------------------------------------------------------------------------------------->
-<!--------------------------------------------------------------------------------------------------->
-
-<div class="row p-0 mx-0 mt-4">
-    <div class="container product-detail">
-        <div class="border border-2 border-dark rounded rounded-pill d-inline py-2 px-5">
-            <span id="Product-Technical" class="fw-bold"><i class="fa fa-shopping-bag"> </i> محصولات مشابه</span>
-        </div>
-        <div class="likeThisProduct row mt-5">
-            <div class="col-6 col-sm-4 col-lg-2 px-1">
-                <div class="w-100 h-100 m-auto">
-                    <a href="#" class="text-decoration-none">
-                        <img src="../Images/samsung galaxy a53.jpg" alt="samsung galaxy a53" class="likeProductImgs">
-                    </a>
-                    <a href="#" class="text-black text-decoration-none">
-                        <div class="font-size-small text-center my-1">
-                            گوشی موبایل سامسونگ مدل samsung galaxy a53
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-6 col-sm-4 col-lg-2 px-1">
-                <div class="w-100 h-100 m-auto">
-                    <a href="#" class="text-decoration-none">
-                        <img src="../Images/iphone 13 pro max.jpg" alt="iphone 13 pro max" class="likeProductImgs">
-                    </a>
-                    <a href="#" class="text-black text-decoration-none">
-                        <div class="font-size-small text-center my-1">
-                            گوشی موبایل اپل مدل iphone 13 pro max
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-6 col-sm-4 col-lg-2 px-1">
-                <div class="w-100 h-100 m-auto">
-                    <a href="#" class="text-decoration-none">
-                        <img src="../Images/samsung galaxy a73 2022.webp" alt="samsung galaxy a73 2022" class="likeProductImgs">
-                    </a>
-                    <a href="#" class="text-black text-decoration-none">
-                        <div class="font-size-small text-center my-1">
-                            گوشی موبایل سامسونگ مدل samsung galaxy a73 2022
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-6 col-sm-4 col-lg-2 px-1">
-                <div class="w-100 h-100 m-auto">
-                    <a href="#" class="text-decoration-none">
-                        <img src="../Images/xiaomi mi 11 pro.jpg" alt="xiaomi mi 11 pro" class="likeProductImgs">
-                    </a>
-                    <a href="#" class="text-black text-decoration-none">
-                        <div class="font-size-small text-center my-1">
-                            گوشی موبایل شیائومی مدل xiaomi mi 11 pro
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-6 col-sm-4 col-lg-2 px-1">
-                <div class="w-100 h-100 m-auto">
-                    <a href="#" class="text-decoration-none">
-                        <img src="../Images/samsung galaxy s22 2022.jpg" alt="samsung galaxy s22 2022" class="likeProductImgs">
-                    </a>
-                    <a href="#" class="text-black text-decoration-none">
-                        <div class="font-size-small text-center my-1">
-                            گوشی موبایل سامسونگ مدل samsung galaxy s22 2022
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-6 col-sm-4 col-lg-2 px-1">
-                <a href="#" class="text-decoration-none">
-                    <img src="../Images/samsung s21 ultra.jpg" alt="samsung s21 ultra" class="likeProductImgs">
-                </a>
-                <a href="#" class="text-black text-decoration-none">
-                    <div class="font-size-small text-center my-1">
-                        گوشی موبایل سامسونگ مدل samsung s21 ultra
-                    </div>
+                <span class="fw-light text-info">دسته کالا :</span>
+                <a href="#" class="text-decoration-none fw-light text-info">
+                    @if (category != null)
+                    {
+                        @category.CategoryName
+                    }
+                    else
+                    {
+                        <span>بدون دسته بندی</span>
+                    }
                 </a>
             </div>
+            <div class="p-title fw-bold my-2">
+                @product.ProductName
+            </div>
+            <div class="line bg-dark-subtle w-100 my-1"></div>
+            <div class="font-size-small my-3">
+                <a href="#product-comments" class="text-decoration-none fw-light text-info">6 دیدگاه برای این کالا</a>
+            </div>
+            <div class="font-size-small my-3 detail-preview">
+                <span>
+                    @product.ProductDiscription.Substring(0,250)
+                </span>
+                <a href="#product-detail" class="text-decoration-none fw-bold text-info">بیشتر.....</a>
+            </div>
+            <div class="my-3">
+                <NavLink href="#Product-Technical" class="fw-bold text-decoration-none text-info">مشاهده مشخصات فنی کالا</NavLink>
+            </div>
+        </div>
+        <div class="add-cart col-12 col-xl-3 mt-xl-5">
+            <div class="add-cart-box w-100 text-left h-100 px-3 py-4">
+                <div class="font-size-small">
+                    <i class="fa fa-check"> </i> گارانتی اصالت کالا و برگشت 20 روزه کالا
+                </div>
+                <div class="line bg-dark-subtle w-100 my-4"></div>
+                <span class="font-size-small"><i class="fa fa-shop"> </i></span>
+                @if (product.Number > 0)
+                {
+                    <span class="text-success">موجود در انبار و اماده ارسال</span>
+                }
+                else
+                {
+                    <span class="text-danger">در انبار موجود نمیباشد</span>
+                }
+                <div class="line bg-dark-subtle w-100 my-4"></div>
+                <form method="post" class="add-cart-form">
+                    <input class="mx-1" type="radio" value="blue" name="colorSelected" id="colorSelected0" checked><span class="text-primary">آبی</span>
+                    <input class="mx-1" type="radio" value="black" name="colorSelected" id="colorSelected1"><span class="text-black">مشکی</span>
+                    <input class="mx-1" type="radio" value="pink" name="colorSelected" id="colorSelected3"><span class="text-danger">قرمز</span>
+                    <div class="price my-3">
+                        <span class="fw-bold">@Convert.ToInt32(product.Price).ToString("n0") تومان</span>
+                    </div>
+                    @if (product.Number > 0)
+                    {
+                        <button type="submit" class="btn btn-success w-100">اضافه به سبد خرید</button>
+                    }
+                    else
+                    {
+                        <button type="submit" disabled class="btn btn-success w-100">اضافه به سبد خرید</button>
+                    }
+                </form>
+            </div>
         </div>
     </div>
-</div>
+
+    <!--------------------------------------------------------------------------------------------------->
+    <!--------------------------------------------------------------------------------------------------->
+    <!--------------------------------------------------------------------------------------------------->
+
+
+    <div class="p-0 mx-0 mt-4">
+        <div class="container product-detail">
+            <div class="border border-2 border-dark rounded rounded-pill d-inline py-2 px-5">
+                <span class="fw-bold" id="product-detail"><i class="fa fa-info-circle"> </i> توضیحات کالا</span>
+            </div>
+            <div class="text-justify product-detail-text mt-5">
+                @product.ProductDiscription
+            </div>
+        </div>
+    </div>
+
+    <!--------------------------------------------------------------------------------------------------->
+    <!--------------------------------------------------------------------------------------------------->
+    <!--------------------------------------------------------------------------------------------------->
+
+
+    <div class="p-0 mx-0 mt-4">
+        <div class="container product-detail">
+            <div class="border border-2 border-dark rounded rounded-pill d-inline py-2 px-5">
+                <span id="Product-Technical" class="fw-bold"><i class="fa fa-gears"> </i> مشخصات فنی</span>
+            </div>
+            <div class="text-justify product-Technical-text mt-5">
+                @if (productAttributeViewModel != null)
+                {
+                    <div id="show-less-technical">
+                        @for (int i = 0; i < productAttributeViewModel.Count && i < 5; i++)
+                        {
+                            <div class="row p-0 mx-0">
+                                <div class="col-3">
+                                    @categoryAttributeViewModels.Find(t=>t.AttributeId == productAttributeViewModel[i].AttributeId).Title
+                                </div>
+                                <span class="col-1 text-black-50">|</span>
+                                <div class="col">
+                                    @productAttributeViewModel[i].Discription
+                                </div>
+                            </div>
+                            <hr class="myhr">
+                        }
+                        @for (int i = 5; i < productAttributeViewModel.Count; i++)
+                        {
+                            <div id="show-more-technical" class="@ShowMoreText">
+                                <hr class="myhr">
+                                <div class="row p-0 mx-0">
+                                    <div class="col-3">
+                                        @categoryAttributeViewModels.Find(t=>t.AttributeId == productAttributeViewModel[i].AttributeId).Title
+                                    </div>
+                                    <span class="col-1 text-black-50">|</span>
+                                    <div class="col">
+                                        @productAttributeViewModel[i].Discription
+                                    </div>
+                                </div>
+                                <hr class="myhr">
+                            </div>
+                        }
+                        <button id="show-more-technical-btn" class="btn btn-info btn-sm my-3 p-2" @onclick="ShowMore">
+                            @ShowMoreBtn
+                        </button>
+                    </div>
+                }
+                else
+                {
+                    <span class="text-danger">ویژگی یافت نشد.</span>
+                }
+                <!--------------------------------------------------------------------------------------------------->
+
+            </div>
+        </div>
+    </div>
+    <!--------------------------------------------------------------------------------------------------->
+    <!--------------------------------------------------------------------------------------------------->
+    <!--------------------------------------------------------------------------------------------------->
+
+    <div class="p-0 mx-0 mt-4">
+        <div class="container product-detail">
+            <div class="border border-2 border-dark rounded rounded-pill d-inline py-2 px-5">
+                <span class="fw-bold" id="product-comments"><i class="fa fa-comment"> </i> نظرات</span>
+            </div>
+            <div class="product-comments mt-3 text-justify text-center">
+                <div class="add-Comment d-block d-lg-none w-100 m-auto font-size-small">
+                    <form action="#" method="post" class="form-box">
+                        <input type="text" id="commentUserNameSM" name="commentUserName" placeholder="نام ..."
+                               class="comment-inputs form-control my-2 font-size-small">
+                        <textarea name="commentText" id="commentTextSM" cols="30" rows="10" placeholder="متن نظر ..."
+                                  class="comment-inputs form-control my-2 font-size-small"></textarea>
+                        <button type="submit" class="w-100 btn btn-success">ارسال نظر</button>
+                    </form>
+                </div>
+                <div class="add-Comment d-none d-lg-block w-50 m-auto font-size-small">
+                    <form action="#" method="post" class="form-box">
+                        <input type="text" id="commentUserName" name="commentUserName" placeholder="نام ..."
+                               class="comment-inputs form-control my-2 font-size-small">
+                        <textarea name="commentText" id="commentText" cols="30" rows="10" placeholder="متن نظر ..."
+                                  class="comment-inputs form-control my-2 font-size-small"></textarea>
+                        <button type="submit" class="w-100 btn btn-success">ارسال نظر</button>
+                    </form>
+                </div>
+                <div id="show-less-comments">
+                    <div class="comment-box text-left rounded rounded-5 my-3">
+                        <div class="font-size-small">
+                            حسین بخشایش مقرب | <span class="text-black-50">9 فروردین 1402</span> | <span class="text-success">
+                                5 <a href="#" class="text-success text-decoration-none"><i class="fa-regular fa-thumbs-up"></i></a>
+                            </span>
+                        </div>
+                        <hr class="myhr">
+                        <div class="px-3">
+                            <p class="comment-text">
+                                من این گوشی رو خریدم<br>
+                                خیلی عالی هستش و من ازش خیلی راضیم<br>
+                                مرسی از سایت خوبتون
+                            </p>
+                        </div>
+                    </div>
+                    <div class="comment-box text-left rounded rounded-5 my-3">
+                        <div class="font-size-small">
+                            کاربر 2 | <span class="text-black-50">2 اسفند 1401</span> | <span class="text-success">
+                                2 <a href="#"
+                                     class="text-success text-decoration-none"><i class="fa-regular fa-thumbs-up"></i></a>
+                            </span>
+                        </div>
+                        <hr class="myhr">
+                        <div class="px-3">
+                            <p class="comment-text">
+                                خیلی سایت خوبی دارین، من همیشه از سایت شما خرید میکنم و همیشه برام در کمترین زمان میرسه،
+                                واقعا خدمات پس از فروش و گارانتی هم عالیه، پیشنهاد میکنم حتما ازشون خرید کنین
+                            </p>
+                        </div>
+                    </div>
+                    <div class="comment-box text-left rounded rounded-5 my-3">
+                        <div class="font-size-small">
+                            کاربر 3 | <span class="text-black-50">10 بهمن 1401</span> | <span class="text-success">
+                                2 <a href="#"
+                                     class="text-success text-decoration-none"><i class="fa-regular fa-thumbs-up"></i></a>
+                            </span>
+                        </div>
+                        <hr class="myhr">
+                        <div class="px-3">
+                            <p class="comment-text">
+                                اصلا گوشی خوبی نیست. من راضی نبودم
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div id="show-more-comments" class="d-none">
+                    <div class="comment-box text-left rounded rounded-5 my-3">
+                        <div class="font-size-small">
+                            کاربر 4 | <span class="text-black-50">2 بهمن 1401</span> | <span class="text-success">
+                                1 <a href="#"
+                                     class="text-success text-decoration-none"><i class="fa-regular fa-thumbs-up"></i></a>
+                            </span>
+                        </div>
+                        <hr class="myhr">
+                        <div class="px-3">
+                            <p class="comment-text">
+                                سامسونگ همیشه گوشی های خیلی خوبی داره
+                            </p>
+                        </div>
+                    </div>
+                    <div class="comment-box text-left rounded rounded-5 my-3">
+                        <div class="font-size-small">
+                            کاربر 5 | <span class="text-black-50">2 بهمن 1401</span> | <span class="text-success">
+                                0 <a href="#"
+                                     class="text-success text-decoration-none"><i class="fa-regular fa-thumbs-up"></i></a>
+                            </span>
+                        </div>
+                        <hr class="myhr">
+                        <div class="px-3">
+                            <p class="comment-text">
+                                خیلی مزخرفه.....
+                            </p>
+                        </div>
+                    </div>
+                    <div class="comment-box text-left rounded rounded-5 my-3">
+                        <div class="font-size-small">
+                            کاربر 6 | <span class="text-black-50">20 دی 1401</span> | <span class="text-success">
+                                0 <a href="#"
+                                     class="text-success text-decoration-none"><i class="fa-regular fa-thumbs-up"></i></a>
+                            </span>
+                        </div>
+                        <hr class="myhr">
+                        <div class="px-3">
+                            <p class="comment-text">
+                                بهترین سایت رو دارین. ممنون از شما و سایت خوبتون
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <button id="show-more-comments-btn" class="btn btn-info btn-sm p-2" onclick="showMoreCommentsFunction();">
+                    مشاهده
+                    نظرات بیشتر...
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!--------------------------------------------------------------------------------------------------->
+    <!--------------------------------------------------------------------------------------------------->
+    <!--------------------------------------------------------------------------------------------------->
+
+    <div class="row p-0 mx-0 mt-4">
+        <div class="container product-detail">
+            <div class="border border-2 border-dark rounded rounded-pill d-inline py-2 px-5">
+                <span id="Product-Technical" class="fw-bold"><i class="fa fa-shopping-bag"> </i> محصولات مشابه</span>
+            </div>
+            <div class="likeThisProduct row mt-5">
+                <div class="col-6 col-sm-4 col-lg-2 px-1">
+                    <div class="w-100 h-100 m-auto">
+                        <a href="#" class="text-decoration-none">
+                            <img src="../Images/samsung galaxy a53.jpg" alt="samsung galaxy a53" class="likeProductImgs">
+                        </a>
+                        <a href="#" class="text-black text-decoration-none">
+                            <div class="font-size-small text-center my-1">
+                                گوشی موبایل سامسونگ مدل samsung galaxy a53
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-4 col-lg-2 px-1">
+                    <div class="w-100 h-100 m-auto">
+                        <a href="#" class="text-decoration-none">
+                            <img src="../Images/iphone 13 pro max.jpg" alt="iphone 13 pro max" class="likeProductImgs">
+                        </a>
+                        <a href="#" class="text-black text-decoration-none">
+                            <div class="font-size-small text-center my-1">
+                                گوشی موبایل اپل مدل iphone 13 pro max
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-4 col-lg-2 px-1">
+                    <div class="w-100 h-100 m-auto">
+                        <a href="#" class="text-decoration-none">
+                            <img src="../Images/samsung galaxy a73 2022.webp" alt="samsung galaxy a73 2022" class="likeProductImgs">
+                        </a>
+                        <a href="#" class="text-black text-decoration-none">
+                            <div class="font-size-small text-center my-1">
+                                گوشی موبایل سامسونگ مدل samsung galaxy a73 2022
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-4 col-lg-2 px-1">
+                    <div class="w-100 h-100 m-auto">
+                        <a href="#" class="text-decoration-none">
+                            <img src="../Images/xiaomi mi 11 pro.jpg" alt="xiaomi mi 11 pro" class="likeProductImgs">
+                        </a>
+                        <a href="#" class="text-black text-decoration-none">
+                            <div class="font-size-small text-center my-1">
+                                گوشی موبایل شیائومی مدل xiaomi mi 11 pro
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-4 col-lg-2 px-1">
+                    <div class="w-100 h-100 m-auto">
+                        <a href="#" class="text-decoration-none">
+                            <img src="../Images/samsung galaxy s22 2022.jpg" alt="samsung galaxy s22 2022" class="likeProductImgs">
+                        </a>
+                        <a href="#" class="text-black text-decoration-none">
+                            <div class="font-size-small text-center my-1">
+                                گوشی موبایل سامسونگ مدل samsung galaxy s22 2022
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-4 col-lg-2 px-1">
+                    <a href="#" class="text-decoration-none">
+                        <img src="../Images/samsung s21 ultra.jpg" alt="samsung s21 ultra" class="likeProductImgs">
+                    </a>
+                    <a href="#" class="text-black text-decoration-none">
+                        <div class="font-size-small text-center my-1">
+                            گوشی موبایل سامسونگ مدل samsung s21 ultra
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <span class="text-danger">محصول یافت نشد.</span>
+}
 
 <div>
     <Footer />
 </div>
 
 @code {
+    [Parameter]
+    public string? Id { get; set; }
+    public ProductViewModel? product { get; set; }
+    public List<ProductImagesViewModel>? productImagesViewModels { get; set; }
+    public CategoryViewModel? category { get; set; }
+    public List<ProductAttributeViewModel>? productAttributeViewModel { get; set; }
+    public List<CategoryAttributeViewModel>? categoryAttributeViewModels { get; set; }
+    public string ShowMoreText = "d-none";
+    public string ShowMoreBtn = "مشاهده بیشتر ...";
+
+    protected async override Task OnInitializedAsync()
+    {
+        int PId = Convert.ToInt32(Id);
+        product = await httpClient.GetFromJsonAsync<ProductViewModel>($"Product/Info/{PId}");
+        productImagesViewModels = await httpClient.GetFromJsonAsync<List<ProductImagesViewModel>>($"ProductImage/GetImages/{PId}");
+        category = await httpClient.GetFromJsonAsync<CategoryViewModel>($"Category/Info/{product.CategoryId}");
+        productAttributeViewModel = await httpClient.GetFromJsonAsync<List<ProductAttributeViewModel>>($"ProductAttribute/GetPA/{product.ProductId}");
+        categoryAttributeViewModels = await httpClient.GetFromJsonAsync<List<CategoryAttributeViewModel>>($"CategoryAttribute/List/{product.CategoryId}");
+        await base.OnInitializedAsync();
+    }
+
+    public void ShowMore()
+    {
+        if(ShowMoreText == "d-none")
+        {
+            ShowMoreText = "d-block";
+            ShowMoreBtn = "مشاهده کمتر ...";
+        }
+        else
+        {
+            ShowMoreText = "d-none";
+            ShowMoreBtn = "مشاهده بیشتر ...";
+        }
+    }
 }

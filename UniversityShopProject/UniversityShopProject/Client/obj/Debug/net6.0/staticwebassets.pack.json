@@ -97,8 +97,72 @@
       "PackagePath": "staticwebassets\\Images\\CategoryAdminImages\\کنسول بازی.jpg"
     },
     {
+      "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\Images\\Product-Image\\05a734f95eef432fa933cb53d38cab53.jpg",
+      "PackagePath": "staticwebassets\\Images\\Product-Image\\05a734f95eef432fa933cb53d38cab53.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\Images\\Product-Image\\1a49097dcbac406fac68420d5738dd41.jpg",
+      "PackagePath": "staticwebassets\\Images\\Product-Image\\1a49097dcbac406fac68420d5738dd41.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\Images\\Product-Image\\75bb22c8f0fe43c0ba895ae6ef7a1649.jpg",
+      "PackagePath": "staticwebassets\\Images\\Product-Image\\75bb22c8f0fe43c0ba895ae6ef7a1649.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\Images\\Product-Image\\7ab88dc1aa5f4d399ef6add46f43058b.jpg",
+      "PackagePath": "staticwebassets\\Images\\Product-Image\\7ab88dc1aa5f4d399ef6add46f43058b.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\Images\\Product-Image\\8bfdc9fef4ec4853ab6417ca2d2580d7.jpg",
+      "PackagePath": "staticwebassets\\Images\\Product-Image\\8bfdc9fef4ec4853ab6417ca2d2580d7.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\Images\\Product-Image\\8d43f86698d74e7a89aeba9d0f48db8b.jpg",
+      "PackagePath": "staticwebassets\\Images\\Product-Image\\8d43f86698d74e7a89aeba9d0f48db8b.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\Images\\Product-Image\\9ee121a0a9334eb681ad57b1fa401208.jpg",
+      "PackagePath": "staticwebassets\\Images\\Product-Image\\9ee121a0a9334eb681ad57b1fa401208.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\Images\\Product-Image\\a5871459573f4b1b846f7a271305194c.jpg",
+      "PackagePath": "staticwebassets\\Images\\Product-Image\\a5871459573f4b1b846f7a271305194c.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\Images\\Product-Image\\a6848cd1d2774aaaa8f818c287b0a563.jpg",
+      "PackagePath": "staticwebassets\\Images\\Product-Image\\a6848cd1d2774aaaa8f818c287b0a563.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\Images\\Product-Image\\a8aa4119510b4931aa9e4c223b0f2445.jpg",
+      "PackagePath": "staticwebassets\\Images\\Product-Image\\a8aa4119510b4931aa9e4c223b0f2445.jpg"
+    },
+    {
       "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\Images\\Product-Image\\acer nitro 5 an515-55.jpg",
       "PackagePath": "staticwebassets\\Images\\Product-Image\\acer nitro 5 an515-55.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\Images\\Product-Image\\c477e9496e4148be9ca91974bdbbf560.jpg",
+      "PackagePath": "staticwebassets\\Images\\Product-Image\\c477e9496e4148be9ca91974bdbbf560.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\Images\\Product-Image\\c8fab78c58834e94896a0d59e91afe1f.jpg",
+      "PackagePath": "staticwebassets\\Images\\Product-Image\\c8fab78c58834e94896a0d59e91afe1f.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\Images\\Product-Image\\e05efd00a5964113a770507ecea60c70.jpg",
+      "PackagePath": "staticwebassets\\Images\\Product-Image\\e05efd00a5964113a770507ecea60c70.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\Images\\Product-Image\\e489e881a51d4267808302878174d722.jpg",
+      "PackagePath": "staticwebassets\\Images\\Product-Image\\e489e881a51d4267808302878174d722.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\Images\\Product-Image\\f4e231be055a489fbbee800d7d1f5d29.jpg",
+      "PackagePath": "staticwebassets\\Images\\Product-Image\\f4e231be055a489fbbee800d7d1f5d29.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\Images\\Product-Image\\f93aebc9bafa4d698966793a472fdf5a.jpg",
+      "PackagePath": "staticwebassets\\Images\\Product-Image\\f93aebc9bafa4d698966793a472fdf5a.jpg"
     },
     {
       "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\Images\\Product-Image\\iphone 13 pro max.jpg",
@@ -115,10 +179,6 @@
     {
       "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\Images\\Product-Image\\samsung galaxy a73 2022.webp",
       "PackagePath": "staticwebassets\\Images\\Product-Image\\samsung galaxy a73 2022.webp"
-    },
-    {
-      "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\Images\\Product-Image\\samsung galaxy s22 2022.jpg",
-      "PackagePath": "staticwebassets\\Images\\Product-Image\\samsung galaxy s22 2022.jpg"
     },
     {
       "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\Images\\Product-Image\\samsung s21 ultra.jpg",
@@ -159,6 +219,10 @@
     {
       "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\Images\\Slider-Images\\sliedr-top.jpg",
       "PackagePath": "staticwebassets\\Images\\Slider-Images\\sliedr-top.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\Images\\Static-Image\\AddImageIcon.png",
+      "PackagePath": "staticwebassets\\Images\\Static-Image\\AddImageIcon.png"
     },
     {
       "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\Images\\Static-Image\\PictureOff-1.jpg",
@@ -221,6 +285,10 @@
       "PackagePath": "staticwebassets\\css\\admin-style.css"
     },
     {
+      "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\css\\app.css",
+      "PackagePath": "staticwebassets\\css\\app.css"
+    },
+    {
       "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\css\\bootstrap-rtl.min.css",
       "PackagePath": "staticwebassets\\css\\bootstrap-rtl.min.css"
     },
@@ -243,6 +311,42 @@
     {
       "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\css\\navbarStyle.css",
       "PackagePath": "staticwebassets\\css\\navbarStyle.css"
+    },
+    {
+      "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
+      "PackagePath": "staticwebassets\\css\\open-iconic"
+    },
+    {
+      "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\css\\open-iconic\\ICON-LICENSE",
+      "PackagePath": "staticwebassets\\css\\open-iconic"
+    },
+    {
+      "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\css\\open-iconic\\README.md",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\README.md"
+    },
+    {
+      "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.eot",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.eot"
+    },
+    {
+      "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.otf",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.otf"
+    },
+    {
+      "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.svg",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.svg"
+    },
+    {
+      "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.ttf",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.ttf"
+    },
+    {
+      "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.woff"
     },
     {
       "Id": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\css\\style.css",

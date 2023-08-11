@@ -114,13 +114,22 @@
 </div>
 
 @code {
-    UserCreateViewModel? userCreateViewModel;
+    UserCreateViewModel userCreateViewModel = new UserCreateViewModel();
     private string styleModal = "d-none";
     private string inType = "password";
+}
 
-    protected override void OnInitialized()
+@functions{
+    private async Task HandleValidSubmit()
     {
-        userCreateViewModel = new UserCreateViewModel();
+        if (userCreateViewModel != null)
+        {
+            var res = await httpClient.PostAsJsonAsync<UserCreateViewModel>("User/Create", userCreateViewModel);
+            if (res != null)
+            {
+                navigationManager.NavigateTo("/Admin-Userlist", true);
+            }
+        }
     }
     protected void ShowAddModal()
     {
@@ -132,17 +141,6 @@
     protected void CloseModal()
     {
         styleModal = "d-none";
-    }
-    private async Task HandleValidSubmit()
-    {
-        if (userCreateViewModel != null)
-        {
-            var res = await httpClient.PostAsJsonAsync<UserCreateViewModel>("User/Create", userCreateViewModel);
-            if (res != null)
-            {
-                navigationManager.NavigateTo("/Admin-Userlist", true);
-            }
-        }
     }
     private void ShowPassword()
     {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Components.Forms;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,14 +9,9 @@ namespace UniversityShopProject.Shared.Models
 {
     public class ImageFile
     {
-        public FileData Files { get; set; }
+        public string base64data { get; set; }
+        public string contentType { get; set; }
+        public string fileName { get; set; }
+    }
 
-    }
-    public class FileData
-    {
-        public string FileName { get; set; }
-        public byte[] Data { get; set; }
-        public string FileType { get; set; }
-        public long Size { get; set; }
-    }
 }

@@ -1,6 +1,5 @@
-using Microsoft.AspNetCore.ResponseCompression;
-using System.Reflection;
 using UniversityShopProject.Server.Classes.MappingProfile;
+using UniversityShopProjectServices.Service;
 
 namespace UniversityShopProject
 {
@@ -14,6 +13,7 @@ namespace UniversityShopProject
 
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
+
 
             //AutoMapper
             builder.Services.AddAutoMapper(typeof(UserMapProfile));

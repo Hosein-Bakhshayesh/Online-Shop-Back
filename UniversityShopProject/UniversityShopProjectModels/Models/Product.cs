@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace UniversityShopProjectModels.Models;
 
-public partial class Product : BaseEntity
+public partial class Product:BaseEntity
 {
     public int ProductId { get; set; }
 
@@ -20,6 +20,8 @@ public partial class Product : BaseEntity
     public int Number { get; set; }
 
     public bool IsActive { get; set; }
+
+    public int? Views { get; set; }
 
     public virtual ICollection<CartItem> CartItems { get; set; } = new List<CartItem>();
 

@@ -2,10 +2,12 @@
 @inject HttpClient httpClient
 @layout AdminLayout
 
-<h3>مشخصات @userInfoView.FirstName @userInfoView.LastName</h3>
+<PageTitle>مشخصات کاربر</PageTitle>
 
 @if (userInfoView != null)
 {
+    <h3>مشخصات @userInfoView.FirstName @userInfoView.LastName</h3>
+
     <table class="table table-bordered mt-3">
         <thead>
             <tr>
@@ -38,16 +40,17 @@
             <tr>
                 <td>@userInfoView.MobileNumber</td>
                 <td>
-                    @if(userInfoView.Email == null)
+                    @if (userInfoView.Email == null)
                     {
                         <span class="text-danger">ایمیل ثبت نشده است.</span>
-                    }else
+                    }
+                    else
                     {
                         @userInfoView.Email
                     }
                 </td>
                 <td>
-                    @if(userInfoView.NationalCode == null)
+                    @if (userInfoView.NationalCode == null)
                     {
                         <span class="text-danger">کدملی ثبت نشده است.</span>
                     }
@@ -90,18 +93,42 @@ else
 @code {
     @inject NavigationManager navigationManager
     [Parameter]
-    public string userId { get; set; }
+    public string? userId { get; set; }
 
-    public UserInfoViewModel? userInfoView { get; set; }
+    public UserInfoViewModel? userInfoView = new UserInfoViewModel();
     public string hiddenStr = "mt-2 d-none";
+
+}
+
+@functions {
 
     protected override async Task OnInitializedAsync()
     {
-        userInfoView = new UserInfoViewModel();
-        int id = int.Parse(userId);
-        userInfoView = await httpClient.GetFromJsonAsync<UserInfoViewModel>($"User/Info/{id}");
-        userInfoView.EditUrl = ("/Admin-UserInfo/" + userInfoView.UserId + "/Edit");
-    } 
+        if (userId != null)
+        {
+            int id = int.Parse(userId);
+            userInfoView = await httpClient.GetFromJsonAsync<UserInfoViewModel>($"User/Info/{id}");
+            if (userInfoView != null)
+            {
+                userInfoView.EditUrl = ("/Admin-UserInfo/" + userInfoView.UserId + "/Edit");
+            }
+        }
+
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (userId != null)
+        {
+            int id = int.Parse(userId);
+            userInfoView = await httpClient.GetFromJsonAsync<UserInfoViewModel>($"User/Info/{id}");
+            if (userInfoView != null)
+            {
+                userInfoView.EditUrl = ("/Admin-UserInfo/" + userInfoView.UserId + "/Edit");
+            }
+        }
+    }
+
     public void DeleteUser()
     {
         if (this.hiddenStr == "mt-2 d-none")
@@ -113,5 +140,4 @@ else
             this.hiddenStr = "mt-2 d-none";
         }
     }
-
 }

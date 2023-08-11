@@ -3,6 +3,7 @@
 
 @layout AdminLayout
 
+<PageTitle>لیست کاربران سایت</PageTitle>
 <h3>لیست کاربران سایت</h3>
 
 <UserAddModal/>
@@ -17,36 +18,47 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var user in users)
+        @if(users != null)
+        {
+            @foreach (var user in users)
+            {
+                <tr>
+                    <td>
+                        @user.FirstName
+                    </td>
+                    <td>
+                        @user.LastName
+                    </td>
+                    <td>
+                        @user.UserName
+                    </td>
+                    <td>
+                        @if (user.IsActive)
+                        {
+                            <span class="text-success">
+                                کاربر فعال می‌باشد
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="text-danger">
+                                کاربر غیرفعال است
+                            </span>
+                        }
+                    </td>
+                    <td>
+                        <NavLink href="@user.InfoUrl">
+                            <button class="btn btn-info">جزئیات</button>
+                        </NavLink>
+                    </td>
+                </tr>
+            }
+        }
+        else
         {
             <tr>
-                <td>
-                    @user.FirstName
-                </td>
-                <td>
-                    @user.LastName
-                </td>
-                <td>
-                    @user.UserName
-                </td>
-                <td>
-                    @if(user.IsActive)
-                    {
-                        <span class="text-success">
-                            کاربر فعال می‌باشد
-                        </span>
-                    }
-                    else
-                    {
-                        <span class="text-danger">
-                            کاربر غیرفعال است
-                        </span>
-                    }
-                </td>
-                <td>
-                    <NavLink href="@user.InfoUrl">
-                        <button class="btn btn-info">جزئیات</button>
-                    </NavLink>
+                <td colspan="5">
+                    هیچ کاربری در سایت یافت نشد.
                 </td>
             </tr>
         }
@@ -55,15 +67,19 @@
 </table>
 
 @code {
-    private List<UserListViewModel>? users = new();
 
+    private List<UserListViewModel>? users = new();
+}
+@functions{
     protected override async Task OnInitializedAsync()
     {
         users = await httpClient.GetFromJsonAsync<List<UserListViewModel>>("User/List");
-        foreach (var item in users)
+        if (users != null)
         {
-            item.InfoUrl = "/Admin-UserInfo/" + item.UserId;
+            foreach (var item in users)
+            {
+                item.InfoUrl = "/Admin-UserInfo/" + item.UserId;
+            }
         }
     }
-
 }

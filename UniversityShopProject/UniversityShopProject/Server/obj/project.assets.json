@@ -4056,7 +4056,10 @@
           "Microsoft.AspNetCore.Authorization": "7.0.5",
           "Microsoft.AspNetCore.Components.WebAssembly": "6.0.15",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.5",
-          "UniversityShopProject.Shared": "1.0.0"
+          "UniversityShopProject.Shared": "1.0.0",
+          "UniversityShopProjectModels": "1.0.0",
+          "UniversityShopProjectRepository": "1.0.0",
+          "UniversityShopProjectServices": "1.0.0"
         },
         "compile": {
           "bin/placeholder/UniversityShopProject.Client.dll": {}
@@ -4070,6 +4073,7 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "BCrypt.Net-Next": "4.0.3",
+          "Microsoft.AspNetCore.Components.Web": "6.0.15",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.5"
         },
         "compile": {

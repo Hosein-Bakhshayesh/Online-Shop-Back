@@ -1,0 +1,382 @@
+﻿@page "/Admin-ProductList/Product/{Id}"
+@layout AdminLayout
+@inject HttpClient httpClient
+
+@if (productInfoViewModel != null)
+{
+    <h4 class="mb-4">مشخصات <span class="text-danger">@productInfoViewModel.ProductName</span></h4>
+    @if (SuccessAlert == true)
+    {
+        <tr>
+            <td colspan="5">
+                <div class="alert alert-success fade-in fade-out " role="alert">
+                    <a href="#" @onclick="CloseSuccessAlert" class="text-black-50 text-decoration-none fw-bold">&times; </a>
+                    <span class="mx-2">تغییرات با موفقیت انجام شد.</span>
+                </div>
+            </td>
+        </tr>
+    }
+    <table class="table table-bordered mt-3">
+        <thead class="thead-light">
+            <tr>
+                <th class="text-center">عکس اصلی کالا</th>
+                <th class="text-center">نام کالا</th>
+                <th class="text-center">قیمت کالا</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="w-25 text-center p-2">
+                    <img src="/Images/Product-Image/@productInfoViewModel.ProductImagePath" style="max-height:120px;" />
+                    <br />
+                    <br />
+                    <label for="OriginalImage" class="text-warning fw-bold mt-2">تغییر تصویر : </label>
+                    <InputFile OnChange="editProductImage" id="OriginalImage" />
+                </td>
+                <td class="text-center pt-4 fw-bold text-primary">
+                    @productInfoViewModel.ProductName
+                    <br />
+                    <br />
+                    <br />
+                    <label for="ProductEditName" class="text-danger fw-bold mt-2">تغییر نام : </label>
+                    <textarea @bind-Value:event="oninput" @bind-Value="productInfoViewModel.ProductName" class="form-control" id="ProductEditName">
+                        @productInfoViewModel.ProductName
+                            </textarea>
+                </td>
+                <td class="text-center pt-4">
+                    @productInfoViewModel.Price
+                    <br />
+                    <br />
+                    <br />
+                    <label for="ProductEditPrice" class="text-danger fw-bold mt-2">تغییر قیمت : </label>
+                    <input type="number" @bind-Value:event="oninput" @bind-Value="productInfoViewModel.Price" class="form-control" id="ProductEditPrice" />
+                </td>
+
+            </tr>
+        </tbody>
+        <thead class="thead-light">
+            <tr>
+                <th class="text-center">تعداد</th>
+                <th class="text-center">دسته بندی</th>
+                <th class="text-center">فعال</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="text-center pt-4">
+                    @productInfoViewModel.Number
+                    <br />
+                    <br />
+                    <br />
+                    <label for="ProductEditNumber" class="text-danger fw-bold mt-2">تغییر تعداد : </label>
+                    <input type="number" @bind-Value:event="oninput" @bind-Value="productInfoViewModel.Number" class="form-control" id="ProductEditNumber" />
+                </td>
+                <td class="text-center pt-4">
+                    @if (category != null)
+                    {
+                        @category.CategoryName
+                    }
+                    else
+                    {
+                        <span class="text-danger">این کالا دسته بندی ندارد</span>
+                    }
+                </td>
+                <td class="text-center pt-4">
+                    @if (productInfoViewModel.IsActive)
+                    {
+                        <span class="text-success">فعال</span>
+                    }
+                    else
+                    {
+                        <span class="text-danger">غیرفعال</span>
+                    }
+                    <br />
+                    <br />
+                    <br />
+                    <label for="ProductEditIsActive" class="text-danger fw-bold mt-2">تغییر وضعیت : </label>
+                    <input type="checkbox" @bind-value="productInfoViewModel.IsActive" @bind-value:event="oninput" class="form-check" id="ProductEditIsActive" />فعال :
+                </td>
+            </tr>
+        </tbody>
+        <thead class="thead-light">
+            <tr>
+                <th colspan="3" class="text-center">توضیحات محصول</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="3">
+
+                    <textarea class="form-control text-justify w-100" @bind-Value:event="oninput" @bind-Value="productInfoViewModel.ProductDiscription" rows="15">
+                        @productInfoViewModel.ProductDiscription
+                                </textarea>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center pt-4" colspan="3">
+                    <span class="text-danger">
+                        <b>نکته : </b>
+                        برای ثبت تغییرات اعمال شده در اطلاعات پایه کالا آن را ثبت کنید !
+                    </span>
+                    <button @onclick="SubmitEdit" class="btn btn-warning mx-3">تغییر اطلاعات پایه کالا</button>
+                </td>
+
+            </tr>
+        </tbody>
+        <thead class="thead-light">
+            <tr>
+                <th colspan="3" class="text-center">
+                    ویژگی های کالا
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (addAttText == true)
+            {
+                <tr>
+                    <td colspan="3">
+                        <div class="alert alert-success fade-in fade-out " role="alert">
+                            <a href="#" @onclick="CloseAlert" class="text-black-50 text-decoration-none fw-bold">&times; </a>
+                            <span class="mx-2">ویژگی با موفقیت اضافه شد.</span>
+                        </div>
+                    </td>
+                </tr>
+
+            }
+            @if (productAttributeViewModels != null)
+            {
+                @foreach (var item in productAttributeViewModels)
+                {
+                    <tr>
+                        <td colspan="1">
+                            @categoryAttributeViewModels.FirstOrDefault(t=>t.AttributeId==item.AttributeId).Title;
+                        </td>
+                        <td colspan="2">
+                            @item.Discription
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="3">
+                        <span class="text-danger">برای این محصول ویژگی یافت نشد</span>
+                    </td>
+                </tr>
+            }
+            <tr>
+                <th colspan="3">
+                    <button class="btn @addAttributeStyle" @onclick="AddAttribute">@addAttributeText</button>
+                </th>
+            </tr>
+        </tbody>
+    </table>
+
+    <EditForm Model="AddProductAttributeViewModel" OnValidSubmit="addProductAttribute">
+        <div class="@addAttribute row">
+            <div class="col-3">
+                <div class="w-100">
+                    <InputSelect class="form-select" @bind-Value="AddProductAttributeViewModel.AttributeId" required>
+                        @foreach (var item in categoryAttributeViewModels)
+                        {
+                            <option value="@item.AttributeId">@item.Title</option>
+                        }
+                    </InputSelect>
+                </div>
+
+            </div>
+            <div class="col-3">
+                <div class="w-100">
+                    <InputText @bind-Value="AddProductAttributeViewModel.Discription" class="form-control" required />
+                </div>
+            </div>
+            <div class="col-3">
+                <button class="btn btn-outline-success w-50">ثبت</button>
+            </div>
+        </div>
+    </EditForm>
+    <hr />
+    <table class="table table-bordered">
+        <thead class="thead-light">
+            <tr>
+                <td class="text-center">
+                    تصاویر دیگر محصول
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="m-0">
+                    <div class="row w-100">
+                        @if (productImagesViewModels != null)
+                        {
+                            @foreach (var item in productImagesViewModels)
+                            {
+                                <span class="col-2 p-2 img-thumbnail">
+                                    <img class=" w-100" src="/Images/Product-Image/@item.ImagePath">
+                                </span>
+                            }
+                        }
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>اضافه کردن تصویر محصول </p>
+                    <InputFile id="inputImage" class="mx-3" OnChange="SelectFile" accept="image/jpeg">
+
+                    </InputFile>
+                </td>
+            </tr>
+            @if (DisplaySuccessAlert == true)
+            {
+                <tr>
+                    <td>
+                        <div class="alert alert-success fade-in fade-out " role="alert">
+                            <a href="#" @onclick="CloseAlert" class="text-black-50 text-decoration-none fw-bold">&times; </a>
+                            <span class="mx-2">تصویر با موفقیت اضافه شد.</span>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h3 class="text-danger">
+        محصول یافت نشد.
+    </h3>
+}
+
+@code {
+    private System.Threading.Timer? timer;
+    [Parameter]
+    public string? Id { get; set; }
+    public ProductInfoViewModel? productInfoViewModel { get; set; }
+    public CategoryViewModel? category { get; set; }
+    public List<ProductAttributeViewModel>? productAttributeViewModels { get; set; }
+    public List<CategoryAttributeViewModel>? categoryAttributeViewModels { get; set; }
+    public ProductAttributeViewModel? AddProductAttributeViewModel { get; set; }
+    public List<ProductImagesViewModel>? productImagesViewModels { get; set; }
+    public ImageFile filesBase64 { get; set; }
+    public bool DisplaySuccessAlert { get; set; }
+    public string? addAttribute { get; set; }
+    public string addAttributeText = "اضافه کردن محصول جدید";
+    public string addAttributeStyle = "btn-outline-success";
+    public bool SuccessAlert = false;
+    public bool addAttText = false;
+}
+
+@functions{
+    protected override async Task OnInitializedAsync()
+    {
+        AddProductAttributeViewModel = new ProductAttributeViewModel();
+        addAttribute = "d-none";
+        DisplaySuccessAlert = false;
+        if (Id != null)
+        {
+            productInfoViewModel = await httpClient.GetFromJsonAsync<ProductInfoViewModel>($"Product/Info/{int.Parse(Id)}");
+            if (productInfoViewModel != null)
+            {
+                category = await httpClient.GetFromJsonAsync<CategoryViewModel>($"Category/Info/{productInfoViewModel.CategoryId}");
+                productAttributeViewModels = await httpClient.GetFromJsonAsync<List<ProductAttributeViewModel>>($"ProductAttribute/GetPA/{productInfoViewModel.ProductId}");
+                categoryAttributeViewModels = await httpClient.GetFromJsonAsync<List<CategoryAttributeViewModel>>($"CategoryAttribute/List/{productInfoViewModel.CategoryId}");
+                productImagesViewModels = await httpClient.GetFromJsonAsync<List<ProductImagesViewModel>>($"ProductImage/GetImages/{productInfoViewModel.ProductId}");
+
+            }
+        }
+
+    }
+
+    public async Task SelectFile(InputFileChangeEventArgs e)
+    {
+        string extension = Path.GetExtension(e.File.Name);
+        if (extension == ".jpg")
+        {
+            var file = e.File; // get the files selected by the users
+            var resizedFile = await file.RequestImageFileAsync(file.ContentType, 10000, 10000); // resize the image file
+            var buf = new byte[resizedFile.Size]; // allocate a buffer to fill with the file's data
+            using (var stream = resizedFile.OpenReadStream())
+            {
+                await stream.ReadAsync(buf); // copy the stream to the buffer
+            }
+            filesBase64 = (new ImageFile { base64data = Convert.ToBase64String(buf), contentType = file.ContentType, fileName = file.Name }); // convert to a base64 string!!
+            var msg = await httpClient.PutAsJsonAsync($"/ProductImage/Save/{productInfoViewModel.ProductId}", filesBase64, System.Threading.CancellationToken.None);
+            if (msg != null)
+            {
+                DisplaySuccessAlert = true;
+                productImagesViewModels = await httpClient.GetFromJsonAsync<List<ProductImagesViewModel>>($"ProductImage/GetImages/{productInfoViewModel.ProductId}");
+            }
+        }
+    }
+
+    public async Task editProductImage(InputFileChangeEventArgs e)
+    {
+        string extension = Path.GetExtension(e.File.Name);
+        if (extension == ".jpg")
+        {
+            var file = e.File; // get the files selected by the users
+            var resizedFile = await file.RequestImageFileAsync(file.ContentType, 10000, 10000); // resize the image file
+            var buf = new byte[resizedFile.Size]; // allocate a buffer to fill with the file's data
+            using (var stream = resizedFile.OpenReadStream())
+            {
+                await stream.ReadAsync(buf); // copy the stream to the buffer
+            }
+            filesBase64 = (new ImageFile { base64data = Convert.ToBase64String(buf), contentType = file.ContentType, fileName = file.Name }); // convert to a base64 string!!
+            var msg = await httpClient.PutAsJsonAsync($"/ProductImage/EditProductImage/{productInfoViewModel.ProductId}", filesBase64, System.Threading.CancellationToken.None);
+            if (msg != null)
+            {
+                SuccessAlert = true;
+                productInfoViewModel = await httpClient.GetFromJsonAsync<ProductInfoViewModel>($"Product/Info/{int.Parse(Id)}");
+            }
+        }
+    }
+
+    public async void SubmitEdit()
+    {
+        var msg = await httpClient.PutAsJsonAsync($"/Product/SubmitEdit/{productInfoViewModel.ProductId}", productInfoViewModel);
+        SuccessAlert = true;
+    }
+
+    public void CloseAlert()
+    {
+        DisplaySuccessAlert = false;
+        addAttText = false;
+    }
+    public void CloseSuccessAlert()
+    {
+        SuccessAlert = false;
+    }
+
+    public void AddAttribute()
+    {
+        if (addAttribute == "d-none")
+        {
+            addAttribute = "d-flex";
+            addAttributeText = "پایان اضافه کردن ویژگی";
+            addAttributeStyle = "btn-outline-danger";
+        }
+        else if (addAttribute == "d-flex")
+        {
+            addAttribute = "d-none";
+            addAttributeText = "اضافه ویژگی جدید به محصول";
+            addAttributeStyle = "btn-outline-success";
+        }
+
+    }
+
+    public async void addProductAttribute()
+    {
+        AddProductAttributeViewModel.ProductId = productInfoViewModel.ProductId;
+        var msg = await httpClient.PostAsJsonAsync<ProductAttributeViewModel>($"ProductAttribute/AddAttribute", AddProductAttributeViewModel);
+        if (msg != null)
+        {
+            AddAttribute();
+            addAttText = true;
+            productAttributeViewModels = await httpClient.GetFromJsonAsync<List<ProductAttributeViewModel>>($"ProductAttribute/GetPA/{productInfoViewModel.ProductId}");
+
+        }
+    }
+}

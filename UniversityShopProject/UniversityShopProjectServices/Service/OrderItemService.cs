@@ -8,9 +8,9 @@ using UniversityShopProjectModels.Models;
 
 namespace UniversityShopProjectServices.Service
 {
-    public class OrderItemServic : GenericService<OrderItem>, IOrderItemService
+    public class OrderItemService : GenericService<OrderItem>, IOrderItemService
     {
-        public OrderItemServic(UniversityShopProjectContext context) : base(context)
+        public OrderItemService(UniversityShopProjectContext context) : base(context)
         {
         }
     }

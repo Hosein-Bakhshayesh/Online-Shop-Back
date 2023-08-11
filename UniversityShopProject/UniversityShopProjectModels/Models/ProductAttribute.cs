@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace UniversityShopProjectModels.Models;
 
-public partial class ProductAttribute : BaseEntity
+public partial class ProductAttribute:BaseEntity
 {
     public int Paid { get; set; }
 

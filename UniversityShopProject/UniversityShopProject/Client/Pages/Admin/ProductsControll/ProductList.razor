@@ -4,7 +4,7 @@
 
 <h3>لیست محصولات</h3>
 
-<ProductAdd id="@id"/>
+<ProductAdd id="@id" Categories="@Categories" />
 
 <table class="table table-bordered mt-3">
     <thead>
@@ -51,8 +51,8 @@
                         }
                     </td>
                     <td class="text-center">
-                        <NavLink>
-                            <a href="#" class="btn btn-outline-primary text-decoration-none">جزئیات</a>
+                        <NavLink href="@item.infoUrl" class="btn btn-outline-primary text-decoration-none">
+                            جزئیات
                         </NavLink>
                         <button @onclick="(e => DeleteProduct(item.ProductId))" class="btn btn-outline-danger">حذف</button>
                     </td>
@@ -62,11 +62,13 @@
         }
         else
         {
-        <td>
-            <p class="text-danger">
-                محصولی یافت نشد...
-            </p>
-        </td>
+            <tr>
+                <td colspan="6">
+                    <p class="text-danger">
+                        محصولی یافت نشد...
+                    </p>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
@@ -100,12 +102,26 @@
     public string id { get; set; }
     public List<ProductViewModel>? products { get; set; }
     public string styleDeleteSuccessModal { get; set; } = "d-none";
-    public ImageFile imageFile;
+    public List<CategoryViewModel>? Categories { get; set; }
+    private System.Threading.Timer? timer;
+}
 
+@functions {
     protected override async Task OnInitializedAsync()
     {
-        int temp = int.Parse(id);
-        products = await httpClient.GetFromJsonAsync<List<ProductViewModel>>($"Product/List/{temp}");
+        timer = new System.Threading.Timer(async (object? stateInfo) =>
+        {
+            int temp = int.Parse(id);
+            products = await httpClient.GetFromJsonAsync<List<ProductViewModel>>($"Product/List/{temp}");
+            Categories = await httpClient.GetFromJsonAsync<List<CategoryViewModel>>("Category/List");
+            foreach (var item in products)
+            {
+                item.infoUrl = $"/Admin-ProductList/Product/{item.ProductId}";
+
+            }
+            StateHasChanged(); // NOTE: MUST CALL StateHasChanged() BECAUSE THIS IS TRIGGERED BY A TIMER INSTEAD OF A USER EVENT
+        }, new System.Threading.AutoResetEvent(false), 2000, 2000); // fire every 2000 milliseconds
+
     }
     public void ShowDeleteSuccessModal()
     {
@@ -134,18 +150,6 @@
 
         }
     }
-
-
-
-    //private async Task OnInputFileChanged(InputFileChangeEventArgs f)
-    //{
-    //    imageFile.Files.FileName = Guid.NewGuid().ToString().Replace("-", "");
-    //    imageFile.Files.Data = new Byte[f.File.Size];
-    //    await f.File.OpenReadStream().ReadAsync(imageFile.Files.Data);
-    //    imageFile.Files.FileType = f.File.ContentType;
-    //    imageFile.Files.Size = f.File.Size;
-    //    ProductAdd.ProductImagePath = imageFile.Files.FileName + ".jpg";
-    //}
 
     public async Task ReLoad()
     {

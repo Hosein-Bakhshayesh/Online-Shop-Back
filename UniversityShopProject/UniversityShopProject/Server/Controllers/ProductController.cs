@@ -1,15 +1,10 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Components.Forms;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using UniversityShopProject.Shared.ViewModels;
+using UniversityShopProject.Shared.Models;
 using UniversityShopProject.Shared.ViewModels.Product;
 using UniversityShopProjectModels.Context;
 using UniversityShopProjectModels.Models;
 using UniversityShopProjectServices.Service;
-using System.IO;
-using UniversityShopProject.Shared.Models;
 
 namespace UniversityShopProject.Server.Controllers
 {
@@ -20,11 +15,15 @@ namespace UniversityShopProject.Server.Controllers
         public IMapper _mapper { get; set; }
         UniversityShopProjectContext db = new();
         ProductService _productService;
-
-        public ProductController(IMapper mapper)
+        ProductImageService _productImageService;
+        private readonly IWebHostEnvironment env;
+        public static string ImageFileName = "1.jpg";
+        public ProductController(IMapper mapper, IWebHostEnvironment env)
         {
             _productService = new ProductService(db);
+            _productImageService = new ProductImageService(db);
             _mapper = mapper;
+            this.env = env;
         }
 
         [HttpGet("List/{id}")]
@@ -49,6 +48,22 @@ namespace UniversityShopProject.Server.Controllers
         {
             try
             {
+                Product product = _productService.GetEntity(Pid);
+                string path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()) + "\\Client\\wwwroot\\Images\\Product-Image\\" + product.ProductImagePath);
+                if (System.IO.File.Exists(path))
+                {
+                    System.IO.File.Delete(path);
+                }
+                var list = _productImageService.GetAll().FindAll(t => t.ProductId == Pid);
+                foreach (var item in list)
+                {
+                    path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()) + "\\Client\\wwwroot\\Images\\Product-Image\\" + item.ImagePath);
+                    if (System.IO.File.Exists(path))
+                    {
+                        System.IO.File.Delete(path);
+                    }
+                    _productImageService.Delete(item);
+                }
                 _productService.Delete(Pid);
                 _productService.Save();
                 return Ok();
@@ -81,10 +96,9 @@ namespace UniversityShopProject.Server.Controllers
             }
         }
 
-        [HttpPost("Add")]
-        public ActionResult ProductAdd(ProductViewModel ProductAdd)
+        [HttpPost("Create")]
+        public ActionResult ProductCreate([FromBody] ProductViewModel ProductAdd)
         {
-            ProductAdd.ProductImagePath = Guid.NewGuid().ToString().Replace("-", "");
             Product product = _mapper.Map<ProductViewModel, Product>(ProductAdd);
             try
             {
@@ -96,18 +110,47 @@ namespace UniversityShopProject.Server.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "انجام نشد");
             }
-            
+
         }
 
-        [HttpPost("SaveImage")]
-        public ActionResult SaveImage(ImageFile imageFile)
+        [HttpPut("SaveImage/{fileName}")]
+        public async Task<ActionResult> ProductSaveImage([FromBody] ImageFile file, string fileName)
         {
             try
             {
-                string fileExtenstion = imageFile.Files.FileType.ToLower().Contains("jpg") ? "jpg" : "";
-                string fileName = $@"/Images/Product-Image/{imageFile.Files.FileName}.{fileExtenstion}";
-                var fileStream = System.IO.File.Create(fileName);
-                fileStream.WriteAsync(imageFile.Files.Data);
+                if (file != null)
+                {
+                    ImageFileName = fileName;
+                    string path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()) + "\\Client\\wwwroot\\Images\\Product-Image\\" + fileName);
+                    var buf = Convert.FromBase64String(file.base64data);
+                    await System.IO.File.WriteAllBytesAsync(path, buf);
+                }
+                return Content(ImageFileName);
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "انجام نشد");
+            }
+        }
+        [HttpPut("SubmitEdit/{Id}")]
+        public ActionResult SubmitEdit(ProductInfoViewModel productInfoViewModel, int Id)
+        {
+            try
+            {
+                if (productInfoViewModel != null && Id > 0)
+                {
+                    var p = _productService.GetEntity(Id);
+                    if (p != null)
+                    {
+                        p.ProductName = productInfoViewModel.ProductName;
+                        p.ProductDiscription = productInfoViewModel.ProductDiscription;
+                        p.Price = productInfoViewModel.Price;
+                        p.Number = productInfoViewModel.Number;
+                        p.IsActive = productInfoViewModel.IsActive;
+                        bool res = _productService.Update(p);
+                        _productService.Save();
+                    }
+                }
                 return Ok();
             }
             catch
@@ -115,5 +158,19 @@ namespace UniversityShopProject.Server.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "انجام نشد");
             }
         }
+
+        [HttpGet("GetLast")]
+        public ActionResult GetLastProduct()
+        {
+            var LastProduct = _productService.GetLastProduct();
+            if(LastProduct != null)
+            {
+                List<ProductViewModel> products = new List<ProductViewModel>();
+                products = _mapper.Map<List<Product>,List<ProductViewModel>>(LastProduct);
+                return Ok(products);
+            }
+            return NotFound("محصولی یافت نشد.");
+        }
+
     }
 }

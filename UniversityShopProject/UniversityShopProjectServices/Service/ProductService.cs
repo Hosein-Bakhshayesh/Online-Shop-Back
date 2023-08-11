@@ -13,5 +13,18 @@ namespace UniversityShopProjectServices.Service
         public ProductService(UniversityShopProjectContext context) : base(context)
         {
         }
+
+        public List<Product>? GetLastProduct()
+        {
+            var products = GetAll().TakeLast(10).ToList();
+            if(products!=null)
+            {
+                return products;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

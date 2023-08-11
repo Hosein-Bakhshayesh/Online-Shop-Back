@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using UniversityShopProject.Client;
+using UniversityShopProjectRepository.Repository;
+using UniversityShopProjectServices.Service;
 
 namespace UniversityShopProject.Client
 {

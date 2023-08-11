@@ -1,32 +1,18 @@
-﻿<header>
+﻿@inject HttpClient httpClient
+
+<header>
     <div class="bg-primary d-block d-xl-none">
         <div class="collapse navbar-collapse m-0 p-0" id="colNav">
             <ul class="navbar-nav text-center p-0">
-                <li class="nav-item my-2">
-                    <NavLink class="nav-sm nav-link" href="/CategoriesItem">
-                        <h4 class="m-0 categories-title">کالای دیجیتال</h4>
-                    </NavLink>
-                </li>
-                <li class="nav-item my-2">
-                    <NavLink class="nav-sm nav-link" href="#">
-                        <h4 class="m-0 categories-title">مد و پوشاک</h4>
-                    </NavLink>
-                </li>
-                <li class="nav-item my-2">
-                    <NavLink class="nav-sm nav-link" href="#">
-                        <h4 class="m-0 categories-title">کتاب و لوازم تحریر</h4>
-                    </NavLink>
-                </li>
-                <li class="nav-item my-2">
-                    <NavLink class="nav-sm nav-link" href="#">
-                        <h4 class="m-0 categories-title">زیبایی و سلامت</h4>
-                    </NavLink>
-                </li>
-                <li class="nav-item my-2">
-                    <NavLink class="nav-sm nav-link" href="#">
-                        <h4 class="m-0 categories-title">لوازم خانگی</h4>
-                    </NavLink>
-                </li>
+                @foreach (var item in categories.FindAll(t => t.ParentId == null))
+                {
+                    <li class="nav-item my-2">
+                        <NavLink class="nav-sm nav-link" href="/CategoriesItem">
+                            <h4 class="m-0 categories-title">@item.CategoryName</h4>
+                        </NavLink>
+                    </li>
+                }
+
             </ul>
         </div>
     </div>
@@ -45,163 +31,38 @@
                         </button>
                         <div class="dropdown-content">
                             <div class="w-100 row">
-                                <div class="col-2 mt-1 p-0">
-                                    <ul>
-                                        <li>
-                                            <NavLink href="/CategoriesItem">
-                                                <h4 class="m-0 categories-title">کالای دیجیتال</h4>
-                                            </NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink href="#">
-                                                <h5 class="m-0 categories-subtitle">موبایل</h5>
-                                            </NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink href="#">
-                                                <h5 class="m-0 categories-subtitle">لپتاپ</h5>
-                                            </NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink href="#">
-                                                <h5 class="m-0 categories-subtitle">کنسول بازی</h5>
-                                            </NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink href="#">
-                                                <h5 class="m-0 categories-subtitle">تلویزیون</h5>
-                                            </NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink href="#">
-                                                <h5 class="m-0 categories-subtitle">بازی کامپیوتری</h5>
-                                            </NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink href="#">
-                                                <h5 class="m-0 categories-subtitle">لوازم جانبی</h5>
-                                            </NavLink>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-2 mt-1 p-0">
-                                    <ul>
-                                        <li>
-                                            <NavLink href="/CategoriesItem">
-                                                <h4 class="m-0 categories-title">مد و پوشاک</h4>
-                                            </NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink href="#">
-                                                <h5 class="m-0 categories-subtitle">پوشاک مردانه</h5>
-                                            </NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink href="#">
-                                                <h5 class="m-0 categories-subtitle">اکسسوری مردانه</h5>
-                                            </NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink href="#">
-                                                <h5 class="m-0 categories-subtitle">پوشاک زنانه</h5>
-                                            </NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink href="#">
-                                                <h5 class="m-0 categories-subtitle">اکسسوری زنانه</h5>
-                                            </NavLink>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-2 mt-1 p-0">
-                                    <ul>
-                                        <li>
-                                            <NavLink href="/CategoriesItem">
-                                                <h4 class="m-0 categories-title">کتاب و لوازم تحریر</h4>
-                                            </NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink href="#">
-                                                <h5 class="m-0 categories-subtitle">کتاب و مجله</h5>
-                                            </NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink href="#">
-                                                <h5 class="m-0 categories-subtitle">لوازم تحریر</h5>
-                                            </NavLink>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-2 mt-1 p-0">
-                                    <ul>
-                                        <li>
-                                            <NavLink href="/CategoriesItem">
-                                                <h4 class="m-0 categories-title">زیبایی و سلامت</h4>
-                                            </NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink href="#">
-                                                <h5 class="m-0 categories-subtitle">لوازم آرایشی</h5>
-                                            </NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink href="#">
-                                                <h5 class="m-0 categories-subtitle">مراقبت از پوست</h5>
-                                            </NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink href="#">
-                                                <h5 class="m-0 categories-subtitle">عطر و ادکلن</h5>
-                                            </NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink href="#">
-                                                <h5 class="m-0 categories-subtitle">لوازم بهداشتی</h5>
-                                            </NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink href="#">
-                                                <h5 class="m-0 categories-subtitle">مراقبت از مو</h5>
-                                            </NavLink>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-2 mt-1 p-0">
-                                    <ul>
-                                        <li>
-                                            <NavLink href="/CategoriesItem">
-                                                <h4 class="m-0 categories-title">لوازم خانگی</h4>
-                                            </NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink href="#">
-                                                <h5 class="m-0 categories-subtitle">تلویزیون</h5>
-                                            </NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink href="#">
-                                                <h5 class="m-0 categories-subtitle">دکوراتیو</h5>
-                                            </NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink href="#">
-                                                <h5 class="m-0 categories-subtitle">لوازم برقی</h5>
-                                            </NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink href="#">
-                                                <h5 class="m-0 categories-subtitle">لوازم آشپزخانه</h5>
-                                            </NavLink>
-                                        </li>
-                                    </ul>
-                                </div>
+                                @foreach (var item in categories.FindAll(t => t.ParentId == null))
+                                {
+                                    @if(item.IsActive == true)
+                                    {
+                                        <div class="col-2 mt-1 p-0">
+                                            <ul>
+                                                <li>
+                                                    <NavLink href="/CategoriesItem">
+                                                        <h4 class="m-0 categories-title">@item.CategoryName</h4>
+                                                    </NavLink>
+                                                </li>
+                                                @foreach (var temp in categories.FindAll(t => t.ParentId == item.CategoryId))
+                                                {
+                                                    <li>
+                                                        <NavLink href="#">
+                                                            <h5 class="m-0 categories-subtitle">@temp.CategoryName</h5>
+                                                        </NavLink>
+                                                    </li>
+
+                                                }
+                                            </ul>
+                                        </div>
+                                    }
+                                }
+
                             </div>
 
                         </div>
                     </div>
                 </li>
                 <li class="d-none d-sm-block nav-item mx-4">
-                    <NavLink href="#" class="nav-link mt-2" data-toggle="modal" data-target="#searchModal">
+                    <NavLink @onclick="ShowSearchModal" class="nav-link mt-2" data-toggle="modal" data-target="#searchModal">
                         <i class="fa fa-search"></i>
                     </NavLink>
                 </li>
@@ -221,21 +82,21 @@
                     سبد خرید <i class="fa fa-shopping-cart"> </i> : <span id="cart-items-count"> 0</span>
                 </NavLink>
                 <div class="dropdown d-none d-sm-block">
-                    <div class="btn dropdown-toggle border-0" id="dropdownMenuButton" data-toggle="dropdown">
+                    <div class="btn dropdown-toggle border-0" @onclick="ShowUserDropdown" id="dropdownMenuButton" data-toggle="dropdown">
                         <i class="fa-solid fa-2x fa-circle-user"></i>
                     </div>
-                    <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
-                        <NavLink href="/UserPanel" class="dropdown-item p-0 d-flex align-items-center border border-bottom">
+                    <div class="dropdown-menu p-0 @displayDropdown" aria-labelledby="dropdownMenuButton">
+                        <NavLink href="/UserPanel" @onclick="ShowUserDropdown" class="dropdown-item p-0 d-flex align-items-center border border-bottom">
                             <i class="fa fa-circle-user px-2"></i>مشخصات کاربری
                         </NavLink>
-                        <NavLink href="/UserPanel" class="dropdown-item p-0 d-flex align-items-center border border-bottom">
+                        <NavLink href="/UserPanel" @onclick="ShowUserDropdown" class="dropdown-item p-0 d-flex align-items-center border border-bottom">
                             <i class="fa-regular fa-heart px-2"></i>لیست علاقه‌مندی‌ها
                         </NavLink>
-                        <NavLink href="/UserPanel"
-                           class="d-block d-lg-none dropdown-item p-0 d-flex align-items-center border border-bottom">
+                        <NavLink href="/UserPanel" @onclick="ShowUserDropdown"
+                                 class="d-block d-lg-none dropdown-item p-0 d-flex align-items-center border border-bottom">
                             <i class="fa fa-shopping-cart px-2"></i>مشاهده سبد خرید
                         </NavLink>
-                        <NavLink href="/UserPanel" class="dropdown-item p-0 d-flex align-items-center">
+                        <NavLink href="/UserPanel" @onclick="ShowUserDropdown" class="dropdown-item p-0 d-flex align-items-center">
                             <i class="fa-solid fa-arrow-right-from-bracket px-2"></i>خروج از حساب کاربری
                         </NavLink>
                     </div>
@@ -249,11 +110,16 @@
     <!--------------------------------------------------------------------------------------------------->
 </header>
 
-<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+<div class="modal fade @SearchModalText" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
-        <div id="modal-bode-search" class="modal-content">
-
+        <div id="modal-bode-search" class="modal-content bg-white">
+            <div class="modal-header">
+                <h5 class="modal-title">جست و جو در محصولات</h5>
+                <button class="btn btn-outline-danger" type="button" @onclick="CloseSearchModal" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
             <div class="modal-body">
                 <div class="input-group">
                     <input type="search" class="form-control" placeholder="جست و جو کالا..." id="searchBar">
@@ -267,5 +133,34 @@
 </div>
 
 @code {
-
+    public List<CategoryViewModel>? categories { get; set; }
+    public string SearchModalText = "hide d-none";
+    public string displayDropdown = "d-none";
+    protected async override Task OnInitializedAsync()
+    {
+        categories = await httpClient.GetFromJsonAsync<List<CategoryViewModel>>("Category/List");
+        await base.OnInitializedAsync();
+    }
+    public void ShowSearchModal()
+    {
+        if (SearchModalText == "hide d-none")
+        {
+            SearchModalText = "show d-block";
+        }
+    }
+    public void CloseSearchModal()
+    {
+        SearchModalText = "hide d-none";
+    }
+    public void ShowUserDropdown()
+    {
+        if (displayDropdown == "d-none")
+        {
+            displayDropdown = "d-block";
+        }
+        else
+        {
+            displayDropdown = "d-none";
+        }
+    }
 }

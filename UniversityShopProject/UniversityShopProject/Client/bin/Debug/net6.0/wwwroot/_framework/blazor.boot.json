@@ -230,15 +230,21 @@
       "mscorlib.dll": "sha256-C3gpWQMELcHYfrHU\/1agQUvWTtSNs9Ul2suMxcKFnIc=",
       "netstandard.dll": "sha256-CgGkoZQx73t3qchcsu85kgBcgrjNEOiudArOwKNb18k=",
       "System.Private.CoreLib.dll": "sha256-6nUSjiT7okMlkN897OnDypwppYuK7JxTahOClXkAuwE=",
-      "UniversityShopProject.Shared.dll": "sha256-dXppostATzSYNoXIq9ZtWfTOrCBpxZoukOyQ9rzpAnQ=",
-      "UniversityShopProject.Client.dll": "sha256-Y5dW2pFVtBcc8o4wdLRtiOF7E8rURg2ZJWDomDywTGY="
+      "UniversityShopProject.Shared.dll": "sha256-rTb\/cr8IGyWPE9T\/syC1CjZR5jHpEnYmBAYrxSk5vLk=",
+      "UniversityShopProjectModels.dll": "sha256-XuLRMxhx3M6xQz3nWthoEdnZu1AZ5LmNyULFQPdWtyQ=",
+      "UniversityShopProjectRepository.dll": "sha256-bru2QQuHA9B0eyxvEUHv0kmjpuN46pjCeqjxtdHy4VE=",
+      "UniversityShopProjectServices.dll": "sha256-+2emIIUbhLkPXf7zL7Yhq80sEDygmZmTXnr\/eyszNPs=",
+      "UniversityShopProject.Client.dll": "sha256-Tl8zyyAt0x3l3b9BNYA10jH2ETwhHHRcdlRHajVqiBQ="
     },
     "extensions": null,
     "lazyAssembly": null,
     "libraryInitializers": null,
     "pdb": {
-      "UniversityShopProject.Shared.pdb": "sha256-eW13QoGsDdqVil9H2fKH1BgTNUlbH2dBlJ4gG42TMV0=",
-      "UniversityShopProject.Client.pdb": "sha256-BGmLuvwLwdApXrGzTAFBlP7\/+Grs8z+QkG1+Ey6Vm5Q="
+      "UniversityShopProjectModels.pdb": "sha256-H0mogOrx5ILdTJ2nTsPeuA2r7rv9RlCahJfPW0CuHnY=",
+      "UniversityShopProjectRepository.pdb": "sha256-oLUcqBQeIHzSKJkIWWetNDOZfoO+sAqRAj1MGNXxs1Y=",
+      "UniversityShopProjectServices.pdb": "sha256-1eR2GtH8vIvq7FpzUF26EyuoMCxgOYGxlpIxLrjMyfU=",
+      "UniversityShopProject.Shared.pdb": "sha256-\/nXelccdP9S0VgHwUWqPnruyzvupdCHV8GrJlNgqISg=",
+      "UniversityShopProject.Client.pdb": "sha256-2n4eLKtLxc5XKQiT\/YYW09JlVIrjg7LCLRIXU5FftJE="
     },
     "runtime": {
       "dotnet.6.0.16.5l3cj9sv96.js": "sha256-GT2gK+GjOisRXJY+9yh6H8s6K\/KDIsaFMFIgWvAnttY=",
