@@ -6,6 +6,7 @@
 <h3>لیست مدیران سایت</h3>
 
 <AdminAddModal/>
+
 <table class="table table-bordered mt-3">
     <thead>
         <tr>
@@ -17,37 +18,45 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var admin in Admins)
+       @if(Admins != null)
+        {
+            @foreach (var admin in Admins)
+            {
+                <tr>
+                    <td>
+                        @admin.FirstName
+                    </td>
+                    <td>
+                        @admin.LastName
+                    </td>
+                    <td>
+                        @admin.UserName
+                    </td>
+                    <td>
+                        @if (admin.IsActive)
+                        {
+                            <span class="text-success">
+                                مدیر فعال می‌باشد
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="text-danger">
+                                مدیر غیرفعال است
+                            </span>
+                        }
+                    </td>
+                    <td>
+                        <NavLink href="@admin.AdminInfoUrl">
+                            <button class="btn btn-info">جزئیات</button>
+                        </NavLink>
+                    </td>
+                </tr>
+            }
+        }else
         {
             <tr>
-                <td>
-                    @admin.FirstName
-                </td>
-                <td>
-                    @admin.LastName
-                </td>
-                <td>
-                    @admin.UserName
-                </td>
-                <td>
-                    @if (admin.IsActive)
-                    {
-                        <span class="text-success">
-                            مدیر فعال می‌باشد
-                        </span>
-                    }
-                    else
-                    {
-                        <span class="text-danger">
-                            مدیر غیرفعال است
-                        </span>
-                    }
-                </td>
-                <td>
-                    <NavLink href="@admin.AdminInfoUrl">
-                        <button class="btn btn-info">جزئیات</button>
-                    </NavLink>
-                </td>
+                <td colspan="5" class="text-danger">مدیری در سایت ثبت نشده است.</td>
             </tr>
         }
     </tbody>
@@ -60,9 +69,12 @@
     protected override async Task OnInitializedAsync()
     {
         Admins = await httpClient.GetFromJsonAsync<List<AdminListViewModel>>("Admins/List");
-        foreach (var item in Admins)
+        if(Admins!=null)
         {
-            item.AdminInfoUrl = "/Admin-AdminInfo/" + item.AdminId;
+            foreach (var item in Admins)
+            {
+                item.AdminInfoUrl = "/Admin-AdminInfo/" + item.AdminId;
+            }
         }
     }
 

@@ -1,0 +1,57 @@
+﻿@page "/Admin/Login"
+@using UniversityShopProject.Shared.ViewModels.Auth;
+@using UniversityShopProjectModels.Models;
+@layout AccountintLayout
+@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+
+<div class="main-box">
+    <div class="form-box mt-6">
+        <EditForm Model="@loginRequest" OnValidSubmit="@LoginAdminReq">
+            <div class="alert alert-danger @ShowExistErrorLogin mb-3">
+                نام کاربری یا رمز عبور اشتباه است.
+            </div>
+            <div class="input-group mx-auto d-block mt-2">
+                <h3 class="fw-bold text-center my-4">
+                    ورود مدیر
+                </h3>
+                <span class="text-danger">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+                </span>
+                <InputText @bind-Value="loginRequest.UserName" class="input-field form-control w-100 my-2 border-0" placeholder="نام کاربری" />
+                <InputText type="password" @bind-Value="loginRequest.Password" class="input-field form-control w-100 my-2 border-0" placeholder="رمز عبور" />
+                <button type="submit" class="btn btn-success w-100 mt-2">ورود</button>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    public string ShowExistErrorLogin = "d-none";
+    public LoginRequest loginRequest = new LoginRequest();
+}
+@functions {
+
+    protected override Task OnInitializedAsync()
+    {
+        return base.OnInitializedAsync();
+    }
+
+    private async Task LoginAdminReq()
+    {
+        var isExist = await httpClient.GetFromJsonAsync<bool>($"Admins/GetPermission/{loginRequest.UserName}/{loginRequest.Password}");
+        if (isExist == false)
+        {
+            ShowExistErrorLogin = "d-block";
+            return;
+        }
+        ShowExistErrorLogin = "d-none";
+        var res = await httpClient.PostAsJsonAsync<LoginRequest>("Admins/LoginAdmin", loginRequest);
+        if (res != null)
+        {
+            navigationManager.NavigateTo("/", true);
+        }
+    }
+
+}

@@ -23,27 +23,29 @@
                         <ValidationSummary />
                     </span>
 
-                    <div class="row w-100">
+                    <div class="row w-100 mt-2">
                         <div class="col-6 w-100">
                             <label>
                                 نام دسته :<span class="text-danger">*</span>
                             </label>
                             <InputText @bind-Value="categoryView.CategoryName" class="form-control input-field" placeholder="نام دسته" />
                         </div>
-                        <div class="col-6 w-100">
+                        <div class="col-6 w-100 mt-2">
                             <label>
                                 دسته‌اصلی :
                             </label>
                             <InputSelect @bind-Value="categoryView.ParentId" class="form-control input-field">
                                 <option value="" selected>بدون انتخاب</option>
-                                @foreach (var item in categories)
+                                @if(categories != null)
                                 {
-                                    <option value="@item.CategoryId">@item.CategoryName</option>
+                                    @foreach (var item in categories)
+                                    {
+                                        <option value="@item.CategoryId">@item.CategoryName</option>
+                                    }
                                 }
                             </InputSelect>
                         </div>
-                        <hr />
-                        <div class="col-6 w-100">
+                        <div class="col-6 w-100 mt-2">
                             <label>
                                 وضعیت :<span class="text-danger">*</span>
                             </label>
@@ -66,14 +68,16 @@
 </div>
 
 @code {
-    CategoryViewModel? categoryView;
-    List<CategoryViewModel>? categories;
+    CategoryViewModel categoryView = new CategoryViewModel();
+    List<CategoryViewModel>? categories { get; set; }
     private string styleModal = "d-none";
     protected override async Task OnInitializedAsync()
     {
-        categoryView = new CategoryViewModel();
         categories = await httpClient.GetFromJsonAsync<List<CategoryViewModel>>("Category/List");
-        categories = categories.FindAll(t => t.ParentId == null);
+        if(categories != null)
+        {
+            categories = categories.FindAll(t => t.ParentId == null);
+        }
     }
     protected void ShowAddModal()
     {

@@ -30,13 +30,17 @@ namespace UniversityShopProjectServices.Service
         public bool CheckUserName(string userName)
         {
             var users = GetAll();
-            var userNames = users.Select(u => u.UserName);
-            if(userNames.Any(u=> u == userName))
+            if(!users.Any(u=> u.UserName.ToUpper() == userName.ToUpper()))
             {
                 return false;
             }
             else
                 return true;
+        }
+
+        public bool CheckPermission(string userName,string password)
+        {
+            return GetAll().Any(t=>t.UserName == userName && t.Password == password);
         }
     }
 }

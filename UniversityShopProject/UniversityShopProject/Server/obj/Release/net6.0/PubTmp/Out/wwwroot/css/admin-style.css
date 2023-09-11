@@ -1,0 +1,64 @@
+@font-face {
+	font-family: 'TanhaWeb';
+	src: url("../fonts/Tanha/Tanha-FD.ttf") format('truerype');
+	src: url("../fonts/Tanha/Tanha-FD.woff") format('woff');
+	src: url("../fonts/Tanha/Tanha-FD.woff2") format('woff2');
+}
+
+@font-face {
+	font-family: 'yekanWeb';
+	src: url("../fonts/Yekan/Yekan.ttf") format('truerype');
+	src: url("../fonts/Yekan/Yekan.woff") format('woff');
+}
+
+body {
+    font-family: 'TanhaWeb';
+    font-size: medium;
+}
+
+#navbar{
+    height: 100%;
+    width: 18%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    overflow-x: hidden;
+    background-color: rgb(49, 49, 49);
+    transition: .3s;
+    text-align: center;
+}
+.B-Nav{
+    color: white;
+    text-decoration: none;
+    outline: none;
+}
+.B-Nav:hover{
+    color: rgb(49, 49, 49);
+    background-color: white;
+    text-decoration: none;
+}
+.btn:focus{
+    box-shadow: none !important;
+}
+#img-profile{
+    height: 160px;
+    width: 160px;
+}
+.icon{
+    font-size: x-large;
+}
+#main{
+    margin-right: 20%;
+    transition: .3s;
+}
+#openIcon{
+    font-size: x-large;
+    display: inline;
+    visibility: hidden;
+    transition: .3s;
+    position: fixed;
+}
+#openIcon:hover{
+    cursor: pointer;
+}

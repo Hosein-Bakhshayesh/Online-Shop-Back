@@ -1,611 +1,523 @@
 ﻿@page "/UserPanel"
+@using System.Globalization;
+@using UniversityShopProjectModels.Models;
+@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+
 <PageTitle>پنل کاربری</PageTitle>
 
+
 <div class="mainBox">
-    <div class="panelBox">
-        <div class="position-relative row p-0 m-0">
-            <div class="col-1 col-lg-3 h-100 menu-right p-0 m-0 position-relative">
-                <div class="menu-title">
-                    <div id="button-active" class="position-absolute border-info w-100"></div>
-                    <button type="button"
-                            class="w-100 h-100 menu-button border-right-0 border-left-0 row d-flex align-items-center m-0"
-                            onclick="openUserPanel();">
-                        <i class="fa fa-user-circle col-1 ml-2"></i>
-                        <span class="mx-2 col text-left d-none d-lg-block">مشخصات کاربری</span>
-                    </button>
-                    <button type="button"
-                            class="w-100 h-100 menu-button border-right-0 border-left-0 row d-flex align-items-center m-0"
-                            onclick="openWishPanel();">
-                        <i class="fa-regular fa-heart col-1 ml-2"></i>
-                        <span class="mx-2 col text-left d-none d-lg-block">لیست علاقه‌مندی‌ها</span>
-                    </button>
-                    <button type="button"
-                            class="w-100 h-100 menu-button border-right-0 border-left-0 row d-flex align-items-center m-0"
-                            onclick="openOrderPanel();">
-                        <i class="fa-solid fa-bag-shopping col-1 ml-2"></i>
-                        <span class="mx-2 col text-left d-none d-lg-block">سفارشات</span>
-                    </button>
-                    <button type="button"
-                            class="w-100 h-100 menu-button border-right-0 border-left-0 row d-flex align-items-center m-0"
-                            onclick="openLocationPanel();">
-                        <i class="fa fa-location-dot col-1 ml-2"></i>
-                        <span class="mx-2 col text-left d-none d-lg-block">آدرس‌ها</span>
-                    </button>
-                </div>
-            </div>
-            <!--------------------------------------------------------------------------------------------------->
-            <!--------------------------------------------------------------------------------------------------->
-            <!--------------------------------------------------------------------------------------------------->
-            <div id="userInfoPanel" class="col-9 h-100 py-3">
-                <form action="#" class="form-group p-2" method="post">
-                    <div class="row p-0 m-0">
-                        <div class="col-6">
-                            <label for="FName" class="form-label">نام :</label>
-                            <input type="text" class="input-field form-control" value="حسین" id="FName" name="FName"
-                                   placeholder="نام">
-                        </div>
-                        <div class="col-6">
-                            <label for="LName" class="form-label">نام خانوادگی :</label>
-                            <input type="text" class="input-field form-control" value="بخشایش مقرب" id="LName"
-                                   name="LName" placeholder="نام خانوادگی">
-                        </div>
-                    </div>
-                    <div class="row p-0 m-0 mt-3">
-                        <div class="col-6">
-                            <label for="userName" class="form-label">نام کاربری :</label>
-                            <input type="text" class="input-field form-control" value="hosein_bakhshayesh"
-                                   id="userName" name="userName" placeholder="نام کاربری">
-                        </div>
-                        <div class="col-6">
-                            <label for="password" class="form-label">رمز عبور :</label>
-                            <input type="password" class="input-field form-control" value="123456" id="password"
-                                   name="password" placeholder="رمز عبور">
-                        </div>
-                    </div>
-                    <div class="row p-0 m-0 mt-3">
-                        <div class="col">
-                            <label for="userEmail" class="form-label">آدرس ایمیل :</label>
-                            <input type="text" class="input-field form-control" value="hoseinb2.0181@gmail.com"
-                                   id="userEmail" name="userEmail" placeholder="ایمیل">
-                        </div>
-                    </div>
-                    <div class="row p-0 m-0 mt-3">
-                        <div class="col-6">
-                            <label for="userMobile" class="form-label">شماره موبایل :</label>
-                            <input type="text" class="input-field form-control" value="09378149896" id="userMobile"
-                                   name="userMobile" placeholder="شماره موبایل">
-                        </div>
-                        <div class="col-6">
-                            <label for="userNationalCode" class="form-label">کد ملی :</label>
-                            <input type="text" class="input-field form-control" value="123456" id="userNationalCode"
-                                   name="userNationalCode" placeholder="کد ملی">
-                        </div>
-                    </div>
-                    <div class="row p-0 m-0 mt-4">
-                        <div class="col">
-                            <label for="Gender" class="form-label">جنسیت :</label>
-                            <input type="radio" name="Gender" id="men" class="mx-1" checked> مرد
-                            <input type="radio" name="Gender" id="women" class="mx-1"> زن
-                            <input type="radio" name="Gender" id="nothing" class="mx-1"> بدون انتخاب
-                        </div>
-                    </div>
-                    <div class="row p-0 m-0 mt-4">
-                        <div class="col-3">
-                            <button type="submit" class="btn btn-warning w-100 fw-bold">ویرایش اطلاعات</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <!--------------------------------------------------------------------------------------------------->
-            <!--------------------------------------------------------------------------------------------------->
-            <!--------------------------------------------------------------------------------------------------->
-            <div id="wishListPanel" class="col-9 m-0 p-0 overflow-y-scroll">
-                <div class="row whishList-items p-0 m-0">
-                    <div class="col-3 px-1">
-                        <div class="p-img h-100 text-center">
-                            <img src="Images/Product-Image/acer nitro 5 an515-55.jpg" alt="" class="p-imgs h-100 p-1">
-                        </div>
-                    </div>
-                    <div class="col-6 py-2">
-                        <div>
-                            لپتاپ ایسر مدل acer nitro 5 an515-55
-                        </div>
-                    </div>
-                    <div class="col-3 row m-0 p-0 text-center">
-                        <div class="text-danger mt-4">
-                            29,000,000 تومان
-                        </div>
-                        <div class="w-100">
-                            <button type="button" class="p-Details mx-auto btn btn-info">
-                                <NavLink href="/ProductDetail"
-                                   class="text-white text-decoration-none">مشاهده جزئیات کالا</NavLink>
+    <AuthorizeView Roles="User">
+        <Authorized>
+            <div class="panelBox">
+                <div class="position-relative row p-0 m-0">
+                    <div class="col-1 col-lg-3 h-100 menu-right p-0 m-0 position-relative">
+                        <div class="menu-title">
+                            <div id="button-active" class="position-absolute border-info w-100" style="@activeBtnStyle"></div>
+                            <button type="button" @onclick="()=>Show('U')" class="w-100 h-100 menu-button border-right-0 border-left-0 row d-flex align-items-center m-0">
+                                <i class="fa fa-user-circle col-1 ml-2"></i>
+                                <span class="mx-2 col text-left d-none d-lg-block">مشخصات کاربری</span>
+                            </button>
+                            <button type="button" @onclick="() => Show('W')" class="w-100 h-100 menu-button border-right-0 border-left-0 row d-flex align-items-center m-0">
+                                <i class="fa-regular fa-heart col-1 ml-2"></i>
+                                <span class="mx-2 col text-left d-none d-lg-block">لیست علاقه‌مندی‌ها</span>
+                            </button>
+                            <button type="button" @onclick="() => Show('S')" class="w-100 h-100 menu-button border-right-0 border-left-0 row d-flex align-items-center m-0">
+                                <i class="fa-solid fa-bag-shopping col-1 ml-2"></i>
+                                <span class="mx-2 col text-left d-none d-lg-block">سفارشات</span>
+                            </button>
+                            <button type="button" @onclick="() => Show('A')" class="w-100 h-100 menu-button border-right-0 border-left-0 row d-flex align-items-center m-0">
+                                <i class="fa fa-location-dot col-1 ml-2"></i>
+                                <span class="mx-2 col text-left d-none d-lg-block">آدرس‌ها</span>
                             </button>
                         </div>
                     </div>
-                </div>
-                <!--------------------------------------------------------------------------------------------------->
-                <div class="row whishList-items p-0 m-0">
-                    <div class="col-3 px-1">
-                        <div class="p-img h-100 text-center">
-                            <img src="Images/Product-Image/iphone 13 pro max.jpg" alt="iphone 13 pro max"
-                                 class="p-imgs p-1 h-100">
+                    <!--------------------------------------------------------------------------------------------------->
+                    <!--------------------------------------------------------------------------------------------------->
+                    <!--------------------------------------------------------------------------------------------------->
+                    <div id="userInfoPanel" class="col-9 h-100 py-3 @ShowUserSetting">
+                        <div class="alert alert-success @ShowEditSuccess">
+                            <button @onclick="CloseSuccess" class="close" data-dismiss="alert">&times;</button>
+                            تغییرات با موفقیت ثبت شد.
                         </div>
+                        @if (user != null)
+                        {
+                            <EditForm Context="userContext" Model="user" OnValidSubmit="EditUser" class="form-group p-2">
+                                <div class="row p-0 m-0">
+                                    <div class="col-6">
+                                        <label class="form-label">نام :</label>
+                                        <InputText @bind-Value="user.FirstName" class="input-field form-control" placeholder="نام" />
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="form-label">نام خانوادگی :</label>
+                                        <InputText @bind-Value="user.LastName" class="input-field form-control" placeholder="نام خانوادگی" />
+                                    </div>
+                                </div>
+                                <div class="row p-0 m-0 mt-3">
+                                    <div class="col-6">
+                                        <label class="form-label">نام کاربری :</label>
+                                        <InputText @bind-Value="user.UserName" class="input-field form-control" placeholder="نام کاربری" />
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="form-label">رمز عبور :</label>
+                                        <InputText @bind-Value="user.Password" class="input-field form-control" placeholder="رمز عبور" />
+                                    </div>
+                                </div>
+                                <div class="row p-0 m-0 mt-3">
+                                    <div class="col">
+                                        <label class="form-label">آدرس ایمیل :</label>s
+                                        <InputText @bind-Value="user.Email" class="input-field form-control" placeholder="ایمیل" />
+                                    </div>
+                                </div>
+                                <div class="row p-0 m-0 mt-3">
+                                    <div class="col-6">
+                                        <label class="form-label">شماره موبایل :</label>
+                                        <InputText @bind-Value="user.MobileNumber" class="input-field form-control" placeholder="شماره موبایل" />
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="form-label">کد ملی :</label>
+                                        <InputText @bind-Value="user.NationalCode" class="input-field form-control" placeholder="کد ملی" />
+                                    </div>
+                                </div>
+                                <div class="row p-0 m-0 mt-2">
+                                    <div class="col">
+                                        <label class="form-label">جنسیت :</label>
+                                        <InputSelect @bind-Value="user.GenderString" class="form-select">
+                                            <option value="true">زن</option>
+                                            <option value="false">مرد</option>
+                                            <option value="">بدون انتخاب</option>
+                                        </InputSelect>
+                                    </div>
+                                </div>
+                                <div class="row p-0 m-0 mt-2">
+                                    <div class="col-3">
+                                        <button type="submit" class="btn btn-warning w-100 fw-bold">ویرایش اطلاعات</button>
+                                    </div>
+                                </div>
+                            </EditForm>
+                        }
                     </div>
-                    <div class="col-6 py-2">
-                        <div>
-                            گوشی موبایل اپل مدل iphone 13 pro max
-                        </div>
-                    </div>
-                    <div class="col-3 row m-0 p-0 text-center">
-                        <div class="text-danger mt-4">
-                            63,000,000 تومان
-                        </div>
-                        <div class="w-100">
-                            <button type="button" class="p-Details mx-auto btn btn-info">
-                                <NavLink href="/ProductDetail"
-                                   class="text-white text-decoration-none">مشاهده جزئیات کالا</NavLink>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!--------------------------------------------------------------------------------------------------->
-                <div class="row whishList-items p-0 m-0">
-                    <div class="col-3 px-1">
-                        <div class="p-img h-100 text-center">
-                            <img src="Images/Product-Image/samsung galaxy a73 2022.webp" alt="samsung galaxy a73 2022"
-                                 class="p-imgs h-100 p-1">
-                        </div>
-                    </div>
-                    <div class="col-6 py-2">
-                        <div>
-                            گوشی موبایل سامسونگ مدل samsung galaxy a73 2022
-                        </div>
-                    </div>
-                    <div class="col-3 row m-0 p-0 text-center">
-                        <div class="text-danger mt-4">
-                            37,100,000 تومان
-                        </div>
-                        <div class="w-100">
-                            <button type="button" class="p-Details mx-auto btn btn-info">
-                                <NavLink href="/ProductDetail"
-                                   class="text-white text-decoration-none">مشاهده جزئیات کالا</NavLink>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!--------------------------------------------------------------------------------------------------->
-                <div class="row whishList-items p-0 m-0">
-                    <div class="col-3 px-1">
-                        <div class="p-img h-100 text-center">
-                            <img src="Images/Product-Image/samsung s21 ultra.jpg" alt="samsung s21 ultra"
-                                 class="p-imgs h-100 p-1">
-                        </div>
-                    </div>
-                    <div class="col-6 py-2">
-                        <div>
-                            گوشی موبایل سامسونگ مدل samsung s21 ultra
-                        </div>
-                    </div>
-                    <div class="col-3 row m-0 p-0 text-center">
-                        <div class="text-danger mt-4">
-                            52,000,000 تومان
-                        </div>
-                        <div class="w-100">
-                            <button type="button" class="p-Details mx-auto btn btn-info">
-                                <NavLink href="/ProductDetail"
-                                   class="text-white text-decoration-none">مشاهده جزئیات کالا</NavLink>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!--------------------------------------------------------------------------------------------------->
-                <div class="row whishList-items p-0 m-0">
-                    <div class="col-3 px-1">
-                        <div class="p-img h-100 text-center">
-                            <img src="Images/Product-Image/xiaomi mi 12.jpg" alt="xiaomi mi 12" class="p-imgs h-100 p-1">
-                        </div>
-                    </div>
-                    <div class="col-6 py-2">
-                        <div>
-                            گوشی موبایل شیائومی مدل xiaomi mi 12
-                        </div>
-                    </div>
-                    <div class="col-3 row m-0 p-0 text-center">
-                        <div class="text-danger mt-4">
-                            31,000,000 تومان
-                        </div>
-                        <div class="w-100">
-                            <button type="button" class="p-Details mx-auto btn btn-info">
-                                <NavLink href="/ProductDetail"
-                                   class="text-white text-decoration-none">مشاهده جزئیات کالا</NavLink>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!--------------------------------------------------------------------------------------------------->
-                <div class="row whishList-items p-0 m-0">
-                    <div class="col-3 px-1">
-                        <div class="p-img h-100 text-center">
-                            <img src="Images/Product-Image/samsung galaxy s22 2022.jpg" alt="samsung galaxy s22 2022"
-                                 class="p-imgs h-100 p-1">
-                        </div>
-                    </div>
-                    <div class="col-6 py-2">
-                        <div>
-                            گوشی موبایل سامسونگ مدل samsung galaxy s22 2022
-                        </div>
-                    </div>
-                    <div class="col-3 row m-0 p-0 text-center">
-                        <div class="text-danger mt-4">
-                            66,000,000 تومان
-                        </div>
-                        <div class="w-100">
-                            <button type="button" class="p-Details mx-auto btn btn-info">
-                                <NavLink href="/ProductDetail"
-                                   class="text-white text-decoration-none">مشاهده جزئیات کالا</NavLink>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!--------------------------------------------------------------------------------------------------->
-                <div class="row whishList-items p-0 m-0">
-                    <div class="col-3 px-1">
-                        <div class="p-img h-100 text-center">
-                            <img src="Images/Product-Image/xiaomi note 10 pro max.jpg" alt="xiaomi note 10 pro max"
-                                 class="p-imgs h-100 p-1">
-                        </div>
-                    </div>
-                    <div class="col-6 py-2">
-                        <div>
-                            گوشی موبایل شیائومی مدل xiaomi note 10 pro max
-                        </div>
-                    </div>
-                    <div class="col-3 row m-0 p-0 text-center">
-                        <div class="text-danger mt-4">
-                            7,500,000 تومان
-                        </div>
-                        <div class="w-100">
-                            <button type="button" class="p-Details mx-auto btn btn-info">
-                                <NavLink href="/ProductDetail"
-                                   class="text-white text-decoration-none">مشاهده جزئیات کالا</NavLink>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--------------------------------------------------------------------------------------------------->
-            <!--------------------------------------------------------------------------------------------------->
-            <!--------------------------------------------------------------------------------------------------->
-            <div id="orderList" class="col-9 py-3 overflow-y-scroll">
-                <div class="orderItems row p-0 mx-0 mb-3">
-                    <div class="p-status mt-2">
-                        <i class="fa fa-check text-success"></i>
-                        وضعیت کالا : تحویل داده شده
-                    </div>
-                    <div class="row product-details">
-                        <div class="col-3">
-                            25 اسفند 1401
-                        </div>|
-                        <div class="col-4">
-                            کد سفارش : 75412587
-                        </div>|
-                        <div class="col">
-                            مبلغ کل : 102,000,000 تومان
-                        </div>
-                    </div>
-                    <div class="row product-imgs">
-                        <div class="product-imgs-items my-auto mx-1 p-0">
-                            <NavLink href="/ProductDetail">
-                                <img src="Images/Product-Image/acer nitro 5 an515-55.jpg"
-                                     alt="acer nitro 5 an515-55" class="orders-img">
-                            </NavLink>
-                        </div>
-                        <div class="product-imgs-items my-auto mx-1">
-                            <NavLink href="/ProductDetail">
-                                <img src="Images/Product-Image/iphone 13 pro max.jpg"
-                                     alt="iphone 13 pro max" class="orders-img">
-                            </NavLink>
-                        </div>
-                        <div class="product-imgs-items my-auto mx-1">
-                            <NavLink href="/ProductDetail">
-                                <img src="Images/Product-Image/samsung galaxy a73 2022.webp"
-                                     alt="samsung galaxy a73 2022" class="orders-img">
-                            </NavLink>
-                        </div>
-                        <div class="product-imgs-items my-auto mx-1">
-                            <NavLink href="/ProductDetail">
-                                <img src="Images/Product-Image/samsung s21 ultra.jpg"
-                                     alt="samsung s21 ultra" class="orders-img">
-                            </NavLink>
-                        </div>
-                        <div class="product-imgs-items my-auto mx-1">
-                            <NavLink href="/ProductDetail">
-                                <img src="Images/Product-Image/xiaomi mi 12.jpg"
-                                     alt="xiaomi mi 12" class="orders-img">
-                            </NavLink>
-                        </div>
-                        <div class="text-center product-imgs-items my-auto mx-1 pt-4">
-                            <span>3 +</span>
-                        </div>
-                    </div>
-                    <div class="text-right">
-                        <NavLink href="#" class="text-info text-decoration-none">
-                            <i class="fa fa-file-invoice mx-1"></i>
-                            <span>مشاهده فاکتور</span>
-                        </NavLink>
-                    </div>
-                </div>
-                <!--------------------------------------------------------------------------------------------------->
-                <div class="orderItems row p-0 mx-0 mb-3">
-                    <div class="p-status mt-2">
-                        <i class="fa fa-xmark text-danger"></i>
-                        وضعیت کالا : لغو شده
-                    </div>
-                    <div class="row product-details">
-                        <div class="col-3">
-                            21 اسفند 1401
-                        </div>|
-                        <div class="col-4">
-                            کد سفارش : 5432542
-                        </div>|
-                        <div class="col">
-                            مبلغ کل : 58,000,000 تومان
-                        </div>
-                    </div>
-                    <div class="row product-imgs">
-                        <div class="product-imgs-items my-auto mx-1">
-                            <NavLink href="/ProductDetail">
-                                <img src="Images/Product-Image/acer nitro 5 an515-55.jpg"
-                                     alt="acer nitro 5 an515-55" class="orders-img">
-                            </NavLink>
-                        </div>
-                        <div class="product-imgs-items my-auto mx-1">
-                            <NavLink href="/ProductDetail">
-                                <img src="Images/Product-Image/xiaomi note 10 pro max.jpg"
-                                     alt="xiaomi note 10 pro max" class="orders-img">
-                            </NavLink>
-                        </div>
-                        <div class="product-imgs-items my-auto mx-1">
-                            <NavLink href="/ProductDetail">
-                                <img src="Images/Product-Image/iphone se 2020.jpg"
-                                     alt="iphone se 2020" class="orders-img">
-                            </NavLink>
-                        </div>
-                    </div>
-                    <div class="text-right">
-                        <NavLink href="#" class="text-info text-decoration-none">
-                            <i class="fa fa-file-invoice mx-1"></i>
-                            <span>مشاهده فاکتور</span>
-                        </NavLink>
-                    </div>
-                </div>
-                <!--------------------------------------------------------------------------------------------------->
-                <div class="orderItems row p-0 mx-0 mb-3">
-                    <div class="p-status mt-2">
-                        <i class="fa fa-check text-success"></i>
-                        وضعیت کالا : تحویل داده شده
-                    </div>
-                    <div class="row product-details">
-                        <div class="col-3">
-                            20 بهمن 1401
-                        </div>|
-                        <div class="col-4">
-                            کد سفارش : 34535435
-                        </div>|
-                        <div class="col">
-                            مبلغ کل : 5,000,000 تومان
-                        </div>
-                    </div>
-                    <div class="row product-imgs">
-                        <div class="product-imgs-items my-auto mx-1">
-                            <NavLink href="/ProductDetail">
-                                <img src="Images/Product-Image/iphone 13 pro max.jpg"
-                                     alt="iphone 13 pro max" class="orders-img">
-                            </NavLink>
-                        </div>
-                        <div class="product-imgs-items my-auto mx-1">
-                            <NavLink href="/ProductDetail">
-                                <img src="Images/Product-Image/iphone se 2020.jpg"
-                                     alt="iphone se 2020" class="orders-img">
-                            </NavLink>
-                        </div>
-                        <div class="product-imgs-items my-auto mx-1">
-                            <NavLink href="/ProductDetail">
-                                <img src="Images/Product-Image/samsung galaxy s22 2022.jpg"
-                                     alt="samsung galaxy s22 2022" class="orders-img">
-                            </NavLink>
-                        </div>
-                        <div class="product-imgs-items my-auto mx-1">
-                            <NavLink href="/ProductDetail">
-                                <img src="Images/Product-Image/xiaomi mi 12.jpg"
-                                     alt="xiaomi mi 12" class="orders-img">
-                            </NavLink>
-                        </div>
-                        <div class="product-imgs-items my-auto mx-1">
-                            <NavLink href="/ProductDetail">
-                                <img src="Images/Product-Image/xiaomi poco x3 pro.png"
-                                     alt="xiaomi poco x3 pro" class="orders-img">
-                            </NavLink>
-                        </div>
-                        <div class="text-center product-imgs-items my-auto mx-1 pt-4">
-                            <span>8 +</span>
-                        </div>
-                    </div>
-                    <div class="text-right">
-                        <NavLink href="#" class="text-info text-decoration-none">
-                            <i class="fa fa-file-invoice mx-1"></i>
-                            <span>مشاهده فاکتور</span>
-                        </NavLink>
-                    </div>
-                </div>
-                <!--------------------------------------------------------------------------------------------------->
-                <div class="orderItems row p-0 mx-0 mb-3">
-                    <div class="p-status mt-2">
-                        <i class="fa fa-check text-success"></i>
-                        وضعیت کالا : تحویل داده شده
-                    </div>
-                    <div class="row product-details">
-                        <div class="col-3">
-                            10 آذر 1401
-                        </div>|
-                        <div class="col-4">
-                            کد سفارش : 45234556
-                        </div>|
-                        <div class="col">
-                            مبلغ کل : 300,000 تومان
-                        </div>
-                    </div>
-                    <div class="row product-imgs">
-                        <div class="product-imgs-items my-auto mx-1">
-                            <NavLink href="/ProductDetail">
-                                <img src="Images/Product-Image/xiaomi poco x3 pro.png"
-                                     alt="xiaomi poco x3 pro" class="orders-img">
-                            </NavLink>
-                        </div>
-                    </div>
-                    <div class="text-right">
-                        <NavLink href="#" class="text-info text-decoration-none">
-                            <i class="fa fa-file-invoice mx-1"></i>
-                            <span>مشاهده فاکتور</span>
-                        </NavLink>
-                    </div>
-                </div>
-            </div>
-            <!--------------------------------------------------------------------------------------------------->
-            <!--------------------------------------------------------------------------------------------------->
-            <!--------------------------------------------------------------------------------------------------->
-            <div id="locationLists" class="col-9 py-3 overflow-y-scroll">
-                <div class="addNewLocation w-100 text-right">
-                    <NavLink href="#" class="btn btn-outline-success fw-bold" data-toggle="modal" data-target="#myModal">
-                        <i class="fa fa-plus mx-1"></i>
-                        <span>ثبت آدرس جدید</span>
-                    </NavLink>
-                </div>
-                <div class="modal fade" id="myModal" role="dialog">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title">ثبت آدرس جدید</h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <!--------------------------------------------------------------------------------------------------->
+                    <!--------------------------------------------------------------------------------------------------->
+                    <!--------------------------------------------------------------------------------------------------->
+                    <div id="wishListPanel" class="col-9 m-0 p-0 @ShowUserWhishList">
+                        @if (wishProducts != null && wishProducts.Count > 0)
+                        {
+                            @foreach (var item in wishProducts)
+                            {
+                                <div class="row whishList-items p-0 m-0">
+                                    <div class="col-3 px-1">
+                                        <div class="p-img h-100 text-center">
+                                            <img src="Images/Product-Image/@item.ProductImagePath" alt="@item.ProductName" class="p-imgs h-100 p-1">
+                                        </div>
+                                    </div>
+                                    <div class="col-6 py-2">
+                                        <div>
+                                            @item.ProductName
+                                        </div>
+                                    </div>
+                                    <div class="col-3 row m-0 p-0 text-center">
+                                        <div class="text-danger mt-2">
+                                            @Convert.ToInt32(item.Price).ToString("n0") تومان
+                                        </div>
+                                        <div class="w-100">
+                                            <button type="button" class="w-50 mx-auto btn btn-info">
+                                                <NavLink href="@item.ProductDetailLink" class="text-white text-decoration-none">مشاهده جزئیات کالا</NavLink>
+                                            </button>
+                                            <button @onclick="()=>DeleteFromWishList(item.ProductId)" type="button" class="w-50 mx-auto btn btn-danger">حذف</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="m-2 text-danger fw-bold">
+                                لیست علاقه مندی ها خالی میباشد.
                             </div>
-                            <div class="modal-body">
-                                <form action="" method="post" class="form-box p-3">
-                                    <div class="row">
-                                        <div class="col-12 col-lg-6 my-2 my-lg-0">
-                                            <label for="stateName" class="form-label">
-                                                استان <span class="text-danger">*</span> :
-                                            </label>
-                                            <input type="text" class="form-control input-field" id="stateName"
-                                                   name="stateName" placeholder="استان">
-                                        </div>
-                                        <div class="col-12 col-lg-6 my-2 my-lg-0">
-                                            <label for="cityName" class="form-label">
-                                                شهر <span class="text-danger">*</span> :
-                                            </label>
-                                            <input type="text" class="form-control input-field" id="cityName"
-                                                   name="cityName" placeholder="شهر">
+                        }
+                    </div>
+                    <!--------------------------------------------------------------------------------------------------->
+                    <!--------------------------------------------------------------------------------------------------->
+                    <!--------------------------------------------------------------------------------------------------->
+                    <div id="orderList" class="col-9 py-3 @ShowUserOrdersList">
+                        @if (orderViewModels != null && orderViewModels.Count > 0)
+                        {
+                            @foreach (var item in orderViewModels)
+                            {
+                                <div class="orderItems row p-0 mx-0 mb-3">
+                                    <div class="p-status mt-2">
+                                        <i class="fa fa-check text-success"></i>
+                                        وضعیت کالا : @item.Status
+                                    </div>
+                                    <div class="row product-details">
+                                        <div class="col-3">
+                                            @item.Date
+                                        </div>|
+                                        <div class="col-4">
+                                            کد سفارش : @item.OrderId
+                                        </div>|
+                                        <div class="col">
+                                            مبلغ کل : @Convert.ToInt32(item.Total).ToString("n0") تومان
                                         </div>
                                     </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col my-2 my-lg-0">
-                                            <label for="streetName" class="form-label">
-                                                آدرس پستی <span class="text-danger">*</span> :
-                                            </label>
-                                            <textarea class="form-control input-field" name="streetName"
-                                                      id="streetName" cols="30" rows="10"
-                                                      placeholder="آدرس پستی کامل : کوچه، محل، ساختمان........"></textarea>
-                                        </div>
+                                    <div class="row product-imgs">
+                                        @foreach (var orderItem in orderItemViewModels.FindAll(t => t.OrderId == item.OrderId))
+                                        {
+                                            <div class="product-imgs-items my-auto mx-1 p-0">
+                                                <NavLink href=@($"/ProductDetail/{orderItem.ProductId}")>
+                                                    <img src="Images/Product-Image/@productViewModels.Find(t=>t.ProductId == orderItem.ProductId).ProductImagePath"
+                                                         alt="@productViewModels.Find(t=>t.ProductId == orderItem.ProductId).ProductName" class="orders-img">
+                                                </NavLink>
+                                            </div>
+                                        }
                                     </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-6 col-lg-3 my-2 my-lg-0">
-                                            <label for="pelakNumber" class="form-label">
-                                                پلاک <span class="text-danger">*</span> :
-                                            </label>
-                                            <input type="text" class="form-control input-field" id="pelakNumber"
-                                                   name="pelakNumber" placeholder="پلاک">
-                                        </div>
-                                        <div class="col-6 col-lg-2 my-2 my-lg-0">
-                                            <label for="vahedNumber" class="form-label">واحد :</label>
-                                            <input type="text" class="form-control input-field" id="vahedNumber"
-                                                   name="vahedNumber" placeholder="واحد">
-                                        </div>
-                                        <div class="col-12 col-lg my-2 my-lg-0">
-                                            <label for="postalCodeNumber" class="form-label">
-                                                کد پستی <span class="text-danger">*</span> :
-                                            </label>
-                                            <input type="text" class="form-control input-field"
-                                                   id="postalCodeNumber" name="postalCodeNumber" placeholder="کد پستی">
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-12 col-lg-4 my-2 my-lg-0">
-                                            <label for="recipientFName" class="form-label">
-                                                نام گیرنده <span class="text-danger">*</span> :
-                                            </label>
-                                            <input type="text" class="form-control input-field" id="recipientFName"
-                                                   name="recipientFName" placeholder="نام گبرنده">
-                                        </div>
-                                        <div class="col-12 col-lg-4 my-2 my-lg-0">
-                                            <label for="recipientLName" class="form-label">
-                                                نام خانوادگی گیرنده <span class="text-danger">*</span>
-                                                :
-                                            </label>
-                                            <input type="text" class="form-control input-field" id="recipientLName"
-                                                   name="recipientLName" placeholder="نام خانوادگی گیرنده">
-                                        </div>
-                                        <div class="col-12 col-lg-4 my-2 my-lg-0">
-                                            <label for="recipientMobile" class="form-label">
-                                                شماره موبایل گیرنده
-                                                <span class="text-danger fw-light">*</span>
-                                                :
-                                            </label>
-                                            <input type="text" class="form-control input-field" id="recipientMobile"
-                                                   name="recipientMobile" placeholder="شماره موبایل گیرنده">
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <hr>
-                                </form>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="m-2 text-danger fw-bold">
+                                سفارشی ثبت نشده است.
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-danger fw-bold"
-                                        data-dismiss="modal">
-                                    بستن
-                                </button>
-                                <button type="button" class="btn btn-outline-success fw-bold"
-                                        data-dismiss="modal">
-                                    ذخیره
-                                </button>
+                        }
+                    </div>
+                    <!--------------------------------------------------------------------------------------------------->
+                    <!--------------------------------------------------------------------------------------------------->
+                    <!--------------------------------------------------------------------------------------------------->
+                    <div id="locationLists" class="col-9 py-3 @ShowUserAddressList">
+                        <div class="addNewLocation w-100 text-right">
+                            <NavLink @onclick="ShowAddAddressModal" class="btn btn-outline-success fw-bold" data-toggle="modal" data-target="#myModal">
+                                <i class="fa fa-plus mx-1"></i>
+                                <span>ثبت آدرس جدید</span>
+                            </NavLink>
+                        </div>
+                        <div class="modal fade @styleModal" id="myModal" role="dialog" aria-labelledby="myModal" aria-hidden="true" style="background:#00000080 !important">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">ثبت آدرس جدید</h4>
+                                        <button @onclick="ShowAddAddressModal" type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <EditForm Context="Address" Model="addressesViewModel" OnValidSubmit="AddAddress" class="form-box p-3">
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-12 col-lg-6 my-2 my-lg-0">
+                                                    <label for="stateName" class="form-label">
+                                                        استان <span class="text-danger">*</span> :
+                                                    </label>
+                                                    <select @onchange="@CitySelect" class="form-select input-field">
+                                                        @if (provinces != null)
+                                                        {
+                                                            @foreach (var item in provinces)
+                                                            {
+                                                                <option value="@item.Id">@item.Name</option>
+                                                            }
+                                                        }
+                                                    </select>
+                                                </div>
+                                                <div class="col-12 col-lg-6 my-2 my-lg-0">
+                                                    <label for="cityName" class="form-label">
+                                                        شهر <span class="text-danger">*</span> :
+                                                    </label>
+                                                    <select @bind="addressesViewModel.CityId" class="form-select input-field">
+                                                        @if (cities != null)
+                                                        {
+                                                            @foreach (var item in cities)
+                                                            {
+                                                                <option value="@item.Id">@item.Name</option>
+                                                            }
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col my-2 my-lg-0">
+                                                    <label for="streetName" class="form-label">
+                                                        آدرس پستی <span class="text-danger">*</span> :
+                                                    </label>
+                                                    <InputTextArea @bind-Value="addressesViewModel.Street" class="form-control input-field" cols="30" rows="4" placeholder="آدرس پستی کامل : کوچه، محل، ساختمان........" />
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-6 col-lg-3 my-2 my-lg-0">
+                                                    <label for="pelakNumber" class="form-label">
+                                                        پلاک <span class="text-danger">*</span> :
+                                                    </label>
+                                                    <InputNumber @bind-Value="addressesViewModel.Pelak" class="form-control input-field" placeholder="پلاک" />
+                                                </div>
+                                                <div class="col-6 col-lg-2 my-2 my-lg-0">
+                                                    <label for="vahedNumber" class="form-label">واحد :</label>
+                                                    <InputNumber @bind-Value="addressesViewModel.Vahed" class="form-control input-field" placeholder="واحد" />
+                                                </div>
+                                                <div class="col-12 col-lg my-2 my-lg-0">
+                                                    <label for="postalCodeNumber" class="form-label">
+                                                        کد پستی <span class="text-danger">*</span> :
+                                                    </label>
+                                                    <InputText @bind-Value="addressesViewModel.PostalCode" class="form-control input-field" placeholder="کد پستی" />
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-12 col-lg-4 my-2 my-lg-0">
+                                                    <label for="recipientFName" class="form-label">
+                                                        نام گیرنده <span class="text-danger">*</span> :
+                                                    </label>
+                                                    <InputText @bind-Value="addressesViewModel.FirstName" class="form-control input-field" placeholder="نام گبرنده" />
+                                                </div>
+                                                <div class="col-12 col-lg-4 my-2 my-lg-0">
+                                                    <label for="recipientLName" class="form-label">
+                                                        نام خانوادگی گیرنده <span class="text-danger">*</span>
+                                                        :
+                                                    </label>
+                                                    <InputText @bind-Value="addressesViewModel.LastName" class="form-control input-field" placeholder="نام خانوادگی گیرنده" />
+                                                </div>
+                                                <div class="col-12 col-lg-4 my-2 my-lg-0">
+                                                    <label for="recipientMobile" class="form-label">
+                                                        شماره موبایل گیرنده
+                                                        <span class="text-danger fw-light">*</span>
+                                                        :
+                                                    </label>
+                                                    <InputText @bind-Value="addressesViewModel.Mobile" class="form-control input-field" placeholder="شماره موبایل گیرنده" />
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <hr>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button @onclick="ShowAddAddressModal" type="button" class="btn btn-outline-danger fw-bold"
+                                                    data-dismiss="modal">
+                                                بستن
+                                            </button>
+                                            <button type="submit" class="btn btn-outline-success fw-bold"
+                                                    data-dismiss="modal">
+                                                ذخیره
+                                            </button>
+                                        </div>
+                                    </EditForm>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="locationsList mt-3">
-                    <p>حسین بخشایش مقرب</p>
-                    <p>بندرانزلی, خیابان میرزاکوچک خان, پشت آژانس فجر</p>
-                    <div class="row">
-                        <p class="col-4"><i class="fa fa-building"></i> شهر : بندرانزلی</p>
-                        |
-                        <p class="col"><i class="fa-regular fa-envelope"></i> کد پستی : 4313757143</p>
-                    </div>
-                    <div class="row p-0">
-                        <p class="col"><i class="fa fa-mobile"></i> موبایل : 09378149896</p>
-                        <div class="location-buttons col-3 mb-3 d-flex">
-                            <button class="fw-bold btn btn-warning w-50 mx-1"> ویرایش</button>
-                            <button class="fw-bold btn btn-danger w-50 mx-1">حذف</button>
+                        <div class="alert alert-success px-3 mt-2 @addSucccess">
+                            <button @onclick="CloseAddSuccess" class="close" data-dismiss="alert">&times;</button>
+                            با موفقیت ثبت شد.
                         </div>
+                        @if (addressesViewModels != null && addressesViewModels.Count > 0)
+                        {
+                            @foreach (var item in addressesViewModels)
+                            {
+                                <div class="locationsList mt-3">
+                                    <p>@item.FirstName @item.LastName</p>
+                                    <p></p>
+                                    <div class="row">
+                                        <p class="col-4"><i class="fa fa-building"></i> شهر : @item.cityName</p>
+                                        |
+                                        <p class="col"><i class="fa-regular fa-envelope"></i> کد پستی : @item.PostalCode</p>
+                                    </div>
+                                    <div class="row p-0">
+                                        <p class="col"><i class="fa fa-mobile"></i> موبایل : @item.Mobile</p>
+                                        <div class="location-buttons col-3 mb-3 d-flex">
+                                            <button @onclick="()=>DeleteAddress(item.AddressId)" class="fw-bold btn btn-danger w-50 mx-1">حذف</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="m-2 text-danger fw-bold">
+                                آدرسی ثبت نشده است.
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
+    </Authorized>
+</AuthorizeView>
         </div>
-    </div>
-</div>
+
 
 
 @code {
+    public UserInfoViewModel? user { get; set; }
+    public List<ProductViewModel>? wishProducts { get; set; }
+    public List<OrderViewModel>? orderViewModels { get; set; }
+    public List<OrderItemViewModel>? orderItemViewModels { get; set; }
+    public List<ProductViewModel>? productViewModels { get; set; }
+    public List<AddressesViewModel>? addressesViewModels { get; set; }
+    public List<City>? cities { get; set; }
+    public List<Province>? provinces { get; set; }
+    PersianCalendar pc = new PersianCalendar();
+    public string ShowEditSuccess = "d-none";
+    public string ShowUserSetting = "d-block";
+    public string ShowUserWhishList = "d-none";
+    public string ShowUserOrdersList = "d-none";
+    public string ShowUserAddressList = "d-none";
+    public string addSucccess = "d-none";
+    public string activeBtnStyle = "top:0 !important";
+    AddressesViewModel addressesViewModel = new AddressesViewModel();
+    private string styleModal = "hide d-none";
 
+    protected override async Task OnInitializedAsync()
+    {
+        user = await httpClient.GetFromJsonAsync<UserInfoViewModel>("User/GetCurrentUser");
+        if (user != null)
+        {
+            user.GenderString = user.Gender.ToString();
+            wishProducts = await httpClient.GetFromJsonAsync<List<ProductViewModel>>($"WishList/GetWishList/{user.UserId}");
+            if (wishProducts != null)
+            {
+                foreach (var item in wishProducts)
+                {
+                    item.ProductDetailLink = "/ProductDetail/" + item.ProductId;
+                }
+            }
+            orderViewModels = await httpClient.GetFromJsonAsync<List<OrderViewModel>>($"Order/GetOrderList/{user.UserId}");
+            if (orderViewModels != null)
+            {
+                orderItemViewModels = new List<OrderItemViewModel>();
+                productViewModels = new List<ProductViewModel>();
+                foreach (var item in orderViewModels)
+                {
+                    DateTime dateTime = DateTime.Parse(item.Date);
+                    item.Date = string.Format("{0}/{1}/{2}", pc.GetYear(dateTime), pc.GetMonth(dateTime), pc.GetDayOfMonth(dateTime));
+                    orderItemViewModels.AddRange(await httpClient.GetFromJsonAsync<List<OrderItemViewModel>>($"Order/GetOrderItemsList/{item.OrderId}"));
+                }
+                foreach (var item in orderItemViewModels)
+                {
+                    productViewModels.Add(await httpClient.GetFromJsonAsync<ProductViewModel>($"Product/Info/{item.ProductId}"));
+                }
+            }
+            addressesViewModels = await httpClient.GetFromJsonAsync<List<AddressesViewModel>>($"Address/Addresses/{user.UserId}");
+        }
+        else
+        {
+            navigationManager.NavigateTo("/", true);
+        }
+        provinces = await httpClient.GetFromJsonAsync<List<Province>>("Address/GetProvince");
+        await base.OnInitializedAsync();
+    }
+
+    public async Task EditUser()
+    {
+        if (user != null)
+        {
+            user.Gender = bool.Parse(user.GenderString);
+            var res = await httpClient.PutAsJsonAsync<UserInfoViewModel>("User/Edit", user);
+            if (res != null)
+            {
+                ShowEditSuccess = "d-block";
+            }
+        }
+    }
+
+    public async Task CitySelect(ChangeEventArgs e)
+    {
+        addressesViewModel.Province = Convert.ToInt32(e.Value.ToString());
+
+        cities = await httpClient.GetFromJsonAsync<List<City>>($"Address/City/{addressesViewModel.Province}");
+    }
+
+    public void Show(char ch)
+    {
+        switch (ch)
+        {
+            case 'U':
+                {
+                    activeBtnStyle = "top:0 !important";
+                    ShowUserWhishList = "d-none";
+                    ShowUserSetting = "d-block";
+                    ShowUserOrdersList = "d-none";
+                    ShowUserAddressList = "d-none";
+                    break;
+                }
+            case 'W':
+                {
+                    activeBtnStyle = "top:60px !important";
+                    ShowUserWhishList = "d-block";
+                    ShowUserSetting = "d-none";
+                    ShowUserOrdersList = "d-none";
+                    ShowUserAddressList = "d-none";
+                    break;
+                }
+            case 'S':
+                {
+                    activeBtnStyle = "top:120px !important";
+                    ShowUserWhishList = "d-none";
+                    ShowUserSetting = "d-none";
+                    ShowUserOrdersList = "d-block";
+                    ShowUserAddressList = "d-none";
+                    break;
+                }
+            case 'A':
+                {
+                    activeBtnStyle = "top:180px !important";
+                    ShowUserWhishList = "d-none";
+                    ShowUserSetting = "d-none";
+                    ShowUserOrdersList = "d-none";
+                    ShowUserAddressList = "d-block";
+                    break;
+                }
+        }
+    }
+
+    public void CloseSuccess()
+    {
+        ShowEditSuccess = "d-none";
+    }
+
+    public void ShowAddAddressModal()
+    {
+        if (styleModal == "hide d-none")
+        {
+            styleModal = "show d-block";
+        }
+        else
+        {
+            styleModal = "hide d-none";
+        }
+    }
+
+    public void CloseAddSuccess()
+    {
+        addSucccess = "d-none";
+    }
+
+    public async Task AddAddress()
+    {
+        if (addressesViewModel != null)
+        {
+            addressesViewModel.UserId = user.UserId;
+            var res = await httpClient.PostAsJsonAsync<AddressesViewModel>("Address/AddAddress", addressesViewModel);
+            if (res != null)
+            {
+                addressesViewModels = await httpClient.GetFromJsonAsync<List<AddressesViewModel>>($"Address/Addresses/{user.UserId}");
+                ShowAddAddressModal();
+                addSucccess = "d-block";
+            }
+        }
+    }
+
+    public async Task DeleteAddress(int? id)
+    {
+        if (id != null)
+        {
+            var res = await httpClient.GetFromJsonAsync<bool>($"Address/DeleteAddress/{id}");
+            if (res != false)
+            {
+                addressesViewModels = await httpClient.GetFromJsonAsync<List<AddressesViewModel>>($"Address/Addresses/{user.UserId}");
+                addSucccess = "d-block";
+            }
+        }
+    }
+
+    public async Task DeleteFromWishList(int productId)
+    {
+        var res = await httpClient.GetFromJsonAsync<bool>($"WishList/DeleteFromWishList/{user.UserId}/{productId}");
+        wishProducts = await httpClient.GetFromJsonAsync<List<ProductViewModel>>($"WishList/GetWishList/{user.UserId}");
+    }
 }

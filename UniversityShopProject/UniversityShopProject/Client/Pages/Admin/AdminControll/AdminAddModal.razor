@@ -24,67 +24,64 @@
                     </span>
 
                     <div class="row w-100">
-                        <div class="col-6 w-100">
+                        <div class="col-6 w-100 mt-2">
                             <label>
                                 نام :<span class="text-danger">*</span>
                             </label>
-                            <InputText @bind-Value="adminCreateViewModel.FirstName" class="form-control input-field" placeholder="نام" />
+                            <InputText @bind-Value="adminCreateViewModel.FirstName" class="form-control" placeholder="نام" />
                         </div>
-                        <div class="col-6 w-100">
+                        <div class="col-6 w-100 mt-2">
                             <label>
                                 نام خانوادگی :<span class="text-danger">*</span>
                             </label>
-                            <InputText @bind-Value="adminCreateViewModel.LastName" class="form-control input-field" placeholder="نام خانوادگی" />
+                            <InputText @bind-Value="adminCreateViewModel.LastName" class="form-control" placeholder="نام خانوادگی" />
                         </div>
-                        <hr />
-                        <div class="col-6 w-100">
+                        <div class="col-6 w-100 mt-2">
                             <label>
                                 نام کاربری :<span class="text-danger">*</span>
                             </label>
-                            <InputText @bind-Value="adminCreateViewModel.UserName" class="form-control input-field" placeholder="نام کاربری" />
+                            <InputText @bind-Value="adminCreateViewModel.UserName" class="form-control" placeholder="نام کاربری" />
                         </div>
-                        <div class="col-6 w-100">
+                        <div class="col-6 w-100 mt-2">
                             <label>
                                 شماره موبایل :<span class="text-danger">*</span>
                             </label>
-                            <InputText @bind-Value="adminCreateViewModel.MobileNumber" class="form-control input-field" placeholder="شماره موبایل" />
+                            <InputText @bind-Value="adminCreateViewModel.MobileNumber" class="form-control" placeholder="شماره موبایل" />
                         </div>
-                        <hr />
-                        <div class="col-5 w-100">
+                        <div class="col-5 w-100 mt-2">
                             <label>
                                 پسورد :<span class="text-danger">*</span>
                             </label>
-                            <InputText @bind-Value="adminCreateViewModel.Password" class="form-control input-field" type="@inType" />
+                            <InputText @bind-Value="adminCreateViewModel.Password" class="form-control" type="@inType" />
                         </div>
-                        <div class="col-5 w-100">
+                        <div class="col-5 w-100 mt-2">
                             <label>
                                 تکرار پسورد :<span class="text-danger">*</span>
                             </label>
-                            <InputText @bind-Value="adminCreateViewModel.RePassword" class="form-control input-field" type="@inType" />
+                            <InputText @bind-Value="adminCreateViewModel.RePassword" class="form-control" type="@inType" />
                         </div>
-                        <div class="col-2 w-100 p-0">
+                        <div class="col-2 w-100 mt-2 p-0">
                             <span class="fa fa-eye mt-5" @onclick="ShowPassword"></span>
                         </div>
-                        <hr />
-                        <div class="col-6 w-100">
+                        <div class="col-6 w-100 mt-2">
                             <label>
                                 وضعیت :<span class="text-danger">*</span>
 
                             </label>
-                            <InputSelect @bind-Value="adminCreateViewModel.IsActive" class="form-control input-field">
+                            <InputSelect @bind-Value="adminCreateViewModel.IsActive" class="form-control">
                                 <option value="true">فعال</option>
                                 <option value="false" selected>غیرفعال</option>
                             </InputSelect>
                         </div>
-                        <div class="col-6 w-100">
+                        <div class="col-6 w-100 mt-2">
                             <label>
                                 ایمیل :
                             </label>
-                            <InputText @bind-Value="adminCreateViewModel.Email" class="form-control input-field w-100" placeholder="ایمیل" />
+                            <InputText @bind-Value="adminCreateViewModel.Email" class="form-control w-100" placeholder="ایمیل" />
                         </div>
                     </div>
                     <hr />
-                    <div>
+                    <div class=" mt-2">
                         <button @onclick="CloseModal" type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
                         <button type="submit" class="btn btn-success">درج مدیر</button>
                     </div>
@@ -96,14 +93,10 @@
 </div>
 
 @code {
-    AdminCreateViewModel? adminCreateViewModel;
+    AdminCreateViewModel adminCreateViewModel = new AdminCreateViewModel();
     private string styleModal = "d-none";
     private string inType = "password";
 
-    protected override void OnInitialized()
-    {
-        adminCreateViewModel = new AdminCreateViewModel();
-    }
     protected void ShowAddModal()
     {
         if (styleModal == "d-none")

@@ -1,0 +1,268 @@
+﻿@page "/OrderPayment/{CartId:int}"
+@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+
+<div class="Cart-Item-List">
+    <AuthorizeView Roles="User">
+        <Authorized>
+            <div class="container mt-2">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="text-center">شماره</th>
+                            <th scope="col" class="text-center">نام کالا</th>
+                            <th scope="col" class="text-center">تعداد</th>
+                            <th scope="col" class="text-center">قیمت کل</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (activeCart != null && cartItems != null && cartItems.Count > 0 && productViewModels != null)
+                        {
+                            @foreach (var item in cartItems)
+                            {
+                                <tr>
+                                    <th class="text-center">@(i++)</th>
+                                    <td>@productViewModels.Find(t=>t.ProductId == item.ProductId).ProductName</td>
+                                    <td class="text-center">@item.Quantity</td>
+                                    <td class="text-center">@(Convert.ToInt32(item.Total).ToString("n0"))</td>
+
+                                </tr>
+                            }
+                            <tr class="thead-light">
+                                <th colspan="5">جمع کل</th>
+                                <td colspan="1" class="text-danger text-center">@(Convert.ToInt32(activeCart.Total).ToString("n0"))</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div class="my-3">
+                    <span class="form-label fw-bold">انتخاب آدرس</span>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-4">
+                        <label>انتخاب آدرس ثبت شده : </label>
+                    </div>
+                    <div class="col-8">
+                        @if (addresses != null)
+                        {
+                            <select class="form-select" @onchange="ChangeAddress">
+                                <option selected></option>
+                                @foreach (var item in addresses)
+                                {
+                                    <option value="@item.AddressId">@item.cityName - @item.Street - @item.Pelak - @item.Vahed - @item.FirstName @item.LastName</option>
+                                }
+                            </select>
+                        }
+                    </div>
+                </div>
+                <hr />
+                <div>
+                    <label class="fw-bold">مشخصات آدرس</label>
+                </div>
+                <EditForm Context="Form" Model="addressesViewModel" class="form-box p-3" OnValidSubmit="GoToPayment">
+                    <div>
+
+                        <div class="alert alert-success @ShowSuccessChangeAddress">
+                            <button type="button" @onclick="CloseSuccess" class="close" data-dismiss="alert">&times;</button>
+
+                            با موفقیت تغییر یافت.
+                        </div>
+                        <div>
+                            <div class="row">
+                                <div class="col-12 col-lg-6 my-2 my-lg-0">
+                                    <label for="stateName" class="form-label">
+                                        استان <span class="text-danger">*</span> :
+                                    </label>
+                                    <select @onchange="CitySelect" class="form-select input-field">
+                                        @if (provinces != null)
+                                        {
+                                            @foreach (var item in provinces)
+                                            {
+                                                <option value="@item.Id">@item.Name</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-12 col-lg-6 my-2 my-lg-0">
+                                    <label for="cityName" class="form-label">
+                                        شهر <span class="text-danger">*</span> :
+                                    </label>
+                                    <select @bind="addressesViewModel.CityId" class="form-select input-field">
+                                        @if (cities != null)
+                                        {
+                                            @foreach (var item in cities)
+                                            {
+                                                <option value="@item.Id">@item.Name</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col my-2 my-lg-0">
+                                    <label for="streetName" class="form-label">
+                                        آدرس پستی <span class="text-danger">*</span> :
+                                    </label>
+                                    <InputTextArea @bind-Value="addressesViewModel.Street" class="form-control input-field" cols="30" rows="4" placeholder="آدرس پستی کامل : کوچه، محل، ساختمان........" />
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-6 col-lg-3 my-2 my-lg-0">
+                                    <label for="pelakNumber" class="form-label">
+                                        پلاک <span class="text-danger">*</span> :
+                                    </label>
+                                    <InputNumber @bind-Value="addressesViewModel.Pelak" class="form-control input-field" placeholder="پلاک" />
+                                </div>
+                                <div class="col-6 col-lg-2 my-2 my-lg-0">
+                                    <label for="vahedNumber" class="form-label">واحد :</label>
+                                    <InputNumber @bind-Value="addressesViewModel.Vahed" class="form-control input-field" placeholder="واحد" />
+                                </div>
+                                <div class="col-12 col-lg my-2 my-lg-0">
+                                    <label for="postalCodeNumber" class="form-label">
+                                        کد پستی <span class="text-danger">*</span> :
+                                    </label>
+                                    <InputText @bind-Value="addressesViewModel.PostalCode" class="form-control input-field" placeholder="کد پستی" />
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-12 col-lg-4 my-2 my-lg-0">
+                                    <label for="recipientFName" class="form-label">
+                                        نام گیرنده <span class="text-danger">*</span> :
+                                    </label>
+                                    <InputText @bind-Value="addressesViewModel.FirstName" class="form-control input-field" placeholder="نام گبرنده" />
+                                </div>
+                                <div class="col-12 col-lg-4 my-2 my-lg-0">
+                                    <label for="recipientLName" class="form-label">
+                                        نام خانوادگی گیرنده <span class="text-danger">*</span>
+                                        :
+                                    </label>
+                                    <InputText @bind-Value="addressesViewModel.LastName" class="form-control input-field" placeholder="نام خانوادگی گیرنده" />
+                                </div>
+                                <div class="col-12 col-lg-4 my-2 my-lg-0">
+                                    <label for="recipientMobile" class="form-label">
+                                        شماره موبایل گیرنده
+                                        <span class="text-danger fw-light">*</span>
+                                        :
+                                    </label>
+                                    <InputText @bind-Value="addressesViewModel.Mobile" class="form-control input-field" placeholder="شماره موبایل گیرنده" />
+                                </div>
+                            </div>
+                            <hr>
+                        </div>
+
+                    </div>
+                    <hr />
+                    <div class="mt-2 row">
+                        <div class="col-2">
+                            انتخاب درگاه پرداخت :
+                        </div>
+                        <div class="col-4">
+                            <input type="radio" name="SamanBank" id="SamanBank" required checked />
+                            <img src="/images/static-image/saman_bank_logo2.png" style="width:50px" />
+                        </div>
+                        <div class="col-2">
+                            <button type="submit" class="btn btn-outline-success">
+                                ورود به صفحه پرداخت
+                            </button>
+                        </div>
+                    </div>
+                </EditForm>
+            </div>
+        </Authorized>
+        <NotAuthorized>
+            <div class="container mt-2 alert alert-danger w-100">
+                برای دسترسی به این قسمت ابتدا <a href="/Login">وارد</a> سایت شوید.
+            </div>
+        </NotAuthorized>
+    </AuthorizeView>
+</div>
+
+@code {
+    [Parameter]
+    public int CartId { get; set; }
+    public CartViewModel? activeCart { get; set; }
+    public List<CartItemViewModel>? cartItems { get; set; }
+    public List<ProductViewModel>? productViewModels = new List<ProductViewModel>();
+    public UserInfoViewModel? user { get; set; }
+    public List<AddressesViewModel>? addresses { get; set; }
+    public AddressesViewModel addressesViewModel = new AddressesViewModel();
+    public List<City>? cities { get; set; }
+    public List<Province>? provinces { get; set; }
+    string ShowSuccessChangeAddress = "d-none";
+    int i = 1;
+
+    protected override async Task OnInitializedAsync()
+    {
+        user = await httpClient.GetFromJsonAsync<UserInfoViewModel>("User/GetCurrentUser");
+        if (user.UserName != null)
+        {
+            activeCart = await httpClient.GetFromJsonAsync<CartViewModel>("Cart/GetActiveCart");
+            addresses = await httpClient.GetFromJsonAsync<List<AddressesViewModel>>($"Address/Addresses/{user.UserId}");
+        }
+        if (activeCart.CartId > 0 && activeCart.CartId == CartId)
+        {
+            cartItems = await httpClient.GetFromJsonAsync<List<CartItemViewModel>>($"Cart/GetItems/{activeCart.CartId}");
+        }
+        if (cartItems.Count > 0)
+        {
+            foreach (var item in cartItems)
+            {
+                ProductViewModel? model = await httpClient.GetFromJsonAsync<ProductViewModel>($"Product/Info/{item.ProductId}");
+                if (model != null)
+                {
+                    productViewModels.Add(model);
+                }
+            }
+        }
+        provinces = await httpClient.GetFromJsonAsync<List<Province>>("Address/GetProvince");
+        cities = await httpClient.GetFromJsonAsync<List<City>>($"Address/GetCity");
+        if (addresses != null)
+        {
+            foreach (var item in addresses)
+            {
+                item.cityName = cities.Find(t => t.Id == item.CityId).Name;
+            }
+        }
+        await base.OnInitializedAsync();
+    }
+
+    public async Task CitySelect(ChangeEventArgs e)
+    {
+        addressesViewModel.Province = Convert.ToInt32(e.Value.ToString());
+
+        cities = await httpClient.GetFromJsonAsync<List<City>>($"Address/City/{addressesViewModel.Province}");
+    }
+
+    public async Task ChangeAddress(ChangeEventArgs e)
+    {
+        if (e.Value == null)
+        {
+            addressesViewModel = new AddressesViewModel();
+            return;
+        }
+        addressesViewModel = addresses.Find(t => t.AddressId == Convert.ToInt32(e.Value.ToString()));
+    }
+
+    public void CloseSuccess()
+    {
+        if (ShowSuccessChangeAddress == "d-none")
+        {
+            ShowSuccessChangeAddress = "d-block";
+        }
+        else
+        {
+            ShowSuccessChangeAddress = "d-none";
+        }
+    }
+
+    public async void GoToPayment()
+    {
+        var res = await httpClient.PutAsJsonAsync($"Order/AddOrder/{activeCart.CartId}", addressesViewModel);
+        navigationManager.NavigateTo($"/Payment/{user.UserId}");
+    }
+
+}

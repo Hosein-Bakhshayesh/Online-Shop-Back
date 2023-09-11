@@ -35,7 +35,7 @@
 
     private async Task Delete()
     {
-        var res = await httpClient.PutAsJsonAsync("User/Delete", userInfoView);
+        var res = await httpClient.PostAsJsonAsync<int>("User/Delete", userInfoView.UserId);
         if(res!=null)
         {
             navigationManager.NavigateTo("/Admin-UserList");

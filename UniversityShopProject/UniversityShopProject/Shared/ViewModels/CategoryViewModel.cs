@@ -23,7 +23,8 @@ namespace UniversityShopProject.Shared.ViewModels
         public bool IsActive { get; set; }
         public string? CInfoUrl { get; set; }
         public string? CAttributeUrl { get; set; }
-        public string CImage { get; set; }
-        public string PUrl { get; set; }
+        public string? CImage { get; set; }
+        public string? PUrl { get; set; }
+        public string? CategoryItemUrl { get; set; }
     }
 }

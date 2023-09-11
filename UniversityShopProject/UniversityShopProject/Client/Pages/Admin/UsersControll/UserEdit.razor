@@ -19,34 +19,34 @@
         <table class="table table-bordered mt-3">
             <thead>
                 <tr>
-                    <th scope="col">آیدی</th>
-                    <th scope="col">
+                    <th scope="col" class="text-center">آیدی</th>
+                    <th scope="col" class="text-center">
                         نام<span class="text-danger">*</span>
                     </th>
-                    <th scope="col">
+                    <th scope="col" class="text-center">
                         نام خانوادگی<span class="text-danger">*</span>
                     </th>
-                    <th scope="col">
+                    <th scope="col" class="text-center">
                         نام کاربری<span class="text-danger">*</span>
                     </th>
-                    <th scope="col">
+                    <th scope="col" class="text-center">
                         پسورد<span class="text-danger">*</span>
                     </th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>@userInfoView.UserId</td>
-                    <td>
+                    <td class="text-center">@userInfoView.UserId</td>
+                    <td class="text-center">
                         <InputText @bind-Value="userInfoView.FirstName" class="input-field form-control" />
                     </td>
-                    <td>
+                    <td class="text-center">
                         <InputText @bind-Value="userInfoView.LastName" class="form-control" />
                     </td>
-                    <td>
+                    <td class="text-center">
                         <InputText @bind-Value="userInfoView.UserName" class="form-control" />
                     </td>
-                    <td class="d-flex">
+                    <td class="d-flex text-center">
                         <InputText @bind-Value="userInfoView.Password" class="form-control" type="@inType" />
                         <span class="fa fa-eye m-auto ml-1" @onclick="ShowPassword"></span>
                     </td>
@@ -54,34 +54,34 @@
             </tbody>
             <thead>
                 <tr>
-                    <th scope="col">
+                    <th scope="col" class="text-center">
                         شماره موبایل<span class="text-danger">*</span>
                     </th>
-                    <th scope="col">ایمیل</th>
-                    <th scope="col">کد ملی</th>
-                    <th scope="col">جنسیت</th>
-                    <th scope="col">وضعیت فعال/غیرفعال<span class="text-danger">*</span></th>
+                    <th scope="col" class="text-center">ایمیل</th>
+                    <th scope="col" class="text-center">کد ملی</th>
+                    <th scope="col" class="text-center">جنسیت</th>
+                    <th scope="col" class="text-center">وضعیت فعال/غیرفعال<span class="text-danger">*</span></th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>
+                    <td class="text-center">
                         <InputText @bind-Value="userInfoView.MobileNumber" class="form-control" />
                     </td>
-                    <td>
+                    <td class="text-center">
                         <InputText @bind-Value="userInfoView.Email" class="form-control" />
                     </td>
                     <td>
                         <InputText @bind-Value="userInfoView.NationalCode" class="form-control" />
                     </td>
-                    <td>
+                    <td class="text-center">
                         <InputSelect @bind-Value="userInfoView.Gender" class="form-control">
                             <option value="true">مرد</option>
                             <option value="false">زن</option>
                             <option value="">بدون انتخاب</option>
                         </InputSelect>
                     </td>
-                    <td>
+                    <td class="text-center">
                         <InputSelect @bind-Value="userInfoView.IsActive" class="form-control">
                             <option value="true">فعال</option>
                             <option value="false">غیرفعال</option>

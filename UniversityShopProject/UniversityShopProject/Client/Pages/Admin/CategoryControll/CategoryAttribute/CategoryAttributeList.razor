@@ -1,7 +1,9 @@
-﻿@page "/Admin-CategoryInfo/Attributes/{categoryId}"
+﻿@page "/Admin-CategoryAttributes/{categoryId:int}"
 @inject HttpClient httpClient
 
 @layout AdminLayout
+
+<PageTitle>ویژگی‌های دسته بندی</PageTitle>
 
 <h3>ویژگی‌های دسته @CategoryName‌</h3>
 
@@ -39,7 +41,7 @@
                             <label>
                                 توضیحات :
                             </label>
-                            <InputText @bind-Value="categoryAttView.Discription" class="form-control input-field" placeholder="نام دسته" />
+                            <InputText @bind-Value="categoryAttView.Discription" class="form-control input-field" placeholder="توضیحات" />
                         </div>
                     </div>
                     <hr />
@@ -69,7 +71,7 @@
 
 </button>
 
-@if (attributes.Count > 0 || categoryId != null)
+@if (attributes!=null)
 {
     <EditForm Model="@attributes" OnValidSubmit="@HandleValidSubmit">
         <hr />
@@ -96,7 +98,7 @@
                             }
                             else
                             {
-                                <InputText @bind-Value="item.Title" class="form-control input-field" />
+                                <InputText @bind-Value="item.Title" class="form-control input-field"/>
                             }
                         </td>
                         <td>
@@ -175,11 +177,11 @@ else
 
 @code {
     [Parameter]
-    public string? categoryId { get; set; }
-    public string CategoryName { get; set; }
+    public int categoryId { get; set; }
+    public string? CategoryName { get; set; }
     public List<CategoryAttributeViewModel>? attributes { get; set; } = new();
     public bool IsEdit { get; set; } = false;
-    CategoryAttributeViewModel? categoryAttView;
+    CategoryAttributeViewModel categoryAttView = new CategoryAttributeViewModel();
     private string styleModal = "d-none";
     private string styleDeleteModal = "d-none";
     public string editBTN { get; set; } = "d-none";
@@ -188,8 +190,7 @@ else
 
     protected void ShowAddModal()
     {
-        categoryAttView = new CategoryAttributeViewModel();
-        categoryAttView.CategoryId = int.Parse(categoryId);
+        categoryAttView.CategoryId = categoryId;
         if (styleModal == "d-none")
         {
             styleModal = "d-block";
@@ -213,12 +214,12 @@ else
         editBTN = "d-none";
         IsEdit = false;
     }
-    public async void CloseEditModal()
+    public void CloseEditModal()
     {
         styleEditModal = "d-none";
         ReLoadList();
     }
-    public async void CloseDeleteModal()
+    public void CloseDeleteModal()
     {
         styleDeleteModal = "d-none";
         ReLoadList();
@@ -230,8 +231,8 @@ else
             var res = await httpClient.PostAsJsonAsync<CategoryAttributeViewModel>("CategoryAttribute/Create", categoryAttView);
             if (res != null)
             {
-                int id = int.Parse(categoryId);
-                attributes = await httpClient.GetFromJsonAsync<List<CategoryAttributeViewModel>>($"CategoryAttribute/List/{id}");
+                categoryAttView = new CategoryAttributeViewModel();
+                attributes = await httpClient.GetFromJsonAsync<List<CategoryAttributeViewModel>>($"CategoryAttribute/List/{categoryId}");
                 CloseModal();
             }
         }
@@ -240,10 +241,12 @@ else
     protected override async Task OnInitializedAsync()
     {
 
-        int id = int.Parse(categoryId);
-        CategoryViewModel temp = await httpClient.GetFromJsonAsync<CategoryViewModel>($"Category/Info/{id}");
-        CategoryName = temp.CategoryName;
-        attributes = await httpClient.GetFromJsonAsync<List<CategoryAttributeViewModel>>($"CategoryAttribute/List/{id}");
+        CategoryViewModel? temp = await httpClient.GetFromJsonAsync<CategoryViewModel>($"Category/Info/{categoryId}");
+        if(temp!=null)
+        {
+            CategoryName = temp.CategoryName;
+        }
+        attributes = await httpClient.GetFromJsonAsync<List<CategoryAttributeViewModel>>($"CategoryAttribute/List/{categoryId}");
     }
 
     public async void HandleValidSubmit()
@@ -252,8 +255,7 @@ else
         var res = await httpClient.PutAsJsonAsync("CategoryAttribute/Edit", attributes);
         if (res != null)
         {
-            int id = int.Parse(categoryId);
-            attributes = await httpClient.GetFromJsonAsync<List<CategoryAttributeViewModel>>($"CategoryAttribute/List/{id}");
+            attributes = await httpClient.GetFromJsonAsync<List<CategoryAttributeViewModel>>($"CategoryAttribute/List/{categoryId}");
         }
     }
     public void editAtt()
@@ -271,15 +273,14 @@ else
     }
     public async void ReLoadList()
     {
-        OnInitializedAsync();
+        await OnInitializedAsync();
     }
     private async void DeleteAtt(int id)
     {
         var res = await httpClient.DeleteAsync($"CategoryAttribute/Delete/{id}");
         if (res != null)
         {
-            int temp = int.Parse(categoryId);
-            attributes = await httpClient.GetFromJsonAsync<List<CategoryAttributeViewModel>>($"CategoryAttribute/List/{temp}");
+            attributes = await httpClient.GetFromJsonAsync<List<CategoryAttributeViewModel>>($"CategoryAttribute/List/{categoryId}");
             styleDeleteModal = "d-none";
             CloseDeleteModal();
         }

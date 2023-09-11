@@ -32,6 +32,7 @@ namespace UniversityShopProject.Server.Controllers
             List<Product> products;
             products = _productService.GetAll().FindAll(t => t.CategoryId == id);
             List<ProductViewModel> productVM = _mapper.Map<List<Product>, List<ProductViewModel>>(products);
+            productVM.Reverse();
             if (productVM != null)
             {
                 return Ok(productVM);
@@ -41,6 +42,30 @@ namespace UniversityShopProject.Server.Controllers
                 return NotFound("Product Not Exist");
             }
 
+        }
+
+        [HttpGet("List/{id}/{page}")]
+        public ActionResult ProductList(int id,int page)
+        {
+            List<Product> products;
+            products = _productService.GetAllWithPage(id,15, page);
+            List<ProductViewModel> productVM = _mapper.Map<List<Product>, List<ProductViewModel>>(products);
+            if (productVM != null)
+            {
+                return Ok(productVM);
+            }
+            else
+            {
+                return NotFound("Product Not Exist");
+            }
+
+        }
+        [HttpGet("TotalPageCount/{size}/{id}")]
+        public ActionResult TotalPageCount(int size,int id)
+        {
+            int count = _productService.GetTotalPageCount(size,id);
+
+            return Ok(count);
         }
 
         [HttpDelete("Delete/{Pid}")]
@@ -170,6 +195,42 @@ namespace UniversityShopProject.Server.Controllers
                 return Ok(products);
             }
             return NotFound("محصولی یافت نشد.");
+        }
+        [HttpGet("GetMostView")]
+        public ActionResult GetMostView()
+        {
+            var LastProduct = _productService.GetMostView();
+            if(LastProduct != null)
+            {
+                List<ProductViewModel> products = new List<ProductViewModel>();
+                products = _mapper.Map<List<Product>,List<ProductViewModel>>(LastProduct);
+                return Ok(products);
+            }
+            return NotFound("محصولی یافت نشد.");
+        }
+
+        [HttpPost("AddView")]
+        public ActionResult AddView([FromBody] int id)
+        {
+            try
+            {
+                Product product = _productService.GetEntity(id);
+                if(product.Views == null)
+                {
+                    product.Views = 1;
+                }
+                else
+                {
+                    product.Views++;
+                }
+                _productService.Update(product);
+                _productService.Save();
+                return Ok();
+            }
+            catch
+            {
+                return NotFound("محصولی یافت نشد.");
+            }
         }
 
     }

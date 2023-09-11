@@ -1,4 +1,4 @@
-﻿@page "/Admin-ProductList/Product/{Id}"
+﻿@page "/Admin-Product/{Id:int}"
 @layout AdminLayout
 @inject HttpClient httpClient
 
@@ -10,7 +10,7 @@
         <tr>
             <td colspan="5">
                 <div class="alert alert-success fade-in fade-out " role="alert">
-                    <a href="#" @onclick="CloseSuccessAlert" class="text-black-50 text-decoration-none fw-bold">&times; </a>
+                    <a @onclick="CloseSuccessAlert" style="cursor:pointer" class="text-black-50 text-decoration-none fw-bold">&times; </a>
                     <span class="mx-2">تغییرات با موفقیت انجام شد.</span>
                 </div>
             </td>
@@ -41,10 +41,10 @@
                     <label for="ProductEditName" class="text-danger fw-bold mt-2">تغییر نام : </label>
                     <textarea @bind-Value:event="oninput" @bind-Value="productInfoViewModel.ProductName" class="form-control" id="ProductEditName">
                         @productInfoViewModel.ProductName
-                            </textarea>
+                                                                </textarea>
                 </td>
                 <td class="text-center pt-4">
-                    @productInfoViewModel.Price
+                    @Convert.ToInt32(productInfoViewModel.Price).ToString("n0")
                     <br />
                     <br />
                     <br />
@@ -94,7 +94,7 @@
                     <br />
                     <br />
                     <label for="ProductEditIsActive" class="text-danger fw-bold mt-2">تغییر وضعیت : </label>
-                    <input type="checkbox" @bind-value="productInfoViewModel.IsActive" @bind-value:event="oninput" class="form-check" id="ProductEditIsActive" />فعال :
+                    <input type="checkbox" @bind-value="productInfoViewModel.IsActive" @bind-value:event="oninput" class="form-check mx-auto" id="ProductEditIsActive" />
                 </td>
             </tr>
         </tbody>
@@ -109,7 +109,7 @@
 
                     <textarea class="form-control text-justify w-100" @bind-Value:event="oninput" @bind-Value="productInfoViewModel.ProductDiscription" rows="15">
                         @productInfoViewModel.ProductDiscription
-                                </textarea>
+                                                                    </textarea>
                 </td>
             </tr>
             <tr>
@@ -131,28 +131,33 @@
             </tr>
         </thead>
         <tbody>
-            @if (addAttText == true)
-            {
-                <tr>
-                    <td colspan="3">
-                        <div class="alert alert-success fade-in fade-out " role="alert">
-                            <a href="#" @onclick="CloseAlert" class="text-black-50 text-decoration-none fw-bold">&times; </a>
-                            <span class="mx-2">ویژگی با موفقیت اضافه شد.</span>
-                        </div>
-                    </td>
-                </tr>
 
-            }
+            <tr>
+                <td colspan="3">
+                    <div class="alert alert-success fade-in fade-out @addAttText" role="alert">
+                        <a @onclick="CloseAlert" style="cursor:pointer" class="text-black-50 text-decoration-none fw-bold">&times; </a>
+                        <span class="mx-2">ویژگی با موفقیت اضافه شد.</span>
+                    </div>
+                    <div class="alert alert-danger fade-in fade-out @deleteAttText" role="alert">
+                        <a @onclick="CloseAlert" style="cursor:pointer" class="text-black-50 text-decoration-none fw-bold">&times; </a>
+                        <span class="mx-2">حذف شد.</span>
+                    </div>
+                </td>
+            </tr>
+
             @if (productAttributeViewModels != null)
             {
                 @foreach (var item in productAttributeViewModels)
                 {
                     <tr>
                         <td colspan="1">
-                            @categoryAttributeViewModels.FirstOrDefault(t=>t.AttributeId==item.AttributeId).Title;
+                            @categoryAttributeViewModels.FirstOrDefault(t=>t.AttributeId==item.AttributeId).Title
                         </td>
-                        <td colspan="2">
+                        <td colspan="1">
                             @item.Discription
+                        </td>
+                        <td>
+                            <button class="btn-sm btn-outline-danger" @onclick="()=>DeleteAtt(item.Paid)">حذف ویژگی</button>
                         </td>
                     </tr>
                 }
@@ -178,9 +183,17 @@
             <div class="col-3">
                 <div class="w-100">
                     <InputSelect class="form-select" @bind-Value="AddProductAttributeViewModel.AttributeId" required>
-                        @foreach (var item in categoryAttributeViewModels)
+                        @if (categoryAttributeViewModels != null)
                         {
-                            <option value="@item.AttributeId">@item.Title</option>
+                            @foreach (var item in categoryAttributeViewModels)
+                            {
+                                <option value="@item.AttributeId">
+                                    @item.Title @if (item.Discription != null)
+                                    {
+                                        <span>(@item.Discription)</span>
+                                    }
+                                </option>
+                            }
                         }
                     </InputSelect>
                 </div>
@@ -215,10 +228,12 @@
                             {
                                 <span class="col-2 p-2 img-thumbnail">
                                     <img class=" w-100" src="/Images/Product-Image/@item.ImagePath">
+                                    <button class="btn btn-outline-danger w-100" @onclick="()=>DeleteMoreImage(item.ImageId)">حذف تصویر</button>
                                 </span>
                             }
                         }
                     </div>
+
                 </td>
             </tr>
             <tr>
@@ -229,17 +244,18 @@
                     </InputFile>
                 </td>
             </tr>
-            @if (DisplaySuccessAlert == true)
-            {
-                <tr>
-                    <td>
-                        <div class="alert alert-success fade-in fade-out " role="alert">
-                            <a href="#" @onclick="CloseAlert" class="text-black-50 text-decoration-none fw-bold">&times; </a>
-                            <span class="mx-2">تصویر با موفقیت اضافه شد.</span>
-                        </div>
-                    </td>
-                </tr>
-            }
+            <tr>
+                <td>
+                    <div class="alert alert-success fade-in fade-out @DisplaySuccessAlert " role="alert">
+                        <a @onclick="CloseAlert" style="cursor:pointer" class="text-black-50 text-decoration-none fw-bold">&times; </a>
+                        <span class="mx-2">تصویر با موفقیت اضافه شد.</span>
+                    </div>
+                    <div class="alert alert-danger fade-in fade-out @DisplayDeleteAlert " role="alert">
+                        <a @onclick="CloseAlert" style="cursor:pointer" class="text-black-50 text-decoration-none fw-bold">&times; </a>
+                        <span class="mx-2">حذف شد.</span>
+                    </div>
+                </td>
+            </tr>
         </tbody>
     </table>
 }
@@ -253,40 +269,40 @@ else
 @code {
     private System.Threading.Timer? timer;
     [Parameter]
-    public string? Id { get; set; }
+    public int Id { get; set; }
     public ProductInfoViewModel? productInfoViewModel { get; set; }
     public CategoryViewModel? category { get; set; }
     public List<ProductAttributeViewModel>? productAttributeViewModels { get; set; }
     public List<CategoryAttributeViewModel>? categoryAttributeViewModels { get; set; }
-    public ProductAttributeViewModel? AddProductAttributeViewModel { get; set; }
+    public ProductAttributeViewModel AddProductAttributeViewModel = new ProductAttributeViewModel();
     public List<ProductImagesViewModel>? productImagesViewModels { get; set; }
-    public ImageFile filesBase64 { get; set; }
-    public bool DisplaySuccessAlert { get; set; }
+    public ImageFile? filesBase64 { get; set; }
+    public string DisplaySuccessAlert = "d-none";
+    public string DisplayDeleteAlert = "d-none";
     public string? addAttribute { get; set; }
-    public string addAttributeText = "اضافه کردن محصول جدید";
+    public string addAttributeText = "اضافه ویژگی جدید به محصول";
     public string addAttributeStyle = "btn-outline-success";
     public bool SuccessAlert = false;
-    public bool addAttText = false;
+    public string addAttText = "d-none";
+    public string deleteAttText = "d-none";
 }
 
-@functions{
+@functions {
     protected override async Task OnInitializedAsync()
     {
-        AddProductAttributeViewModel = new ProductAttributeViewModel();
         addAttribute = "d-none";
-        DisplaySuccessAlert = false;
-        if (Id != null)
+        DisplaySuccessAlert = "d-none";
+        DisplayDeleteAlert = "d-none";
+        productInfoViewModel = await httpClient.GetFromJsonAsync<ProductInfoViewModel>($"Product/Info/{Id}");
+        if (productInfoViewModel != null)
         {
-            productInfoViewModel = await httpClient.GetFromJsonAsync<ProductInfoViewModel>($"Product/Info/{int.Parse(Id)}");
-            if (productInfoViewModel != null)
-            {
-                category = await httpClient.GetFromJsonAsync<CategoryViewModel>($"Category/Info/{productInfoViewModel.CategoryId}");
-                productAttributeViewModels = await httpClient.GetFromJsonAsync<List<ProductAttributeViewModel>>($"ProductAttribute/GetPA/{productInfoViewModel.ProductId}");
-                categoryAttributeViewModels = await httpClient.GetFromJsonAsync<List<CategoryAttributeViewModel>>($"CategoryAttribute/List/{productInfoViewModel.CategoryId}");
-                productImagesViewModels = await httpClient.GetFromJsonAsync<List<ProductImagesViewModel>>($"ProductImage/GetImages/{productInfoViewModel.ProductId}");
+            category = await httpClient.GetFromJsonAsync<CategoryViewModel>($"Category/Info/{productInfoViewModel.CategoryId}");
+            productAttributeViewModels = await httpClient.GetFromJsonAsync<List<ProductAttributeViewModel>>($"ProductAttribute/GetPA/{productInfoViewModel.ProductId}");
+            categoryAttributeViewModels = await httpClient.GetFromJsonAsync<List<CategoryAttributeViewModel>>($"CategoryAttribute/List/{productInfoViewModel.CategoryId}");
+            productImagesViewModels = await httpClient.GetFromJsonAsync<List<ProductImagesViewModel>>($"ProductImage/GetImages/{productInfoViewModel.ProductId}");
 
-            }
         }
+
 
     }
 
@@ -303,12 +319,16 @@ else
                 await stream.ReadAsync(buf); // copy the stream to the buffer
             }
             filesBase64 = (new ImageFile { base64data = Convert.ToBase64String(buf), contentType = file.ContentType, fileName = file.Name }); // convert to a base64 string!!
-            var msg = await httpClient.PutAsJsonAsync($"/ProductImage/Save/{productInfoViewModel.ProductId}", filesBase64, System.Threading.CancellationToken.None);
-            if (msg != null)
+            if (productInfoViewModel != null)
             {
-                DisplaySuccessAlert = true;
+                var msg = await httpClient.PutAsJsonAsync($"/ProductImage/Save/{productInfoViewModel.ProductId}", filesBase64, System.Threading.CancellationToken.None);
+            }
+            DisplaySuccessAlert = "d-block";
+            if (productInfoViewModel != null)
+            {
                 productImagesViewModels = await httpClient.GetFromJsonAsync<List<ProductImagesViewModel>>($"ProductImage/GetImages/{productInfoViewModel.ProductId}");
             }
+
         }
     }
 
@@ -325,25 +345,31 @@ else
                 await stream.ReadAsync(buf); // copy the stream to the buffer
             }
             filesBase64 = (new ImageFile { base64data = Convert.ToBase64String(buf), contentType = file.ContentType, fileName = file.Name }); // convert to a base64 string!!
-            var msg = await httpClient.PutAsJsonAsync($"/ProductImage/EditProductImage/{productInfoViewModel.ProductId}", filesBase64, System.Threading.CancellationToken.None);
-            if (msg != null)
+            if (productInfoViewModel != null)
             {
-                SuccessAlert = true;
-                productInfoViewModel = await httpClient.GetFromJsonAsync<ProductInfoViewModel>($"Product/Info/{int.Parse(Id)}");
+                var msg = await httpClient.PutAsJsonAsync($"/ProductImage/EditProductImage/{productInfoViewModel.ProductId}", filesBase64, System.Threading.CancellationToken.None);
             }
+            SuccessAlert = true;
+            productInfoViewModel = await httpClient.GetFromJsonAsync<ProductInfoViewModel>($"Product/Info/{Id}");
+
         }
     }
 
     public async void SubmitEdit()
     {
-        var msg = await httpClient.PutAsJsonAsync($"/Product/SubmitEdit/{productInfoViewModel.ProductId}", productInfoViewModel);
+        if (productInfoViewModel != null)
+        {
+            var msg = await httpClient.PutAsJsonAsync($"/Product/SubmitEdit/{productInfoViewModel.ProductId}", productInfoViewModel);
+        }
         SuccessAlert = true;
     }
 
     public void CloseAlert()
     {
-        DisplaySuccessAlert = false;
-        addAttText = false;
+        DisplaySuccessAlert = "d-none";
+        addAttText = "d-none";
+        deleteAttText = "d-none";
+        DisplayDeleteAlert = "d-none";
     }
     public void CloseSuccessAlert()
     {
@@ -367,16 +393,34 @@ else
 
     }
 
-    public async void addProductAttribute()
+    public async Task addProductAttribute()
     {
-        AddProductAttributeViewModel.ProductId = productInfoViewModel.ProductId;
-        var msg = await httpClient.PostAsJsonAsync<ProductAttributeViewModel>($"ProductAttribute/AddAttribute", AddProductAttributeViewModel);
-        if (msg != null)
+        if (productInfoViewModel != null)
         {
-            AddAttribute();
-            addAttText = true;
-            productAttributeViewModels = await httpClient.GetFromJsonAsync<List<ProductAttributeViewModel>>($"ProductAttribute/GetPA/{productInfoViewModel.ProductId}");
-
+            AddProductAttributeViewModel.ProductId = productInfoViewModel.ProductId;
         }
+        await httpClient.PostAsJsonAsync<ProductAttributeViewModel>($"ProductAttribute/AddAttribute", AddProductAttributeViewModel);
+        AddProductAttributeViewModel = new ProductAttributeViewModel();
+        addAttText = "d-block";
+        productAttributeViewModels = await httpClient.GetFromJsonAsync<List<ProductAttributeViewModel>>($"ProductAttribute/GetPA/{productInfoViewModel.ProductId}");
+        AddAttribute();
+        await OnInitializedAsync();
+    }
+
+    public async Task DeleteMoreImage(int id)
+    {
+        if (id > 0)
+        {
+            await httpClient.PostAsJsonAsync<int>($"ProductImage/DeleteImage", id);
+            DisplayDeleteAlert = "d-block";
+            productImagesViewModels = await httpClient.GetFromJsonAsync<List<ProductImagesViewModel>>($"ProductImage/GetImages/{productInfoViewModel.ProductId}");
+        }
+    }
+
+    public async Task DeleteAtt(int id)
+    {
+        await httpClient.PostAsJsonAsync<int>($"ProductAttribute/DeleteAtt", id);
+        deleteAttText = "d-block";
+        productAttributeViewModels = await httpClient.GetFromJsonAsync<List<ProductAttributeViewModel>>($"ProductAttribute/GetPA/{productInfoViewModel.ProductId}");
     }
 }

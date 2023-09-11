@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using UniversityShopProject.Shared.ViewModels.Admin;
+using UniversityShopProject.Shared.ViewModels.Auth;
 using UniversityShopProject.Shared.ViewModels.User;
 using UniversityShopProjectModels.Context;
 using UniversityShopProjectModels.Models;
@@ -125,6 +128,54 @@ namespace UniversityShopProject.Server.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "عملیات درج کاربر انجام نشد");
             }
+        }
+
+        [HttpPost("LoginAdmin")]
+        public ActionResult Login(LoginRequest userRequest)
+        {
+            Admin? admin = _AdminService.GetAll().Where(t => t.UserName == userRequest.UserName && t.Password == userRequest.Password).FirstOrDefault();
+            if (admin != null)
+            {
+                var claims = new List<Claim>{
+                    new Claim(ClaimTypes.Name, admin.UserName),
+                    new Claim(ClaimTypes.Role, "Admin"),
+                };
+                var claimIdentity = new ClaimsIdentity(claims, "ServerAuth");
+                ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimIdentity);
+                AuthenticationHttpContextExtensions.SignInAsync(HttpContext, claimsPrincipal);
+            }
+            return Ok(admin);
+        }
+
+        [HttpGet("IsAdmin")]
+        public ActionResult IsAdmin()
+        {
+            AdminInfoViewModel adminInfoViewModel = new AdminInfoViewModel();
+            if (User.Identity != null)
+            {
+                if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    Admin admin = new Admin();
+                    admin.UserName = User.FindFirstValue(ClaimTypes.Name);
+                    admin = _AdminService.GetAll().Find(t => t.UserName == admin.UserName);
+                    adminInfoViewModel = _mapper.Map<Admin, AdminInfoViewModel>(admin);
+                }
+            }
+            return Ok(adminInfoViewModel);
+        }
+
+        [HttpGet("LogOutAdmin")]
+        public ActionResult LogOutUser()
+        {
+            AuthenticationHttpContextExtensions.SignOutAsync(HttpContext);
+            return Ok(true);
+        }
+
+        [HttpGet("GetPermission/{userName}/{password}")]
+        public ActionResult GetPermission(string userName, string password)
+        {
+            var res = _AdminService.CheckPermission(userName, password);
+            return Ok(res);
         }
     }
 }

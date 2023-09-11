@@ -41,6 +41,8 @@ namespace UniversityShopProject.Shared.ViewModels.User
         public bool? Gender { get; set; }
         [Display(Name = "فعال/غیرفعال")]
         public bool IsActive { get; set; }
+
         public string? EditUrl { get; set; }
+        public string? GenderString { get; set; }
     }
 }

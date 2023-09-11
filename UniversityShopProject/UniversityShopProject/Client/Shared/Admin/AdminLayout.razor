@@ -1,23 +1,54 @@
 ﻿@inherits LayoutComponentBase
+@inject HttpClient httpclient
+@inject NavigationManager navigationManager
 
 <div class="page">
-    <div class="sidebar">
-        <AdminNavbar />
-    </div>
+    <AuthorizeView Roles="Admin">
+        <Authorized>
+            <div class="sidebar">
+                <AdminNavbar />
+            </div>
 
-    <main>
-        <div class="top-row px-4">
-            <a href="#" target="_blank" class="btn btn-outline-danger">خروج</a>
-        </div>
+            <main>
+                <div class="top-row px-4">
+                    <a class="btn btn-outline-secondary" onclick="window.history.go(-1);">بازگشت</a>
+                    <a @onclick="LogoutAdmin" class="btn btn-outline-danger">خروج</a>
+                </div>
 
-        <article class="content px-4 my-3">
-            @Body
-        </article>
-    </main>
+
+                <article class="content px-4 my-3">
+                    @Body
+                </article>
+            </main>
+        </Authorized>
+    </AuthorizeView>
 </div>
 
 
 
 @code {
+    public AdminInfoViewModel? admin { get; set; }
 
+    protected async override Task OnParametersSetAsync()
+    {
+        admin = await httpclient.GetFromJsonAsync<AdminInfoViewModel>("Admins/IsAdmin");
+        if (admin.UserName == null)
+        {
+            navigationManager.NavigateTo("/Admin/Login", true);
+        }
+        await base.OnParametersSetAsync();
+    }
+
+    public async void LogoutAdmin()
+    {
+        var res = await httpclient.GetFromJsonAsync<bool>("Admins/LogOutAdmin");
+        if (res == true)
+        {
+            navigationManager.NavigateTo("/", true);
+        }
+    }
+    public void NotAuthorizedNavigation()
+    {
+        navigationManager.NavigateTo("/", true);
+    }
 }

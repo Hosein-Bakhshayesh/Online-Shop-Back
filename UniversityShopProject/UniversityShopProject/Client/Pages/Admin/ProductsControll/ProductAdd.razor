@@ -23,7 +23,7 @@
                         <DataAnnotationsValidator />
                         <ValidationSummary />
                     </span>
-                    <div class="row w-100">
+                    <div class="row w-100 mt-2">
                         <div class="col-6 w-100">
                             <label>
                                 نام کالا :<span class="text-danger">*</span>
@@ -35,37 +35,37 @@
                                 گروه کالا :<span class="text-danger">*</span>
                             </label>
                             <InputSelect @bind-Value="productAdd.CategoryId" class="form-control input-field" readonly>
-                                @foreach (var item in Categories)
+                                @if(Categories != null)
                                 {
-                                    if (item.CategoryId == int.Parse(id))
+                                    @foreach (var item in Categories)
                                     {
-                                        <option value="@item.CategoryId" selected>@item.CategoryName</option>
+                                        if (item.CategoryId == int.Parse(id))
+                                        {
+                                            <option value="@item.CategoryId" selected>@item.CategoryName</option>
+                                        }
                                     }
                                 }
                             </InputSelect>
                         </div>
-                        <hr />
-                        <div class="col-12 w-100">
+                        <div class="col-12 w-100 mt-2">
                             <label>
                                 توضیحات :<span class="text-danger">*</span>
                             </label>
                             <InputTextArea @bind-Value="productAdd.ProductDiscription" class="form-control input-field" />
                         </div>
-                        <hr />
-                        <div class="col-6 w-100">
+                        <div class="col-6 w-100 mt-2">
                             <label>
                                 قیمت :<span class="text-danger">*</span>
                             </label>
                             <InputText @bind-Value="productAdd.Price" class="form-control input-field" />
                         </div>
-                        <div class="col-6 w-100">
+                        <div class="col-6 w-100 mt-2">
                             <label>
                                 تعداد :<span class="text-danger">*</span>
                             </label>
                             <InputNumber @bind-Value="productAdd.Number" class="form-control input-field" />
                         </div>
-                        <hr />
-                        <div class="col-6 w-100">
+                        <div class="col-6 w-100 mt-2">
                             <label>
                                 وضعیت :<span class="text-danger">*</span>
                             </label>
@@ -74,8 +74,7 @@
                                 <option value="false">غیرفعال</option>
                             </InputSelect>
                         </div>
-                        <hr />
-                        <div class="col-12 w-100">
+                        <div class="col-12 w-100 mt-3">
                             <label>
                                 تصویر کالا :<span class="text-danger">*</span>
                             </label>
@@ -83,7 +82,7 @@
                         </div>
                     </div>
                     <hr />
-                    <div>
+                    <div class="mt-2">
                         <button @onclick="CloseAddModal" type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
                         <button type="submit" class="btn btn-success" disabled="@isDisabled">درج کالا</button>
                     </div>
@@ -97,24 +96,17 @@
 
 @code {
     [Parameter]
-    public string id { get; set; }
-    public ProductViewModel productAdd { get; set; }
+    public string id { get; set; } = " ";
+    public ProductViewModel productAdd = new ProductViewModel();
     [Parameter]
     public List<CategoryViewModel>? Categories { get; set; }
-    public ImageFile? filesBase64 { get; set; }
+    public ImageFile filesBase64 = new ImageFile();
     public string styleAddProductModal { get; set; } = "d-none";
-    public IBrowserFile imageFile;
+    public IBrowserFile? imageFile;
     bool isDisabled = false;
 }
 
 @functions {
-    protected override async Task OnInitializedAsync()
-    {
-        productAdd = new ProductViewModel();
-        filesBase64 = new ImageFile();
-
-    }
-
     public async Task AddHandleValidSubmit()
     {
         isDisabled = true;
@@ -125,7 +117,9 @@
             productAdd.ProductImagePath = fileName;
             productAdd.ProductId = 0;
             productAdd.infoUrl = "Info";
+            productAdd.CategoryId = Convert.ToInt32(id);
             var res2 = await httpClient.PostAsJsonAsync<ProductViewModel>("Product/Create", productAdd);
+            productAdd = new ProductViewModel();
             isDisabled = false;
             CloseAddModal();
         }

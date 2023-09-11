@@ -1,10 +1,15 @@
-﻿@page "/Admin-CategoryInfo/{categoryId}"
+﻿@page "/Admin-CategoryInfo/{categoryId:int}"
 @inject HttpClient httpClient
 @inject NavigationManager navigationManager
 
 @layout AdminLayout
 
-<h3>مشخصات @categoryView.CategoryName</h3>
+<PageTitle>مشخصات دسته بندی</PageTitle>
+
+@if (categoryView != null)
+{
+    <h3>مشخصات @categoryView.CategoryName</h3>
+}
 
 @if (categoryView != null)
 {
@@ -82,74 +87,85 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in CategoryChild)
+                @if (CategoryChild != null)
                 {
-                    <tr>
+                    @foreach (var item in CategoryChild)
+                    {
+                        <tr>
 
-                        @if (isEdit == false)
-                        {
-                            <td>@item.CategoryName</td>
-                            <td>
-                                @if (item.IsActive == true)
-                                {
-                                    <span class="text-success">این دسته بندی فعال است.</span>
-                                }
-                                else
-                                {
-                                    <span class="text-danger">این دسته بندی غیرفعال است.</span>
-
-                                }
-                            </td>
-                            <td>
-                                @Categories.FirstOrDefault(t=>t.CategoryId == item.ParentId).CategoryName
-                            </td>
-                        }
-                        else
-                        {
-                            <td>
-                                <InputText @bind-Value="item.CategoryName" class="input-field form-control" />
-                            </td>
-                            <td>
-                                <InputSelect @bind-Value="item.IsActive" class="form-control">
-                                    <option value="true">فعال</option>
-                                    <option value="false">غیرفعال</option>
-                                </InputSelect>
-                            </td>
-                            <td>
-                                <InputSelect @bind-Value="item.ParentId" class="form-control">
-                                    @foreach (var C in Categories)
+                            @if (isEdit == false)
+                            {
+                                <td>@item.CategoryName</td>
+                                <td>
+                                    @if (item.IsActive == true)
                                     {
-
-                                        @if (C.ParentId == null)
-                                        {
-                                            <option value="@C.CategoryId">
-                                                @C.CategoryName
-                                            </option>
-                                        }
+                                        <span class="text-success">این دسته بندی فعال است.</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-danger">این دسته بندی غیرفعال است.</span>
 
                                     }
-                                </InputSelect>
+                                </td>
+                                <td>
+                                    @if (Categories != null)
+                                    {
+                                        @Categories.FirstOrDefault(t=>t.CategoryId == item.ParentId).CategoryName
+                                    }
+
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <InputText @bind-Value="item.CategoryName" class="input-field form-control" />
+                                </td>
+                                <td>
+                                    <InputSelect @bind-Value="item.IsActive" class="form-control">
+                                        <option value="true">فعال</option>
+                                        <option value="false">غیرفعال</option>
+                                    </InputSelect>
+                                </td>
+                                <td>
+                                    <InputSelect @bind-Value="item.ParentId" class="form-control">
+                                        @if (Categories != null)
+                                        {
+                                            @foreach (var C in Categories)
+                                            {
+
+                                                @if (C.ParentId == null)
+                                                {
+                                                    <option value="@C.CategoryId">
+                                                        @C.CategoryName
+                                                    </option>
+                                                }
+
+                                            }
+                                        }
+                                    </InputSelect>
+                                </td>
+                            }
+                            <td>
+                                <CategoryDelete CategoryId="@item.CategoryId" />
+                                <NavLink href="@item.CAttributeUrl">
+                                    <button type="button" class="btn-outline-primary btn">ویژگی‌ها</button>
+                                </NavLink>
                             </td>
-                        }
-                        <td>
-                            <CategoryDelete CategoryId="@item.CategoryId"/>
-                            <NavLink href="@item.CAttributeUrl">
-                                <button type="button" class="btn-outline-primary btn">ویژگی‌ها</button>
-                            </NavLink>
-                        </td>
-                    </tr>
+                        </tr>
+                    }
                 }
             </tbody>
         </table>
-        @if(isEdit == false)
+        @if (isEdit == false)
         {
             <button type="button" class="btn btn-warning my-2" @onclick="EditCategory">ویرایش</button>
-        }else
+        }
+        else
         {
             <button type="submit" class="btn btn-warning my-2">تایید و ویرایش</button>
         }
     </EditForm>
-    <CategoryDelete CategoryId="@int.Parse(categoryId)" />
+    <CategoryDelete CategoryId="@categoryId" />
 
 
 }
@@ -162,7 +178,7 @@ else
 
 @code {
     [Parameter]
-    public string? categoryId { get; set; }
+    public int categoryId { get; set; }
     public CategoryViewModel? categoryView { get; set; }
     public List<CategoryViewModel>? CategoryChild { get; set; }
     public List<CategoryViewModel>? Categories { get; set; }
@@ -172,13 +188,15 @@ else
     protected override async Task OnInitializedAsync()
     {
         categoryView = new CategoryViewModel();
-        int id = int.Parse(categoryId);
-        categoryView = await httpClient.GetFromJsonAsync<CategoryViewModel>($"Category/Info/{id}");
+        categoryView = await httpClient.GetFromJsonAsync<CategoryViewModel>($"Category/Info/{categoryId}");
         Categories = await httpClient.GetFromJsonAsync<List<CategoryViewModel>>("Category/List");
-        CategoryChild = await httpClient.GetFromJsonAsync<List<CategoryViewModel>>($"Category/ChildInfo/{id}");
-        @foreach (var item in CategoryChild)
+        CategoryChild = await httpClient.GetFromJsonAsync<List<CategoryViewModel>>($"Category/ChildInfo/{categoryId}");
+        if (CategoryChild != null)
         {
-            item.CAttributeUrl = "/Admin-CategoryInfo/Attributes/" + item.CategoryId;
+            @foreach (var item in CategoryChild)
+            {
+                item.CAttributeUrl = "/Admin-CategoryAttributes/" + item.CategoryId;
+            }
         }
     }
 
@@ -188,7 +206,7 @@ else
         {
             var res = await httpClient.PutAsJsonAsync("Category/Edit", categoryView);
             var res_2 = await httpClient.PutAsJsonAsync("Category/EditChild", CategoryChild);
-            if (res != null || res_2!=null)
+            if (res != null || res_2 != null)
             {
                 navigationManager.NavigateTo("/Admin-CategoryList");
             }

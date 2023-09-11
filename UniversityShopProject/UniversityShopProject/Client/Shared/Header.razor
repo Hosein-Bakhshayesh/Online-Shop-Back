@@ -1,16 +1,20 @@
 ﻿@inject HttpClient httpClient
+@inject NavigationManager navigationManager
 
 <header>
     <div class="bg-primary d-block d-xl-none">
         <div class="collapse navbar-collapse m-0 p-0" id="colNav">
             <ul class="navbar-nav text-center p-0">
-                @foreach (var item in categories.FindAll(t => t.ParentId == null))
+                @if (categories != null)
                 {
-                    <li class="nav-item my-2">
-                        <NavLink class="nav-sm nav-link" href="/CategoriesItem">
-                            <h4 class="m-0 categories-title">@item.CategoryName</h4>
-                        </NavLink>
-                    </li>
+                    @foreach (var item in categories.FindAll(t => t.ParentId == null))
+                    {
+                        <li class="nav-item my-2">
+                            <NavLink class="nav-sm nav-link" href="/CategoriesItem">
+                                <h4 class="m-0 categories-title">@item.CategoryName</h4>
+                            </NavLink>
+                        </li>
+                    }
                 }
 
             </ul>
@@ -31,28 +35,31 @@
                         </button>
                         <div class="dropdown-content">
                             <div class="w-100 row">
-                                @foreach (var item in categories.FindAll(t => t.ParentId == null))
+                                @if (categories != null)
                                 {
-                                    @if(item.IsActive == true)
+                                    @foreach (var item in categories.FindAll(t => t.ParentId == null))
                                     {
-                                        <div class="col-2 mt-1 p-0">
-                                            <ul>
-                                                <li>
-                                                    <NavLink href="/CategoriesItem">
-                                                        <h4 class="m-0 categories-title">@item.CategoryName</h4>
-                                                    </NavLink>
-                                                </li>
-                                                @foreach (var temp in categories.FindAll(t => t.ParentId == item.CategoryId))
-                                                {
+                                        @if (item.IsActive == true)
+                                        {
+                                            <div class="col-2 mt-1 p-0">
+                                                <ul>
                                                     <li>
-                                                        <NavLink href="#">
-                                                            <h5 class="m-0 categories-subtitle">@temp.CategoryName</h5>
+                                                        <NavLink href="@item.CategoryItemUrl">
+                                                            <h4 class="m-0 categories-title">@item.CategoryName</h4>
                                                         </NavLink>
                                                     </li>
+                                                    @foreach (var temp in categories.FindAll(t => t.ParentId == item.CategoryId))
+                                                    {
+                                                        <li>
+                                                            <NavLink href="@temp.CategoryItemUrl">
+                                                                <h5 class="m-0 categories-subtitle">@temp.CategoryName</h5>
+                                                            </NavLink>
+                                                        </li>
 
-                                                }
-                                            </ul>
-                                        </div>
+                                                    }
+                                                </ul>
+                                            </div>
+                                        }
                                     }
                                 }
 
@@ -72,36 +79,54 @@
                     <NavLink class="m-0 text-black text-decoration-none logo-place" href="/">لوگو سایت</NavLink>
                 </p>
             </div>
-            <div class="d-block d-sm-none col d-flex justify-content-end">
-                <NavLink href="/UserPanel" class="text-black text-decoration-none" title="مشاهده پنل کاربری">
-                    <i class="fa-solid fa-2x fa-circle-user"></i>
-                </NavLink>
-            </div>
-            <div class="navbar-nav col-3 d-flex justify-content-end">
-                <NavLink href="/UserPanel" class="d-none d-lg-block nav-link nav-item mr-3 my-auto">
-                    سبد خرید <i class="fa fa-shopping-cart"> </i> : <span id="cart-items-count"> 0</span>
-                </NavLink>
-                <div class="dropdown d-none d-sm-block">
-                    <div class="btn dropdown-toggle border-0" @onclick="ShowUserDropdown" id="dropdownMenuButton" data-toggle="dropdown">
-                        <i class="fa-solid fa-2x fa-circle-user"></i>
-                    </div>
-                    <div class="dropdown-menu p-0 @displayDropdown" aria-labelledby="dropdownMenuButton">
-                        <NavLink href="/UserPanel" @onclick="ShowUserDropdown" class="dropdown-item p-0 d-flex align-items-center border border-bottom">
-                            <i class="fa fa-circle-user px-2"></i>مشخصات کاربری
-                        </NavLink>
-                        <NavLink href="/UserPanel" @onclick="ShowUserDropdown" class="dropdown-item p-0 d-flex align-items-center border border-bottom">
-                            <i class="fa-regular fa-heart px-2"></i>لیست علاقه‌مندی‌ها
-                        </NavLink>
-                        <NavLink href="/UserPanel" @onclick="ShowUserDropdown"
-                                 class="d-block d-lg-none dropdown-item p-0 d-flex align-items-center border border-bottom">
-                            <i class="fa fa-shopping-cart px-2"></i>مشاهده سبد خرید
-                        </NavLink>
-                        <NavLink href="/UserPanel" @onclick="ShowUserDropdown" class="dropdown-item p-0 d-flex align-items-center">
-                            <i class="fa-solid fa-arrow-right-from-bracket px-2"></i>خروج از حساب کاربری
+            <AuthorizeView Roles="User">
+                <Authorized>
+                    <div class="d-block d-sm-none col d-flex justify-content-end">
+                        <NavLink href="/UserPanel" class="text-black text-decoration-none" title="مشاهده پنل کاربری">
+                            <i class="fa-solid fa-2x fa-circle-user"></i>
                         </NavLink>
                     </div>
-                </div>
-            </div>
+                    <div class="navbar-nav col-3 d-flex justify-content-end">
+                        <NavLink href="/Cart" class="d-none d-lg-block nav-link nav-item mr-3 my-auto">
+                            مشاهده سبد خرید <i class="fa fa-shopping-cart"> </i>
+                        </NavLink>
+                        <div class="dropdown d-none d-sm-block">
+                            <div class="btn dropdown-toggle border-0" @onclick="ShowUserDropdown" id="dropdownMenuButton" data-toggle="dropdown">
+                                <i class="fa-solid fa-2x fa-circle-user"></i>
+                            </div>
+                            <div class="dropdown-menu p-0 @displayDropdown" aria-labelledby="dropdownMenuButton">
+                                <NavLink href="/UserPanel" @onclick="ShowUserDropdown" class="dropdown-item p-0 d-flex align-items-center border border-bottom">
+                                    <i class="fa fa-circle-user px-2"></i>مشخصات کاربری
+                                </NavLink>
+                                <NavLink href="/Cart" @onclick="ShowUserDropdown"
+                                         class="d-block d-lg-none dropdown-item p-0 d-flex align-items-center border border-bottom">
+                                    <i class="fa fa-shopping-cart px-2"></i>مشاهده سبد خرید
+                                </NavLink>
+                                <NavLink style="cursor:pointer" @onclick="LogoutUser" class="dropdown-item p-0 d-flex align-items-center">
+                                    <i class="fa-solid fa-arrow-right-from-bracket px-2"></i>خروج از حساب کاربری
+                                </NavLink>
+                            </div>
+                        </div>
+                    </div>
+                </Authorized>
+                <NotAuthorized>
+                    <div class="col d-flex justify-content-end">
+                        <NavLink href="/Login" class="btn btn-outline-info">
+                            ورود / ثبت نام
+                        </NavLink>
+                    </div>
+                </NotAuthorized>
+            </AuthorizeView>
+            <AuthorizeView Roles="Admin">
+                <Authorized>
+                    <div class="col d-flex justify-content-end">
+                        <NavLink href="/Admin" class="btn btn-outline-info">
+                            پنل ادمین
+                        </NavLink>
+                    </div>
+                </Authorized>
+            </AuthorizeView>
+
         </div>
     </nav>
 
@@ -136,9 +161,18 @@
     public List<CategoryViewModel>? categories { get; set; }
     public string SearchModalText = "hide d-none";
     public string displayDropdown = "d-none";
+    private System.Threading.Timer? timer;
+
     protected async override Task OnInitializedAsync()
     {
         categories = await httpClient.GetFromJsonAsync<List<CategoryViewModel>>("Category/List");
+        if (categories != null)
+        {
+            foreach (var item in categories)
+            {
+                item.CategoryItemUrl = "/CategoriesItem/" + item.CategoryId;
+            }
+        }
         await base.OnInitializedAsync();
     }
     public void ShowSearchModal()
@@ -161,6 +195,14 @@
         else
         {
             displayDropdown = "d-none";
+        }
+    }
+    public async Task LogoutUser()
+    {
+        var res = await httpClient.GetFromJsonAsync<bool>("User/LogOutUser");
+        if (res == true)
+        {
+            navigationManager.NavigateTo("/", true);
         }
     }
 }

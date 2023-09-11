@@ -1,0 +1,46 @@
+﻿@inject HttpClient httpclient
+
+@if(products!=null)
+{
+    @foreach (var item in products)
+    {
+        <div class="col-12 col-sm-5 col-lg-2 product-box p-0 mx-2 my-2">
+            <NavLink href="@item.ProductDetailLink" class="text-center h-50 bg-white d-block text-black text-decoration-none">
+                <img src="Images/Product-Image/@item.ProductImagePath" alt="@item.ProductName" class="product-img">
+            </NavLink>
+            <div class="w-100 text-center mt-2 h-25">
+                <NavLink href="@item.ProductDetailLink" class="product-title mt-2 fw-lighter text-black text-decoration-none">
+                    @item.ProductName
+                </NavLink>
+            </div>
+            <div class=" justify-content-center align-items-end pb-4 h-25 d-flex text-danger">
+                @Convert.ToInt32(item.Price).ToString("n0") تومان
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="col-12 col-sm-5 col-lg-2 product-box p-0 mx-2 my-2">
+        <p class="text-danger fw-bold">
+            محصولی یافت نشد.
+        </p>
+    </div>
+}
+
+
+
+@code {
+    public List<ProductViewModel>? products { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        products = await httpclient.GetFromJsonAsync<List<ProductViewModel>>("Product/GetMostView");
+        products.Reverse();
+        foreach (var item in products)
+        {
+            item.ProductDetailLink = "ProductDetail/" + item.ProductId;
+        }
+        await base.OnInitializedAsync();
+    }
+}

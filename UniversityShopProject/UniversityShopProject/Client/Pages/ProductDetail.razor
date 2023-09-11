@@ -1,21 +1,49 @@
-﻿@page "/ProductDetail/{Id}"
+﻿@page "/ProductDetail/{Id:int}"
+@using System.Globalization;
 @inject HttpClient httpClient
+@inject NavigationManager navigationManager
 
 @if (product != null)
 {
+    <PageTitle>مشخصات @product.ProductName</PageTitle>
     <div class="row product-interface p-0 m-0">
+        <div class="alert alert-danger @ShowLoginError">
+            <button @onclick="CloseAlert" class="close" data-dismiss="alert">&times;</button>
+            ابتدا <a href="/Login">وارد</a> سایت شوید.
+        </div>
+        <div class="alert alert-success @ShowSuccessAddToCart">
+            <button @onclick="CloseAlert" class="close" data-dismiss="alert">&times;</button>
+            با موفقیت در سبد خرید اضافه شد.
+        </div>
+        <div class="alert alert-success @ShowSuccessAddToWishList">
+            <button @onclick="CloseAlert" class="close" data-dismiss="alert">&times;</button>
+            با موفقیت در لیست علاقه مندی‌ها اضافه شد.
+        </div>
+        <div class="alert alert-warning @ExistAddToWishList">
+            <button @onclick="CloseAlert" class="close" data-dismiss="alert">&times;</button>
+            این کالا در لیست علاقه مندی‌ها موجود میباشد.
+        </div>
         <div class="product-img-box col-12 col-xl-4 px-0 py-4">
             <div id="active-img" class="product-img w-100 m-0 text-center">
-                <img src="/Images/Product-Image/@product.ProductImagePath" alt="@product.ProductName" class="h-100">
+                @if (activeImage == null)
+                {
+                    activeImage = product.ProductImagePath;
+                }
+                <img src="/Images/Product-Image/@activeImage" alt="@product.ProductName" class="h-100">
             </div>
             @if (productImagesViewModels != null)
             {
                 <div class="product-another-imgs row my-2">
+                    <div class="product-imgs col-3 p-2 w-100 m-0 text-center">
+                        <a @onclick="()=>ActiveImage(product.ProductImagePath)">
+                            <img src="/Images/Product-Image/@product.ProductImagePath" alt="@product.ProductName" class="h-100">
+                        </a>
+                    </div>
                     @foreach (var item in productImagesViewModels)
                     {
                         <div class="product-imgs col-3 p-2 w-100 m-0 text-center">
-                            <a href="#">
-                                <img src="~/Images/Product-Image/@item.ImagePath" alt="@product.ProductName" class="h-100">
+                            <a @onclick="()=>ActiveImage(item.ImagePath)">
+                                <img src="/Images/Product-Image/@item.ImagePath" alt="@product.ProductName" class="h-100">
                             </a>
                         </div>
                     }
@@ -26,7 +54,7 @@
         <div class="product-detail-interface col-12 col-xl-5 px-0 py-5">
             <div class="font-size-small">
                 <span class="fw-light text-info">دسته کالا :</span>
-                <a href="#" class="text-decoration-none fw-light text-info">
+                <a href="@($"/CategoriesItem/{product.CategoryId}")" class="text-decoration-none fw-light text-info">
                     @if (category != null)
                     {
                         @category.CategoryName
@@ -42,16 +70,26 @@
             </div>
             <div class="line bg-dark-subtle w-100 my-1"></div>
             <div class="font-size-small my-3">
-                <a href="#product-comments" class="text-decoration-none fw-light text-info">6 دیدگاه برای این کالا</a>
+                <a style="cursor:pointer" class="text-decoration-none fw-light text-info" onclick="document.getElementById('product-comments').scrollIntoView({behavior:'smooth'})">
+                    @comments.Count دیدگاه برای این کالا
+                </a>
             </div>
             <div class="font-size-small my-3 detail-preview">
                 <span>
-                    @product.ProductDiscription.Substring(0,250)
+                    @if (product.ProductDiscription.Length > 350)
+                    {
+                        @product.ProductDiscription.Substring(0,350)
+                    }
+                    else
+                    {
+                        @product.ProductDiscription
+                    }
+
                 </span>
-                <a href="#product-detail" class="text-decoration-none fw-bold text-info">بیشتر.....</a>
+                <a style="cursor:pointer" onclick="document.getElementById('product-detail').scrollIntoView({behavior:'smooth'})" class="text-decoration-none fw-bold text-info">بیشتر.....</a>
             </div>
             <div class="my-3">
-                <NavLink href="#Product-Technical" class="fw-bold text-decoration-none text-info">مشاهده مشخصات فنی کالا</NavLink>
+                <a style="cursor:pointer" onclick="document.getElementById('Product-Technical').scrollIntoView({behavior:'smooth'})" class="fw-bold text-decoration-none text-info">مشاهده مشخصات فنی کالا</a>
             </div>
         </div>
         <div class="add-cart col-12 col-xl-3 mt-xl-5">
@@ -59,7 +97,7 @@
                 <div class="font-size-small">
                     <i class="fa fa-check"> </i> گارانتی اصالت کالا و برگشت 20 روزه کالا
                 </div>
-                <div class="line bg-dark-subtle w-100 my-4"></div>
+                <div class="line bg-dark-subtle w-100 my-4"><hr /></div>
                 <span class="font-size-small"><i class="fa fa-shop"> </i></span>
                 @if (product.Number > 0)
                 {
@@ -70,22 +108,20 @@
                     <span class="text-danger">در انبار موجود نمیباشد</span>
                 }
                 <div class="line bg-dark-subtle w-100 my-4"></div>
-                <form method="post" class="add-cart-form">
-                    <input class="mx-1" type="radio" value="blue" name="colorSelected" id="colorSelected0" checked><span class="text-primary">آبی</span>
-                    <input class="mx-1" type="radio" value="black" name="colorSelected" id="colorSelected1"><span class="text-black">مشکی</span>
-                    <input class="mx-1" type="radio" value="pink" name="colorSelected" id="colorSelected3"><span class="text-danger">قرمز</span>
+                <div class="add-cart-form">
                     <div class="price my-3">
                         <span class="fw-bold">@Convert.ToInt32(product.Price).ToString("n0") تومان</span>
                     </div>
                     @if (product.Number > 0)
                     {
-                        <button type="submit" class="btn btn-success w-100">اضافه به سبد خرید</button>
+                        <button @onclick="AddToCart" type="button" class="btn btn-success w-100">اضافه به سبد خرید</button>
                     }
                     else
                     {
-                        <button type="submit" disabled class="btn btn-success w-100">اضافه به سبد خرید</button>
+                        <button type="button" disabled class="btn btn-secondary w-100">موجود نمیباشد.</button>
                     }
-                </form>
+                    <button @onclick="AddToWishList" type="button" class="btn btn-warning w-100 mt-2">اضافه کردن به لیست علاقه مندی ها</button>
+                </div>
             </div>
         </div>
     </div>
@@ -95,7 +131,7 @@
     <!--------------------------------------------------------------------------------------------------->
 
 
-    <div class="p-0 mx-0 mt-4">
+    <div class="p-0 mx-0 mt-2">
         <div class="container product-detail">
             <div class="border border-2 border-dark rounded rounded-pill d-inline py-2 px-5">
                 <span class="fw-bold" id="product-detail"><i class="fa fa-info-circle"> </i> توضیحات کالا</span>
@@ -111,7 +147,7 @@
     <!--------------------------------------------------------------------------------------------------->
 
 
-    <div class="p-0 mx-0 mt-4">
+    <div class="p-0 mx-0 mt-2">
         <div class="container product-detail">
             <div class="border border-2 border-dark rounded rounded-pill d-inline py-2 px-5">
                 <span id="Product-Technical" class="fw-bold"><i class="fa fa-gears"> </i> مشخصات فنی</span>
@@ -167,124 +203,82 @@
     <!--------------------------------------------------------------------------------------------------->
     <!--------------------------------------------------------------------------------------------------->
 
-    <div class="p-0 mx-0 mt-4">
+    <div class="p-0 mx-0 mt-2">
         <div class="container product-detail">
             <div class="border border-2 border-dark rounded rounded-pill d-inline py-2 px-5">
                 <span class="fw-bold" id="product-comments"><i class="fa fa-comment"> </i> نظرات</span>
             </div>
             <div class="product-comments mt-3 text-justify text-center">
                 <div class="add-Comment d-block d-lg-none w-100 m-auto font-size-small">
-                    <form action="#" method="post" class="form-box">
-                        <input type="text" id="commentUserNameSM" name="commentUserName" placeholder="نام ..."
-                               class="comment-inputs form-control my-2 font-size-small">
-                        <textarea name="commentText" id="commentTextSM" cols="30" rows="10" placeholder="متن نظر ..."
-                                  class="comment-inputs form-control my-2 font-size-small"></textarea>
+                    <EditForm Model="AddComment" OnValidSubmit="AddCommentSubmit" class="form-box">
+                        <InputText @bind-Value="AddComment.Name" id="commentUserNameSM" name="commentUserName" placeholder="نام ..." class="comment-inputs form-control my-2 font-size-small" />
+                        <InputTextArea @bind-Value="AddComment.CommentText" name="commentText" id="commentTextSM" cols="30" rows="10" placeholder="متن نظر ..." class="comment-inputs form-control my-2 font-size-small"></InputTextArea>
                         <button type="submit" class="w-100 btn btn-success">ارسال نظر</button>
-                    </form>
+                    </EditForm>
                 </div>
                 <div class="add-Comment d-none d-lg-block w-50 m-auto font-size-small">
-                    <form action="#" method="post" class="form-box">
-                        <input type="text" id="commentUserName" name="commentUserName" placeholder="نام ..."
-                               class="comment-inputs form-control my-2 font-size-small">
-                        <textarea name="commentText" id="commentText" cols="30" rows="10" placeholder="متن نظر ..."
-                                  class="comment-inputs form-control my-2 font-size-small"></textarea>
+                    <EditForm Model="AddComment" OnValidSubmit="AddCommentSubmit" class="form-box">
+                        <InputText @bind-Value="AddComment.Name" id="commentUserNameSM" name="commentUserName" placeholder="نام ..." class="comment-inputs form-control my-2 font-size-small" />
+                        <InputTextArea @bind-Value="AddComment.CommentText" name="commentText" id="commentTextSM" cols="30" rows="10" placeholder="متن نظر ..." class="comment-inputs form-control my-2 font-size-small"></InputTextArea>
                         <button type="submit" class="w-100 btn btn-success">ارسال نظر</button>
-                    </form>
+                    </EditForm>
                 </div>
-                <div id="show-less-comments">
-                    <div class="comment-box text-left rounded rounded-5 my-3">
-                        <div class="font-size-small">
-                            حسین بخشایش مقرب | <span class="text-black-50">9 فروردین 1402</span> | <span class="text-success">
-                                5 <a href="#" class="text-success text-decoration-none"><i class="fa-regular fa-thumbs-up"></i></a>
-                            </span>
-                        </div>
-                        <hr class="myhr">
-                        <div class="px-3">
-                            <p class="comment-text">
-                                من این گوشی رو خریدم<br>
-                                خیلی عالی هستش و من ازش خیلی راضیم<br>
-                                مرسی از سایت خوبتون
-                            </p>
-                        </div>
-                    </div>
-                    <div class="comment-box text-left rounded rounded-5 my-3">
-                        <div class="font-size-small">
-                            کاربر 2 | <span class="text-black-50">2 اسفند 1401</span> | <span class="text-success">
-                                2 <a href="#"
-                                     class="text-success text-decoration-none"><i class="fa-regular fa-thumbs-up"></i></a>
-                            </span>
-                        </div>
-                        <hr class="myhr">
-                        <div class="px-3">
-                            <p class="comment-text">
-                                خیلی سایت خوبی دارین، من همیشه از سایت شما خرید میکنم و همیشه برام در کمترین زمان میرسه،
-                                واقعا خدمات پس از فروش و گارانتی هم عالیه، پیشنهاد میکنم حتما ازشون خرید کنین
-                            </p>
-                        </div>
-                    </div>
-                    <div class="comment-box text-left rounded rounded-5 my-3">
-                        <div class="font-size-small">
-                            کاربر 3 | <span class="text-black-50">10 بهمن 1401</span> | <span class="text-success">
-                                2 <a href="#"
-                                     class="text-success text-decoration-none"><i class="fa-regular fa-thumbs-up"></i></a>
-                            </span>
-                        </div>
-                        <hr class="myhr">
-                        <div class="px-3">
-                            <p class="comment-text">
-                                اصلا گوشی خوبی نیست. من راضی نبودم
-                            </p>
-                        </div>
-                    </div>
+                <div class="alert alert-success fade-in fade-out @SuccessAddComment mt-3" role="alert">
+                    <a href="#" @onclick="CloseSuccessAlert" class="text-black-50 text-decoration-none fw-bold">&times; </a>
+                    <span class="mx-2">تغییرات با موفقیت انجام شد.</span>
                 </div>
-                <div id="show-more-comments" class="d-none">
-                    <div class="comment-box text-left rounded rounded-5 my-3">
-                        <div class="font-size-small">
-                            کاربر 4 | <span class="text-black-50">2 بهمن 1401</span> | <span class="text-success">
-                                1 <a href="#"
-                                     class="text-success text-decoration-none"><i class="fa-regular fa-thumbs-up"></i></a>
-                            </span>
-                        </div>
-                        <hr class="myhr">
-                        <div class="px-3">
-                            <p class="comment-text">
-                                سامسونگ همیشه گوشی های خیلی خوبی داره
-                            </p>
-                        </div>
+                @if (comments.Count > 0)
+                {
+                    <div id="show-less-comments">
+                        @for (int i = 0; i < comments.Count && i < 3; i++)
+                        {
+                            <div class="comment-box text-left rounded rounded-5 my-3">
+                                <div class="font-size-small">
+                                    @comments[i].Name | <span class="text-black-50">@comments[i].DateTime</span> | <span class="text-success">
+                                        @comments[i].Like <a href="#" class="text-success text-decoration-none"><i class="fa-regular fa-thumbs-up"></i></a>
+                                    </span>
+                                </div>
+                                <hr class="myhr">
+                                <div class="px-3">
+                                    <p class="comment-text">
+                                        @comments[i].CommentText
+                                    </p>
+                                </div>
+                            </div>
+                        }
                     </div>
-                    <div class="comment-box text-left rounded rounded-5 my-3">
-                        <div class="font-size-small">
-                            کاربر 5 | <span class="text-black-50">2 بهمن 1401</span> | <span class="text-success">
-                                0 <a href="#"
-                                     class="text-success text-decoration-none"><i class="fa-regular fa-thumbs-up"></i></a>
-                            </span>
+                    if (comments.Count > 3)
+                    {
+                        <div id="show-more-comments" class="@ShowMoreCommentText">
+                            @for (int i = 3; i < comments.Count; i++)
+                            {
+                                <div class="comment-box text-left rounded rounded-5 my-3">
+                                    <div class="font-size-small">
+                                        @comments[i].Name | <span class="text-black-50">@comments[i].DateTime</span> | <span class="text-success">
+                                            @comments[i].Like <a href="#" class="text-success text-decoration-none"><i class="fa-regular fa-thumbs-up"></i></a>
+                                        </span>
+                                    </div>
+                                    <hr class="myhr">
+                                    <div class="px-3">
+                                        <p class="comment-text">
+                                            @comments[i].CommentText
+                                        </p>
+                                    </div>
+                                </div>
+                            }
                         </div>
-                        <hr class="myhr">
-                        <div class="px-3">
-                            <p class="comment-text">
-                                خیلی مزخرفه.....
-                            </p>
-                        </div>
+                    }
+                    <button id="show-more-comments-btn" class="btn btn-info btn-sm p-2" @onclick="showMoreCommentsFunction">
+                        @ShowMoreCommentBtn
+                    </button>
+                }
+                else
+                {
+                    <div>
+                        <span class="text-danger mt-3">برای این کالا نظری ثبت نشده است.</span>
                     </div>
-                    <div class="comment-box text-left rounded rounded-5 my-3">
-                        <div class="font-size-small">
-                            کاربر 6 | <span class="text-black-50">20 دی 1401</span> | <span class="text-success">
-                                0 <a href="#"
-                                     class="text-success text-decoration-none"><i class="fa-regular fa-thumbs-up"></i></a>
-                            </span>
-                        </div>
-                        <hr class="myhr">
-                        <div class="px-3">
-                            <p class="comment-text">
-                                بهترین سایت رو دارین. ممنون از شما و سایت خوبتون
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <button id="show-more-comments-btn" class="btn btn-info btn-sm p-2" onclick="showMoreCommentsFunction();">
-                    مشاهده
-                    نظرات بیشتر...
-                </button>
+                }
+
             </div>
         </div>
     </div>
@@ -294,83 +288,32 @@
     <!--------------------------------------------------------------------------------------------------->
     <!--------------------------------------------------------------------------------------------------->
 
-    <div class="row p-0 mx-0 mt-4">
+    <div class="row p-0 mx-0 mt-2">
         <div class="container product-detail">
             <div class="border border-2 border-dark rounded rounded-pill d-inline py-2 px-5">
                 <span id="Product-Technical" class="fw-bold"><i class="fa fa-shopping-bag"> </i> محصولات مشابه</span>
             </div>
             <div class="likeThisProduct row mt-5">
-                <div class="col-6 col-sm-4 col-lg-2 px-1">
-                    <div class="w-100 h-100 m-auto">
-                        <a href="#" class="text-decoration-none">
-                            <img src="../Images/samsung galaxy a53.jpg" alt="samsung galaxy a53" class="likeProductImgs">
-                        </a>
-                        <a href="#" class="text-black text-decoration-none">
-                            <div class="font-size-small text-center my-1">
-                                گوشی موبایل سامسونگ مدل samsung galaxy a53
+                @for (int i = 0; i < ProductLikeList.Count && i < 6; i++)
+                {
+                    @if (ProductLikeList[i].ProductId != product.ProductId)
+                    {
+                        <div class="col-6 col-sm-4 col-lg-2 px-1">
+                            <div class="w-100 h-100 m-auto">
+                                <a href="@ProductLikeList[i].ProductDetailLink" class="text-decoration-none">
+                                    <img src="/Images/Product-Image/@ProductLikeList[i].ProductImagePath" alt="@ProductLikeList[i].ProductName" class="likeProductImgs">
+                                </a>
+                                <a href="@ProductLikeList[i].ProductDetailLink" class="text-black text-decoration-none">
+                                    <div class="font-size-small text-center my-1">
+                                        @ProductLikeList[i].ProductName
+                                    </div>
+                                </a>
                             </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-6 col-sm-4 col-lg-2 px-1">
-                    <div class="w-100 h-100 m-auto">
-                        <a href="#" class="text-decoration-none">
-                            <img src="../Images/iphone 13 pro max.jpg" alt="iphone 13 pro max" class="likeProductImgs">
-                        </a>
-                        <a href="#" class="text-black text-decoration-none">
-                            <div class="font-size-small text-center my-1">
-                                گوشی موبایل اپل مدل iphone 13 pro max
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-6 col-sm-4 col-lg-2 px-1">
-                    <div class="w-100 h-100 m-auto">
-                        <a href="#" class="text-decoration-none">
-                            <img src="../Images/samsung galaxy a73 2022.webp" alt="samsung galaxy a73 2022" class="likeProductImgs">
-                        </a>
-                        <a href="#" class="text-black text-decoration-none">
-                            <div class="font-size-small text-center my-1">
-                                گوشی موبایل سامسونگ مدل samsung galaxy a73 2022
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-6 col-sm-4 col-lg-2 px-1">
-                    <div class="w-100 h-100 m-auto">
-                        <a href="#" class="text-decoration-none">
-                            <img src="../Images/xiaomi mi 11 pro.jpg" alt="xiaomi mi 11 pro" class="likeProductImgs">
-                        </a>
-                        <a href="#" class="text-black text-decoration-none">
-                            <div class="font-size-small text-center my-1">
-                                گوشی موبایل شیائومی مدل xiaomi mi 11 pro
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-6 col-sm-4 col-lg-2 px-1">
-                    <div class="w-100 h-100 m-auto">
-                        <a href="#" class="text-decoration-none">
-                            <img src="../Images/samsung galaxy s22 2022.jpg" alt="samsung galaxy s22 2022" class="likeProductImgs">
-                        </a>
-                        <a href="#" class="text-black text-decoration-none">
-                            <div class="font-size-small text-center my-1">
-                                گوشی موبایل سامسونگ مدل samsung galaxy s22 2022
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-6 col-sm-4 col-lg-2 px-1">
-                    <a href="#" class="text-decoration-none">
-                        <img src="../Images/samsung s21 ultra.jpg" alt="samsung s21 ultra" class="likeProductImgs">
-                    </a>
-                    <a href="#" class="text-black text-decoration-none">
-                        <div class="font-size-small text-center my-1">
-                            گوشی موبایل سامسونگ مدل samsung s21 ultra
                         </div>
-                    </a>
-                </div>
+                    }
+                }
             </div>
+
         </div>
     </div>
 }
@@ -384,30 +327,63 @@ else
 </div>
 
 @code {
+    private System.Threading.Timer? timer;
     [Parameter]
-    public string? Id { get; set; }
+    public int? Id { get; set; }
     public ProductViewModel? product { get; set; }
     public List<ProductImagesViewModel>? productImagesViewModels { get; set; }
     public CategoryViewModel? category { get; set; }
     public List<ProductAttributeViewModel>? productAttributeViewModel { get; set; }
     public List<CategoryAttributeViewModel>? categoryAttributeViewModels { get; set; }
+    public List<CommentViewModel>? comments { get; set; }
+    public List<ProductViewModel>? ProductLikeList { get; set; }
+    public CommentViewModel? AddComment = new CommentViewModel();
     public string ShowMoreText = "d-none";
     public string ShowMoreBtn = "مشاهده بیشتر ...";
+    public string ShowMoreCommentText = "d-none";
+    public string ShowMoreCommentBtn = "مشاهده نظرات بیشتر...";
+    public string SuccessAddComment = "d-none";
+    public string ShowLoginError = "d-none";
+    public string ShowSuccessAddToCart = "d-none";
+    public string ShowSuccessAddToWishList = "d-none";
+    public string ExistAddToWishList = "d-none";
+    public string? activeImage = null;
+    PersianCalendar pc = new PersianCalendar();
 
-    protected async override Task OnInitializedAsync()
+
+
+    protected async override Task OnParametersSetAsync()
     {
-        int PId = Convert.ToInt32(Id);
-        product = await httpClient.GetFromJsonAsync<ProductViewModel>($"Product/Info/{PId}");
-        productImagesViewModels = await httpClient.GetFromJsonAsync<List<ProductImagesViewModel>>($"ProductImage/GetImages/{PId}");
+        CloseAlert();
+        CloseSuccessAlert();
+        product = await httpClient.GetFromJsonAsync<ProductViewModel>($"Product/Info/{Id}");
+        productImagesViewModels = await httpClient.GetFromJsonAsync<List<ProductImagesViewModel>>($"ProductImage/GetImages/{Id}");
         category = await httpClient.GetFromJsonAsync<CategoryViewModel>($"Category/Info/{product.CategoryId}");
         productAttributeViewModel = await httpClient.GetFromJsonAsync<List<ProductAttributeViewModel>>($"ProductAttribute/GetPA/{product.ProductId}");
         categoryAttributeViewModels = await httpClient.GetFromJsonAsync<List<CategoryAttributeViewModel>>($"CategoryAttribute/List/{product.CategoryId}");
-        await base.OnInitializedAsync();
+        comments = await httpClient.GetFromJsonAsync<List<CommentViewModel>>($"Comment/Get/{product.ProductId}");
+        comments.Reverse();
+        foreach (var item in comments)
+        {
+            DateTime dateTime = DateTime.Parse(item.DateTime);
+            item.DateTime = string.Format("{0}/{1}/{2}", pc.GetYear(dateTime), pc.GetMonth(dateTime), pc.GetDayOfMonth(dateTime));
+        }
+        ProductLikeList = await httpClient.GetFromJsonAsync<List<ProductViewModel>>($"Product/List/{product.CategoryId}");
+        foreach (var item in ProductLikeList)
+        {
+            item.ProductDetailLink = "ProductDetail/" + item.ProductId;
+        }
+        activeImage = product.ProductImagePath;
+        if(product!=null)
+        {
+            await httpClient.PostAsJsonAsync<int>("Product/AddView", product.ProductId);
+        }
+        await base.OnParametersSetAsync();
     }
 
     public void ShowMore()
     {
-        if(ShowMoreText == "d-none")
+        if (ShowMoreText == "d-none")
         {
             ShowMoreText = "d-block";
             ShowMoreBtn = "مشاهده کمتر ...";
@@ -418,4 +394,91 @@ else
             ShowMoreBtn = "مشاهده بیشتر ...";
         }
     }
+
+    public void showMoreCommentsFunction()
+    {
+        if (ShowMoreCommentText == "d-none")
+        {
+            ShowMoreCommentText = "d-block";
+            ShowMoreCommentBtn = "مشاهده نظرات کمتر...";
+        }
+        else
+        {
+            ShowMoreCommentText = "d-none";
+            ShowMoreCommentBtn = "مشاهده نظرات بیشتر...";
+        }
+    }
+
+    public async void AddCommentSubmit()
+    {
+        AddComment.Like = 0;
+        AddComment.IsActive = true;
+        AddComment.DateTime = DateTime.Now.ToString("MM/dd/yyyy");
+        AddComment.ProductId = product.ProductId;
+        var res = await httpClient.PostAsJsonAsync<CommentViewModel>("Comment/AddComment", AddComment);
+        SuccessAddComment = "d-block";
+        comments = await httpClient.GetFromJsonAsync<List<CommentViewModel>>($"Comment/Get/{product.ProductId}");
+        comments.Reverse();
+        foreach (var item in comments)
+        {
+            DateTime dateTime = DateTime.Parse(item.DateTime);
+            item.DateTime = string.Format("{0}/{1}/{2}", pc.GetYear(dateTime), pc.GetMonth(dateTime), pc.GetDayOfMonth(dateTime));
+        }
+        showMoreCommentsFunction();
+    }
+
+    public void ActiveImage(string path)
+    {
+        activeImage = path;
+    }
+    public void CloseSuccessAlert()
+    {
+        SuccessAddComment = "d-none";
+    }
+
+    public async Task AddToCart()
+    {
+        UserInfoViewModel? user = await httpClient.GetFromJsonAsync<UserInfoViewModel>("User/GetCurrentUser");
+        if (user.UserName == null)
+        {
+            ShowLoginError = "d-block";
+            return;
+        }
+        ShowLoginError = "d-none";
+
+        var res = await httpClient.GetFromJsonAsync<bool>($"Cart/AddToCart/{user.UserId}/{product.ProductId}");
+        if (res == true)
+        {
+            ShowSuccessAddToCart = "d-block";
+        }
+    }
+
+    public async Task AddToWishList()
+    {
+        UserInfoViewModel? user = await httpClient.GetFromJsonAsync<UserInfoViewModel>("User/GetCurrentUser");
+        if (user.UserName == null)
+        {
+            ShowLoginError = "d-block";
+            return;
+        }
+        ShowLoginError = "d-none";
+        var res = await httpClient.GetFromJsonAsync<bool>($"WishList/AddToWishList/{user.UserId}/{product.ProductId}");
+        if (res == true)
+        {
+            ShowSuccessAddToWishList = "d-block";
+        }
+        if(res == false)
+        {
+            ExistAddToWishList = "d-block";
+        }
+    }
+
+    public void CloseAlert()
+    {
+        ShowLoginError = "d-none";
+        ExistAddToWishList = "d-none";
+        ShowSuccessAddToCart = "d-none";
+        ShowSuccessAddToWishList = "d-none";
+    }
+
 }

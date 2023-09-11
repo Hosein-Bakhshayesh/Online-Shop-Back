@@ -127,38 +127,10 @@ public partial class UniversityShopProjectContext : DbContext
             entity.Property(e => e.Detail)
                 .HasMaxLength(500)
                 .UseCollation("SQL_Latin1_General_CP1_CI_AS");
-            entity.Property(e => e.Email)
-                .HasMaxLength(150)
-                .UseCollation("SQL_Latin1_General_CP1_CI_AS");
-            entity.Property(e => e.FirstName)
-                .HasMaxLength(150)
-                .UseCollation("SQL_Latin1_General_CP1_CI_AS");
             entity.Property(e => e.IsActive).HasColumnName("isActive");
-            entity.Property(e => e.LastName)
-                .HasMaxLength(150)
-                .UseCollation("SQL_Latin1_General_CP1_CI_AS");
-            entity.Property(e => e.Mobile)
-                .HasMaxLength(50)
-                .UseCollation("SQL_Latin1_General_CP1_CI_AS");
-            entity.Property(e => e.PostalCode)
-                .HasMaxLength(50)
-                .UseCollation("SQL_Latin1_General_CP1_CI_AS");
-            entity.Property(e => e.Street)
-                .HasMaxLength(150)
-                .UseCollation("SQL_Latin1_General_CP1_CI_AS");
             entity.Property(e => e.Total)
                 .HasMaxLength(50)
                 .UseCollation("SQL_Latin1_General_CP1_CI_AS");
-
-            entity.HasOne(d => d.City).WithMany(p => p.Carts)
-                .HasForeignKey(d => d.CityId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Cart_City");
-
-            entity.HasOne(d => d.Province).WithMany(p => p.Carts)
-                .HasForeignKey(d => d.ProvinceId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Cart_Province");
 
             entity.HasOne(d => d.User).WithMany(p => p.Carts)
                 .HasForeignKey(d => d.UserId)
@@ -283,6 +255,7 @@ public partial class UniversityShopProjectContext : DbContext
         {
             entity.ToTable("Order");
 
+            entity.Property(e => e.Date).HasMaxLength(50);
             entity.Property(e => e.Detail)
                 .HasMaxLength(300)
                 .UseCollation("SQL_Latin1_General_CP1_CI_AS");

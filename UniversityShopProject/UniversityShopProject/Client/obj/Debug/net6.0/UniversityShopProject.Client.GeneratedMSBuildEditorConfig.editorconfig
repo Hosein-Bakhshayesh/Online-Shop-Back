@@ -20,6 +20,10 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/hosei/OneDrive/Desktop/University Online Shop Project/Back-end/UniversityShopProject/UniversityShopProject/Client/Pages/Admin/AdminComment/AdminCommentList.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQWRtaW5Db21tZW50XEFkbWluQ29tbWVudExpc3QucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/hosei/OneDrive/Desktop/University Online Shop Project/Back-end/UniversityShopProject/UniversityShopProject/Client/Pages/Admin/AdminControll/AdminAddModal.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQWRtaW5Db250cm9sbFxBZG1pbkFkZE1vZGFsLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
@@ -38,6 +42,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/hosei/OneDrive/Desktop/University Online Shop Project/Back-end/UniversityShopProject/UniversityShopProject/Client/Pages/Admin/AdminIndex.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQWRtaW5JbmRleC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hosei/OneDrive/Desktop/University Online Shop Project/Back-end/UniversityShopProject/UniversityShopProject/Client/Pages/Admin/AdminOrder/AdminOrderList.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQWRtaW5PcmRlclxBZG1pbk9yZGVyTGlzdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/hosei/OneDrive/Desktop/University Online Shop Project/Back-end/UniversityShopProject/UniversityShopProject/Client/Pages/Admin/CategoryControll/CategoryAddModal.razor]
@@ -96,6 +104,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcR2V0TGFzdFByb2R1Y3QucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/hosei/OneDrive/Desktop/University Online Shop Project/Back-end/UniversityShopProject/UniversityShopProject/Client/Pages/GetMostViewProduct.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcR2V0TW9zdFZpZXdQcm9kdWN0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/hosei/OneDrive/Desktop/University Online Shop Project/Back-end/UniversityShopProject/UniversityShopProject/Client/Pages/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
@@ -128,6 +140,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/hosei/OneDrive/Desktop/University Online Shop Project/Back-end/UniversityShopProject/UniversityShopProject/Client/Pages/Admin/AdminLogin.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQWRtaW5Mb2dpbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-byobmldf31
+
 [C:/Users/hosei/OneDrive/Desktop/University Online Shop Project/Back-end/UniversityShopProject/UniversityShopProject/Client/Pages/Admin/UsersControll/UserEdit.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cVXNlcnNDb250cm9sbFxVc2VyRWRpdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-ndvmpvn88i
@@ -140,9 +156,21 @@ build_metadata.AdditionalFiles.CssScope = b-p7bp40ch2a
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW4ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-cuq7xw58nc
 
+[C:/Users/hosei/OneDrive/Desktop/University Online Shop Project/Back-end/UniversityShopProject/UniversityShopProject/Client/Pages/OrderPayment.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT3JkZXJQYXltZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-wx23bi4qq5
+
+[C:/Users/hosei/OneDrive/Desktop/University Online Shop Project/Back-end/UniversityShopProject/UniversityShopProject/Client/Pages/PaymentPage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUGF5bWVudFBhZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-4b8fnb01ao
+
 [C:/Users/hosei/OneDrive/Desktop/University Online Shop Project/Back-end/UniversityShopProject/UniversityShopProject/Client/Pages/ProductDetail.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZHVjdERldGFpbC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-gr087cyep9
+
+[C:/Users/hosei/OneDrive/Desktop/University Online Shop Project/Back-end/UniversityShopProject/UniversityShopProject/Client/Pages/UserCart.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlckNhcnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-kuhjzuxilv
 
 [C:/Users/hosei/OneDrive/Desktop/University Online Shop Project/Back-end/UniversityShopProject/UniversityShopProject/Client/Pages/UserPanel.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlclBhbmVsLnJhem9y

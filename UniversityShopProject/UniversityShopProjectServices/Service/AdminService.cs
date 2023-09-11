@@ -37,5 +37,10 @@ namespace UniversityShopProjectServices.Service
             else
                 return true;
         }
+
+        public bool CheckPermission(string userName, string password)
+        {
+            return GetAll().Any(t => t.UserName == userName && t.Password == password);
+        }
     }
 }

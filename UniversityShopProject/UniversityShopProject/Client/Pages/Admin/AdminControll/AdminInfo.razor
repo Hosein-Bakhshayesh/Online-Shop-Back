@@ -1,8 +1,15 @@
-﻿@page "/Admin-AdminInfo/{adminId}"
+﻿@page "/Admin-AdminInfo/{adminId:int}"
 @inject HttpClient httpClient
+@inject NavigationManager navigationManager
+
 @layout AdminLayout
 
-<h3>مشخصات @adminInfoView.FirstName @adminInfoView.LastName</h3>
+<PageTitle>مشخصات مدیر سایت</PageTitle>
+
+@if (adminInfoView != null)
+{
+    <h3>مشخصات @adminInfoView.FirstName @adminInfoView.LastName</h3>
+}
 
 @if (adminInfoView != null)
 {
@@ -53,7 +60,7 @@
     </NavLink>
     <button type="button" class="btn btn-danger" @onclick="DeleteUser">حذف</button>
     <div class="@hiddenStr">
-        <DeleteAdmin adminId="@adminId" />
+        <DeleteAdmin adminId="@adminId.ToString()" />
     </div>
 }
 else
@@ -65,9 +72,8 @@ else
 
 
 @code {
-    @inject NavigationManager navigationManager
     [Parameter]
-    public string adminId { get; set; }
+    public int adminId { get; set; }
 
     public AdminInfoViewModel? adminInfoView { get; set; }
     public string hiddenStr = "mt-2 d-none";
@@ -75,9 +81,11 @@ else
     protected override async Task OnInitializedAsync()
     {
         adminInfoView = new AdminInfoViewModel();
-        int id = int.Parse(adminId);
-        adminInfoView = await httpClient.GetFromJsonAsync<AdminInfoViewModel>($"Admins/Info/{id}");
-        adminInfoView.EditUrl = ("/Admin-AdminInfo/" + adminInfoView.AdminId + "/Edit");
+        adminInfoView = await httpClient.GetFromJsonAsync<AdminInfoViewModel>($"Admins/Info/{adminId}");
+        if(adminInfoView != null)
+        {
+            adminInfoView.EditUrl = ("/Admin-EditInfo/" + adminInfoView.AdminId);
+        }
     }
     public void DeleteUser()
     {

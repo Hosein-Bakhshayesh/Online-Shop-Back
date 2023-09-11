@@ -11,35 +11,35 @@
     <table class="table table-bordered mt-3">
         <thead>
             <tr>
-                <th scope="col">آیدی</th>
-                <th scope="col">نام</th>
-                <th scope="col">نام خانوادگی</th>
-                <th scope="col">نام کاربری</th>
-                <th scope="col">پسورد</th>
+                <th scope="col" class="text-center">آیدی</th>
+                <th scope="col" class="text-center">نام</th>
+                <th scope="col" class="text-center">نام خانوادگی</th>
+                <th scope="col" class="text-center">نام کاربری</th>
+                <th scope="col" class="text-center">پسورد</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>@userInfoView.UserId</td>
-                <td>@userInfoView.FirstName</td>
-                <td>@userInfoView.LastName</td>
-                <td>@userInfoView.UserName</td>
-                <td>@userInfoView.Password</td>
+                <td class="text-center">@userInfoView.UserId</td>
+                <td class="text-center">@userInfoView.FirstName</td>
+                <td class="text-center">@userInfoView.LastName</td>
+                <td class="text-center">@userInfoView.UserName</td>
+                <td class="text-center">@userInfoView.Password</td>
             </tr>
         </tbody>
         <thead>
             <tr>
-                <th scope="col">شماره موبایل</th>
-                <th scope="col">ایمیل</th>
-                <th scope="col">کد ملی</th>
-                <th scope="col">جنسیت</th>
-                <th scope="col">وضعیت فعال/غیرفعال</th>
+                <th scope="col" class="text-center">شماره موبایل</th>
+                <th scope="col" class="text-center">ایمیل</th>
+                <th scope="col" class="text-center">کد ملی</th>
+                <th scope="col" class="text-center">جنسیت</th>
+                <th scope="col" class="text-center">وضعیت فعال/غیرفعال</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>@userInfoView.MobileNumber</td>
-                <td>
+                <td class="text-center">@userInfoView.MobileNumber</td>
+                <td class="text-center">
                     @if (userInfoView.Email == null)
                     {
                         <span class="text-danger">ایمیل ثبت نشده است.</span>
@@ -49,7 +49,7 @@
                         @userInfoView.Email
                     }
                 </td>
-                <td>
+                <td class="text-center">
                     @if (userInfoView.NationalCode == null)
                     {
                         <span class="text-danger">کدملی ثبت نشده است.</span>
@@ -59,17 +59,33 @@
                         @userInfoView.NationalCode
                     }
                 </td>
-                <td>
+                <td class="text-center">
                     @if (userInfoView.Gender == null)
                     {
                         <span class="text-danger">جنسیت مشخص نشده است.</span>
                     }
                     else
                     {
-                        @userInfoView.Gender
+                        @if(@userInfoView.Gender == true)
+                        {
+                            <span>مرد</span>
+                        }
+                        else
+                        {
+                            <span>زن</span>
+                        }
                     }
                 </td>
-                <td>@userInfoView.IsActive</td>
+                <td class="text-center">
+                    @if (@userInfoView.IsActive == true)
+                    {
+                        <span>فعال</span>
+                    }
+                    else
+                    {
+                        <span>غیرفعال</span>
+                    }
+                </td>
             </tr>
         </tbody>
     </table>

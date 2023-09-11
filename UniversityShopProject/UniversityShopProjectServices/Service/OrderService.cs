@@ -13,5 +13,18 @@ namespace UniversityShopProjectServices.Service
         public OrderService(UniversityShopProjectContext context) : base(context)
         {
         }
+
+        public List<Order> GetAllWithPage(int size, int page = 1)
+        {
+            var skip = size * (page - 1);
+            return GetAll().Skip(skip).Take(size).ToList();
+        }
+
+        public int GetTotalPageCount(int size)
+        {
+            var count = GetAll().Count();
+
+            return count > 0 ? (int)Math.Ceiling((decimal)count / size) : 1;
+        }
     }
 }

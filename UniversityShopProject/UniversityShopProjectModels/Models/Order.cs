@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace UniversityShopProjectModels.Models;
 
-public partial class Order:BaseEntity
+public partial class Order : BaseEntity
 {
     public int OrderId { get; set; }
 
@@ -28,6 +28,8 @@ public partial class Order:BaseEntity
     public int? Vahed { get; set; }
 
     public string PostalCode { get; set; } = null!;
+
+    public string Date { get; set; } = null!;
 
     public string? Detail { get; set; }
 

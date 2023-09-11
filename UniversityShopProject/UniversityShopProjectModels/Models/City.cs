@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace UniversityShopProjectModels.Models;
 
-public partial class City:BaseEntity
+public partial class City : BaseEntity
 {
     public int Id { get; set; }
 
@@ -14,8 +14,6 @@ public partial class City:BaseEntity
     public string Name { get; set; } = null!;
 
     public virtual ICollection<Address> Addresses { get; set; } = new List<Address>();
-
-    public virtual ICollection<Cart> Carts { get; set; } = new List<Cart>();
 
     public virtual County County { get; set; } = null!;
 

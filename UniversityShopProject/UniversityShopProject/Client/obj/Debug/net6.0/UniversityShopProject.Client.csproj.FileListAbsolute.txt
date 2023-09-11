@@ -992,3 +992,11 @@ C:\Users\hosei\OneDrive\Desktop\University Online Shop Project\Back-end\Universi
 C:\Users\hosei\OneDrive\Desktop\University Online Shop Project\Back-end\UniversityShopProject\UniversityShopProject\Client\obj\Debug\net6.0\build-gz\QUeNBIRb.gz
 C:\Users\hosei\OneDrive\Desktop\University Online Shop Project\Back-end\UniversityShopProject\UniversityShopProject\Client\obj\Debug\net6.0\build-gz\FBfBGWcF.gz
 C:\Users\hosei\OneDrive\Desktop\University Online Shop Project\Back-end\UniversityShopProject\UniversityShopProject\Client\obj\Debug\net6.0\build-gz\yH4quQaf.gz
+C:\Users\hosei\OneDrive\Desktop\University Online Shop Project\Back-end\UniversityShopProject\UniversityShopProject\Client\bin\Debug\net6.0\wwwroot\_framework\Microsoft.AspNetCore.Components.Authorization.dll
+C:\Users\hosei\OneDrive\Desktop\University Online Shop Project\Back-end\UniversityShopProject\UniversityShopProject\Client\bin\Debug\net6.0\wwwroot\_framework\Microsoft.AspNetCore.Components.Authorization.dll.gz
+C:\Users\hosei\OneDrive\Desktop\University Online Shop Project\Back-end\UniversityShopProject\UniversityShopProject\Client\bin\Debug\net6.0\Microsoft.AspNetCore.Components.Authorization.dll
+C:\Users\hosei\OneDrive\Desktop\University Online Shop Project\Back-end\UniversityShopProject\UniversityShopProject\Client\obj\Debug\net6.0\build-gz\SEaFUsBP.gz
+C:\Users\hosei\OneDrive\Desktop\University Online Shop Project\Back-end\UniversityShopProject\UniversityShopProject\Client\obj\Debug\net6.0\scopedcss\Pages\UserCart.razor.rz.scp.css
+C:\Users\hosei\OneDrive\Desktop\University Online Shop Project\Back-end\UniversityShopProject\UniversityShopProject\Client\obj\Debug\net6.0\scopedcss\Pages\OrderPayment.razor.rz.scp.css
+C:\Users\hosei\OneDrive\Desktop\University Online Shop Project\Back-end\UniversityShopProject\UniversityShopProject\Client\obj\Debug\net6.0\scopedcss\Pages\PaymentPage.razor.rz.scp.css
+C:\Users\hosei\OneDrive\Desktop\University Online Shop Project\Back-end\UniversityShopProject\UniversityShopProject\Client\obj\Debug\net6.0\scopedcss\Pages\Admin\AdminLogin.razor.rz.scp.css

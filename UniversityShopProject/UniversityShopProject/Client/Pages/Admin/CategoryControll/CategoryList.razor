@@ -3,58 +3,71 @@
 
 @layout AdminLayout
 
+<PageTitle>لیست دسته بندی‌ها</PageTitle>
+
 <h3>لیست دسته بندی‌ها</h3>
 
-<CategoryAddModal/>
+<CategoryAddModal />
 <table class="table table-bordered mt-3">
     <thead>
-        <tr>  
+        <tr>
             <th scope="col">نام</th>
             <th scope="col">وضعیت فعال/غیرفعال</th>
             <th scope="col">زیردسته‌ها</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in categories)
+        @if (categories != null)
         {
-            if (item.ParentId == null)
+            @foreach (var item in categories)
             {
-                <tr>
-                    <td>@item.CategoryName</td>
-                    <td>
-                        @if (item.IsActive == true)
-                        {
-                            <span class="text-success">این دسته بندی فعال است.</span>
-                        }
-                        else
-                        {
-                            <span class="text-danger">این دسته بندی غیرفعال است.</span>
-
-                        }
-                    </td>
-                    <td>
-                        <ul style="direction:ltr !important;">
-                            @foreach (var sub in categories)
+                if (item.ParentId == null)
+                {
+                    <tr>
+                        <td>@item.CategoryName</td>
+                        <td>
+                            @if (item.IsActive == true)
                             {
-                                if (sub.ParentId == item.CategoryId)
-                                {
-                                    <li class="my-2">
-                                        @sub.CategoryName
-                                        <br>
-                                    </li>
-                                }
+                                <span class="text-success">این دسته بندی فعال است.</span>
                             }
-                        </ul>
-                    </td>
-                    <td>
-                        <NavLink href="@item.CInfoUrl">
-                            <buttom class="btn btn-warning btn-sm btn-block px-0">
-                                مشاهده جزئیات و ویرایش
-                            </buttom>
-                        </NavLink>
-                    </td>
-                </tr>
+                            else
+                            {
+                                <span class="text-danger">این دسته بندی غیرفعال است.</span>
+
+                            }
+                        </td>
+                        <td>
+                            <ul style="direction:ltr !important;">
+                                @foreach (var sub in categories)
+                                {
+                                    if (sub.ParentId == item.CategoryId)
+                                    {
+                                        <li class="my-2">
+                                            @sub.CategoryName
+                                            <br>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </td>
+                        <td>
+                            <NavLink href="@item.CInfoUrl">
+                                <buttom class="btn btn-warning btn-sm btn-block px-0">
+                                    مشاهده جزئیات و ویرایش
+                                </buttom>
+                            </NavLink>
+                        </td>
+                    </tr>
+                }
             }
+        }
+        else
+        {
+            <tr>
+                <td colspan="3" class="text-danger">
+                    دسته بندی یافت نشد.
+                </td>
+            </tr>
         }
     </tbody>
 </table>
@@ -67,10 +80,12 @@
     protected override async Task OnInitializedAsync()
     {
         categories = await httpClient.GetFromJsonAsync<List<CategoryViewModel>>("Category/List");
-        foreach (var item in categories)
+        if (categories != null)
         {
-            item.CInfoUrl = "/Admin-CategoryInfo/" + item.CategoryId;
-
+            foreach (var item in categories)
+            {
+                item.CInfoUrl = "/Admin-CategoryInfo/" + item.CategoryId;
+            }
         }
     }
 }

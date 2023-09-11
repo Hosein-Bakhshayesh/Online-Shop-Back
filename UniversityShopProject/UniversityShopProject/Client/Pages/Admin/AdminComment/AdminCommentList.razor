@@ -1,0 +1,161 @@
+﻿@page "/Admin-CommentList"
+@using System.Globalization;
+@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+
+@layout AdminLayout
+
+<h3>لیست نظرات سایت</h3>
+
+<div class="alert alert-danger @DeleteSuccess">
+    با موفقیت انجام شد.
+</div>
+
+<table class="table table-bordered mt-3">
+    <thead>
+        <tr>
+            <th scope="col" class="text-center">نام</th>
+            <th scope="col" class="text-center">متن نظر</th>
+            <th scope="col" class="text-center">نام کالای مرتبط</th>
+            <th scope="col" class="text-center">تاریخ نظر</th>
+            <th scope="col" class="text-center">وضعیت فعال/غیرفعال</th>
+            <th colspan="2" class="text-center">گزینه‌ها</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (comments != null)
+        {
+            @foreach (var comment in comments)
+            {
+                <tr>
+                    <td>
+                        @comment.Name
+                    </td>
+                    <td>
+                        @comment.CommentText
+                    </td>
+                    <td>
+                        <a href="@($"/ProductDetail/{comment.ProductId}")" class="text-info text-decoration-none fw-bold" target="_blank">
+                            @products.Find(t=>t.ProductId == comment.ProductId).ProductName
+                        </a>
+                    </td>
+                    <td class="text-center">
+                        @comment.DateTime
+                    </td>
+                    <td class="text-center">
+                        @if (comment.IsActive)
+                        {
+                            <span class="text-success">
+                                فعال می‌باشد
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="text-danger">
+                                غیرفعال است
+                            </span>
+                        }
+                    </td>
+                    <td class="text-center" colspan="2">
+                        <button @onclick="()=>DeleteComment(comment.CommentId)" class="btn btn-danger w-100">حذف نظر</button>
+                        @if (comment.IsActive)
+                        {
+                            <button @onclick="()=>ChangeActive(comment.CommentId)" class="btn btn-warning w-100 mt-2">غیرفعال</button>
+                        }
+                        else
+                        {
+                            <button @onclick="()=>ChangeActive(comment.CommentId)" class="btn btn-success w-100 mt-2">فعال</button>
+                        }
+
+                    </td>
+                </tr>
+            }
+        }
+        @if (TotalPageSize > 0)
+        {
+            <tr>
+                <td colspan="7">
+                    <div class="mt-3 mx-2 row">
+                        <ul class="pagination">
+                            @for (int pageIndex = 1; pageIndex <= TotalPageSize; pageIndex++)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="@navigationManager.GetUriWithQueryParameter("page",pageIndex)">@(pageIndex)</a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td colspan="7" class="text-danger">نظری در سایت ثبت نشده است.</td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+@code {
+    private List<CommentViewModel>? comments = new();
+    private List<ProductViewModel>? products = new();
+    PersianCalendar pc = new PersianCalendar();
+    public string DeleteSuccess = "d-none";
+    [Parameter, SupplyParameterFromQuery]
+    public int page { get; set; } = 0;
+    public int? TotalPageSize { get; set; }
+
+    protected async override Task OnParametersSetAsync()
+    {
+        comments = await httpClient.GetFromJsonAsync<List<CommentViewModel>>($"Comment/GetAllComments/{page}");
+        foreach (var item in comments)
+        {
+            DateTime dateTime = DateTime.Parse(item.DateTime);
+            item.DateTime = string.Format("{0}/{1}/{2}", pc.GetYear(dateTime), pc.GetMonth(dateTime), pc.GetDayOfMonth(dateTime));
+            if (!products.Any(t => t.ProductId == item.ProductId))
+                products.Add(await httpClient.GetFromJsonAsync<ProductViewModel>($"Product/Info/{item.ProductId}"));
+        }
+        TotalPageSize = await httpClient.GetFromJsonAsync<int>("Comment/TotalPageCount/10");
+        await base.OnParametersSetAsync();
+    }
+
+    public async Task DeleteComment(int id)
+    {
+        if (id > 0)
+        {
+            var res = await httpClient.PostAsJsonAsync<int>("Comment/DeleteComment", id);
+            DeleteSuccess = "d-block";
+            comments = await httpClient.GetFromJsonAsync<List<CommentViewModel>>($"Comment/GetAllComments/{page}");
+            foreach (var item in comments)
+            {
+                DateTime dateTime = DateTime.Parse(item.DateTime);
+                item.DateTime = string.Format("{0}/{1}/{2}", pc.GetYear(dateTime), pc.GetMonth(dateTime), pc.GetDayOfMonth(dateTime));
+                if (!products.Any(t => t.ProductId == item.ProductId))
+                    products.Add(await httpClient.GetFromJsonAsync<ProductViewModel>($"Product/Info/{item.ProductId}"));
+            }
+            TotalPageSize = await httpClient.GetFromJsonAsync<int>("Comment/TotalPageCount/10");
+        }
+    }
+
+    public async Task ChangeActive(int id)
+    {
+        if (id > 0)
+        {
+            var res = await httpClient.PostAsJsonAsync<int>("Comment/ChangeActive", id);
+            DeleteSuccess = "d-block";
+            comments = await httpClient.GetFromJsonAsync<List<CommentViewModel>>($"Comment/GetAllComments/{page}");
+            foreach (var item in comments)
+            {
+                DateTime dateTime = DateTime.Parse(item.DateTime);
+                item.DateTime = string.Format("{0}/{1}/{2}", pc.GetYear(dateTime), pc.GetMonth(dateTime), pc.GetDayOfMonth(dateTime));
+                if (!products.Any(t => t.ProductId == item.ProductId))
+                    products.Add(await httpClient.GetFromJsonAsync<ProductViewModel>($"Product/Info/{item.ProductId}"));
+            }
+            TotalPageSize = await httpClient.GetFromJsonAsync<int>("Comment/TotalPageCount/10");
+        }
+    }
+
+
+}

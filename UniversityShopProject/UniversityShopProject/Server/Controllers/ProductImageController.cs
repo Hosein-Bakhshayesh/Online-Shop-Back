@@ -88,5 +88,20 @@ namespace UniversityShopProject.Server.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "انجام نشد");
             }
         }
+
+        [HttpPost("DeleteImage")]
+        public ActionResult DeleteImage([FromBody] int id)
+        {
+            try
+            {
+                _productImageService.Delete(id);
+                _productImageService.Save();
+                return Ok();
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "انجام نشد");
+            }
+        }
     }
 }

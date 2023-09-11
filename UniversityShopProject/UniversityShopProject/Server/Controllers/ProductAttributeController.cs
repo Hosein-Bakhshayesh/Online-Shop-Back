@@ -47,5 +47,20 @@ namespace UniversityShopProject.Server.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "انجام نشد");
             }
         }
+
+        [HttpPost("DeleteAtt")]
+        public ActionResult DeleteAtt([FromBody]int id)
+        {
+            try
+            {
+                _productAttributeService.Delete(id);
+                _productAttributeService.Save();
+                return Ok();
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "انجام نشد");
+            }
+        }
     }
 }

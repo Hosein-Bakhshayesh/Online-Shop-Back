@@ -58,7 +58,6 @@ body {
 }
 
 #btn-active {
-    left: 0;
     width: 110px;
     border-radius: 1.8rem;
     transition: .6s;
@@ -96,11 +95,3 @@ body {
         outline: 0 !important;
         box-shadow: none !important;
     }
-
-#login {
-    display: block;
-}
-
-#register {
-    display: none;
-}

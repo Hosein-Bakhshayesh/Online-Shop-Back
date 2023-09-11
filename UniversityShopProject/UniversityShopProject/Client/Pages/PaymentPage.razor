@@ -1,0 +1,74 @@
+﻿@page "/Payment/{userId:int}"
+@inject HttpClient httpClient
+@inject NavigationManager navigationManager
+
+
+<div class="container Cart-Item-List">
+    <AuthorizeView Roles="User">
+        <Authorized>
+            <div class="row">
+                <div class="alert @ShowAlert">
+                    @Alertmessage
+                </div>
+                <div class="col-8 fw-bold">
+                    مجموع کل فاکتور :
+                </div>
+                <div class="col-4 text-center text-danger fw-bold">
+                    @if(order != null)
+                    {
+                        @(Convert.ToInt32(order.Total).ToString("n0"))
+                    }
+                </div>
+            </div>
+            <hr />
+            <div class="mt-5 text-center w-100">
+                <button @onclick="PaymentSuccess" class="w-25 btn btn-success">پرداخت موفق</button>
+                <button @onclick="PaymentError" class="w-25 btn btn-danger">پرداخت ناموفق</button>
+            </div>
+        </Authorized>
+        <NotAuthorized>
+            <div class="alert alert-danger container">
+                صفحه یافت نشد. <a href="/">صفحه اصلی</a>
+            </div>
+        </NotAuthorized>
+    </AuthorizeView>
+</div>
+
+
+@code {
+    [Parameter]
+    public int userId { get; set; }
+    public UserInfoViewModel? user { get; set; }
+    public OrderViewModel? order { get; set; }
+    public string ShowAlert = "alert-success d-none";
+    public string Alertmessage = "با موفقیت انجام شد.";
+    protected override async Task OnInitializedAsync()
+    {
+        user = await httpClient.GetFromJsonAsync<UserInfoViewModel>("User/GetCurrentUser");
+        if (user.UserName != null)
+        {
+            order = await httpClient.GetFromJsonAsync<OrderViewModel>($"Order/GetPaymentOrder/{user.UserId}");
+
+        }
+        await base.OnInitializedAsync();
+    }
+
+    public async Task PaymentSuccess()
+    {
+        var res = await httpClient.PostAsJsonAsync<OrderViewModel>($"Order/PaymentSuccess", order);
+        var res1 = await httpClient.PostAsJsonAsync<OrderViewModel>($"Order/ProductCountDown", order);
+        ShowAlert = "alert-success d-block";
+        Alertmessage = "با موفقیت انجام شد.";
+        Thread.Sleep(2000);
+        navigationManager.NavigateTo("/");
+    }
+
+    public async Task PaymentError()
+    {
+        var res = await httpClient.PostAsJsonAsync<OrderViewModel>($"Order/PaymentError", order);
+        ShowAlert = "alert-danger d-block";
+        Alertmessage = "پرداخت موفقیت آمیز نبود.";
+        Thread.Sleep(2000);
+        navigationManager.NavigateTo("/Cart");
+    }
+}
