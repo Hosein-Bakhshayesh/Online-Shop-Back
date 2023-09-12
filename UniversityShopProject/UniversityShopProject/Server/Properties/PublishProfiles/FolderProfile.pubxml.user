@@ -3,9 +3,4 @@
 https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project>
-  <PropertyGroup>
-    <_PublishTargetUrl>C:\Publish</_PublishTargetUrl>
-    <History>True|2023-09-09T19:59:09.6703360Z;True|2023-09-09T21:23:21.8429445+03:30;True|2023-09-08T13:21:59.6084846+03:30;True|2023-09-08T12:28:57.8054067+03:30;</History>
-    <LastFailureDetails />
-  </PropertyGroup>
 </Project>

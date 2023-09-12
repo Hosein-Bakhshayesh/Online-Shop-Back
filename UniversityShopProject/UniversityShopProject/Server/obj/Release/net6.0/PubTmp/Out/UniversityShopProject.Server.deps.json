@@ -20,6 +20,7 @@
           "UniversityShopProject.Client": "1.0.0",
           "UniversityShopProject.Shared": "1.0.0",
           "UniversityShopProjectModels": "1.0.0",
+          "UniversityShopProjectRepository": "1.0.0",
           "UniversityShopProjectServices": "1.0.0"
         },
         "runtime": {

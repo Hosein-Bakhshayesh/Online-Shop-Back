@@ -10,11 +10,11 @@
 <table class="table table-bordered mt-3">
     <thead>
         <tr>
-            <th scope="col" >نام</th>
-            <th scope="col" >نام خانوادگی</th>
-            <th scope="col" >نام کاربری</th>
-            <th scope="col" >وضعیت فعال/غیرفعال</th>
-            <th scope="col" >گزینه‌ها</th>
+            <th scope="col" class="text-center">نام</th>
+            <th scope="col" class="text-center">نام خانوادگی</th>
+            <th scope="col" class="text-center">نام کاربری</th>
+            <th scope="col" class="text-center">وضعیت فعال/غیرفعال</th>
+            <th scope="col" class="text-center">گزینه‌ها</th>
         </tr>
     </thead>
     <tbody>
@@ -23,16 +23,16 @@
             @foreach (var user in users)
             {
                 <tr>
-                    <td>
+                    <td class="text-center">
                         @user.FirstName
                     </td>
-                    <td>
+                    <td class="text-center">
                         @user.LastName
                     </td>
-                    <td>
+                    <td class="text-center">
                         @user.UserName
                     </td>
-                    <td>
+                    <td class="text-center">
                         @if (user.IsActive)
                         {
                             <span class="text-success">
@@ -46,7 +46,7 @@
                             </span>
                         }
                     </td>
-                    <td>
+                    <td class="text-center">
                         <NavLink href="@user.InfoUrl">
                             <button class="btn btn-info">جزئیات</button>
                         </NavLink>
@@ -57,7 +57,7 @@
         else
         {
             <tr>
-                <td colspan="5">
+                <td colspan="5" class="text-danger">
                     هیچ کاربری در سایت یافت نشد.
                 </td>
             </tr>

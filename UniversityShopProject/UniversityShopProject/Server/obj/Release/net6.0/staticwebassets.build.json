@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "/vcBF9YAz313VoppAtNv++/e2OTGFO+UIaituQj+gUA=",
+  "Hash": "ru3Ef2xRjtj1tSdp3qmyQ12ZESK46GwYCtRhsTjW2XQ=",
   "Source": "UniversityShopProject.Server",
   "BasePath": "_content/UniversityShopProject.Server",
   "Mode": "Default",
@@ -11128,6 +11128,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Images\\Product-Image\\2b3181a9cea847aea861bd5737566fe0.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\Images\\Product-Image\\3206e406d0904a3ab650cc7192fbdd9a.jpg",
+      "SourceId": "UniversityShopProject.Client",
+      "SourceType": "Project",
+      "ContentRoot": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "Images/Product-Image/3206e406d0904a3ab650cc7192fbdd9a.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\Product-Image\\3206e406d0904a3ab650cc7192fbdd9a.jpg"
     },
     {
       "Identity": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProject\\Client\\wwwroot\\Images\\Product-Image\\32d318b101e24801ae1d3370fd5aebe9.jpg",

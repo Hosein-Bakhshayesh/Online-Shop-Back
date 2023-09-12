@@ -29,8 +29,7 @@ namespace UniversityShopProjectServices.Service
         public bool CheckUserName(string userName)
         {
             var admins = GetAll();
-            var userNames = admins.Select(u => u.UserName);
-            if (userNames.Any(u => u == userName))
+            if (!admins.Any(u => u.UserName.ToUpper() == userName.ToUpper()))
             {
                 return false;
             }

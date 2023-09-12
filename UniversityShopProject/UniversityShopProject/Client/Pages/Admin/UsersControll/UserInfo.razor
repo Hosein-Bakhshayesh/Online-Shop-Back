@@ -24,7 +24,9 @@
                 <td class="text-center">@userInfoView.FirstName</td>
                 <td class="text-center">@userInfoView.LastName</td>
                 <td class="text-center">@userInfoView.UserName</td>
-                <td class="text-center">@userInfoView.Password</td>
+                <td class="text-center">
+                    <input type="password" value="@userInfoView.Password" class="form-control" readonly disabled />
+                </td>
             </tr>
         </tbody>
         <thead>

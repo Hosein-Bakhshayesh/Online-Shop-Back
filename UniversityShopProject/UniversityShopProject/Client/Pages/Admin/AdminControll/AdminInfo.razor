@@ -16,33 +16,36 @@
     <table class="table table-bordered mt-3">
         <thead>
             <tr>
-                <th scope="col">آیدی</th>
-                <th scope="col">نام</th>
-                <th scope="col">نام خانوادگی</th>
-                <th scope="col">نام کاربری</th>
+                <th scope="col" class="text-center">آیدی</th>
+                <th scope="col" class="text-center">نام</th>
+                <th scope="col" class="text-center">نام خانوادگی</th>
+                <th scope="col" class="text-center">نام کاربری</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>@adminInfoView.AdminId</td>
-                <td>@adminInfoView.FirstName</td>
-                <td>@adminInfoView.LastName</td>
-                <td>@adminInfoView.UserName</td>
+                <td class="text-center">@adminInfoView.AdminId</td>
+                <td class="text-center">@adminInfoView.FirstName</td>
+                <td class="text-center">@adminInfoView.LastName</td>
+                <td class="text-center">@adminInfoView.UserName</td>
             </tr>
         </tbody>
         <thead>
             <tr>
-                <th scope="col">پسورد</th>
-                <th scope="col">شماره موبایل</th>
-                <th scope="col">ایمیل</th>
-                <th scope="col">وضعیت فعال/غیرفعال</th>
+                <th scope="col" class="text-center">پسورد</th>
+                <th scope="col" class="text-center">شماره موبایل</th>
+                <th scope="col" class="text-center">ایمیل</th>
+                <th scope="col" class="text-center">وضعیت فعال/غیرفعال</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>@adminInfoView.Password</td>
+                <td class="text-center">
+                    <input type="password" value="@adminInfoView.Password" class="form-control" readonly disabled />
+                </td>
                 <td>@adminInfoView.MobileNumber</td>
-                 <td>@if(adminInfoView.Email == null)
+                <td class="text-center">
+                    @if (adminInfoView.Email == null)
                 {
                     <span class="text-danger">ایمیل ثبت نشده است.</span>
                 }else
@@ -50,7 +53,16 @@
                    @adminInfoView.Email
                 }
                 </td>
-                <td>@adminInfoView.IsActive</td>
+                <td class="text-center">
+                    @if (@adminInfoView.IsActive == true)
+                    {
+                        <span>فعال</span>
+                    }
+                    else
+                    {
+                        <span>غیرفعال</span>
+                    }
+                </td>
             </tr>
         </tbody>
     </table>

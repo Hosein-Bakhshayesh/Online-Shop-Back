@@ -12601,6 +12601,7 @@
       "UniversityShopProject.Client >= 1.0.0",
       "UniversityShopProject.Shared >= 1.0.0",
       "UniversityShopProjectModels >= 1.0.0",
+      "UniversityShopProjectRepository >= 1.0.0",
       "UniversityShopProjectServices >= 1.0.0"
     ]
   },
@@ -12634,6 +12635,9 @@
           "projectReferences": {
             "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProjectModels\\UniversityShopProjectModels.csproj": {
               "projectPath": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProjectModels\\UniversityShopProjectModels.csproj"
+            },
+            "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProjectRepository\\UniversityShopProjectRepository.csproj": {
+              "projectPath": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProjectRepository\\UniversityShopProjectRepository.csproj"
             },
             "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProjectServices\\UniversityShopProjectServices.csproj": {
               "projectPath": "C:\\Users\\hosei\\OneDrive\\Desktop\\University Online Shop Project\\Back-end\\UniversityShopProject\\UniversityShopProjectServices\\UniversityShopProjectServices.csproj"

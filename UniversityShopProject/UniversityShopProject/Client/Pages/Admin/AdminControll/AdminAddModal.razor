@@ -22,7 +22,9 @@
                         <DataAnnotationsValidator />
                         <ValidationSummary />
                     </span>
-
+                    <div class="my-2 w-100 alert alert-danger @IsExistUserName">
+                        نام کاربری یا شماره موبایل قیلا در سامانه ثبت شده است.
+                    </div>
                     <div class="row w-100">
                         <div class="col-6 w-100 mt-2">
                             <label>
@@ -96,7 +98,10 @@
     AdminCreateViewModel adminCreateViewModel = new AdminCreateViewModel();
     private string styleModal = "d-none";
     private string inType = "password";
+    private string IsExistUserName = "d-none";
+}
 
+@functions {
     protected void ShowAddModal()
     {
         if (styleModal == "d-none")
@@ -112,10 +117,17 @@
     {
         if (adminCreateViewModel != null)
         {
+            var isExist = await httpClient.GetFromJsonAsync<bool>($"Admins/CheckUserNameAdd/{adminCreateViewModel.UserName}/{adminCreateViewModel.MobileNumber}");
+            if (isExist != true)
+            {
+                IsExistUserName = "d-block";
+                return;
+            }
+            IsExistUserName = "d-none";
             var res = await httpClient.PostAsJsonAsync<AdminCreateViewModel>("Admins/Create", adminCreateViewModel);
             if (res != null)
             {
-                navigationManager.NavigateTo("/Admin-Adminlist",true);
+                navigationManager.NavigateTo("/Admin-Adminlist", true);
             }
         }
     }

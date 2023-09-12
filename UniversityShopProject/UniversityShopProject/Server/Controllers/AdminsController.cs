@@ -111,7 +111,7 @@ namespace UniversityShopProject.Server.Controllers
                 }
                 else
                 {
-                    if (_AdminService.CheckUserName(admin.UserName) == false)
+                    if (_AdminService.CheckUserName(admin.UserName) == true)
                     {
                         return NotFound("کاربری با این نام کاربری قبلا ثبت شده است");
                     }
@@ -128,6 +128,24 @@ namespace UniversityShopProject.Server.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "عملیات درج کاربر انجام نشد");
             }
+        }
+
+        [HttpGet("CheckUserNameAdd/{UserName}/{mobile}")]
+        public ActionResult CheckUserNameAdd(string UserName, string mobile)
+        {
+            if (_AdminService.CheckUserName(UserName) == true)
+            {
+                return Ok(false);
+            }
+            if (_AdminService.CheckMobileNumber(mobile) == false)
+            {
+                return Ok(false);
+            }
+            else
+            {
+                return Ok(true);
+            }
+
         }
 
         [HttpPost("LoginAdmin")]

@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\UniversityShopProjectModels\UniversityShopProjectModels.csproj" />
+    <ProjectReference Include="..\..\UniversityShopProjectRepository\UniversityShopProjectRepository.csproj" />
     <ProjectReference Include="..\..\UniversityShopProjectServices\UniversityShopProjectServices.csproj" />
     <ProjectReference Include="..\Client\UniversityShopProject.Client.csproj" />
     <ProjectReference Include="..\Shared\UniversityShopProject.Shared.csproj" />

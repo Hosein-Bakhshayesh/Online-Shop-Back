@@ -5,17 +5,14 @@
 @if (productInfoViewModel != null)
 {
     <h4 class="mb-4">مشخصات <span class="text-danger">@productInfoViewModel.ProductName</span></h4>
-    @if (SuccessAlert == true)
-    {
-        <tr>
-            <td colspan="5">
-                <div class="alert alert-success fade-in fade-out " role="alert">
-                    <a @onclick="CloseSuccessAlert" style="cursor:pointer" class="text-black-50 text-decoration-none fw-bold">&times; </a>
-                    <span class="mx-2">تغییرات با موفقیت انجام شد.</span>
-                </div>
-            </td>
-        </tr>
-    }
+    <tr>
+        <td colspan="5">
+            <div class="alert alert-success fade-in fade-out @SuccessAlert" role="alert">
+                <a @onclick="CloseSuccessAlert" style="cursor:pointer" class="text-black-50 text-decoration-none fw-bold">&times; </a>
+                <span class="mx-2">تغییرات با موفقیت انجام شد.</span>
+            </div>
+        </td>
+    </tr>
     <table class="table table-bordered mt-3">
         <thead class="thead-light">
             <tr>
@@ -41,7 +38,7 @@
                     <label for="ProductEditName" class="text-danger fw-bold mt-2">تغییر نام : </label>
                     <textarea @bind-Value:event="oninput" @bind-Value="productInfoViewModel.ProductName" class="form-control" id="ProductEditName">
                         @productInfoViewModel.ProductName
-                                                                </textarea>
+                                                                    </textarea>
                 </td>
                 <td class="text-center pt-4">
                     @Convert.ToInt32(productInfoViewModel.Price).ToString("n0")
@@ -109,7 +106,7 @@
 
                     <textarea class="form-control text-justify w-100" @bind-Value:event="oninput" @bind-Value="productInfoViewModel.ProductDiscription" rows="15">
                         @productInfoViewModel.ProductDiscription
-                                                                    </textarea>
+                                                                        </textarea>
                 </td>
             </tr>
             <tr>
@@ -282,7 +279,7 @@ else
     public string? addAttribute { get; set; }
     public string addAttributeText = "اضافه ویژگی جدید به محصول";
     public string addAttributeStyle = "btn-outline-success";
-    public bool SuccessAlert = false;
+    public string SuccessAlert = "d-none";
     public string addAttText = "d-none";
     public string deleteAttText = "d-none";
 }
@@ -349,7 +346,7 @@ else
             {
                 var msg = await httpClient.PutAsJsonAsync($"/ProductImage/EditProductImage/{productInfoViewModel.ProductId}", filesBase64, System.Threading.CancellationToken.None);
             }
-            SuccessAlert = true;
+            SuccessAlert = "d-block";
             productInfoViewModel = await httpClient.GetFromJsonAsync<ProductInfoViewModel>($"Product/Info/{Id}");
 
         }
@@ -361,7 +358,7 @@ else
         {
             var msg = await httpClient.PutAsJsonAsync($"/Product/SubmitEdit/{productInfoViewModel.ProductId}", productInfoViewModel);
         }
-        SuccessAlert = true;
+        SuccessAlert = "d-block";
     }
 
     public void CloseAlert()
@@ -370,10 +367,11 @@ else
         addAttText = "d-none";
         deleteAttText = "d-none";
         DisplayDeleteAlert = "d-none";
+        SuccessAlert = "d-none";
     }
     public void CloseSuccessAlert()
     {
-        SuccessAlert = false;
+        SuccessAlert = "d-none";
     }
 
     public void AddAttribute()
