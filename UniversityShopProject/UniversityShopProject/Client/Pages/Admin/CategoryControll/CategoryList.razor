@@ -11,9 +11,10 @@
 <table class="table table-bordered mt-3">
     <thead>
         <tr>
-            <th scope="col">نام</th>
-            <th scope="col">وضعیت فعال/غیرفعال</th>
+            <th scope="col" class="text-center">نام</th>
+            <th scope="col" class="text-center">وضعیت فعال/غیرفعال</th>
             <th scope="col">زیردسته‌ها</th>
+            <th colspan="2" class="text-center">گزینه‌ها</th>
         </tr>
     </thead>
     <tbody>
@@ -24,8 +25,8 @@
                 if (item.ParentId == null)
                 {
                     <tr>
-                        <td>@item.CategoryName</td>
-                        <td>
+                        <td class="text-center">@item.CategoryName</td>
+                        <td class="text-center">
                             @if (item.IsActive == true)
                             {
                                 <span class="text-success">این دسته بندی فعال است.</span>
@@ -50,7 +51,7 @@
                                 }
                             </ul>
                         </td>
-                        <td>
+                        <td class="text-center">
                             <NavLink href="@item.CInfoUrl">
                                 <buttom class="btn btn-warning btn-sm btn-block px-0">
                                     مشاهده جزئیات و ویرایش
@@ -64,7 +65,7 @@
         else
         {
             <tr>
-                <td colspan="3" class="text-danger">
+                <td colspan="5" class="alert alert-danger text-center p-2">
                     دسته بندی یافت نشد.
                 </td>
             </tr>
@@ -76,7 +77,9 @@
 
 @code {
     private List<CategoryViewModel>? categories = new();
-
+}
+@functions{
+    //این تابع در زمان لود شدن صفحه، اطلاعات را از کنترلر دریافت میکند
     protected override async Task OnInitializedAsync()
     {
         categories = await httpClient.GetFromJsonAsync<List<CategoryViewModel>>("Category/List");

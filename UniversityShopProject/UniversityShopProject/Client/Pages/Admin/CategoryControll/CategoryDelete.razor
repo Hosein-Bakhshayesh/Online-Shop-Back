@@ -2,7 +2,7 @@
 @inject NavigationManager navigationManager
 <!-- Button trigger modal -->
 <button type="button" @onclick='ShowAddModal' class="btn btn-danger my-2" data-toggle="modal" data-target="#CategoryDelete">
-    حذف دسته‌بندی
+    حذف دسته بندی
 </button>
 
 <!-- Modal -->
@@ -33,7 +33,10 @@
     CategoryViewModel? categoryView { get; set; }
     List<CategoryViewModel>? CategoryChild = new List<CategoryViewModel>();
     private string styleModal = "d-none";
+}
 
+@functions{
+    //با کلیک برروی دکمه حذف، این تابع فراخوانی شده و فرم نمایش داده میشود
     protected void ShowAddModal()
     {
         if (styleModal == "d-none")
@@ -41,10 +44,14 @@
             styleModal = "d-block";
         }
     }
+
+    //این تابع برای بسته شدن فرم استفاده میشود
     protected void CloseModal()
     {
         styleModal = "d-none";
     }
+
+    //با کلیک برروی حذف، این تابع فراخانی شده و اطلاعات را به کنترلر ارسال میکند
     private async Task DeleteCategory()
     {
         categoryView = new CategoryViewModel();

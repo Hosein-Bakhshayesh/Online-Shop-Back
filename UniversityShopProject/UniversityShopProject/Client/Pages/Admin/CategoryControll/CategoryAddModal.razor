@@ -23,8 +23,8 @@
                         <ValidationSummary />
                     </span>
 
-                    <div class="row w-100 mt-2">
-                        <div class="col-6 w-100">
+                    <div class="row w-100">
+                        <div class="col-6 w-100 mt-2">
                             <label>
                                 نام دسته :<span class="text-danger">*</span>
                             </label>
@@ -35,8 +35,8 @@
                                 دسته‌اصلی :
                             </label>
                             <InputSelect @bind-Value="categoryView.ParentId" class="form-control input-field">
-                                <option value="" selected>بدون انتخاب</option>
-                                @if(categories != null)
+                                <option value="" selected>اضافه شدن به عنوان دسته اصلی</option>
+                                @if (categories != null)
                                 {
                                     @foreach (var item in categories)
                                     {
@@ -55,7 +55,7 @@
                             </InputSelect>
                         </div>
                     </div>
-                    <hr/>
+                    <hr />
                     <div>
                         <button @onclick="CloseModal" type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
                         <button type="submit" class="btn btn-success">درج دسته‌بندی</button>
@@ -71,14 +71,19 @@
     CategoryViewModel categoryView = new CategoryViewModel();
     List<CategoryViewModel>? categories { get; set; }
     private string styleModal = "d-none";
+}
+@functions {
+    //این تابع در زمان لود صفحه، اطلاعات را از کنترلر فراخوانی میکند
     protected override async Task OnInitializedAsync()
     {
         categories = await httpClient.GetFromJsonAsync<List<CategoryViewModel>>("Category/List");
-        if(categories != null)
+        if (categories != null)
         {
             categories = categories.FindAll(t => t.ParentId == null);
         }
     }
+
+    //با کلیک برروی دکمه درج دسته جدید، این تابع فراخوانی شده و فرم نمایش داده میشود
     protected void ShowAddModal()
     {
         if (styleModal == "d-none")
@@ -86,10 +91,14 @@
             styleModal = "d-block";
         }
     }
+
+    //این تابع برای بسته شدن فرم فراخوانی میشود
     protected void CloseModal()
     {
         styleModal = "d-none";
     }
+
+    //با کلیک برروی دکمه درج دسته بندی، این تابع فراخوانی شده و اطلاعات را برای اضافه شدن به کنترلر ازسال میکند
     private async Task HandleValidSubmit()
     {
         if (categoryView != null)

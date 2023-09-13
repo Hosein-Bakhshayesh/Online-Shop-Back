@@ -43,11 +43,14 @@ else
 
 @code {
     public List<CategoryViewModel>? categories { get; set; }
+}
 
+@functions{
+    //این تابع در زمان لود صفحه، اطلاعات را از کنترلر میخواند
     protected override async Task OnInitializedAsync()
     {
         categories = await httpClient.GetFromJsonAsync<List<CategoryViewModel>>("Category/List");
-        if(categories != null)
+        if (categories != null)
         {
             foreach (var item in categories)
             {
@@ -57,4 +60,3 @@ else
         }
     }
 }
-

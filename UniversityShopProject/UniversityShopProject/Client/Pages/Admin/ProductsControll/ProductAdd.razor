@@ -3,7 +3,7 @@
 @inject NavigationManager NM
 
 <button type="button" @onclick='ShowAddProductModal' class="btn btn-success my-2" data-toggle="modal" data-target="#AddProductModal">
-    افزودن کالا جدید
+    افزودن محصول جدید
 </button>
 
 @*--------------------------------------------------------------------------------------------*@
@@ -11,7 +11,7 @@
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="AddProductModalTitle">افزودن کالا</h5>
+                <h5 class="modal-title" id="AddProductModalTitle">درج محصول</h5>
                 <button @onclick="CloseAddModal" type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -23,6 +23,9 @@
                         <DataAnnotationsValidator />
                         <ValidationSummary />
                     </span>
+                    <div class="alert alert-danger w-100 @ShowFormatError">
+                        فرمت تصویر تصویر انتخاب شده اشتباه است. لطفا تنها تصویر با فرمت jpg انتخاب کنید.
+                    </div>
                     <div class="row w-100 mt-2">
                         <div class="col-6 w-100">
                             <label>
@@ -84,7 +87,7 @@
                     <hr />
                     <div class="mt-2">
                         <button @onclick="CloseAddModal" type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
-                        <button type="submit" class="btn btn-success" disabled="@isDisabled">درج کالا</button>
+                        <button type="submit" class="btn btn-success" disabled="@isDisabled">درج محصول</button>
                     </div>
                 </EditForm>
             </div>
@@ -104,9 +107,11 @@
     public string styleAddProductModal { get; set; } = "d-none";
     public IBrowserFile? imageFile;
     bool isDisabled = false;
+    public string ShowFormatError = "d-none";
 }
 
 @functions {
+    // با کلیک برروی درج کالا، این تابع کالا را با استفاده از کنترلر ذخیره میکند
     public async Task AddHandleValidSubmit()
     {
         isDisabled = true;
@@ -125,11 +130,13 @@
         }
     }
 
+    //این تابع در زمان انتخاب تصویر اجرا میشود و فایل تصویر را میخواند و فرمت آن را بررسی میکند
     public async Task SelectFile(InputFileChangeEventArgs e)
     {
         string extension = Path.GetExtension(e.File.Name);
         if (extension == ".jpg")
         {
+            ShowFormatError = "d-none";
             var file = e.File; // get the files selected by the users
             var resizedFile = await file.RequestImageFileAsync(file.ContentType, 10000, 10000); // resize the image file
             var buf = new byte[resizedFile.Size]; // allocate a buffer to fill with the file's data
@@ -139,8 +146,13 @@
             }
             filesBase64 = (new ImageFile { base64data = Convert.ToBase64String(buf), contentType = file.ContentType, fileName = file.Name }); // convert to a base64 string!!
         }
+        else
+        {
+            ShowFormatError = "d-block";
+        }
     }
 
+    //با کلیک برروی درج کالا، این تابع فرم را نمایش میدهد
     public void ShowAddProductModal()
     {
         if (styleAddProductModal == "d-none")
@@ -148,6 +160,8 @@
             styleAddProductModal = "d-block";
         }
     }
+
+    //فرم درج کالا را میبندد
     public void CloseAddModal()
     {
         if (styleAddProductModal == "d-block")

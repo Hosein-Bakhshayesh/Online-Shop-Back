@@ -4,11 +4,14 @@
 
 @layout AdminLayout
 
-<PageTitle>مشخصات دسته بندی</PageTitle>
-
 @if (categoryView != null)
 {
+    <PageTitle>مشخصات دسته بندی @categoryView.CategoryName</PageTitle>
     <h3>مشخصات @categoryView.CategoryName</h3>
+}
+else
+{
+    <PageTitle>دسته بندی یافت نشد</PageTitle>
 }
 
 @if (categoryView != null)
@@ -24,11 +27,11 @@
         <table class="table table-bordered mt-3">
             <thead>
                 <tr>
-                    <th scope="col">آیدی</th>
-                    <th scope="col">
+                    <th scope="col" class="text-center">آیدی</th>
+                    <th scope="col" class="text-center">
                         نام<span class="text-danger">*</span>
                     </th>
-                    <th scope="col">
+                    <th scope="col" class="text-center">
                         وضعیت فعال/غیرفعال<span class="text-danger">*</span>
                     </th>
 
@@ -36,8 +39,8 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>@categoryView.CategoryId</td>
-                    <td>
+                    <td class="text-center">@categoryView.CategoryId</td>
+                    <td class="text-center">
                         @if (isEdit == false)
                         {
                             <span>
@@ -50,7 +53,7 @@
 
                         }
                     </td>
-                    <td>
+                    <td class="text-center">
                         @if (isEdit == false)
                         {
                             @if (categoryView.IsActive == true)
@@ -65,7 +68,7 @@
                         }
                         else
                         {
-                            <InputSelect @bind-Value="categoryView.IsActive" class="form-control">
+                            <InputSelect @bind-Value="categoryView.IsActive" class="form-control text-center">
                                 <option value="true">فعال</option>
                                 <option value="false">غیرفعال</option>
                             </InputSelect>
@@ -73,17 +76,15 @@
                     </td>
                 </tr>
             </tbody>
+        </table>
+        <h4 class="fw-bold my-3">لیست زیردسته ها : </h4>
+        <table class="table table-bordered mt-3">
             <thead>
                 <tr>
-                    <th>
-                        لیست زیردسته ها
-                    </th>
-                </tr>
-                <tr>
-                    <th>نام دسته</th>
-                    <th>وضعیت</th>
-                    <th>دسته اصلی</th>
-                    <th>امکانات</th>
+                    <th class="text-center">نام دسته</th>
+                    <th class="text-center">وضعیت</th>
+                    <th class="text-center">دسته اصلی</th>
+                    <th class="text-center">امکانات</th>
                 </tr>
             </thead>
             <tbody>
@@ -95,8 +96,8 @@
 
                             @if (isEdit == false)
                             {
-                                <td>@item.CategoryName</td>
-                                <td>
+                                <td class="text-center">@item.CategoryName</td>
+                                <td class="text-center">
                                     @if (item.IsActive == true)
                                     {
                                         <span class="text-success">این دسته بندی فعال است.</span>
@@ -107,26 +108,25 @@
 
                                     }
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     @if (Categories != null)
                                     {
                                         @Categories.FirstOrDefault(t=>t.CategoryId == item.ParentId).CategoryName
                                     }
-
                                 </td>
                             }
                             else
                             {
-                                <td>
+                                <td class="text-center">
                                     <InputText @bind-Value="item.CategoryName" class="input-field form-control" />
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <InputSelect @bind-Value="item.IsActive" class="form-control">
                                         <option value="true">فعال</option>
                                         <option value="false">غیرفعال</option>
                                     </InputSelect>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <InputSelect @bind-Value="item.ParentId" class="form-control">
                                         @if (Categories != null)
                                         {
@@ -145,7 +145,7 @@
                                     </InputSelect>
                                 </td>
                             }
-                            <td>
+                            <td class="text-center">
                                 <CategoryDelete CategoryId="@item.CategoryId" />
                                 <NavLink href="@item.CAttributeUrl">
                                     <button type="button" class="btn-outline-primary btn">ویژگی‌ها</button>
@@ -159,20 +159,22 @@
         @if (isEdit == false)
         {
             <button type="button" class="btn btn-warning my-2" @onclick="EditCategory">ویرایش</button>
+            <CategoryDelete CategoryId="@categoryId" />
         }
         else
         {
             <button type="submit" class="btn btn-warning my-2">تایید و ویرایش</button>
+            <CategoryDelete CategoryId="@categoryId" />
         }
     </EditForm>
-    <CategoryDelete CategoryId="@categoryId" />
+    
 
 
 }
 else
 {
-    <h4 class="text-danger">
-        User Not Found
+    <h4 class="alert alert-danger w-100 p-2">
+        دسته بندی یافت نشد
     </h4>
 }
 
@@ -182,9 +184,11 @@ else
     public CategoryViewModel? categoryView { get; set; }
     public List<CategoryViewModel>? CategoryChild { get; set; }
     public List<CategoryViewModel>? Categories { get; set; }
-
     public bool isEdit { get; set; } = false;
     public string hiddenStr = "mt-2 d-none";
+}
+@functions{
+    //این تابع، در زمان لود شدن صفحه اطلاعات را از کنترلر درات میکند
     protected override async Task OnInitializedAsync()
     {
         categoryView = new CategoryViewModel();
@@ -200,6 +204,7 @@ else
         }
     }
 
+    //با زدن دکمه ویرایش، این تابع اجرا شده و اطلاعات ویرایش میشود
     private async Task HandleValidSubmit()
     {
         if (categoryView != null)
@@ -213,18 +218,7 @@ else
         }
     }
 
-    public void DeleteUser()
-    {
-        if (this.hiddenStr == "mt-2 d-none")
-        {
-            this.hiddenStr = "mt-2";
-        }
-        else
-        {
-            this.hiddenStr = "mt-2 d-none";
-        }
-    }
-
+    //این تابع با کلیک برروی ویرایش اجرا شده و قابلیت ویرایش را فعال میکند
     public void EditCategory()
     {
         if (isEdit == false)

@@ -4,15 +4,16 @@
 
 @if (productInfoViewModel != null)
 {
+    <PageTitle>مشخصات @productInfoViewModel.ProductName</PageTitle>
     <h4 class="mb-4">مشخصات <span class="text-danger">@productInfoViewModel.ProductName</span></h4>
-    <tr>
-        <td colspan="5">
-            <div class="alert alert-success fade-in fade-out @SuccessAlert" role="alert">
-                <a @onclick="CloseSuccessAlert" style="cursor:pointer" class="text-black-50 text-decoration-none fw-bold">&times; </a>
-                <span class="mx-2">تغییرات با موفقیت انجام شد.</span>
-            </div>
-        </td>
-    </tr>
+
+    <div class="alert alert-success fade-in fade-out @SuccessAlert" role="alert">
+        <a @onclick="CloseSuccessAlert" style="cursor:pointer" class="text-black-50 text-decoration-none fw-bold">&times; </a>
+        <span class="mx-2">تغییرات با موفقیت انجام شد.</span>
+    </div>
+    <div class="alert alert-danger w-100 @ShowFormatError">
+        فرمت تصویر تصویر انتخاب شده اشتباه است. لطفا تنها تصویر با فرمت jpg انتخاب کنید.
+    </div>
     <table class="table table-bordered mt-3">
         <thead class="thead-light">
             <tr>
@@ -38,7 +39,7 @@
                     <label for="ProductEditName" class="text-danger fw-bold mt-2">تغییر نام : </label>
                     <textarea @bind-Value:event="oninput" @bind-Value="productInfoViewModel.ProductName" class="form-control" id="ProductEditName">
                         @productInfoViewModel.ProductName
-                                                                    </textarea>
+                                                                                </textarea>
                 </td>
                 <td class="text-center pt-4">
                     @Convert.ToInt32(productInfoViewModel.Price).ToString("n0")
@@ -106,7 +107,7 @@
 
                     <textarea class="form-control text-justify w-100" @bind-Value:event="oninput" @bind-Value="productInfoViewModel.ProductDiscription" rows="15">
                         @productInfoViewModel.ProductDiscription
-                                                                        </textarea>
+                    </textarea>
                 </td>
             </tr>
             <tr>
@@ -120,6 +121,8 @@
 
             </tr>
         </tbody>
+    </table>
+    <table class="table table-bordered mt-3">
         <thead class="thead-light">
             <tr>
                 <th colspan="3" class="text-center">
@@ -128,7 +131,6 @@
             </tr>
         </thead>
         <tbody>
-
             <tr>
                 <td colspan="3">
                     <div class="alert alert-success fade-in fade-out @addAttText" role="alert">
@@ -185,7 +187,7 @@
                             @foreach (var item in categoryAttributeViewModels)
                             {
                                 <option value="@item.AttributeId">
-                                    @item.Title @if (item.Discription != null)
+                                    @item.Title @if (item.Discription!= null && item.Discription.Length > 1)
                                     {
                                         <span>(@item.Discription)</span>
                                     }
@@ -206,8 +208,7 @@
             </div>
         </div>
     </EditForm>
-    <hr />
-    <table class="table table-bordered">
+    <table class="table table-bordered mt-3">
         <thead class="thead-light">
             <tr>
                 <td class="text-center">
@@ -258,7 +259,8 @@
 }
 else
 {
-    <h3 class="text-danger">
+    <PageTitle>یافت نشد</PageTitle>
+    <h3 class="alert alert-danger w-100 p-2">
         محصول یافت نشد.
     </h3>
 }
@@ -282,9 +284,11 @@ else
     public string SuccessAlert = "d-none";
     public string addAttText = "d-none";
     public string deleteAttText = "d-none";
+    public string ShowFormatError = "d-none";
 }
 
 @functions {
+    //در زمان لود سایت، اطلاعات را از کنترلر میخواند
     protected override async Task OnInitializedAsync()
     {
         addAttribute = "d-none";
@@ -303,11 +307,13 @@ else
 
     }
 
+    //با انتخاب تصویر، این گزینه تابع میشود و تصویر را دریافت میکند
     public async Task SelectFile(InputFileChangeEventArgs e)
     {
         string extension = Path.GetExtension(e.File.Name);
         if (extension == ".jpg")
         {
+            ShowFormatError = "d-none";
             var file = e.File; // get the files selected by the users
             var resizedFile = await file.RequestImageFileAsync(file.ContentType, 10000, 10000); // resize the image file
             var buf = new byte[resizedFile.Size]; // allocate a buffer to fill with the file's data
@@ -327,13 +333,19 @@ else
             }
 
         }
+        else
+        {
+            ShowFormatError = "d-block";
+        }
     }
 
+    //تغییر تصویر اصلی محصول
     public async Task editProductImage(InputFileChangeEventArgs e)
     {
         string extension = Path.GetExtension(e.File.Name);
         if (extension == ".jpg")
         {
+            ShowFormatError = "d-none";
             var file = e.File; // get the files selected by the users
             var resizedFile = await file.RequestImageFileAsync(file.ContentType, 10000, 10000); // resize the image file
             var buf = new byte[resizedFile.Size]; // allocate a buffer to fill with the file's data
@@ -350,17 +362,24 @@ else
             productInfoViewModel = await httpClient.GetFromJsonAsync<ProductInfoViewModel>($"Product/Info/{Id}");
 
         }
+        else
+        {
+            ShowFormatError = "d-block";
+        }
     }
 
+    //ارسال اطلاعات پایه برای ویرایش به کنترلر
     public async void SubmitEdit()
     {
         if (productInfoViewModel != null)
         {
+            SuccessAlert = "d-block";
             var msg = await httpClient.PutAsJsonAsync($"/Product/SubmitEdit/{productInfoViewModel.ProductId}", productInfoViewModel);
+            productInfoViewModel = await httpClient.GetFromJsonAsync<ProductInfoViewModel>($"Product/Info/{Id}");
         }
-        SuccessAlert = "d-block";
     }
 
+    //بسته شدن هشدارها
     public void CloseAlert()
     {
         DisplaySuccessAlert = "d-none";
@@ -369,11 +388,14 @@ else
         DisplayDeleteAlert = "d-none";
         SuccessAlert = "d-none";
     }
+
+    //بسته شدن هشدار ویرایش موفقیت امیز
     public void CloseSuccessAlert()
     {
         SuccessAlert = "d-none";
     }
 
+    //نمایش فرم اضافه کردن ویژگی جدید
     public void AddAttribute()
     {
         if (addAttribute == "d-none")
@@ -391,6 +413,7 @@ else
 
     }
 
+    //اضافه کردن ویژگی جدید
     public async Task addProductAttribute()
     {
         if (productInfoViewModel != null)
@@ -405,6 +428,7 @@ else
         await OnInitializedAsync();
     }
 
+    //حذف تصاویر دیگر محصول
     public async Task DeleteMoreImage(int id)
     {
         if (id > 0)
@@ -415,6 +439,7 @@ else
         }
     }
 
+    //حذف ویژگی محصول
     public async Task DeleteAtt(int id)
     {
         await httpClient.PostAsJsonAsync<int>($"ProductAttribute/DeleteAtt", id);

@@ -3,11 +3,14 @@
 @inject HttpClient httpClient
 @inject NavigationManager navigationManager
 
-<PageTitle>لیست محصولات</PageTitle>
-
 @if(Categories!= null && products != null)
 {
+    <PageTitle>لیست محصولات @Categories.Find(t=>t.CategoryId == products.First().CategoryId).CategoryName</PageTitle>
     <h3>لیست محصولات @Categories.Find(t=>t.CategoryId == products.First().CategoryId).CategoryName</h3>
+}
+else{
+        <PageTitle>یافت نشد</PageTitle>
+
 }
 
 <div class="row mt-3">
@@ -32,7 +35,7 @@
         </tr>
     </thead>
     <tbody>
-        @if (products != null)
+        @if (products != null && products.Count > 0)
         {
             int i = 1;
             foreach (var item in products)
@@ -166,7 +169,7 @@
                     products = products.Where(t => t.ProductName.Contains(Search)).ToList();
                     if (products.Count == 0)
                     {
-                        products = null;
+                        products = new List<ProductViewModel>();
                     }
                 }
                 foreach (var item in products)
