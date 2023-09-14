@@ -36,6 +36,8 @@ else
     protected override async Task OnInitializedAsync()
     {
         products = await httpclient.GetFromJsonAsync<List<ProductViewModel>>("Product/GetLast");
+        products = products.FindAll(t => t.IsActive == true);
+        products.Reverse();
         foreach (var item in products)
         {
             item.ProductDetailLink = "ProductDetail/" + item.ProductId;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Azure;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,8 +11,10 @@ namespace UniversityShopProjectServices.Service
 {
     public class ProductService : GenericService<Product>, IProductService
     {
+        CategoryService _categoryService;
         public ProductService(UniversityShopProjectContext context) : base(context)
         {
+            _categoryService = new CategoryService(context);
         }
 
         public List<Product>? GetLastProduct()
@@ -41,17 +44,53 @@ namespace UniversityShopProjectServices.Service
 
         public List<Product> GetAllWithPage(int id,int size,int page =1)
         {
-            var skip = size * (page - 1);
-            var list = GetAll().FindAll(t => t.CategoryId == id);
-            list.Reverse();
-            return list.Skip(skip).Take(size).ToList();
+            Category category = _categoryService.GetEntity(id);
+            if(category.ParentId != null)
+            {
+                var skip = size * (page - 1);
+                var list = GetAll().FindAll(t => t.CategoryId == id);
+                list.Reverse();
+                return list.Skip(skip).Take(size).ToList();
+            }
+            else
+            {
+                List<Category> categories = new List<Category>();
+                categories = _categoryService.GetAll().FindAll(t=>t.ParentId == id);
+                List<Product> products = new List<Product>();
+                foreach (var item in categories)
+                {
+                    var temp = GetAll().FindAll(t => t.CategoryId == item.CategoryId);
+                    products.AddRange(temp);
+                }
+                var skip = size * (page - 1);
+                products.Reverse();
+                return products.Skip(skip).Take(size).ToList();
+            }
         }
 
         public int GetTotalPageCount(int size,int id)
         {
-            var count = GetAll().FindAll(t => t.CategoryId == id).Count();
+            Category category = _categoryService.GetEntity(id);
+            if (category.ParentId != null)
+            {
+                var count = GetAll().FindAll(t => t.CategoryId == id).Count();
 
-            return count > 0 ? (int)Math.Ceiling((decimal)count / size) : 1;
+                return count > 0 ? (int)Math.Ceiling((decimal)count / size) : 1;
+            }
+            else
+            {
+                List<Category> categories = new List<Category>();
+                categories = _categoryService.GetAll().FindAll(t => t.ParentId == id);
+                List<Product> products = new List<Product>();
+                foreach (var item in categories)
+                {
+                    var temp = GetAll().FindAll(t => t.CategoryId == item.CategoryId);
+                    products.AddRange(temp);
+                }
+                var count = products.Count();
+
+                return count > 0 ? (int)Math.Ceiling((decimal)count / size) : 1;
+            }
         }
     }
 }

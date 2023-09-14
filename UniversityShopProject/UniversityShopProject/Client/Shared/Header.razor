@@ -50,12 +50,14 @@
                                                     </li>
                                                     @foreach (var temp in categories.FindAll(t => t.ParentId == item.CategoryId))
                                                     {
-                                                        <li>
-                                                            <NavLink href="@temp.CategoryItemUrl">
-                                                                <h5 class="m-0 categories-subtitle">@temp.CategoryName</h5>
-                                                            </NavLink>
-                                                        </li>
-
+                                                        @if (temp.IsActive == true)
+                                                        {
+                                                            <li>
+                                                                <NavLink href="@temp.CategoryItemUrl">
+                                                                    <h5 class="m-0 categories-subtitle">@temp.CategoryName</h5>
+                                                                </NavLink>
+                                                            </li>
+                                                        }
                                                     }
                                                 </ul>
                                             </div>

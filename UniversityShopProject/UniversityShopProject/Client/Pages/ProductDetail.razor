@@ -13,7 +13,7 @@
         </div>
         <div class="alert alert-success @ShowSuccessAddToCart">
             <button @onclick="CloseAlert" class="close" data-dismiss="alert">&times;</button>
-            با موفقیت در سبد خرید اضافه شد.
+            با موفقیت در سبد خرید اضافه شد. تعداد : @cartAdd
         </div>
         <div class="alert alert-success @ShowSuccessAddToWishList">
             <button @onclick="CloseAlert" class="close" data-dismiss="alert">&times;</button>
@@ -224,24 +224,25 @@
                     </EditForm>
                 </div>
                 <div class="alert alert-success fade-in fade-out @SuccessAddComment mt-3" role="alert">
-                    <a href="#" @onclick="CloseSuccessAlert" class="text-black-50 text-decoration-none fw-bold">&times; </a>
-                    <span class="mx-2">تغییرات با موفقیت انجام شد.</span>
+                    <a @onclick="CloseSuccessAlert" class="text-black-50 text-decoration-none fw-bold" style="cursor:pointer">&times; </a>
+                    <span class="mx-2">نظر با موفقیت ثبت شد.</span>
                 </div>
                 @if (comments.Count > 0)
                 {
                     <div id="show-less-comments">
-                        @for (int i = 0; i < comments.Count && i < 3; i++)
+                        @foreach (var item in comments.Take(3))
                         {
                             <div class="comment-box text-left rounded rounded-5 my-3">
                                 <div class="font-size-small">
-                                    @comments[i].Name | <span class="text-black-50">@comments[i].DateTime</span> | <span class="text-success">
-                                        @comments[i].Like <a href="#" class="text-success text-decoration-none"><i class="fa-regular fa-thumbs-up"></i></a>
+                                    @item.Name | <span class="text-black-50">@item.DateTime</span> | <span @onclick="()=>AddLike(item.CommentId)" class="text-success">
+                                        @item.Like <a class="text-success text-decoration-none" style="cursor:pointer;"><i class="fa-regular fa-thumbs-up"></i></a>
                                     </span>
+                                    <span class="text-success @Liked"> | لایک شد.</span>
                                 </div>
                                 <hr class="myhr">
                                 <div class="px-3">
                                     <p class="comment-text">
-                                        @comments[i].CommentText
+                                        @item.CommentText
                                     </p>
                                 </div>
                             </div>
@@ -250,18 +251,19 @@
                     if (comments.Count > 3)
                     {
                         <div id="show-more-comments" class="@ShowMoreCommentText">
-                            @for (int i = 3; i < comments.Count; i++)
+                            @foreach (var item in comments.Skip(3))
                             {
                                 <div class="comment-box text-left rounded rounded-5 my-3">
                                     <div class="font-size-small">
-                                        @comments[i].Name | <span class="text-black-50">@comments[i].DateTime</span> | <span class="text-success">
-                                            @comments[i].Like <a href="#" class="text-success text-decoration-none"><i class="fa-regular fa-thumbs-up"></i></a>
+                                        @item.Name | <span class="text-black-50">@item.DateTime</span> | <span @onclick="()=>AddLike(item.CommentId)" class="text-success">
+                                            @item.Like <a class="text-success text-decoration-none" style="cursor:pointer;"><i class="fa-regular fa-thumbs-up"></i></a>
                                         </span>
+                                        <span class="text-success @Liked"> | لایک شد.</span>
                                     </div>
                                     <hr class="myhr">
                                     <div class="px-3">
                                         <p class="comment-text">
-                                            @comments[i].CommentText
+                                            @item.CommentText
                                         </p>
                                     </div>
                                 </div>
@@ -347,13 +349,16 @@ else
     public string ShowSuccessAddToCart = "d-none";
     public string ShowSuccessAddToWishList = "d-none";
     public string ExistAddToWishList = "d-none";
+    public string Liked = "d-none";
+    public string LikeIcon = "fa-regular";
+    public int cartAdd;
     public string? activeImage = null;
     PersianCalendar pc = new PersianCalendar();
-
-
-
+}
+@functions {
     protected async override Task OnParametersSetAsync()
     {
+        cartAdd = 0;
         CloseAlert();
         CloseSuccessAlert();
         product = await httpClient.GetFromJsonAsync<ProductViewModel>($"Product/Info/{Id}");
@@ -374,7 +379,7 @@ else
             item.ProductDetailLink = "ProductDetail/" + item.ProductId;
         }
         activeImage = product.ProductImagePath;
-        if(product!=null)
+        if (product != null)
         {
             await httpClient.PostAsJsonAsync<int>("Product/AddView", product.ProductId);
         }
@@ -415,8 +420,9 @@ else
         AddComment.IsActive = true;
         AddComment.DateTime = DateTime.Now.ToString("MM/dd/yyyy");
         AddComment.ProductId = product.ProductId;
-        var res = await httpClient.PostAsJsonAsync<CommentViewModel>("Comment/AddComment", AddComment);
         SuccessAddComment = "d-block";
+        var res = await httpClient.PostAsJsonAsync<CommentViewModel>("Comment/AddComment", AddComment);
+        AddComment = new CommentViewModel();
         comments = await httpClient.GetFromJsonAsync<List<CommentViewModel>>($"Comment/Get/{product.ProductId}");
         comments.Reverse();
         foreach (var item in comments)
@@ -438,6 +444,7 @@ else
 
     public async Task AddToCart()
     {
+        cartAdd++;
         UserInfoViewModel? user = await httpClient.GetFromJsonAsync<UserInfoViewModel>("User/GetCurrentUser");
         if (user.UserName == null)
         {
@@ -467,7 +474,7 @@ else
         {
             ShowSuccessAddToWishList = "d-block";
         }
-        if(res == false)
+        if (res == false)
         {
             ExistAddToWishList = "d-block";
         }
@@ -479,6 +486,20 @@ else
         ExistAddToWishList = "d-none";
         ShowSuccessAddToCart = "d-none";
         ShowSuccessAddToWishList = "d-none";
+        Liked = "d-none";
     }
 
+    public async Task AddLike(int id)
+    {
+        Liked = "d-block";
+        await httpClient.PostAsJsonAsync("Comment/AddLike", id);
+        LikeIcon = "fa-solid";
+        comments = await httpClient.GetFromJsonAsync<List<CommentViewModel>>($"Comment/Get/{product.ProductId}");
+        comments.Reverse();
+        foreach (var item in comments)
+        {
+            DateTime dateTime = DateTime.Parse(item.DateTime);
+            item.DateTime = string.Format("{0}/{1}/{2}", pc.GetYear(dateTime), pc.GetMonth(dateTime), pc.GetDayOfMonth(dateTime));
+        }
+    }
 }

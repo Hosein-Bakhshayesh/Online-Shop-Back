@@ -24,6 +24,7 @@
                 <tbody>
                     @if (activeCart != null && cartItems != null && cartItems.Count > 0 && productViewModels != null)
                     {
+                        i=1;
                         @foreach (var item in cartItems)
                         {
                             <tr>
@@ -83,14 +84,21 @@
 }
 
 @functions {
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if(firstRender)
+        {
+            i = 1;
+        }
+        base.OnAfterRender(firstRender);
+    }
     protected async override void OnInitialized()
     {
-        i = 1;
         user = await httpClient.GetFromJsonAsync<UserInfoViewModel>("User/GetCurrentUser");
         if (user.UserName != null)
         {
             activeCart = await httpClient.GetFromJsonAsync<CartViewModel>("Cart/GetActiveCart");
-            if (activeCart.CartId > 0)
+            if (!string.IsNullOrEmpty(activeCart.Total))
             {
                 timer = new System.Threading.Timer(async (object? stateInfo) =>
                 {

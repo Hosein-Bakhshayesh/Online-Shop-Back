@@ -112,20 +112,20 @@
                                             <img src="Images/Product-Image/@item.ProductImagePath" alt="@item.ProductName" class="p-imgs h-100 p-1">
                                         </div>
                                     </div>
-                                    <div class="col-6 py-2">
+                                    <div class="col-5 py-2">
                                         <div>
                                             @item.ProductName
                                         </div>
                                     </div>
-                                    <div class="col-3 row m-0 p-0 text-center">
+                                    <div class="col-4 row m-0 p-0 text-center">
                                         <div class="text-danger mt-2">
                                             @Convert.ToInt32(item.Price).ToString("n0") تومان
                                         </div>
                                         <div class="w-100">
-                                            <button type="button" class="w-50 mx-auto btn btn-info">
+                                            <button type="button" class="w-100 mx-auto btn btn-info">
                                                 <NavLink href="@item.ProductDetailLink" class="text-white text-decoration-none">مشاهده جزئیات کالا</NavLink>
                                             </button>
-                                            <button @onclick="()=>DeleteFromWishList(item.ProductId)" type="button" class="w-50 mx-auto btn btn-danger">حذف</button>
+                                            <button @onclick="()=>DeleteFromWishList(item.ProductId)" type="button" class="w-100 mx-auto btn btn-danger">حذف</button>
                                         </div>
                                     </div>
                                 </div>

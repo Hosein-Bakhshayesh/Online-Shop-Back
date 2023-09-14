@@ -15,6 +15,7 @@ namespace UniversityShopProject.Server.Controllers
         public IMapper _mapper { get; set; }
         UniversityShopProjectContext db = new();
         ProductService _productService;
+        CategoryService _categoryService;
         ProductImageService _productImageService;
         private readonly IWebHostEnvironment env;
         public static string ImageFileName = "1.jpg";
@@ -22,6 +23,7 @@ namespace UniversityShopProject.Server.Controllers
         {
             _productService = new ProductService(db);
             _productImageService = new ProductImageService(db);
+            _categoryService = new CategoryService(db);
             _mapper = mapper;
             this.env = env;
         }
@@ -29,26 +31,47 @@ namespace UniversityShopProject.Server.Controllers
         [HttpGet("List/{id}")]
         public ActionResult ProductList(int id)
         {
-            List<Product> products;
-            products = _productService.GetAll().FindAll(t => t.CategoryId == id);
-            List<ProductViewModel> productVM = _mapper.Map<List<Product>, List<ProductViewModel>>(products);
-            productVM.Reverse();
-            if (productVM != null)
-            {
-                return Ok(productVM);
-            }
-            else
+            var categoty = _categoryService.GetEntity(id);
+            if (categoty == null)
             {
                 return NotFound("Product Not Exist");
             }
-
+            if (categoty.ParentId != null)
+            {
+                List<Product> products;
+                products = _productService.GetAll().FindAll(t => t.CategoryId == id);
+                List<ProductViewModel> productVM = _mapper.Map<List<Product>, List<ProductViewModel>>(products);
+                productVM.Reverse();
+                if (productVM != null)
+                {
+                    return Ok(productVM);
+                }
+            }
+            else
+            {
+                var categories = _categoryService.GetAll().FindAll(t => t.ParentId == id);
+                List<ProductViewModel> productViewModels = new List<ProductViewModel>();
+                foreach (var item in categories)
+                {
+                    List<Product> products;
+                    products = _productService.GetAll().FindAll(t => t.CategoryId == id);
+                    List<ProductViewModel> productVM = _mapper.Map<List<Product>, List<ProductViewModel>>(products);
+                    productViewModels.AddRange(productVM);
+                }
+                productViewModels.Reverse();
+                if (productViewModels != null)
+                {
+                    return Ok(productViewModels);
+                }
+            }
+            return NotFound("Product Not Exist");
         }
 
         [HttpGet("List/{id}/{page}")]
-        public ActionResult ProductList(int id,int page)
+        public ActionResult ProductList(int id, int page)
         {
             List<Product> products;
-            products = _productService.GetAllWithPage(id,15, page);
+            products = _productService.GetAllWithPage(id, 15, page);
             List<ProductViewModel> productVM = _mapper.Map<List<Product>, List<ProductViewModel>>(products);
             if (productVM != null)
             {
@@ -61,9 +84,9 @@ namespace UniversityShopProject.Server.Controllers
 
         }
         [HttpGet("TotalPageCount/{size}/{id}")]
-        public ActionResult TotalPageCount(int size,int id)
+        public ActionResult TotalPageCount(int size, int id)
         {
-            int count = _productService.GetTotalPageCount(size,id);
+            int count = _productService.GetTotalPageCount(size, id);
 
             return Ok(count);
         }
@@ -188,10 +211,10 @@ namespace UniversityShopProject.Server.Controllers
         public ActionResult GetLastProduct()
         {
             var LastProduct = _productService.GetLastProduct();
-            if(LastProduct != null)
+            if (LastProduct != null)
             {
                 List<ProductViewModel> products = new List<ProductViewModel>();
-                products = _mapper.Map<List<Product>,List<ProductViewModel>>(LastProduct);
+                products = _mapper.Map<List<Product>, List<ProductViewModel>>(LastProduct);
                 return Ok(products);
             }
             return NotFound("محصولی یافت نشد.");
@@ -200,10 +223,10 @@ namespace UniversityShopProject.Server.Controllers
         public ActionResult GetMostView()
         {
             var LastProduct = _productService.GetMostView();
-            if(LastProduct != null)
+            if (LastProduct != null)
             {
                 List<ProductViewModel> products = new List<ProductViewModel>();
-                products = _mapper.Map<List<Product>,List<ProductViewModel>>(LastProduct);
+                products = _mapper.Map<List<Product>, List<ProductViewModel>>(LastProduct);
                 return Ok(products);
             }
             return NotFound("محصولی یافت نشد.");
@@ -215,7 +238,7 @@ namespace UniversityShopProject.Server.Controllers
             try
             {
                 Product product = _productService.GetEntity(id);
-                if(product.Views == null)
+                if (product.Views == null)
                 {
                     product.Views = 1;
                 }

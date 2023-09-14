@@ -91,7 +91,6 @@ namespace UniversityShopProject.Server.Controllers
             }
         }
         [HttpPost("ChangeActive")]
-        
         public ActionResult ChangeActive([FromBody]int Id)
         {
             try
@@ -100,6 +99,26 @@ namespace UniversityShopProject.Server.Controllers
                 if(comment!=null)
                 {
                     comment.IsActive = !comment.IsActive;
+                    _commentService.Update(comment);
+                    _commentService.Save();
+                }
+
+                return Ok();
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "انجام نشد");
+            }
+        }
+        [HttpPost("AddLike")]
+        public ActionResult AddLike([FromBody]int id)
+        {
+            try
+            {
+                Comment comment = _commentService.GetEntity(id);
+                if (comment != null)
+                {
+                    comment.Like++;
                     _commentService.Update(comment);
                     _commentService.Save();
                 }

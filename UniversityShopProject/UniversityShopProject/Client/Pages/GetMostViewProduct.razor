@@ -37,6 +37,7 @@ else
     {
         products = await httpclient.GetFromJsonAsync<List<ProductViewModel>>("Product/GetMostView");
         products.Reverse();
+        products = products.FindAll(t => t.IsActive == true);
         foreach (var item in products)
         {
             item.ProductDetailLink = "ProductDetail/" + item.ProductId;
