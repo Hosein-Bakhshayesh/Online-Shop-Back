@@ -235,7 +235,7 @@
       "UniversityShopProjectModels.dll": "sha256-lh08TMnAIWUwk4J4fSXgqB7v\/czbPnsgvWFtaLSLW\/E=",
       "UniversityShopProjectRepository.dll": "sha256-\/Lv9CTaHD6bOZ4f8I9dAfk00NaDkCYhTm5oIckpGpng=",
       "UniversityShopProjectServices.dll": "sha256-jBzectOBnOybTMa0A+a1Egs0wQqyoYk70pfTa2ADP10=",
-      "UniversityShopProject.Client.dll": "sha256-dYDGTjf2vjfpFARXvrekKXkw51W9bWZ8NdmrgXLhnDw="
+      "UniversityShopProject.Client.dll": "sha256-6h3T9nnYX\/L+bBg1MauOPc\/zzRSsBT6\/SwXGoLJLJ4Q="
     },
     "extensions": null,
     "lazyAssembly": null,
@@ -245,7 +245,7 @@
       "UniversityShopProjectRepository.pdb": "sha256-BNZPQTLME+PvQyiJY\/pPmWR7CYCKFHiOAmWLumsRDuE=",
       "UniversityShopProjectServices.pdb": "sha256-5+NzQ8rdRkIymH+F07MvTmPNiMH4xebh51imUhRBvlU=",
       "UniversityShopProject.Shared.pdb": "sha256-gCbJuXws2daRHY\/a5Jsipu+PPV8dthZnXQGr8h6\/Dec=",
-      "UniversityShopProject.Client.pdb": "sha256-IxgTYBx1maiERsjL1VO\/YgOVhCzLxqiBIEXtQJVvxWo="
+      "UniversityShopProject.Client.pdb": "sha256-j4LLGl9zLJuJSHQy7M+DAZ+ZJMo7pU6EpNsNfBNIKe0="
     },
     "runtime": {
       "dotnet.6.0.16.5l3cj9sv96.js": "sha256-GT2gK+GjOisRXJY+9yh6H8s6K\/KDIsaFMFIgWvAnttY=",
